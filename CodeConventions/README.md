@@ -9,8 +9,8 @@ Code Conventions
 * A line **must not** exceed *80 character* length.
 * Use **Spaces** not **Tabs**.
 * Always return to `example_google.py` file.
-  * We  dissagree with `example_goole.py` in vaiables naming ONLY, <br>
-       and we agree with it in the whole entire rest.
+  * We dissagree with `example_goole.py` in variables naming ONLY, <br>
+       and **we agree with it in the whole entire rest**.
 
 
 
