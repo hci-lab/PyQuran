@@ -34,8 +34,10 @@ def function_with_types_in_docstring(param1, param2):
     Args:
         param1 (int): The first parameter.
         param2 (str): The second parameter.
+        
     Returns:
         bool: The return value. True for success, False otherwise.
+        
     Note:
         Do not include the `self` parameter in the ``Args`` section.
 
