@@ -107,7 +107,7 @@ def parse_sura(n, alphabets=['ل', 'ب']):
         i += 1
  
     print(A)
-    return
+    return A
 
 
 
