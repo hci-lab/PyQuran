@@ -1,0 +1,3 @@
+"""
+"""
+from PyQuran import *
