@@ -82,7 +82,8 @@ def parse_sura(n, alphabets=['ل', 'ب']):
            unlike a list of English char, the first element 
            is the left-most one.
 
-        2. I didn't 
+        2. I didn't make alphabets[] 29 by default. 
+           Just try it by filling the alphabets with some letters.
     
 
     """
@@ -106,7 +107,7 @@ def parse_sura(n, alphabets=['ل', 'ب']):
         i += 1
  
     print(A)
-    return
+    return A
 
 
 
