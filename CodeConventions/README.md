@@ -43,6 +43,7 @@ def function_with_types_in_docstring(param1, param2):
 
     """
 ```
+pass # in case it is just a prototype (not implemented yet) 
 <br><br>
 
 
