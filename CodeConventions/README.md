@@ -42,8 +42,9 @@ def function_with_types_in_docstring(param1, param2):
         Do not include the `self` parameter in the ``Args`` section.
 
     """
+    pass # in case it is just a prototype (not implemented yet) 
 ```
-pass # in case it is just a prototype (not implemented yet) 
+
 <br><br>
 
 
