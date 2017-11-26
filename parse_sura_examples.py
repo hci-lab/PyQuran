@@ -10,7 +10,7 @@ NOTE:
 
 dal = 'د'
 meem = 'م'
-alifWithouHamza = 'ا'
+alifWithoutHamza = 'ا'
 baa2 = 'ب'
 kaf = 'ك'
 
@@ -22,7 +22,7 @@ parse_sura(112, [dal, meem])
 
 
 # Surat Al-Masad
-parse_sura(111, [meem, alifWithouHamza, baa2])
+parse_sura(111, [meem, alifWithoutHamza, baa2])
 
 
 # Surat Al-Baiina
