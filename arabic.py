@@ -265,6 +265,4 @@ def alphabet_excluding(excludedLetters):
         print(alphabet_excluding([alef, beh, qaf, teh]))
         
     """
-    filtered_alphabet = ''
     return [x for x in alphabet if x not in excludedLetters]
-
