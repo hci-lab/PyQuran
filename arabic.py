@@ -6,7 +6,7 @@ comma            = u'\u060c'
 semicolon        = u'\u061b'
 question         = u'\u061f'
 hamza            = u'\u0621'
-alef_mad       = u'\u0622'
+alef_mad         = u'\u0622'
 alef_hamza_above = u'\u0623'
 waw_hamza        = u'\u0624'
 alef_hamza_below = u'\u0625'
@@ -84,7 +84,7 @@ small_yeh        = u"\u06e6"
 lam_alef                     = u'\ufefb'
 lam_alef_hamza_above         = u'\ufef7'
 lam_alef_hamza_below         = u'\ufef9'
-lam_alef_mad_above         = u'\ufef5'
+lam_alef_mad_above           = u'\ufef5'
 simple_lam_alef              = u'\u0644\u0627'
 simple_lam_alef_hamza_above  = u'\u0644\u0623'
 simple_lam_alef_hamza_below  = u'\u0644\u0625'
@@ -171,12 +171,12 @@ alefat = (
 weak   = ( alef,  waw,  yeh,  alef_maksura)
 yehlike =  ( yeh,   yeh_hamza,   alef_maksura,    small_yeh  )
 
-wawlike   = ( waw,   waw_hamza,   small_waw )
-tehlike   = ( teh,   teh_marbuta )
+wawLike   = ( waw,   waw_hamza,   small_waw )
+tehLike   = ( teh,   teh_marbuta )
 
 small   = ( small_alef,  small_waw,  small_yeh)
 moon_letters = (hamza    , 
-        alef_mad       , 
+        alef_mad         , 
         alef_hamza_above , 
         alef_hamza_below , 
         alef             , 
@@ -210,44 +210,6 @@ sun_letters = (
         lam              , 
         noon             , 
     )
-alphabetic_order = {
-                alef             : 1, 
-                beh              : 2, 
-                teh              : 3, 
-                teh_marbuta      : 3, 
-                theh             : 4, 
-                jeem             : 5, 
-                hah              : 6, 
-                khah             : 7, 
-                dal              : 8, 
-                thal             : 9, 
-                reh              : 10, 
-                zain             : 11, 
-                seen             : 12, 
-                sheen            : 13, 
-                sad              : 14, 
-                dad              : 15, 
-                tah              : 16, 
-                zah              : 17, 
-                ain              : 18, 
-                ghain            : 19, 
-                feh              : 20, 
-                qaf              : 21, 
-                kaf              : 22, 
-                lam              : 23, 
-                meem             : 24, 
-                noon             : 25, 
-                heh              : 26, 
-                waw              : 27, 
-                yeh              : 28, 
-                hamza            : 29, 
-                alef_mad         : 29, 
-                alef_hamza_above : 29, 
-                waw_hamza        : 29, 
-                alef_hamza_below : 29, 
-                yeh_hamza        : 29, 
-                }
-
 
 """
     * Some alphabet building tools
