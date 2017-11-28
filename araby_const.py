@@ -236,3 +236,25 @@ ALPHABETIC_ORDER = {
                 ALEF_HAMZA_BELOW : 29, 
                 YEH_HAMZA        : 29, 
                 }
+
+
+"""
+    * Some alphabet building tools
+"""
+def alphabet_excluding(excludedLetters):
+    """returns the alphabet excluding the given letters.
+
+    Args:
+        excludedLetters (list['char']): letters to be excluded from the alphabet
+
+    Returns:
+        str: alphabet excluding the given excludedLetters
+
+    Calling:
+        `print(alphabet_excluding([TAH, SHEEN, ZAIN, THAL, YEH]))`
+        
+    """
+    filtered_alphabet = ''
+    for letter in excludedLetters:
+        filtered_alphabet = LETTERS.replace(letter, '') 
+    return filtered_alphabet
