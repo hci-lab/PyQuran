@@ -1,29 +1,7 @@
-# -*- coding = utf-8 -*-
-#---
-#
-# ------------
-# Description:
-# ------------
-#
-# Arabic codes
-#
-# (C) Copyright 2010,  Taha Zerrouki
-# -----------------
-#  $Date: 2010/03/01
-#  $Author: Taha Zerrouki$
-#  $Revision: 0.1 $
-#  This program is written under the Gnu Public License.
-#
-"""
-Arabic module
-@author: Taha Zerrouki
-@contact: taha dot zerrouki at gmail dot com
-@copyright: Arabtechies,  Arabeyes,   Taha Zerrouki
-@license: GPL
-@date:2010/03/01
-@version: 0.1
+"""This module contains Arabic tools for text analysis
 """
 
+# Constans.
 COMMA            = u'\u060C'
 SEMICOLON        = u'\u061B'
 QUESTION         = u'\u061F'
@@ -229,7 +207,6 @@ ALPHABETIC_ORDER = {
                 WAW              : 27, 
                 YEH              : 28, 
                 HAMZA            : 29, 
-
                 ALEF_MADDA       : 29, 
                 ALEF_HAMZA_ABOVE : 29, 
                 WAW_HAMZA        : 29, 
