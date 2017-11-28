@@ -1,248 +1,251 @@
 """This module contains Arabic tools for text analysis
 """
 
-# Constans.
-COMMA            = u'\u060C'
-SEMICOLON        = u'\u061B'
-QUESTION         = u'\u061F'
-HAMZA            = u'\u0621'
-ALEF_MADDA       = u'\u0622'
-ALEF_HAMZA_ABOVE = u'\u0623'
-WAW_HAMZA        = u'\u0624'
-ALEF_HAMZA_BELOW = u'\u0625'
-YEH_HAMZA        = u'\u0626'
-ALEF             = u'\u0627'
-BEH              = u'\u0628'
-TEH_MARBUTA      = u'\u0629'
-TEH              = u'\u062a'
-THEH             = u'\u062b'
-JEEM             = u'\u062c'
-HAH              = u'\u062d'
-KHAH             = u'\u062e'
-DAL              = u'\u062f'
-THAL             = u'\u0630'
-REH              = u'\u0631'
-ZAIN             = u'\u0632'
-SEEN             = u'\u0633'
-SHEEN            = u'\u0634'
-SAD              = u'\u0635'
-DAD              = u'\u0636'
-TAH              = u'\u0637'
-ZAH              = u'\u0638'
-AIN              = u'\u0639'
-GHAIN            = u'\u063a'
-TATWEEL          = u'\u0640'
-FEH              = u'\u0641'
-QAF              = u'\u0642'
-KAF              = u'\u0643'
-LAM              = u'\u0644'
-MEEM             = u'\u0645'
-NOON             = u'\u0646'
-HEH              = u'\u0647'
-WAW              = u'\u0648'
-ALEF_MAKSURA     = u'\u0649'
-YEH              = u'\u064a'
-MADDA_ABOVE      = u'\u0653'
-HAMZA_ABOVE      = u'\u0654'
-HAMZA_BELOW      = u'\u0655'
-ZERO             = u'\u0660'
-ONE              = u'\u0661'
-TWO              = u'\u0662'
-THREE            = u'\u0663'
-FOUR             = u'\u0664'
-FIVE             = u'\u0665'
-SIX              = u'\u0666'
-SEVEN            = u'\u0667'
-EIGHT            = u'\u0668'
-NINE             = u'\u0669'
-PERCENT          = u'\u066a'
-DECIMAL          = u'\u066b'
-THOUSANDS        = u'\u066c'
-STAR             = u'\u066d'
-MINI_ALEF        = u'\u0670'
-ALEF_WASLA       = u'\u0671'
-FULL_STOP        = u'\u06d4'
-BYTE_ORDER_MARK  = u'\ufeff'
+# constans.
+comma            = u'\u060c'
+semicolon        = u'\u061b'
+question         = u'\u061f'
+hamza            = u'\u0621'
+alef_mad       = u'\u0622'
+alef_hamza_above = u'\u0623'
+waw_hamza        = u'\u0624'
+alef_hamza_below = u'\u0625'
+yeh_hamza        = u'\u0626'
+alef             = u'\u0627'
+beh              = u'\u0628'
+teh_marbuta      = u'\u0629'
+teh              = u'\u062a'
+theh             = u'\u062b'
+jeem             = u'\u062c'
+hah              = u'\u062d'
+khah             = u'\u062e'
+dal              = u'\u062f'
+thal             = u'\u0630'
+reh              = u'\u0631'
+zain             = u'\u0632'
+seen             = u'\u0633'
+sheen            = u'\u0634'
+sad              = u'\u0635'
+dad              = u'\u0636'
+tah              = u'\u0637'
+zah              = u'\u0638'
+ain              = u'\u0639'
+ghain            = u'\u063a'
+feh              = u'\u0641'
+qaf              = u'\u0642'
+kaf              = u'\u0643'
+lam              = u'\u0644'
+meem             = u'\u0645'
+noon             = u'\u0646'
+heh              = u'\u0647'
+waw              = u'\u0648'
+alef_maksura     = u'\u0649'
+yeh              = u'\u064a'
+madda_above      = u'\u0653'
+hamza_above      = u'\u0654'
+hamza_below      = u'\u0655'
+zero             = u'\u0660'
+one              = u'\u0661'
+two              = u'\u0662'
+three            = u'\u0663'
+four             = u'\u0664'
+five             = u'\u0665'
+six              = u'\u0666'
+seven            = u'\u0667'
+eight            = u'\u0668'
+nine             = u'\u0669'
+percent          = u'\u066a'
+decimal          = u'\u066b'
+thousands        = u'\u066c'
+star             = u'\u066d'
+mini_alef        = u'\u0670'
+alef_wasla       = u'\u0671'
+full_stop        = u'\u06d4'
+byte_order_mark  = u'\ufeff'
 
-# Diacritics
-FATHATAN         = u'\u064b'
-DAMMATAN         = u'\u064c'
-KASRATAN         = u'\u064d'
-FATHA            = u'\u064e'
-DAMMA            = u'\u064f'
-KASRA            = u'\u0650'
-SHADDA           = u'\u0651'
-SUKUN            = u'\u0652'
 
-# Small Letters
-SMALL_ALEF       = u"\u0670"
-SMALL_WAW        = u"\u06E5"
-SMALL_YEH        = u"\u06E6"
-#Ligatures
-LAM_ALEF                     = u'\ufefb'
-LAM_ALEF_HAMZA_ABOVE         = u'\ufef7'
-LAM_ALEF_HAMZA_BELOW         = u'\ufef9'
-LAM_ALEF_MADDA_ABOVE         = u'\ufef5'
-SIMPLE_LAM_ALEF              = u'\u0644\u0627'
-SIMPLE_LAM_ALEF_HAMZA_ABOVE  = u'\u0644\u0623'
-SIMPLE_LAM_ALEF_HAMZA_BELOW  = u'\u0644\u0625'
-SIMPLE_LAM_ALEF_MADDA_ABOVE  = u'\u0644\u0622'
-# groups
-LETTERS = u''.join([
-        ALEF, 
-        BEH,
-        TEH,
-        THEH,
-        JEEM,  
-        HAH,  
-        KHAH, 
-        DAL,
-        THAL,
-        REH,  
-        ZAIN,  
-        SEEN, 
-        SHEEN,  
-        SAD,  
-        DAD,  
-        TAH, 
-        ZAH, 
-        AIN,
-        GHAIN,  
-        FEH,  
-        QAF,  
-        KAF, 
-        LAM,  
-        MEEM,  
-        NOON,  
-        HEH,  
-        WAW,  
-        YEH, 
-        HAMZA,   
-        ALEF_MADDA,  
-        ALEF_HAMZA_ABOVE,  
-        WAW_HAMZA,  
-        ALEF_HAMZA_BELOW,
-        YEH_HAMZA, 
-        ALEF_MAKSURA,  
-        TEH_MARBUTA
+tatweel          = u'\u0640'
+
+# diacritics
+fathatan         = u'\u064b'
+dammatan         = u'\u064c'
+kasratan         = u'\u064d'
+fatha            = u'\u064e'
+damma            = u'\u064f'
+kasra            = u'\u0650'
+shadda           = u'\u0651'
+sukun            = u'\u0652'
+
+# small letters
+small_alef       = u"\u0670"
+small_waw        = u"\u06e5"
+small_yeh        = u"\u06e6"
+#ligatures
+lam_alef                     = u'\ufefb'
+lam_alef_hamza_above         = u'\ufef7'
+lam_alef_hamza_below         = u'\ufef9'
+lam_alef_mad_above         = u'\ufef5'
+simple_lam_alef              = u'\u0644\u0627'
+simple_lam_alef_hamza_above  = u'\u0644\u0623'
+simple_lam_alef_hamza_below  = u'\u0644\u0625'
+simple_lam_alef_mad_above  = u'\u0644\u0622'
+
+# Lists
+alphabet = u''.join([
+        alef, 
+        beh,
+        teh,
+        theh,
+        jeem,  
+        hah,  
+        khah, 
+        dal,
+        thal,
+        reh,  
+        zain,  
+        seen, 
+        sheen,  
+        sad,  
+        dad,  
+        tah, 
+        zah, 
+        ain,
+        ghain,  
+        feh,  
+        qaf,  
+        kaf, 
+        lam,  
+        meem,  
+        noon,  
+        heh,  
+        waw,  
+        yeh, 
+        hamza,   
+        alef_mad,  
+        alef_hamza_above,  
+        waw_hamza,  
+        alef_hamza_below,
+        yeh_hamza, 
+        alef_maksura,  
+        teh_marbuta
         ])
 
-TASHKEEL  = (FATHATAN,  DAMMATAN,  KASRATAN, 
-            FATHA, DAMMA, KASRA, 
-            SUKUN, 
-            SHADDA)
-HARAKAT  = (  FATHATAN,    DAMMATAN,    KASRATAN, 
-            FATHA,   DAMMA,   KASRA, 
-            SUKUN
+tashkeel  = (fathatan,  dammatan,  kasratan, 
+            fatha, damma, kasra, 
+            sukun, 
+            shadda)
+harakat  = (  fathatan,    dammatan,    kasratan, 
+            fatha,   damma,   kasra, 
+            sukun
             )
-SHORTHARAKAT  = ( FATHA,   DAMMA,   KASRA,  SUKUN)
+shortharakat  = ( fatha,   damma,   kasra,  sukun)
 
-TANWIN  = (FATHATAN,   DAMMATAN,    KASRATAN)
+tanwin  = (fathatan,   dammatan,    kasratan)
 
-NOT_DEF_HARAKA = TATWEEL
-LIGUATURES = (
-            LAM_ALEF, 
-            LAM_ALEF_HAMZA_ABOVE, 
-            LAM_ALEF_HAMZA_BELOW, 
-            LAM_ALEF_MADDA_ABOVE, 
+not_def_haraka = tatweel
+liguatures = (
+            lam_alef, 
+            lam_alef_hamza_above, 
+            lam_alef_hamza_below, 
+            lam_alef_mad_above, 
             )
-HAMZAT = (
-            HAMZA, 
-            WAW_HAMZA, 
-            YEH_HAMZA, 
-            HAMZA_ABOVE, 
-            HAMZA_BELOW, 
-            ALEF_HAMZA_BELOW, 
-            ALEF_HAMZA_ABOVE, 
+hamzat = (
+            hamza, 
+            waw_hamza, 
+            yeh_hamza, 
+            hamza_above, 
+            hamza_below, 
+            alef_hamza_below, 
+            alef_hamza_above, 
             )
-ALEFAT = (
-            ALEF, 
-            ALEF_MADDA, 
-            ALEF_HAMZA_ABOVE, 
-            ALEF_HAMZA_BELOW, 
-            ALEF_WASLA, 
-            ALEF_MAKSURA, 
-            SMALL_ALEF, 
+alefat = (
+            alef, 
+            alef_mad, 
+            alef_hamza_above, 
+            alef_hamza_below, 
+            alef_wasla, 
+            alef_maksura, 
+            small_alef, 
 
         )
-WEAK   = ( ALEF,  WAW,  YEH,  ALEF_MAKSURA)
-YEHLIKE =  ( YEH,   YEH_HAMZA,   ALEF_MAKSURA,    SMALL_YEH  )
+weak   = ( alef,  waw,  yeh,  alef_maksura)
+yehlike =  ( yeh,   yeh_hamza,   alef_maksura,    small_yeh  )
 
-WAWLIKE   = ( WAW,   WAW_HAMZA,   SMALL_WAW )
-TEHLIKE   = ( TEH,   TEH_MARBUTA )
+wawlike   = ( waw,   waw_hamza,   small_waw )
+tehlike   = ( teh,   teh_marbuta )
 
-SMALL   = ( SMALL_ALEF,  SMALL_WAW,  SMALL_YEH)
-MOON = (HAMZA            , 
-        ALEF_MADDA       , 
-        ALEF_HAMZA_ABOVE , 
-        ALEF_HAMZA_BELOW , 
-        ALEF             , 
-        BEH              , 
-        JEEM             , 
-        HAH              , 
-        KHAH             , 
-        AIN              , 
-        GHAIN            , 
-        FEH              , 
-        QAF              , 
-        KAF              , 
-        MEEM             , 
-        HEH              , 
-        WAW              , 
-        YEH
+small   = ( small_alef,  small_waw,  small_yeh)
+moon_letters = (hamza    , 
+        alef_mad       , 
+        alef_hamza_above , 
+        alef_hamza_below , 
+        alef             , 
+        beh              , 
+        jeem             , 
+        hah              , 
+        khah             , 
+        ain              , 
+        ghain            , 
+        feh              , 
+        qaf              , 
+        kaf              , 
+        meem             , 
+        heh              , 
+        waw              , 
+        yeh
     )
-SUN = (
-        TEH              , 
-        THEH             , 
-        DAL              , 
-        THAL             , 
-        REH              , 
-        ZAIN             , 
-        SEEN             , 
-        SHEEN            , 
-        SAD              , 
-        DAD              , 
-        TAH              , 
-        ZAH              , 
-        LAM              , 
-        NOON             , 
+sun_letters = (
+        teh              , 
+        theh             , 
+        dal              , 
+        thal             , 
+        reh              , 
+        zain             , 
+        seen             , 
+        sheen            , 
+        sad              , 
+        dad              , 
+        tah              , 
+        zah              , 
+        lam              , 
+        noon             , 
     )
-ALPHABETIC_ORDER = {
-                ALEF             : 1, 
-                BEH              : 2, 
-                TEH              : 3, 
-                TEH_MARBUTA      : 3, 
-                THEH             : 4, 
-                JEEM             : 5, 
-                HAH              : 6, 
-                KHAH             : 7, 
-                DAL              : 8, 
-                THAL             : 9, 
-                REH              : 10, 
-                ZAIN             : 11, 
-                SEEN             : 12, 
-                SHEEN            : 13, 
-                SAD              : 14, 
-                DAD              : 15, 
-                TAH              : 16, 
-                ZAH              : 17, 
-                AIN              : 18, 
-                GHAIN            : 19, 
-                FEH              : 20, 
-                QAF              : 21, 
-                KAF              : 22, 
-                LAM              : 23, 
-                MEEM             : 24, 
-                NOON             : 25, 
-                HEH              : 26, 
-                WAW              : 27, 
-                YEH              : 28, 
-                HAMZA            : 29, 
-                ALEF_MADDA       : 29, 
-                ALEF_HAMZA_ABOVE : 29, 
-                WAW_HAMZA        : 29, 
-                ALEF_HAMZA_BELOW : 29, 
-                YEH_HAMZA        : 29, 
+alphabetic_order = {
+                alef             : 1, 
+                beh              : 2, 
+                teh              : 3, 
+                teh_marbuta      : 3, 
+                theh             : 4, 
+                jeem             : 5, 
+                hah              : 6, 
+                khah             : 7, 
+                dal              : 8, 
+                thal             : 9, 
+                reh              : 10, 
+                zain             : 11, 
+                seen             : 12, 
+                sheen            : 13, 
+                sad              : 14, 
+                dad              : 15, 
+                tah              : 16, 
+                zah              : 17, 
+                ain              : 18, 
+                ghain            : 19, 
+                feh              : 20, 
+                qaf              : 21, 
+                kaf              : 22, 
+                lam              : 23, 
+                meem             : 24, 
+                noon             : 25, 
+                heh              : 26, 
+                waw              : 27, 
+                yeh              : 28, 
+                hamza            : 29, 
+                alef_mad         : 29, 
+                alef_hamza_above : 29, 
+                waw_hamza        : 29, 
+                alef_hamza_below : 29, 
+                yeh_hamza        : 29, 
                 }
 
 
@@ -259,10 +262,9 @@ def alphabet_excluding(excludedLetters):
         str: alphabet excluding the given excludedLetters
 
     Calling:
-        `print(alphabet_excluding([TAH, SHEEN, ZAIN, THAL, YEH]))`
+        print(alphabet_excluding([alef, beh, qaf, teh]))
         
     """
     filtered_alphabet = ''
-    for letter in excludedLetters:
-        filtered_alphabet = LETTERS.replace(letter, '') 
-    return filtered_alphabet
+    return [x for x in alphabet if x not in excludedLetters]
+
