@@ -1,10 +1,7 @@
 """This module contains Arabic tools for text analysis
 """
 
-# constans.
-comma            = u'\u060c'
-semicolon        = u'\u061b'
-question         = u'\u061f'
+# letters.
 hamza            = u'\u0621'
 alef_mad         = u'\u0622'
 alef_hamza_above = u'\u0623'
@@ -44,24 +41,7 @@ yeh              = u'\u064a'
 madda_above      = u'\u0653'
 hamza_above      = u'\u0654'
 hamza_below      = u'\u0655'
-zero             = u'\u0660'
-one              = u'\u0661'
-two              = u'\u0662'
-three            = u'\u0663'
-four             = u'\u0664'
-five             = u'\u0665'
-six              = u'\u0666'
-seven            = u'\u0667'
-eight            = u'\u0668'
-nine             = u'\u0669'
-percent          = u'\u066a'
-decimal          = u'\u066b'
-thousands        = u'\u066c'
-star             = u'\u066d'
-mini_alef        = u'\u0670'
-alef_wasla       = u'\u0671'
-full_stop        = u'\u06d4'
-byte_order_mark  = u'\ufeff'
+alef_wasl        = u'\u0671'
 
 
 tatweel          = u'\u0640'
@@ -163,7 +143,7 @@ alefat = (
             alef_mad, 
             alef_hamza_above, 
             alef_hamza_below, 
-            alef_wasla, 
+            alef_wasl, 
             alef_maksura, 
             small_alef, 
 
