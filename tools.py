@@ -9,6 +9,9 @@ This module contains tools for `Quranic Analysis`
 from xml.etree import ElementTree
 import numpy
 from collections import Counter
+import operator
+from audioop import reverse
+
 
 # Parsing xml
 xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
@@ -130,7 +133,9 @@ def get_frequancy(sentence):
     word_list = sentence.split()
     #compute count of uniqe words 
     frequency = Counter(word_list)
-    return frequency
+    #sort frequency descending
+    sorted_freq = dict(sorted(frequency.items(),key=operator.itemgetter(1),reverse=True))
+    return sorted_freq
     
 
     
@@ -161,17 +166,56 @@ def generate_frequancy_dictionary(suraNumber=None):
         ayat = ' '.join(sura)
         #get frequency of sura 
         frequency = get_frequancy(ayat)
+
     return frequency
 
 
+def check_sura_with_frequency(sura_num,freq_dec):
+    """this function check if frequency dictionary of specific sura is
+    compatible with original sura in shapes count
+
+    Args:
+        suraNumber (int): sura number 
+
+    Returns:
+        Boolean: True :- if compatible 
+                 Flase :- if not
+    """
+    #get number of chars in frequency dec
+    num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
+    #get number of chars in  original sura
+    num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
+    if num_of_chars_in_dec == num_of_chars_in_sura:
+        return True
+    else:
+        return False
+    
+    
 
 def main():
     # testing
 #    print(fetch_aya(10, 107))
 #    print(get_sura(10)[107-1])
-#     parse_sura(111, ['م', 'ا', 'ب'])
-     print(get_sura(1))
-     print(generate_frequancy_dictionary())
+#    parse_sura(111, ['م', 'ا', 'ب'])
+    # print(get_sura(1))
+    # a = generate_frequancy_dictionary()
+    # num = [v for k,v in a.items()]
+#   # print(sum(num))
+#   # print(get_sura(22))
+    # print(len(a))
+#   # print(a['الجنة'])
+
+    #check function of sura el hage
+    freq = generate_frequancy_dictionary(22)
+    print(check_sura_with_frequency(sura_num=22,freq_dec=freq))
+
+    
+#     # write in file
+#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
+#     for key, values in fre:
+#         line='{},{}\n'.format(key,values)
+#         su.write(line)
+#     su.close()
      
 if __name__ == '__main__':
     main()
