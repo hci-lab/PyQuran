@@ -8,6 +8,7 @@ This module contains tools for `Quranic Analysis`
 """
 from xml.etree import ElementTree
 import numpy
+from collections import Counter
 
 # Parsing xml
 xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
@@ -35,6 +36,8 @@ def get_sura(sura_number):
     for aya in ayat:
         sura.append(aya.attrib['text'])
     return sura
+
+
 
 
 
@@ -111,11 +114,66 @@ def parse_sura(n, alphabets=['ل', 'ب']):
 
 
 
+
+
+def get_frequancy(sentence):
+    """it take sentence that you want to compute it's 
+       frequency.
+
+    Args:
+        sentence (string): sentece that compute it's frequency. 
+
+    Returns:
+        dict: {str: int}
+    """
+    # split sentence to words     
+    word_list = sentence.split()
+    #compute count of uniqe words 
+    frequency = Counter(word_list)
+    return frequency
+    
+
+    
+def generate_frequancy_dictionary(suraNumber=None):
+    """It takes and ordered number of a sura, and returns the dictionary:
+       * key is the word.  value is its frequency in the Sura.
+       - If you don't pass any parameter, then the entire Quran is targeted.
+       - This function have to work on the Quran with تشكيل, because it's an
+         important factor.
+
+    Args:
+        suraNumber (int): it's optional 
+
+    Returns:
+        dict: {str: int}
+    """
+    frequency = {}
+    #get all Quran if suraNumber is None
+    if suraNumber == None:
+        #get all Quran as one sentence
+        Quran = ' '.join([' '.join(get_sura(i)) for i in range(1,115)])
+        #get all Quran frequency
+        frequency=get_frequancy(Quran)
+    #get frequency of suraNumber
+    else:
+        #get sura from QuranCorpus
+        sura = get_sura(sura_number=suraNumber)
+        ayat = ' '.join(sura)
+        #get frequency of sura 
+        frequency = get_frequancy(ayat)
+    return frequency
+
+
+
 def main():
     # testing
 #    print(fetch_aya(10, 107))
 #    print(get_sura(10)[107-1])
-    parse_sura(111, ['م', 'ا', 'ب'])
-
+#     parse_sura(111, ['م', 'ا', 'ب'])
+     print(get_sura(1))
+     print(generate_frequancy_dictionary())
+     
 if __name__ == '__main__':
     main()
+
+        
