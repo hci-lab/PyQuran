@@ -207,15 +207,16 @@ def main():
 
     #check function of sura el hage
     freq = generate_frequancy_dictionary(22)
-    print(check_sura_with_frequency(sura_num=22,freq_dec=freq))
+    print(freq)
+    print(type(freq))
 
     
-#     # write in file
-#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
-#     for key, values in fre:
-#         line='{},{}\n'.format(key,values)
-#         su.write(line)
-#     su.close()
+    # write in file
+    file = open('sura_Al_hag_freq.csv','w', encoding='utf8')
+    for key, value in freq.items():
+        line='{},{}\n'.format(key, value)
+        file.write(line)
+    file.close()
      
 if __name__ == '__main__':
     main()
