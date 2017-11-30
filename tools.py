@@ -185,6 +185,7 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
+
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
@@ -206,16 +207,38 @@ def main():
 #   # print(a['الجنة'])
 
     #check function of sura el hage
+    import time
+    start = time.time()
     freq = generate_frequancy_dictionary(22)
+    print(time.time()-start)
+    start = time.time()
     print(check_sura_with_frequency(sura_num=22,freq_dec=freq))
-
-    
-#     # write in file
-#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
-#     for key, values in fre:
-#         line='{},{}\n'.format(key,values)
-#         su.write(line)
-#     su.close()
+    print(time.time()-start)
+    print(freq)
+#     write in file
+    su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
+    n = 0
+    l = ""
+    for key, values in freq.items():
+        line='{},{}'.format(key,values)
+        su.write(line+"\n")
+#         n=n+1
+# #         if n !=3:
+# #             l = l+line +" & "
+# #         else:
+#         l = l+line
+#         if(n==3):
+#            su.write(l+" | \n")
+#            n=0
+#            l=""
+    su.close()
+#     from fpdf import FPDF
+# 
+#     pdf = FPDF()
+#     pdf.add_page()
+#     pdf.set_font('Arial', 'B', 16)
+#     pdf.cell(40, 10, 'Hello World!')
+#     pdf.output('tuto1.pdf', 'F')
      
 if __name__ == '__main__':
     main()
