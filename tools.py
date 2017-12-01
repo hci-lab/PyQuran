@@ -185,7 +185,7 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
-
+    print(num_of_chars_in_dec)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
@@ -201,33 +201,45 @@ def generate_latex_table(dictionary,filename):
         filename (string): file name 
     """
     head_code = """\\documentclass[a4paper,10pt]{article}
-                %In the preamble section include the arabtex and utf8 packages
-                \\usepackage{arabtex}
-                \\usepackage{utf8}
-                \\usepackage{color, colortbl}
-                    
-                    
-                \\begin{document}
-                %start encoding to unicode
-                %Note that your layout must support arabic text when compiling
-                \\setcode{utf8}
-        
-        
-                \\begin{tabular}{ P | P }
-                        
-                          
-                \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}} \\\\
-                \\hline"""
+%In the preamble section include the arabtex and utf8 packages
+\\usepackage{arabtex}
+\\usepackage{utf8}
+\\usepackage{longtable}    
+\\usepackage{color, colortbl}
+\\usepackage{supertabular}
+\\usepackage{multicol}
+
+
+\\begin{document}
+\\setcode{utf8}
+\\twocolumn
+
+
+\\begin{longtable}{ P{2cm}  P{1cm} P{2cm}  P{1cm}}    
+      
+      \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}}  & \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}}  & \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}} \\\\
+      \\hline"""
             
-    tail_code = """\\hline
-                \\end{tabular}
-                \\end{document}"""
+    tail_code = """\\end{longtable}
+\\end{document}"""
       
     file  = open(filename+'.tex', 'w', encoding='utf8')
     file.write(head_code+'\n')
+    n = 0
+    l = ""
+    num_of_words_per_row = 3
     for word, frequancy in dictionary.items():
-        line = "\\<"+word+"> & "+str(frequancy)+" \\\\ \n"        
-        file.write(line+'\n')
+        line = "\\<"+word+"> & "+str(frequancy)
+        n = n+1
+        if n!=num_of_words_per_row:
+            l = l+line+" & "
+        else:
+            l = l+line
+        if(n==num_of_words_per_row):
+            file.write(l+' \\\\ \n')
+            l=""
+            n=0
+            
     file.write(tail_code)
     file.close()
     
