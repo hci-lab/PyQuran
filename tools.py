@@ -11,8 +11,6 @@ import numpy
 from collections import Counter
 import operator
 from audioop import reverse
-from nltk.corpus import words
-from dask.bag.core import dictitems
 
 
 # Parsing xml
@@ -187,6 +185,7 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
+    print(num_of_chars_in_dec)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
@@ -271,8 +270,10 @@ def main():
     print(check_sura_with_frequency(sura_num=22,freq_dec=freq))
     print(time.time()-start)
     print(freq)
+    start = time.time()
     generate_latex_table(freq,"test")
-    
+    print(time.time()-start)
+
     x = [1,2,3,4]
     x.reverse()
 #     write in file
