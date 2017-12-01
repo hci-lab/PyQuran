@@ -11,6 +11,8 @@ import numpy
 from collections import Counter
 import operator
 from audioop import reverse
+from nltk.corpus import words
+from dask.bag.core import dictitems
 
 
 # Parsing xml
@@ -185,7 +187,6 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
-    print(num_of_chars_in_dec)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
@@ -200,7 +201,7 @@ def generate_latex_table(dictionary,filename):
         dictionary (dict): frequency dictionary
         filename (string): file name 
     """
-    head_code = """\\documentclass[a4paper,10pt]{article}
+    head_code = """\\documentclass{article}
 %In the preamble section include the arabtex and utf8 packages
 \\usepackage{arabtex}
 \\usepackage{utf8}
@@ -211,35 +212,36 @@ def generate_latex_table(dictionary,filename):
 
 
 \\begin{document}
+\\begin{multicols}{3}
 \\setcode{utf8}
-\\twocolumn
 
-
-\\begin{longtable}{ P{2cm}  P{1cm} P{2cm}  P{1cm}}    
-      
-      \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}}  & \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}}  & \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}} \\\\
-      \\hline"""
+\\begin{center}"""
             
-    tail_code = """\\end{longtable}
+    tail_code = """\\end{center}
+\\end{multicols}
 \\end{document}"""
       
+    begin_table = """\\begin{tabular}{ P{2cm}  P{1cm}} 
+\\textbf{words}    & \\textbf{frequancy}  \\\\
+\\hline"""
+    end_table= """\\end{tabular}"""
+    rows_num = 30  
     file  = open(filename+'.tex', 'w', encoding='utf8')
     file.write(head_code+'\n')
-    n = 0
-    l = ""
-    num_of_words_per_row = 3
-    for word, frequancy in dictionary.items():
-        line = "\\<"+word+"> & "+str(frequancy)
-        n = n+1
-        if n!=num_of_words_per_row:
-            l = l+line+" & "
-        else:
-            l = l+line
-        if(n==num_of_words_per_row):
-            file.write(l+' \\\\ \n')
-            l=""
-            n=0
-            
+    n= int(len(dictionary)/rows_num)
+    words = [("\\<"+word+"> & "+str(frequancy)+' \\\\ \n') for word, frequancy in dictionary.items()] 
+    start=0
+    end=rows_num
+    new_words = []
+    for i in range(n):
+        new_words = new_words+ [begin_table+'\n'] +words[start:end] +[end_table+" \n"]
+        start=end
+        end+=rows_num
+    remain_words = len(dictionary) - rows_num*n
+    if remain_words > 0:
+        new_words +=  [begin_table+" \n"]+ words[-1*remain_words:]+[end_table+" \n"]
+    for word in new_words:
+        file.write(word)
     file.write(tail_code)
     file.close()
     
@@ -270,6 +272,9 @@ def main():
     print(time.time()-start)
     print(freq)
     generate_latex_table(freq,"test")
+    
+    x = [1,2,3,4]
+    x.reverse()
 #     write in file
 #     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
 #     n = 0
