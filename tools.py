@@ -192,6 +192,48 @@ def check_sura_with_frequency(sura_num,freq_dec):
         return False
     
     
+    
+def generate_latex_table(dictionary,filename):
+    """generate latex code of table of frequency 
+    
+    Args:
+        dictionary (dict): frequency dictionary
+        filename (string): file name 
+    """
+    head_code = """\\documentclass[a4paper,10pt]{article}
+                %In the preamble section include the arabtex and utf8 packages
+                \\usepackage{arabtex}
+                \\usepackage{utf8}
+                \\usepackage{color, colortbl}
+                    
+                    
+                \\begin{document}
+                %start encoding to unicode
+                %Note that your layout must support arabic text when compiling
+                \\setcode{utf8}
+        
+        
+                \\begin{tabular}{ P | P }
+                        
+                          
+                \\textbf{\\Large{words}}    & \\textbf{\\Large{frequancy}} \\\\
+                \\hline"""
+            
+    tail_code = """\\hline
+                \\end{tabular}
+                \\end{document}"""
+      
+    file  = open(filename+'.tex', 'w', encoding='utf8')
+    file.write(head_code+'\n')
+    for word, frequancy in dictionary.items():
+        line = "\\<"+word+"> & "+str(frequancy)+" \\\\ \n"        
+        file.write(line+'\n')
+    file.write(tail_code)
+    file.close()
+    
+    
+    
+    
 
 def main():
     # testing
@@ -215,14 +257,15 @@ def main():
     print(check_sura_with_frequency(sura_num=22,freq_dec=freq))
     print(time.time()-start)
     print(freq)
+    generate_latex_table(freq,"test")
 #     write in file
-    su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
-    n = 0
-    l = ""
-    for key, values in freq.items():
-        line='{},{}'.format(key,values)
-        su.write(line+"\n")
-#         n=n+1
+#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
+#     n = 0
+#     l = ""
+#     for key, values in freq.items():
+#         line='{},{}'.format(key,values)
+#         su.write(line+"\n")
+# #         n=n+1
 # #         if n !=3:
 # #             l = l+line +" & "
 # #         else:
@@ -231,7 +274,7 @@ def main():
 #            su.write(l+" | \n")
 #            n=0
 #            l=""
-    su.close()
+#     su.close()
 #     from fpdf import FPDF
 # 
 #     pdf = FPDF()
@@ -239,6 +282,8 @@ def main():
 #     pdf.set_font('Arial', 'B', 16)
 #     pdf.cell(40, 10, 'Hello World!')
 #     pdf.output('tuto1.pdf', 'F')
+     
+   
      
 if __name__ == '__main__':
     main()
