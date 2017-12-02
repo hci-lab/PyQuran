@@ -11,6 +11,7 @@ import numpy
 from collections import Counter
 import operator
 from audioop import reverse
+from sqlalchemy.sql.expression import except_
 
 
 # Parsing xml
@@ -185,7 +186,6 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
-    print(num_of_chars_in_dec)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
@@ -193,12 +193,17 @@ def check_sura_with_frequency(sura_num,freq_dec):
     
     
     
-def generate_latex_table(dictionary,filename):
+def generate_latex_table(dictionary,filename,location="."):
     """generate latex code of table of frequency 
     
     Args:
         dictionary (dict): frequency dictionary
         filename (string): file name 
+        location (string): location to save , the default location is same directory
+    Returns:
+        Boolean: True :- if Done 
+                 Flase :- if something wrong with folder name    
+        
     """
     head_code = """\\documentclass{article}
 %In the preamble section include the arabtex and utf8 packages
@@ -208,10 +213,11 @@ def generate_latex_table(dictionary,filename):
 \\usepackage{color, colortbl}
 \\usepackage{supertabular}
 \\usepackage{multicol}
-
+\\usepackage{geometry} 
+\\geometry{left=.1in, right=.1in, top=.1in, bottom=.1in}
 
 \\begin{document}
-\\begin{multicols}{3}
+\\begin{multicols}{6}
 \\setcode{utf8}
 
 \\begin{center}"""
@@ -221,28 +227,36 @@ def generate_latex_table(dictionary,filename):
 \\end{document}"""
       
     begin_table = """\\begin{tabular}{ P{2cm}  P{1cm}} 
-\\textbf{words}    & \\textbf{frequancy}  \\\\
-\\hline"""
+\\textbf{words}    & \\textbf{\\#}  \\\\
+\\hline
+\\\\[0.01cm]"""
     end_table= """\\end{tabular}"""
-    rows_num = 30  
-    file  = open(filename+'.tex', 'w', encoding='utf8')
-    file.write(head_code+'\n')
-    n= int(len(dictionary)/rows_num)
-    words = [("\\<"+word+"> & "+str(frequancy)+' \\\\ \n') for word, frequancy in dictionary.items()] 
-    start=0
-    end=rows_num
-    new_words = []
-    for i in range(n):
-        new_words = new_words+ [begin_table+'\n'] +words[start:end] +[end_table+" \n"]
-        start=end
-        end+=rows_num
-    remain_words = len(dictionary) - rows_num*n
-    if remain_words > 0:
-        new_words +=  [begin_table+" \n"]+ words[-1*remain_words:]+[end_table+" \n"]
-    for word in new_words:
-        file.write(word)
-    file.write(tail_code)
-    file.close()
+    rows_num = 40
+    if location != '.':
+         filename = location +"/"+ filename
+    
+    try:     
+        file  = open(filename+'.tex', 'w', encoding='utf8')
+        file.write(head_code+'\n')
+        n= int(len(dictionary)/rows_num)
+        words = [("\\<"+word+"> & "+str(frequancy)+' \\\\ \n') for word, frequancy in dictionary.items()] 
+        start=0
+        end=rows_num
+        new_words = []
+        for i in range(n):
+            new_words = new_words+ [begin_table+'\n'] +words[start:end] +[end_table+" \n"]
+            start=end
+            end+=rows_num
+        remain_words = len(dictionary) - rows_num*n
+        if remain_words > 0:
+            new_words +=  [begin_table+" \n"]+ words[-1*remain_words:]+[end_table+" \n"]
+        for word in new_words:
+            file.write(word)
+        file.write(tail_code)
+        file.close()
+        return True
+    except:
+        return False
     
     
     
@@ -271,9 +285,9 @@ def main():
     print(time.time()-start)
     print(freq)
     start = time.time()
-    generate_latex_table(freq,"test")
+    print(generate_latex_table(freq,"test"))
     print(time.time()-start)
-
+    print(len(freq))
     x = [1,2,3,4]
     x.reverse()
 #     write in file
