@@ -185,38 +185,72 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
+    print(num_of_chars_in_dec)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
         return False
     
     
+    
+def generate_latex_table(dictionary,filename):
+    """generate latex code of table of frequency 
+    
+    Args:
+        dictionary (dict): frequency dictionary
+        filename (string): file name 
+    """
+    head_code = """\\documentclass{article}
+%In the preamble section include the arabtex and utf8 packages
+\\usepackage{arabtex}
+\\usepackage{utf8}
+\\usepackage{longtable}    
+\\usepackage{color, colortbl}
+\\usepackage{supertabular}
+\\usepackage{multicol}
+
+
+\\begin{document}
+\\begin{multicols}{3}
+\\setcode{utf8}
+
+\\begin{center}"""
+            
+    tail_code = """\\end{center}
+\\end{multicols}
+\\end{document}"""
+      
+    begin_table = """\\begin{tabular}{ P{2cm}  P{1cm}} 
+\\textbf{words}    & \\textbf{frequancy}  \\\\
+\\hline"""
+    end_table= """\\end{tabular}"""
+    rows_num = 30  
+    file  = open(filename+'.tex', 'w', encoding='utf8')
+    file.write(head_code+'\n')
+    n= int(len(dictionary)/rows_num)
+    words = [("\\<"+word+"> & "+str(frequancy)+' \\\\ \n') for word, frequancy in dictionary.items()] 
+    start=0
+    end=rows_num
+    new_words = []
+    for i in range(n):
+        new_words = new_words+ [begin_table+'\n'] +words[start:end] +[end_table+" \n"]
+        start=end
+        end+=rows_num
+    remain_words = len(dictionary) - rows_num*n
+    if remain_words > 0:
+        new_words +=  [begin_table+" \n"]+ words[-1*remain_words:]+[end_table+" \n"]
+    for word in new_words:
+        file.write(word)
+    file.write(tail_code)
+    file.close()
+    
+    
+    
+    
 
 def main():
-    # testing
-#    print(fetch_aya(10, 107))
-#    print(get_sura(10)[107-1])
-#    parse_sura(111, ['م', 'ا', 'ب'])
-    # print(get_sura(1))
-    # a = generate_frequancy_dictionary()
-    # num = [v for k,v in a.items()]
-#   # print(sum(num))
-#   # print(get_sura(22))
-    # print(len(a))
-#   # print(a['الجنة'])
+    pass
 
-    #check function of sura el hage
-    freq = generate_frequancy_dictionary(22)
-    print(freq)
-    print(type(freq))
-
-    
-    # write in file
-    file = open('sura_Al_hag_freq.csv','w', encoding='utf8')
-    for key, value in freq.items():
-        line='{},{}\n'.format(key, value)
-        file.write(line)
-    file.close()
      
 if __name__ == '__main__':
     main()
