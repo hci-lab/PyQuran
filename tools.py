@@ -11,6 +11,8 @@ import numpy
 from collections import Counter
 import operator
 from audioop import reverse
+import difflib as dif
+from astropy.units import count
 
 
 # Parsing xml
@@ -185,20 +187,89 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
-    print(num_of_chars_in_dec)
+    print(num_of_chars_in_dec ,"    ", num_of_chars_in_sura)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
         return False
     
     
+
+
+
+def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
+    """this function using to cluster words using similarity 
+    and sort every bunch of word  by most common and sort bunches 
+    descending in same time 
     
-def generate_latex_table(dictionary,filename):
+    Args:
+        frequency_dictionary (dict): frequency dictionary that need to sort
+    Returns:
+        dict : sorted dictionary 
+    """
+    # list of dictionaries and every dictionary has similar words and we will call every dictionary as 'X'
+    list_of_dics = []
+    # this dictionary key is a position of 'X' and value the sum of frequencies of 'X'
+    list_of_dics_counts = dict()
+    #counter of X's
+    dic_num=0
+    #lock list used to lock word that added in 'X'
+    occurrence_list = []
+    #loop on all words to cluster them
+    for word,count in frequency_dictionary.items():
+        #check if word is locked from some 'X' or not
+        if word not in occurrence_list:
+            #this use to sum all of frequencies of this 'X'
+            sum_of_freqs = count
+            #create new 'X' and add the first word
+            sub_dic = dict({word:count}) 
+            #add word in occurrence list to lock it
+            occurrence_list.append(word)
+            #loop in the rest word to get similar word
+            for sub_word,sub_count in frequency_dictionary.items():
+                #check if word lock or not
+                if sub_word not in occurrence_list:
+                    #compute similarity probability 
+                    similarity_prob = dif.SequenceMatcher(None,word,sub_word).ratio()
+                    # check if prob of word is bigger than threshold or not
+                    if similarity_prob >= threshold:
+                        #add sub_word as a new word in this 'X'
+                        sub_dic[sub_word] = sub_count
+                        # lock this new word
+                        occurrence_list.append(sub_word)
+                        # add the frequency of this new word to sum_of_freqs
+                        sum_of_freqs +=sub_count
+            #append 'X' in list of dictionaries
+            list_of_dics.append(sub_dic)
+            #append position and summation of this 'X' frequencies
+            list_of_dics_counts[dic_num] = sum_of_freqs
+            # increase number of dictionaries 
+            dic_num +=1
+    #sort list of dictionaries count (sort X's descending) The most frequent
+    list_of_dics_counts = dict(sorted(list_of_dics_counts.items(),key=operator.itemgetter(1),reverse=True))
+    #new frequency dictionary that will return 
+    new_freq_dic =dict()
+    #loop to make them as one dictionary after sorting
+    for position in list_of_dics_counts.keys():
+        new_sub_dic = dict(sorted(list_of_dics[position].items(),key=operator.itemgetter(1),reverse=True))
+        for word,count in new_sub_dic.items():
+            new_freq_dic[word] = count
+
+    return new_freq_dic        
+    
+    
+    
+def generate_latex_table(dictionary,filename,location="."):
     """generate latex code of table of frequency 
     
     Args:
         dictionary (dict): frequency dictionary
         filename (string): file name 
+        location (string): location to save , the default location is same directory
+    Returns:
+        Boolean: True :- if Done 
+                 Flase :- if something wrong with folder name    
+        
     """
     head_code = """\\documentclass{article}
 %In the preamble section include the arabtex and utf8 packages
@@ -208,10 +279,11 @@ def generate_latex_table(dictionary,filename):
 \\usepackage{color, colortbl}
 \\usepackage{supertabular}
 \\usepackage{multicol}
-
+\\usepackage{geometry} 
+\\geometry{left=.1in, right=.1in, top=.1in, bottom=.1in}
 
 \\begin{document}
-\\begin{multicols}{3}
+\\begin{multicols}{6}
 \\setcode{utf8}
 
 \\begin{center}"""
@@ -221,28 +293,36 @@ def generate_latex_table(dictionary,filename):
 \\end{document}"""
       
     begin_table = """\\begin{tabular}{ P{2cm}  P{1cm}} 
-\\textbf{words}    & \\textbf{frequancy}  \\\\
-\\hline"""
+\\textbf{words}    & \\textbf{\\#}  \\\\
+\\hline
+\\\\[0.01cm]"""
     end_table= """\\end{tabular}"""
-    rows_num = 30  
-    file  = open(filename+'.tex', 'w', encoding='utf8')
-    file.write(head_code+'\n')
-    n= int(len(dictionary)/rows_num)
-    words = [("\\<"+word+"> & "+str(frequancy)+' \\\\ \n') for word, frequancy in dictionary.items()] 
-    start=0
-    end=rows_num
-    new_words = []
-    for i in range(n):
-        new_words = new_words+ [begin_table+'\n'] +words[start:end] +[end_table+" \n"]
-        start=end
-        end+=rows_num
-    remain_words = len(dictionary) - rows_num*n
-    if remain_words > 0:
-        new_words +=  [begin_table+" \n"]+ words[-1*remain_words:]+[end_table+" \n"]
-    for word in new_words:
-        file.write(word)
-    file.write(tail_code)
-    file.close()
+    rows_num = 40
+    if location != '.':
+         filename = location +"/"+ filename
+    
+    try:     
+        file  = open(filename+'.tex', 'w', encoding='utf8')
+        file.write(head_code+'\n')
+        n= int(len(dictionary)/rows_num)
+        words = [("\\<"+word+"> & "+str(frequancy)+' \\\\ \n') for word, frequancy in dictionary.items()] 
+        start=0
+        end=rows_num
+        new_words = []
+        for i in range(n):
+            new_words = new_words+ [begin_table+'\n'] +words[start:end] +[end_table+" \n"]
+            start=end
+            end+=rows_num
+        remain_words = len(dictionary) - rows_num*n
+        if remain_words > 0:
+            new_words +=  [begin_table+" \n"]+ words[-1*remain_words:]+[end_table+" \n"]
+        for word in new_words:
+            file.write(word)
+        file.write(tail_code)
+        file.close()
+        return True
+    except:
+        return False
     
     
     
@@ -267,15 +347,18 @@ def main():
     freq = generate_frequancy_dictionary(22)
     print(time.time()-start)
     start = time.time()
-    print(check_sura_with_frequency(sura_num=22,freq_dec=freq))
+    new_dec = sort_dictionary_by_similarity(freq, 0.8)
+    print(new_dec)
+    print(len(freq),"  ",len(new_dec))
+    print(check_sura_with_frequency(sura_num=22,freq_dec=new_dec))
     print(time.time()-start)
     print(freq)
     start = time.time()
-    generate_latex_table(freq,"test")
+    print(generate_latex_table(new_dec,"test"))
     print(time.time()-start)
-
-    x = [1,2,3,4]
-    x.reverse()
+#     print(len(freq))
+#     x = [1,2,3,4]
+#     x.reverse()
 #     write in file
 #     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
 #     n = 0
