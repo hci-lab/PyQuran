@@ -467,6 +467,24 @@ def count_shape(text, system=None):
     return alphabetAsOneShape , alphabetCount
 
 
+def get_verse_count(surah):
+    """
+                	 get_verse_countget get surah as a paramter and return
+                	 how many ayah in it.
+
+                    What it does:
+                        count the number of verses in surah
+
+                    Args:
+
+                        param1 (str ): a strings
+
+                    Returns:
+                        int: the number of verses
+
+
+                    """
+    return len(surah)
     
     
     
