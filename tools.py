@@ -12,7 +12,12 @@ from collections import Counter
 import operator
 from audioop import reverse
 import difflib as dif
-from astropy.units import count
+
+from itertools import chain
+import functools
+from collections import Counter, defaultdict
+from arabic import *
+
 
 
 # Parsing xml
@@ -323,6 +328,145 @@ def generate_latex_table(dictionary,filename,location="."):
         return True
     except:
         return False
+
+
+
+def shape(system):
+    """
+    	 shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
+    	 that want to count it as on shape "inner list" and returns a dictionary has the same value
+         for each set of alphabets and diffrent values for the rest of alphabets
+
+        Args:
+
+            param1 ([[char]]): a list of list of alphabets , each inner list have
+                              alphabets that with be count  as one shape .
+        Returns:
+            dictionary: with all alphabets, where each char "key"  have a value
+            value will be equals for alphabets that will be count as oe shape
+
+
+        """
+
+    alphabetMap=dict()
+    alphabetMap.update({" ": 0})
+
+    newAlphabet=list(set(chain(*system)))
+    listOfAlphabet=list(alphabet)
+    indx=1
+    theRestOfAlphabets=list(set(listOfAlphabet)-set(newAlphabet))
+
+    for setOfNewAlphabet in system:
+        for char in setOfNewAlphabet:
+            alphabetMap.update({char:indx})
+        indx=indx+1
+
+    for char in theRestOfAlphabets:
+        alphabetMap.update({char:indx})
+        indx=indx+1
+    return alphabetMap
+
+
+def convert_text_to_numbers(text,alphabetMap):
+    """
+        	 convert_text_to_numbers get a text (surah or ayah) and convert it to list of numbers
+        	 depends on alphabetMap dictionary , user pass the text "list or list of list" that want to count it
+        	 and dictionary that has each chat with it's number that will convert to,and returns a list of numbers
+
+
+
+
+
+            What it does:
+                it convert each letter to a number "corresponding to dictionary given as argument"
+
+
+            Args:
+
+                param1 ([str] ): a list of strings , each inner list is ayah .
+                param2(dict) : a dictionary has each alphabet with it's corresponding number
+            Returns:
+                List: list of numbers, where each char in the text converted to number
+
+
+            """
+
+    textToNumber=[]
+    i=0
+    if isinstance(text , list):
+        for ayah in text:
+            for char in ayah:
+                textToNumber.insert(i,alphabetMap[char])
+                i=i+1
+    else:
+        for char in text:
+            textToNumber.insert(i, alphabetMap[char])
+            i = i + 1
+
+    return textToNumber
+
+
+def count_shape(text, system=None):
+    """
+            	 count_shape get a text (surah or ayah) and count the occuerence of each shape
+            	 depends on the your system ,If you don't pass system, then it will count each char as one shape
+            	 , user pass the text "list or list of lists" that want to
+            	 count it
+            	 and the system that has sets of alphapets that will  count as one shape.
+
+
+
+
+
+                What it does:
+                    count the occuerence of each shape
+
+
+                Args:
+
+                    param1 ([str] ): a list of strings , each inner list is ayah .
+                    param2([[char]]) : it's optional ,
+                                        -a list of list , each iner list has alphabets that will count as one shape
+                                        - If you don't pass your system, then it will count each char as one shape
+                Returns:
+                    Dict1: dictionary , the value of each element is the alphapets have the same shape.
+                    Dict2: dictionary , the value of each element is the count of each shape
+
+
+                """
+    if system==None:
+        alphabetMap = dict()
+        alphabetMap.update({" ": 0})
+        indx=1
+        for char in alphabet:
+            alphabetMap.update({char: indx})
+            indx = indx + 1
+
+    else:
+        alphabetMap = shape(system)
+
+    textToNumber = convert_text_to_numbers(text, alphabetMap)
+    alphabetCount = Counter(textToNumber)
+
+
+    alphabetAsOneShape = defaultdict(list)
+    for key, value in alphabetMap.items():
+        alphabetAsOneShape[value].append(key)
+
+    '''
+    printf = functools.partial(print, end=" ")
+    for key in viewDict:  # .encode("utf-8")
+        for val in viewDict[key]:
+            printf(val)
+        print(" : " + str(count[key]))
+        '''
+    # just delete the space
+    del alphabetCount[0]
+    del alphabetAsOneShape[0]
+
+    return alphabetAsOneShape , alphabetCount
+
+
     
     
     
@@ -330,7 +474,21 @@ def generate_latex_table(dictionary,filename,location="."):
 
 def main():
     # testing
-#    print(fetch_aya(10, 107))
+
+    alphabetAsOneShape, alphabetCount = count_shape(get_sura(110),
+                                                    [[beh, teh, theh],
+                                                     [jeem, hah, khah]])
+    printf = functools.partial(print, end=" ")
+    for key in alphabetAsOneShape:  # .encode("utf-8")
+        for val in alphabetAsOneShape[key]:
+            printf(val)
+        print(" : " + str(alphabetCount[key]))
+
+
+    print(
+            "----------------------------------------------------------------------------")
+
+    #    print(fetch_aya(10, 107))
 #    print(get_sura(10)[107-1])
 #    parse_sura(111, ['م', 'ا', 'ب'])
     # print(get_sura(1))
