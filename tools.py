@@ -486,12 +486,42 @@ def get_verse_count(surah):
                     """
     return len(surah)
     
-    
-    
+
+def count_token(text):
+    """
+                	 count_token get a text (surah or ayah) and count the
+                	 number of tokens that it has.
+
+                	What it does:
+                        count the number of tokens in text
+
+
+                    Args:
+
+                        param1 (str or [str]): a string or list of strings
+
+
+                    Returns:
+                        int: the number of tokens
+
+
+                    """
+    count=0
+    if isinstance(text, list):
+        for ayah in text:
+            count=count+ayah.count(' ')+1
+
+    else:
+
+           count=text.count(' ')+1
+
+    return count
+
     
 
 def main():
     # testing
+    #newSystem = [[teh, beh, teh, noon], [dal, thal], [jeem, hah, khah],[sad, dad, tah, zah], [ain, ghain]]
 
     alphabetAsOneShape, alphabetCount = count_shape(get_sura(110),
                                                     [[beh, teh, theh],
@@ -503,8 +533,12 @@ def main():
         print(" : " + str(alphabetCount[key]))
 
 
-    print(
-            "----------------------------------------------------------------------------")
+
+    #print(get_verse_count(get_sura(9)))
+    print(count_token(get_sura(110)))
+
+
+
 
     #    print(fetch_aya(10, 107))
 #    print(get_sura(10)[107-1])
