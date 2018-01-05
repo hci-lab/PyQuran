@@ -8,10 +8,13 @@ This module contains tools for `Quranic Analysis`
 """
 from xml.etree import ElementTree
 import numpy
-from collections import Counter
 import operator
 from audioop import reverse
 import difflib as dif
+from itertools import chain
+import functools
+from collections import Counter, defaultdict
+from arabic import *
 
 
 # Parsing xml
@@ -327,66 +330,199 @@ def generate_latex_table(dictionary,filename,location="."):
         return True
     except:
         return False
+
+
+
+def shape(system):
+    """
+    	 shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
+    	 that want to count it as on shape "inner list" and returns a dictionary has the same value
+         for each set of alphabets and diffrent values for the rest of alphabets
+
+        Args:
+
+            param1 ([[char]]): a list of list of alphabets , each inner list have
+                              alphabets that with be count  as one shape .
+        Returns:
+            dictionary: with all alphabets, where each char "key"  have a value
+            value will be equals for alphabets that will be count as oe shape
+
+
+        """
+
+    alphabetMap=dict()
+    alphabetMap.update({" ": 0})
+
+    newAlphabet=list(set(chain(*system)))
+    listOfAlphabet=list(alphabet)
+    indx=1
+    theRestOfAlphabets=list(set(listOfAlphabet)-set(newAlphabet))
+
+    for setOfNewAlphabet in system:
+        for char in setOfNewAlphabet:
+            alphabetMap.update({char:indx})
+        indx=indx+1
+
+    for char in theRestOfAlphabets:
+        alphabetMap.update({char:indx})
+        indx=indx+1
+    return alphabetMap
+
+
+def convert_text_to_numbers(text,alphabetMap):
+    """
+        	 convert_text_to_numbers get a text (surah or ayah) and convert it to list of numbers
+        	 depends on alphabetMap dictionary , user pass the text "list or list of list" that want to count it
+        	 and dictionary that has each chat with it's number that will convert to,and returns a list of numbers
+
+
+
+
+
+            What it does:
+                it convert each letter to a number "corresponding to dictionary given as argument"
+
+
+            Args:
+
+                param1 ([str] ): a list of strings , each inner list is ayah .
+                param2(dict) : a dictionary has each alphabet with it's corresponding number
+            Returns:
+                List: list of numbers, where each char in the text converted to number
+
+
+            """
+
+    textToNumber=[]
+    i=0
+    if isinstance(text , list):
+        for ayah in text:
+            for char in ayah:
+                textToNumber.insert(i,alphabetMap[char])
+                i=i+1
+    else:
+        for char in text:
+            textToNumber.insert(i, alphabetMap[char])
+            i = i + 1
+
+    return textToNumber
+
+
+def count_shape(text, system=None):
+    """
+            	 count_shape get a text (surah or ayah) and count the occuerence of each shape
+            	 depends on the your system ,If you don't pass system, then it will count each char as one shape
+            	 , user pass the text "list or list of lists" that want to
+            	 count it
+            	 and the system that has sets of alphapets that will  count as one shape.
+
+
+
+
+
+                What it does:
+                    count the occuerence of each shape
+
+
+                Args:
+
+                    param1 ([str] ): a list of strings , each inner list is ayah .
+                    param2([[char]]) : it's optional ,
+                                        -a list of list , each iner list has alphabets that will count as one shape
+                                        - If you don't pass your system, then it will count each char as one shape
+                Returns:
+                    Dict1: dictionary , the value of each element is the alphapets have the same shape.
+                    Dict2: dictionary , the value of each element is the count of each shape
+
+
+                """
+    if system==None:
+        alphabetMap = dict()
+        alphabetMap.update({" ": 0})
+        indx=1
+        for char in alphabet:
+            alphabetMap.update({char: indx})
+            indx = indx + 1
+
+    else:
+        alphabetMap = shape(system)
+
+    textToNumber = convert_text_to_numbers(text, alphabetMap)
+    alphabetCount = Counter(textToNumber)
+
+
+    alphabetAsOneShape = defaultdict(list)
+    for key, value in alphabetMap.items():
+        alphabetAsOneShape[value].append(key)
+
+    '''
+    printf = functools.partial(print, end=" ")
+    for key in viewDict:  # .encode("utf-8")
+        for val in viewDict[key]:
+            printf(val)
+        print(" : " + str(count[key]))
+        '''
+    # just delete the space
+    del alphabetCount[0]
+    del alphabetAsOneShape[0]
+
+    return alphabetAsOneShape , alphabetCount
+
+
+def get_verse_count(surah):
+    """
+                	 get_verse_countget get surah as a paramter and return
+                	 how many ayah in it.
+
+                    What it does:
+                        count the number of verses in surah
+
+                    Args:
+
+                        param1 (str ): a strings
+
+                    Returns:
+                        int: the number of verses
+
+
+                    """
+    return len(surah)
     
-    
+
+def count_token(text):
+    """
+                	 count_token get a text (surah or ayah) and count the
+                	 number of tokens that it has.
+
+                	What it does:
+                        count the number of tokens in text
+
+
+                    Args:
+
+                        param1 (str or [str]): a string or list of strings
+
+
+                    Returns:
+                        int: the number of tokens
+
+
+                    """
+    count=0
+    if isinstance(text, list):
+        for ayah in text:
+            count=count+ayah.count(' ')+1
+
+    else:
+
+           count=text.count(' ')+1
+
+    return count
+
 
 
 def main():
-    # testing
-#    print(fetch_aya(10, 107))
-#    print(get_sura(10)[107-1])
-#    parse_sura(111, ['م', 'ا', 'ب'])
-    # print(get_sura(1))
-    # a = generate_frequancy_dictionary()
-    # num = [v for k,v in a.items()]
-#   # print(sum(num))
-#   # print(get_sura(22))
-    # print(len(a))
-#   # print(a['الجنة'])
-
-    #check function of sura el hage
-    import time
-    start = time.time()
-    freq = generate_frequancy_dictionary(22)    
-    print(time.time()-start)
-    start = time.time()
-    print(freq)
-    new_dec = sort_dictionary_by_similarity(freq, 0.8)
-#     print(new_dec)
-#     print(len(freq),"  ",len(new_dec))
-    print(check_sura_with_frequency(sura_num=22,freq_dec=new_dec))
-    print(time.time()-start)
-#     print(freq)
-#     start = time.time()
-#     print(generate_latex_table(new_dec,"test"))
-#     print(time.time()-start)
-#     print(len(freq))
-#     x = [1,2,3,4]
-#     x.reverse()
-#     write in file
-#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
-#     n = 0
-#     l = ""
-#     for key, values in freq.items():
-#         line='{},{}'.format(key,values)
-#         su.write(line+"\n")
-# #         n=n+1
-# #         if n !=3:
-# #             l = l+line +" & "
-# #         else:
-#         l = l+line
-#         if(n==3):
-#            su.write(l+" | \n")
-#            n=0
-#            l=""
-#     su.close()
-#     from fpdf import FPDF
-# 
-#     pdf = FPDF()
-#     pdf.add_page()
-#     pdf.set_font('Arial', 'B', 16)
-#     pdf.cell(40, 10, 'Hello World!')
-#     pdf.output('tuto1.pdf', 'F')
+    pass
      
    
      
