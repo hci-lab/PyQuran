@@ -8,20 +8,18 @@ This module contains tools for `Quranic Analysis`
 """
 from xml.etree import ElementTree
 import numpy
-from collections import Counter
 import operator
 from audioop import reverse
 import difflib as dif
-
 from itertools import chain
 import functools
 from collections import Counter, defaultdict
 from arabic import *
 
 
-
 # Parsing xml
 xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+# xml_file_name = 'QuranCorpus/quran-simple.xml'
 quran_tree = ElementTree.parse(xml_file_name)
 
 
@@ -219,7 +217,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
     #counter of X's
     dic_num=0
     #lock list used to lock word that added in 'X'
-    occurrence_list = []
+    occurrence_list = set()
     #loop on all words to cluster them
     for word,count in frequency_dictionary.items():
         #check if word is locked from some 'X' or not
@@ -229,7 +227,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
             #create new 'X' and add the first word
             sub_dic = dict({word:count}) 
             #add word in occurrence list to lock it
-            occurrence_list.append(word)
+            occurrence_list.add(word)
             #loop in the rest word to get similar word
             for sub_word,sub_count in frequency_dictionary.items():
                 #check if word lock or not
@@ -241,7 +239,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
                         #add sub_word as a new word in this 'X'
                         sub_dic[sub_word] = sub_count
                         # lock this new word
-                        occurrence_list.append(sub_word)
+                        occurrence_list.add(sub_word)
                         # add the frequency of this new word to sum_of_freqs
                         sum_of_freqs +=sub_count
             #append 'X' in list of dictionaries
@@ -262,6 +260,10 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
 
     return new_freq_dic        
     
+    
+    
+    
+
     
     
 def generate_latex_table(dictionary,filename,location="."):
@@ -517,7 +519,7 @@ def count_token(text):
 
     return count
 
-    
+
 
 def main():
     pass
