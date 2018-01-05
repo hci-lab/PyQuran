@@ -520,81 +520,8 @@ def count_token(text):
     
 
 def main():
-    # testing
-    #newSystem = [[teh, beh, teh, noon], [dal, thal], [jeem, hah, khah],[sad, dad, tah, zah], [ain, ghain]]
+    pass
 
-    alphabetAsOneShape, alphabetCount = count_shape(get_sura(110),
-                                                    [[beh, teh, theh],
-                                                     [jeem, hah, khah]])
-    printf = functools.partial(print, end=" ")
-    for key in alphabetAsOneShape:  # .encode("utf-8")
-        for val in alphabetAsOneShape[key]:
-            printf(val)
-        print(" : " + str(alphabetCount[key]))
-
-
-
-    #print(get_verse_count(get_sura(9)))
-    print(count_token(get_sura(110)))
-
-
-
-
-    #    print(fetch_aya(10, 107))
-#    print(get_sura(10)[107-1])
-#    parse_sura(111, ['م', 'ا', 'ب'])
-    # print(get_sura(1))
-    # a = generate_frequancy_dictionary()
-    # num = [v for k,v in a.items()]
-#   # print(sum(num))
-#   # print(get_sura(22))
-    # print(len(a))
-#   # print(a['الجنة'])
-
-    #check function of sura el hage
-    import time
-    start = time.time()
-    freq = generate_frequancy_dictionary(22)
-    print(time.time()-start)
-    start = time.time()
-    new_dec = sort_dictionary_by_similarity(freq, 0.8)
-    print(new_dec)
-    print(len(freq),"  ",len(new_dec))
-    print(check_sura_with_frequency(sura_num=22,freq_dec=new_dec))
-    print(time.time()-start)
-    print(freq)
-    start = time.time()
-    print(generate_latex_table(new_dec,"test"))
-    print(time.time()-start)
-#     print(len(freq))
-#     x = [1,2,3,4]
-#     x.reverse()
-#     write in file
-#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
-#     n = 0
-#     l = ""
-#     for key, values in freq.items():
-#         line='{},{}'.format(key,values)
-#         su.write(line+"\n")
-# #         n=n+1
-# #         if n !=3:
-# #             l = l+line +" & "
-# #         else:
-#         l = l+line
-#         if(n==3):
-#            su.write(l+" | \n")
-#            n=0
-#            l=""
-#     su.close()
-#     from fpdf import FPDF
-# 
-#     pdf = FPDF()
-#     pdf.add_page()
-#     pdf.set_font('Arial', 'B', 16)
-#     pdf.cell(40, 10, 'Hello World!')
-#     pdf.output('tuto1.pdf', 'F')
-     
-   
      
 if __name__ == '__main__':
     main()
