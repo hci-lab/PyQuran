@@ -4,4 +4,4 @@ umar_test.py
 .project
 .pydevproject
 .settings
-__pycache_/*_
+__pycache__/*
