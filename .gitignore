@@ -1,2 +1,6 @@
 .DS_Store
 umar_test.py
+.git
+.project
+.pydevproject
+.settings
