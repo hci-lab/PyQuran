@@ -12,11 +12,11 @@ from collections import Counter
 import operator
 from audioop import reverse
 import difflib as dif
-from astropy.units import count
 
 
 # Parsing xml
 xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+# xml_file_name = 'QuranCorpus/quran-simple.xml'
 quran_tree = ElementTree.parse(xml_file_name)
 
 
@@ -349,15 +349,12 @@ def main():
     start = time.time()
     freq = generate_frequancy_dictionary(22)    
     print(time.time()-start)
-#     import multiprocessing 
-#     p = multiprocessing.Pool(multiprocessing.cpu_count())
     start = time.time()
-#     results = p.starmap(sort_dictionary_by_similarity, [(freq, 0.8)])
     print(freq)
     new_dec = sort_dictionary_by_similarity(freq, 0.8)
 #     print(new_dec)
 #     print(len(freq),"  ",len(new_dec))
-#     print(check_sura_with_frequency(sura_num=22,freq_dec=new_dec))
+    print(check_sura_with_frequency(sura_num=22,freq_dec=new_dec))
     print(time.time()-start)
 #     print(freq)
 #     start = time.time()
