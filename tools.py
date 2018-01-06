@@ -519,13 +519,45 @@ def count_token(text):
 
     return count
 
+def searchTokenWithOutDia(token):
+    """
+                	searchTokenWithOutDia get a token without diarictics(tashkeel)(word or sentence or phrase) and return the
+                	 table which contains verse number , chapter number, token number(index of token in  one ayah)
+
+                	What it does:
+                      search about tokens in Quran Corpus
 
 
-def main():
-    pass
+                    Args:
 
-     
-if __name__ == '__main__':
-    main()
+                        param1 (str): a string
 
-        
+
+                    Returns:
+                        Lists of int :  surNumber , ayatNumber, tokens number
+
+
+                    """
+
+
+
+    ayatNumber=[]
+    surNumber =[]
+    token_name=[]
+    fsurah = 1
+    lastsurah = 115
+    for suraNumber in range(fsurah, lastsurah):
+
+           for ayaNumber in range(1, get_verse_count(get_sura(suraNumber))):
+               aya=fetch_aya(suraNumber, ayaNumber)
+               ayals = araby.tokenize(aya)
+               for c in range(1,len(ayals)):
+
+                  if (token in ayals[c]):
+                     ayatNumber.append(ayaNumber)
+                     surNumber.append(suraNumber)
+                     token_name.append(ayals[c])
+    return [ayatNumber, surNumber,token_name]
+
+
+
