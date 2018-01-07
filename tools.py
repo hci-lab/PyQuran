@@ -581,3 +581,23 @@ def separate_token_with_dicrites(token):
             index = k
             hroof_with_tashkeel.append(harf_with_taskeel)
     return hroof_with_tashkeel
+
+
+def get_sura_number(suraName):
+    """It takes sura name as string, and returns the and ordered number as integer:
+    Args:
+        param1 (str) :sura name
+    Returns:
+        int: It's the sura number
+    Usage Note:
+        Do not forget that the index of the returned list starts at zero.
+        So if the order Sura number is x, then it's at (x-1) in the list.
+    """
+    # get all suras
+    suras_list = quran_tree.findall('sura')
+    suraNumber = None
+    for index in range (1,115):
+        if suras_list[index-1].attrib['name'] == suraName:
+            suraNumber = index
+    #print(suraNumber)
+    return suraNumber
