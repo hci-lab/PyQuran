@@ -110,14 +110,8 @@ alphabet = u''.join([
         teh_marbuta
         ])
 
-tashkeel  = (fathatan,  dammatan,  kasratan, 
-            fatha, damma, kasra, 
-            sukun, 
-            shadda)
-harakat  = (  fathatan,    dammatan,    kasratan, 
-            fatha,   damma,   kasra, 
-            sukun
-            )
+tashkeel  = (fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda)
+harakat   = (fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun)
 shortharakat  = ( fatha,   damma,   kasra,  sukun)
 
 tanwin  = (fathatan,   dammatan,    kasratan)
@@ -228,7 +222,3 @@ def treat_as_the_same(listOfLetter, letter, text):
         
         
     """
-    for x in listOfLetter:
-        text = text.replace(x, letter)
-    return text
-
