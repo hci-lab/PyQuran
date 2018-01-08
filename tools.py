@@ -561,3 +561,66 @@ def searchTokenWithOutDia(token):
 
 
 
+def separate_token_with_dicrites(token):
+    """gets a token with taskeel, and returns a list contains the token characters with their tashkeel.
+    Args:
+        param1 (int): list contains the token characters with their tashkeel.
+    Returns:
+         [str]: a list contains the token characters with their tashkeel.
+    """
+    token_without_tatweel = araby.strip_tatweel(token)
+    print(token_without_tatweel)
+    hroof_with_tashkeel = []
+    for index,i in enumerate(token):
+        if((token[index] in (alphabet or alefat or hamzat) )):
+            k = index
+            harf_with_taskeel =token[index]
+            while((k+1) != len(token) and (token[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
+                harf_with_taskeel =harf_with_taskeel+""+token[k+1]
+                k = k + 1
+            index = k
+            hroof_with_tashkeel.append(harf_with_taskeel)
+    return hroof_with_tashkeel
+
+
+def get_sura_number(suraName):
+    """It takes sura name as string, and returns the and ordered number as integer:
+    Args:
+        param1 (str) :sura name
+    Returns:
+        int: It's the sura number
+    Usage Note:
+        Do not forget that the index of the returned list starts at zero.
+        So if the order Sura number is x, then it's at (x-1) in the list.
+    """
+    # get all suras
+    suras_list = quran_tree.findall('sura')
+    suraNumber = None
+    for index in range (1,115):
+        if suras_list[index-1].attrib['name'] == suraName:
+            suraNumber = index
+    #print(suraNumber)
+    return suraNumber
+
+def get_sura_name(suraNumber=None):
+    """It takes and ordered number of a sura, and returns the sura name as string or suras' names as list:
+       - If you don't pass any parameter, then the entire Quran is targeted.
+    Args:
+        suraNumber (int): it's optional
+    Returns:
+        str: It's the sura name
+        OR
+        list: [str]
+    Usage Note:
+        Do not forget that the index of the returned list starts at zero.
+        So if the order Sura number is x, then it's at (x-1) in the list.
+    """
+    # get all suras
+    suras_list = quran_tree.findall('sura')
+    if suraNumber is None :
+        suraName = [(suras_list[i].attrib['name']) for i in range(0,114)]
+    else:
+        # get suraName
+        suraName = suras_list[suraNumber-1].attrib['name']
+    # return suraName
+    return  suraName
