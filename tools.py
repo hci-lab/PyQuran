@@ -729,3 +729,24 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
             return tokens[tokenNum-1]
     except:
         return ""
+
+
+
+def get_verse(chapterNum,verseNum,with_tashkeel=False):
+    """
+        get specific verse form specific chapter
+        
+        Args:
+            chapterNum (int): number of chapter 
+            verseNum (int): number of verse 
+            with_tashkeel (int) : to check if search with taskeel or not
+
+        Returns:
+            str :  return verse
+    """
+    if(chapterNum > swar_num or verseNum<=0):
+        return ""
+    try:
+        return get_sura(chapterNum,with_tashkeel)[verseNum-1]
+    except:
+        return ""
