@@ -1,6 +1,10 @@
 """This module contains Arabic tools for text analysis
 """
 
+#number of swra in Quran
+swar_num = 114
+
+
 # letters.
 hamza            = u'\u0621'
 alef_mad         = u'\u0622'

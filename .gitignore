@@ -4,4 +4,6 @@ umar_test.py
 .project
 .pydevproject
 .settings
-__pycache__/*
+__pycache__/
+Umar_test2.ipynb
+.ipynb_checkpoints/
