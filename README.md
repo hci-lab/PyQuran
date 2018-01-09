@@ -4,7 +4,7 @@ PyQuran
 
 ## Quran Arabic Corpus
 
-We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*quran-simple-clean*).
+We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmanic Version*).
 * Text format is `UTF-8`
 
 
