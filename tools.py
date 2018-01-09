@@ -583,6 +583,54 @@ def separate_token_with_dicrites(token):
     return hroof_with_tashkeel
 
 
+def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
+    """this function count number of characters occurrence, 
+       for specific verse or with chapter or even all Quran , 
+       note if you don't pass verse and chapterNum he will get all Quran
+    
+    Args:
+        verse (str): this verse that you need to 
+                     count it and default is None.
+        chapterNum (int) : chapter number is a number of 'sura' 
+                          that will count it , and default is 0
+        verseNum (int) : verse number in sura
+        chracters (list) : list of characters that you want to count them 
+    Returns:
+         {dic} : a dictionary and keys is a characters 
+                 and value is count of every chracter.
+    """
+    #dectionary that have frequency 
+    frequency = dict()
+    #check if count specific verse
+    if verse!=None:
+        #count frequency of chars
+        frequency = frequency_of_chars_in_verse(verse,characters)
+    #check if count specific chapter
+    elif chapterNum!=0:
+        #check if count specific verse in this chapter
+        if verseNum!=0:
+            #check if verseNum out of range
+            if(verseNum<0):
+                return dict()
+            verse = get_sura(chapterNum)[verseNum-1]
+            #count frequency of chars
+            frequency = frequency_of_chars_in_verse(verse,characters)
+        else:
+            #count on all chapter
+            chapter = " ".join(get_sura(chapterNum))
+            #count frequency of chars
+            frequency = frequency_of_chars_in_verse(chapter,characters)
+    else:
+        #count for all Quran 
+        Quran = ""
+        for i in range(swar_num):
+            Quran = Quran +" "+ " ".join(get_sura(i+1))+" "
+        #count frequency of chars
+        frequency = frequency_of_chars_in_verse(Quran,characters)
+    return frequency
+
+
+
 
 def frequency_of_chars_in_verse(verse,charaters):
     """this function count number of characters occurrence in verse
