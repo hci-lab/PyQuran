@@ -862,3 +862,83 @@ def hellper_search_function(verse,sequance,verseNum,chapterNum,mode3):
     return []
 
 
+
+
+
+
+def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
+                                verseNum=0,with_tashkeel=False,mode3=False):
+    """
+        search about sequance in verse or chapter or Quran 
+        and return matched seqance and his position if sequance
+        was token or sub-token ,and 0 if sequance was sentence.
+        
+        -cases:
+          * if found verse as string it will search in verse that entered
+          * if no chapterNum and no verseNum and  no verse it will search
+            in All Quran.
+
+          * if no verseNumber and no verse and found chapterNum it will
+            search in chapter.
+
+          * if found chapterNum and verseNum and no verse it will search
+            in verse.
+          
+        Args:
+            verse (str): it's a verse where function search
+            sequances (str): a sequance that you want to match it
+            chapterNum (int) : number of chapter 
+            verseNum (int) : number of verse
+            with_tashkeel (int) : to check if search with taskeel or not
+            mode3 (bool) : if true it will us mode 3 to search
+            
+        Returns:
+            list of tuble :  (matched_sequance ,
+                              his_position ,
+                              verse number ,
+                              chapter number )
+
+            Note: position will 0 if matched_sequance was part of sentence,
+                  and will number if  matched_sequance was token or sub-token
+    """
+    if verseNum<0 or chapterNum <0 :
+        return []
+    #remove extra spaces
+    sequance = re.sub(r" +"," ",sequance)
+    sequance = sequance.strip()
+    
+    #strip tashkeel if with_tashkeel flage is false
+    if not with_tashkeel:
+        sequance = strip_tashkeel(sequance)
+    
+    #search in verse that enterd 
+    if verse != None:
+        return hellper_search_function(verse,sequance,verseNum,chapterNum,mode3)
+    else:
+        #chech if specific chapter  
+        if chapterNum!=0:
+            #check if specific verse
+            if verseNum!=0:
+                verse = get_verse(chapterNum,verseNum,with_tashkeel)
+                return hellper_search_function(verse,sequance,
+                                               verseNum,
+                                               chapterNum,
+                                               mode3)
+            else:
+                #search in Chapter
+                verses = get_sura(chapterNum,with_tashkeel)
+                return sum([hellper_search_function(v,sequance,
+                                                    num+1,chapterNum,
+                                                    mode3) 
+                            for num,v in enumerate(verses)], [])
+        else:
+            #search in all Quran
+            final_list = []
+            for i in range(swar_num):
+                verses = get_sura(i+1,with_tashkeel)
+                final_list += sum([hellper_search_function(v,sequance,
+                                                           num+1,i+1,
+                                                           mode3) 
+                                   for num,v in enumerate(verses)], [])
+            return final_list
+    
