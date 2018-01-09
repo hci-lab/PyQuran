@@ -750,3 +750,21 @@ def get_verse(chapterNum,verseNum,with_tashkeel=False):
         return get_sura(chapterNum,with_tashkeel)[verseNum-1]
     except:
         return ""
+
+
+
+def hellper_get_sequance_positions(verse,sequance):
+    verse = strip_tashkeel(verse)
+    sequance = sequance.split()
+    verse = verse.split()
+    positions = []
+    for n,v in enumerate(verse):
+        if v not in sequance:
+            continue
+        for en,se in enumerate(sequance):
+            if se != verse[n]:
+                break
+            if en == len(sequance)-1:
+                positions.append(n)
+            n+=1
+    return positions
