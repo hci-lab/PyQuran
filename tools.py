@@ -18,8 +18,7 @@ from arabic import *
 
 
 # Parsing xml
-xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-# xml_file_name = 'QuranCorpus/quran-simple.xml'
+xml_file_name = 'QuranCorpus/quran-uthmani.xml'
 quran_tree = ElementTree.parse(xml_file_name)
 
 
