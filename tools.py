@@ -663,7 +663,12 @@ def get_sura_number(suraName):
         So if the order Sura number is x, then it's at (x-1) in the list.
     """
     # get all suras
-    suras_list = quran_tree.findall('sura')
+       # Parsing xml
+
+    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+    quran_tree_ = ElementTree.parse(xml_file_name)
+
+    suras_list = quran_tree_.findall('sura')
     suraNumber = None
     for index in range (1,115):
         if suras_list[index-1].attrib['name'] == suraName:
@@ -684,8 +689,11 @@ def get_sura_name(suraNumber=None):
         Do not forget that the index of the returned list starts at zero.
         So if the order Sura number is x, then it's at (x-1) in the list.
     """
+    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+    quran_tree_ = ElementTree.parse(xml_file_name)
+
     # get all suras
-    suras_list = quran_tree.findall('sura')
+    suras_list = quran_tree_.findall('sura')
     if suraNumber is None :
         suraName = [(suras_list[i].attrib['name']) for i in range(0,114)]
     else:
