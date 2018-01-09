@@ -942,3 +942,78 @@ def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
                                    for num,v in enumerate(verses)], [])
             return final_list
     
+
+
+
+def search_equance(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
+    """
+        take list of sequances and return matched sequance,
+        it search in verse ot chapter or All Quran , 
+        it return for every match :
+            1- matched sequance 
+            2- chapter number of occurrence
+            3- token number if word and 0 if sentence
+        
+        Note :
+             *if found verse != None it will use it en search .
+             
+             *if no verse and found chapterNum and verseNum it will
+              use this verse and use it to search.
+              
+             *if no verse and no verseNum and found chapterNum it will
+              search in chapter.
+             
+             *if no verse and no chapterNum and no verseNum it will
+              search in All Quran.
+        
+        it has many modes:
+            1- search with decorated sequance (with tashkeel),
+               and return matched sequance with decorates (with tashkil).
+               
+            2- search without decorated sequance (without tashkeel),
+               and return matched sequance without decorates (without tashkil).
+               
+            3- search without decorated sequance (without tashkeel),
+               and return matched sequance with decorates (with tashkil).
+            
+        
+        Args:
+            chapterNum (int): number of chapter where function search
+            verseNum (int): number of verse wher function search
+            sequancesList (list): a list of sequances that you want 
+                                  to match them
+            mode (int): this mode that you need to use and default mode 3
+
+        Returns:
+            dict() :  (sequances , list of matched_sequance and their positions)
+    """    
+    final_dict = dict()
+    #loop on all sequances
+    for sequance in sequancesList:
+        #check mode 1 (taskeel to tashkeel)
+        if mode==1:
+             final_dict[sequance] = hellper_pre_search_sequance(
+                                    sequance=sequance,
+                                    verse=verse,
+                                    chapterNum=chapterNum,
+                                    verseNum=verseNum,
+                                    with_tashkeel=True)
+        # chaeck mode 2 (without taskeel to without tashkeel)
+        elif mode==2:
+            final_dict[sequance] = hellper_pre_search_sequance(
+                                   sequance=sequance,
+                                   verse=verse,
+                                   chapterNum=chapterNum,
+                                   verseNum=verseNum,
+                                   with_tashkeel=False)
+        # chaeck mode 3 (without taskeel to with tashkeel)
+        elif mode==3:
+            sequance = strip_tashkeel(sequance)
+            final_dict[sequance] = hellper_pre_search_sequance(
+                                   sequance=sequance,
+                                   verse=verse,
+                                   chapterNum=chapterNum,
+                                   verseNum=verseNum,
+                                   with_tashkeel=True,
+                                   mode3=True)
+    return final_dict        
