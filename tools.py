@@ -15,6 +15,8 @@ from itertools import chain
 import functools
 from collections import Counter, defaultdict
 from arabic import *
+import re
+from pyarabic.araby import strip_tashkeel
 
 
 def get_sura(sura_number,with_tashkeel=False):
@@ -701,3 +703,29 @@ def get_sura_name(suraNumber=None):
         suraName = suras_list[suraNumber-1].attrib['name']
     # return suraName
     return  suraName
+
+
+
+def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
+    """
+        get token from specific verse form specific chapter
+        
+        Args:
+            tokenNum (int) : position of token
+            verseNum (int): number of verse 
+            chapterNum (int): number of chapter 
+            with_tashkeel (int) : to check if search with taskeel or not
+
+        Returns:
+            str :  return verse
+    """
+    if(chapterNum > swar_num or verseNum<=0 or tokenNum<=0):
+        return ""
+    try:
+        tokens = get_sura(chapterNum,with_tashkeel)[verseNum-1].split()
+        if tokenNum > len(tokens):
+            return ""
+        else:
+            return tokens[tokenNum-1]
+    except:
+        return ""
