@@ -768,3 +768,97 @@ def hellper_get_sequance_positions(verse,sequance):
                 positions.append(n)
             n+=1
     return positions
+
+
+
+
+
+def hellper_search_function(verse,sequance,verseNum,chapterNum,mode3):
+    
+    #split verse  to tokens
+    tokens = re.split(r' ',verse)
+    
+    if mode3:
+        verse = strip_tashkeel(verse)
+        
+    tashkeel_ = "|".join([fatha,fathatan,damma,dammatan,
+                          kasra,kasratan,shadda,sukun])
+    pattern = r"((\w|["+tashkeel_+"]*)*"+
+              str(sequance)+"(\w|["+tashkeel_+"]*)*)"
+    
+    #get match_sequance
+    matches = re.findall(pattern,verse)
+    matches = [j.strip() for i in matches for j in i if j !='']
+    #check if found or not
+    if len(matches)!=0:
+        try:
+            new_tokens = verse.split()
+            positions = dict()
+            #get position of occuerance
+            lst = []
+            
+            if len(sequance.split())>1:
+                for tok in matches:
+                    positions[tok] = (0,get_sequance_positions(verse,tok))
+            else:
+                for tok in matches:
+                    if verse.count(tok) > 1:
+                        ls = [i for i,x in enumerate(new_tokens) if x == tok]
+                        positions[tok] = (0,ls)
+                    else:
+                        positions[tok] = (0,[new_tokens.index(tok)])                
+                        
+            if chapterNum!=0:
+                for token in matches:
+                    loc,ls = positions[token]
+                    index = int(ls[loc])
+                    positions[token] = (loc+1,ls)
+                    #check if exist the same token many time
+                    lst.append((tokens[index],
+                                index+1,
+                                verseNum,
+                                chapterNum))
+                #if matched sequance token 
+                return lst   
+        except:
+            pass
+            
+        if len(sequance.split())==1:
+                #if matched sequance token
+                for token in matches:
+                    loc,ls = positions[token]
+                    index = int(ls[loc])
+                    positions[token] = (loc+1,ls)
+                    #check if exist the same token many time
+                    lst.append((tokens[index],
+                                    index+1))
+                #if matched sequance token 
+                return lst
+        else:
+            #check if mode3 False
+            if not mode3:
+                if chapterNum!=0:
+                    #if match sequance sentence
+                    return [(token,0,verseNum,chapterNum) for token in matches]
+                else:
+                    #if match sequance sentence
+                    return [(token,0) for token in matches]
+            else:
+                lst = []                
+                #if match sequance sentence
+                for token in matches:
+                    new_token = []
+                    loc,ls = positions[token]
+                    index = int(ls[loc])
+                    positions[token] = (loc+1,ls)
+                    new_token = " ".join([str(tokens[index-
+                                          len(sequance.split())+i*1+1]) 
+                                          for i in range(len(token.split()))])
+                    if chapterNum!=0:
+                        lst.append((new_token,0,verseNum,chapterNum))
+                    else:
+                        lst.append((new_token,0))
+                return lst 
+    return []
+
+
