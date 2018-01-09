@@ -17,18 +17,12 @@ from collections import Counter, defaultdict
 from arabic import *
 
 
-# Parsing xml
-#xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
-quran_tree = ElementTree.parse(xml_file_name)
-
-
-def get_sura(sura_number):
+def get_sura(sura_number,with_tashkeel=False):
     """gets an sura by returning a list of ayat al-sura.
 
     Args: 
         param1 (int): the ordered number of sura in The Mushaf.
-
+        param2 (bool): if true return sura with tashkeel else return without
     Returns:
          [str]: a list of ayat al-sura.
 
@@ -37,6 +31,14 @@ def get_sura(sura_number):
         So if the order aya number is x, then it's at (x-1) in the list.
 
     """
+    
+    # Parsing xml
+    if not with_tashkeel:
+        xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+    else:
+        xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
+    quran_tree = ElementTree.parse(xml_file_name)
+
     sura_number -= 1
     sura = []
     suras_list = quran_tree.findall('sura')
