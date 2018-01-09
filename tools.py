@@ -583,6 +583,32 @@ def separate_token_with_dicrites(token):
     return hroof_with_tashkeel
 
 
+def frequency_of_character(verse="None",chapterNum=0,verseNum=0,character):
+    """this function count number of characters occurrence, 
+     for specific verse or with chapter or even all Quran , 
+     note if you don't pass verse and chapterNum he will get all Quran
+    
+    Args:
+        verse (str): this verse that you need to 
+                     count it and default is None.
+        chapterNum (int) : chapter number is a number of 'sura' 
+                          that will count it , and default is 0
+        verseNum (int) : verse number in sura
+        chracter (list) : list of characters that you want to count them 
+    Returns:
+         {dic} : a dictionary and keys is a characters and value is count of every chracter.
+    
+    """
+    frequency = dic()
+    if verse!="None":
+        separate_token_with_dicrites()
+    elif chapterNum!=0:
+        
+    else:
+        
+    
+    
+
 def get_sura_number(suraName):
     """It takes sura name as string, and returns the and ordered number as integer:
     Args:
