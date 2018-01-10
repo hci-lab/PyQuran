@@ -753,8 +753,10 @@ def get_verse(chapterNum,verseNum,with_tashkeel=False):
 
 
 
+
 def hellper_get_sequance_positions(verse,sequance):
     verse = strip_tashkeel(verse)
+    sequance = strip_tashkeel(sequance)
     sequance = sequance.split()
     verse = verse.split()
     positions = []
@@ -771,8 +773,6 @@ def hellper_get_sequance_positions(verse,sequance):
 
 
 
-
-
 def hellper_search_function(verse,sequance,verseNum,chapterNum,mode3):
     
     #split verse  to tokens
@@ -780,11 +780,9 @@ def hellper_search_function(verse,sequance,verseNum,chapterNum,mode3):
     
     if mode3:
         verse = strip_tashkeel(verse)
-        
-    tashkeel_ = "|".join([fatha,fathatan,damma,dammatan,
-                          kasra,kasratan,shadda,sukun])
-    pattern = r"((\w|["+tashkeel_+"]*)*"+
-              str(sequance)+"(\w|["+tashkeel_+"]*)*)"
+    tashkeel_ = "|".join([fatha,fathatan,damma,dammatan
+                          ,kasra,kasratan,shadda,sukun])
+    pattern = r"((\w|["+tashkeel_+"]*)*"+str(sequance)+"(\w|["+tashkeel_+"]*)*)"
     
     #get match_sequance
     matches = re.findall(pattern,verse)
@@ -796,19 +794,19 @@ def hellper_search_function(verse,sequance,verseNum,chapterNum,mode3):
             positions = dict()
             #get position of occuerance
             lst = []
-            
             if len(sequance.split())>1:
                 for tok in matches:
-                    positions[tok] = (0,get_sequance_positions(verse,tok))
+                    positions[tok] = (0,hellper_get_sequance_positions(
+                                      verse,tok))
             else:
                 for tok in matches:
                     if verse.count(tok) > 1:
                         ls = [i for i,x in enumerate(new_tokens) if x == tok]
                         positions[tok] = (0,ls)
                     else:
-                        positions[tok] = (0,[new_tokens.index(tok)])                
+                        positions[tok] = (0,[new_tokens.index(tok)])
                         
-            if chapterNum!=0:
+            if chapterNum!=0 and len(sequance.split())==1:
                 for token in matches:
                     loc,ls = positions[token]
                     index = int(ls[loc])
