@@ -943,7 +943,7 @@ def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
 
 
 
-def search_equance(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
+def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
     """
         take list of sequances and return matched sequance,
         it search in verse ot chapter or All Quran , 
