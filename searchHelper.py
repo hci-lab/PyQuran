@@ -1,6 +1,6 @@
 """searchHelper: contains helper functions for searching.
 """
-
+import arabic
 
 def count_spaces_before_index(string, index):
     """counts spaces before a char in string.
