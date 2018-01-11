@@ -18,7 +18,7 @@ from arabic import *
 import re
 from pyarabic.araby import strip_tashkeel
 import searchHelper
-
+from buckwalter import *
 
 # Parsing xml
 xml_file_name = 'QuranCorpus/quran-uthmani.xml'
@@ -1064,3 +1064,33 @@ def search_string_with_tashkeel(string, key):
         return False, []
     else:
         return True, results
+
+
+def buckwalter_arabic_transliteration(string, reverse=False):
+   """
+   buckwalter_arabic_transliteration get an a Unicode
+   tring and transliterate it to Buckwalter encoding or vise verse
+
+    What it does:
+            transliterate a Unicode string to buckwalter and vise verse
+
+
+    Args:
+         param1 (str): a string
+         param2 (bool): Boolean , it's an optional
+                        if it quals to False "False is the defult" ,
+                        it transliterate from a Unicode string to buckwalter encoding
+                        and vise verse if it equals to True
+
+
+        Returns:
+            str : a string, a Unicode or buckwalter 
+
+
+    """
+   for key, value in buck2uni.items():
+       if not reverse:
+            string = string.replace(value, key)
+       else:
+            string = string.replace(key, value)
+   return string
