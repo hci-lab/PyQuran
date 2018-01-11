@@ -33,7 +33,7 @@ def get_sura(sura_number, with_tashkeel=False):
         param1 (int): the ordered number of sura in The Mushaf.
         param2 (bool): if true return sura with tashkeel else return without
     Returns:
-         [str]: a list of ayat al-sura.
+         [str]: a list of `ayat al-sura.`
 
     Usage Note:
         Do not forget that the index of the reunred list starts at zero.
@@ -47,20 +47,18 @@ def get_sura(sura_number, with_tashkeel=False):
 
     """
     
-    # Parsing xml
-    if not with_tashkeel:
-        xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-    else:
-        xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
-    quran_tree = ElementTree.parse(xml_file_name)
-
     sura_number -= 1
     sura = []
     suras_list = quran_tree.findall('sura')
     ayat = suras_list[sura_number]
+
     for aya in ayat:
         sura.append(aya.attrib['text'])
-    return sura
+
+    if with_tashkeel:
+       return list(map(strip_tashkeel, sura)) 
+    else:
+       return sura
 
 
 
