@@ -1,6 +1,10 @@
 """This module contains Arabic tools for text analysis
 """
 
+#number of swra in Quran
+swar_num = 114
+
+
 # letters.
 hamza            = u'\u0621'
 alef_mad         = u'\u0622'
@@ -110,14 +114,8 @@ alphabet = u''.join([
         teh_marbuta
         ])
 
-tashkeel  = (fathatan,  dammatan,  kasratan, 
-            fatha, damma, kasra, 
-            sukun, 
-            shadda)
-harakat  = (  fathatan,    dammatan,    kasratan, 
-            fatha,   damma,   kasra, 
-            sukun
-            )
+tashkeel  = (fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda)
+harakat   = (fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun)
 shortharakat  = ( fatha,   damma,   kasra,  sukun)
 
 tanwin  = (fathatan,   dammatan,    kasratan)
@@ -228,7 +226,3 @@ def treat_as_the_same(listOfLetter, letter, text):
         
         
     """
-    for x in listOfLetter:
-        text = text.replace(x, letter)
-    return text
-

@@ -8,44 +8,58 @@ This module contains tools for `Quranic Analysis`
 """
 from xml.etree import ElementTree
 import numpy
-from collections import Counter
 import operator
 from audioop import reverse
 import difflib as dif
-
 from itertools import chain
 import functools
 from collections import Counter, defaultdict
 from arabic import *
-
-
+import re
+from pyarabic.araby import strip_tashkeel
+import searchHelper
+from buckwalter import *
 
 # Parsing xml
-xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+xml_file_name = 'QuranCorpus/quran-uthmani.xml'
 quran_tree = ElementTree.parse(xml_file_name)
 
 
-def get_sura(sura_number):
+
+
+def get_sura(sura_number, with_tashkeel=False):
     """gets an sura by returning a list of ayat al-sura.
 
     Args: 
         param1 (int): the ordered number of sura in The Mushaf.
-
+        param2 (bool): if true return sura with tashkeel else return without
     Returns:
-         [str]: a list of ayat al-sura.
+         [str]: a list of `ayat al-sura.`
 
     Usage Note:
         Do not forget that the index of the reunred list starts at zero.
         So if the order aya number is x, then it's at (x-1) in the list.
 
+    Working_State: OK.
+
+    TESTING: 
+            1  Handle out of range inputs.
+            2  Handle non integer inputs.
+
     """
+    
     sura_number -= 1
     sura = []
     suras_list = quran_tree.findall('sura')
     ayat = suras_list[sura_number]
+
     for aya in ayat:
         sura.append(aya.attrib['text'])
-    return sura
+
+    if with_tashkeel:
+       return list(map(strip_tashkeel, sura)) 
+    else:
+       return sura
 
 
 
@@ -219,7 +233,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
     #counter of X's
     dic_num=0
     #lock list used to lock word that added in 'X'
-    occurrence_list = []
+    occurrence_list = set()
     #loop on all words to cluster them
     for word,count in frequency_dictionary.items():
         #check if word is locked from some 'X' or not
@@ -229,7 +243,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
             #create new 'X' and add the first word
             sub_dic = dict({word:count}) 
             #add word in occurrence list to lock it
-            occurrence_list.append(word)
+            occurrence_list.add(word)
             #loop in the rest word to get similar word
             for sub_word,sub_count in frequency_dictionary.items():
                 #check if word lock or not
@@ -241,7 +255,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
                         #add sub_word as a new word in this 'X'
                         sub_dic[sub_word] = sub_count
                         # lock this new word
-                        occurrence_list.append(sub_word)
+                        occurrence_list.add(sub_word)
                         # add the frequency of this new word to sum_of_freqs
                         sum_of_freqs +=sub_count
             #append 'X' in list of dictionaries
@@ -262,6 +276,10 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
 
     return new_freq_dic        
     
+    
+    
+    
+
     
     
 def generate_latex_table(dictionary,filename,location="."):
@@ -517,86 +535,567 @@ def count_token(text):
 
     return count
 
+def searchTokenWithOutDia(token):
+    """
+                	searchTokenWithOutDia get a token without diarictics(tashkeel)(word or sentence or phrase) and return the
+                	 table which contains verse number , chapter number, token number(index of token in  one ayah)
+
+                	What it does:
+                      search about tokens in Quran Corpus
+
+
+                    Args:
+
+                        param1 (str): a string
+
+
+                    Returns:
+                        Lists of int :  surNumber , ayatNumber, tokens number
+
+
+                    """
+
+
+
+    ayatNumber=[]
+    surNumber =[]
+    token_name=[]
+    fsurah = 1
+    lastsurah = 115
+    for suraNumber in range(fsurah, lastsurah):
+
+           for ayaNumber in range(1, get_verse_count(get_sura(suraNumber))):
+               aya=fetch_aya(suraNumber, ayaNumber)
+               ayals = araby.tokenize(aya)
+               for c in range(1,len(ayals)):
+
+                  if (token in ayals[c]):
+                     ayatNumber.append(ayaNumber)
+                     surNumber.append(suraNumber)
+                     token_name.append(ayals[c])
+    return [ayatNumber, surNumber,token_name]
+
+
+
+def separate_token_with_dicrites(token):
+    """gets a token with taskeel, and returns a list contains the token characters with their tashkeel.
+    Args:
+        param1 (int): list contains the token characters with their tashkeel.
+    Returns:
+         [str]: a list contains the token characters with their tashkeel.
+    """
+    token_without_tatweel = araby.strip_tatweel(token)
+    print(token_without_tatweel)
+    hroof_with_tashkeel = []
+    for index,i in enumerate(token):
+        if((token[index] in (alphabet or alefat or hamzat) )):
+            k = index
+            harf_with_taskeel =token[index]
+            while((k+1) != len(token) and (token[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
+                harf_with_taskeel =harf_with_taskeel+""+token[k+1]
+                k = k + 1
+            index = k
+            hroof_with_tashkeel.append(harf_with_taskeel)
+    return hroof_with_tashkeel
+
+
+def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
+    """this function count number of characters occurrence, 
+       for specific verse or with chapter or even all Quran , 
+       note if you don't pass verse and chapterNum he will get all Quran
+    
+    Args:
+        verse (str): this verse that you need to 
+                     count it and default is None.
+        chapterNum (int) : chapter number is a number of 'sura' 
+                          that will count it , and default is 0
+        verseNum (int) : verse number in sura
+        chracters (list) : list of characters that you want to count them 
+    Returns:
+         {dic} : a dictionary and keys is a characters 
+                 and value is count of every chracter.
+    """
+    #dectionary that have frequency 
+    frequency = dict()
+    #check if count specific verse
+    if verse!=None:
+        #count frequency of chars
+        frequency = frequency_of_chars_in_verse(verse,characters)
+    #check if count specific chapter
+    elif chapterNum!=0:
+        #check if count specific verse in this chapter
+        if verseNum!=0:
+            #check if verseNum out of range
+            if(verseNum<0):
+                return dict()
+            verse = get_sura(chapterNum)[verseNum-1]
+            #count frequency of chars
+            frequency = frequency_of_chars_in_verse(verse,characters)
+        else:
+            #count on all chapter
+            chapter = " ".join(get_sura(chapterNum))
+            #count frequency of chars
+            frequency = frequency_of_chars_in_verse(chapter,characters)
+    else:
+        #count for all Quran 
+        Quran = ""
+        for i in range(swar_num):
+            Quran = Quran +" "+ " ".join(get_sura(i+1))+" "
+        #count frequency of chars
+        frequency = frequency_of_chars_in_verse(Quran,characters)
+    return frequency
+
+
+
+
+def frequency_of_chars_in_verse(verse,charaters):
+    """this function count number of characters occurrence in verse
+    Args:
+        verse (str): this verse that you need to 
+                     count it and default is None.
+        chracter (list) : list of characters that you want to count them 
+    Returns:
+        {dic} : a dictionary and keys is a characters and value is count of 
+                every chracter.
+    """
+    #dectionary that have frequency 
+    frequency = dict()
+    #count frequency of chars
+    for char in charaters:
+        frequency[char] = verse.count(char)
+    return frequency
     
 
-def main():
-    # testing
-    #newSystem = [[teh, beh, teh, noon], [dal, thal], [jeem, hah, khah],[sad, dad, tah, zah], [ain, ghain]]
+def get_sura_number(suraName):
+    """It takes sura name as string, and returns the and ordered number as integer:
+    Args:
+        param1 (str) :sura name
+    Returns:
+        int: It's the sura number
+    Usage Note:
+        Do not forget that the index of the returned list starts at zero.
+        So if the order Sura number is x, then it's at (x-1) in the list.
+    """
+    # get all suras
+       # Parsing xml
 
-    alphabetAsOneShape, alphabetCount = count_shape(get_sura(110),
-                                                    [[beh, teh, theh],
-                                                     [jeem, hah, khah]])
-    printf = functools.partial(print, end=" ")
-    for key in alphabetAsOneShape:  # .encode("utf-8")
-        for val in alphabetAsOneShape[key]:
-            printf(val)
-        print(" : " + str(alphabetCount[key]))
+    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+    quran_tree_ = ElementTree.parse(xml_file_name)
+
+    suras_list = quran_tree_.findall('sura')
+    suraNumber = None
+    for index in range (1,115):
+        if suras_list[index-1].attrib['name'] == suraName:
+            suraNumber = index
+    #print(suraNumber)
+    return suraNumber
+
+def get_sura_name(suraNumber=None):
+    """It takes and ordered number of a sura, and returns the sura name as string or suras' names as list:
+       - If you don't pass any parameter, then the entire Quran is targeted.
+    Args:
+        suraNumber (int): it's optional
+    Returns:
+        str: It's the sura name
+        OR
+        list: [str]
+    Usage Note:
+        Do not forget that the index of the returned list starts at zero.
+        So if the order Sura number is x, then it's at (x-1) in the list.
+    """
+    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+    quran_tree_ = ElementTree.parse(xml_file_name)
+
+    # get all suras
+    suras_list = quran_tree_.findall('sura')
+    if suraNumber is None :
+        suraName = [(suras_list[i].attrib['name']) for i in range(0,114)]
+    else:
+        # get suraName
+        suraName = suras_list[suraNumber-1].attrib['name']
+    # return suraName
+    return  suraName
 
 
 
-    #print(get_verse_count(get_sura(9)))
-    print(count_token(get_sura(110)))
-
-
-
-
-    #    print(fetch_aya(10, 107))
-#    print(get_sura(10)[107-1])
-#    parse_sura(111, ['م', 'ا', 'ب'])
-    # print(get_sura(1))
-    # a = generate_frequancy_dictionary()
-    # num = [v for k,v in a.items()]
-#   # print(sum(num))
-#   # print(get_sura(22))
-    # print(len(a))
-#   # print(a['الجنة'])
-
-    #check function of sura el hage
-    import time
-    start = time.time()
-    freq = generate_frequancy_dictionary(22)
-    print(time.time()-start)
-    start = time.time()
-    new_dec = sort_dictionary_by_similarity(freq, 0.8)
-    print(new_dec)
-    print(len(freq),"  ",len(new_dec))
-    print(check_sura_with_frequency(sura_num=22,freq_dec=new_dec))
-    print(time.time()-start)
-    print(freq)
-    start = time.time()
-    print(generate_latex_table(new_dec,"test"))
-    print(time.time()-start)
-#     print(len(freq))
-#     x = [1,2,3,4]
-#     x.reverse()
-#     write in file
-#     su = open('sura_Al_hag_freq.txt','w',encoding='utf8')
-#     n = 0
-#     l = ""
-#     for key, values in freq.items():
-#         line='{},{}'.format(key,values)
-#         su.write(line+"\n")
-# #         n=n+1
-# #         if n !=3:
-# #             l = l+line +" & "
-# #         else:
-#         l = l+line
-#         if(n==3):
-#            su.write(l+" | \n")
-#            n=0
-#            l=""
-#     su.close()
-#     from fpdf import FPDF
-# 
-#     pdf = FPDF()
-#     pdf.add_page()
-#     pdf.set_font('Arial', 'B', 16)
-#     pdf.cell(40, 10, 'Hello World!')
-#     pdf.output('tuto1.pdf', 'F')
-     
-   
-     
-if __name__ == '__main__':
-    main()
-
+def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
+    """
+        get token from specific verse form specific chapter
         
+        Args:
+            tokenNum (int) : position of token
+            verseNum (int): number of verse 
+            chapterNum (int): number of chapter 
+            with_tashkeel (int) : to check if search with taskeel or not
+
+        Returns:
+            str :  return verse
+    """
+    if(chapterNum > swar_num or verseNum<=0 or tokenNum<=0):
+        return ""
+    try:
+        tokens = get_sura(chapterNum,with_tashkeel)[verseNum-1].split()
+        if tokenNum > len(tokens):
+            return ""
+        else:
+            return tokens[tokenNum-1]
+    except:
+        return ""
+
+
+
+def get_verse(chapterNum,verseNum,with_tashkeel=False):
+    """
+        get specific verse form specific chapter
+        
+        Args:
+            chapterNum (int): number of chapter 
+            verseNum (int): number of verse 
+            with_tashkeel (int) : to check if search with taskeel or not
+
+        Returns:
+            str :  return verse
+    """
+    if(chapterNum > swar_num or verseNum<=0):
+        return ""
+    try:
+        return get_sura(chapterNum,with_tashkeel)[verseNum-1]
+    except:
+        return ""
+
+
+
+
+def hellper_get_sequance_positions(verse,sequance):
+    verse = strip_tashkeel(verse)
+    sequance = strip_tashkeel(sequance)
+    sequance = sequance.split()
+    verse = verse.split()
+    positions = []
+    for n,v in enumerate(verse):
+        if v not in sequance:
+            continue
+        for en,se in enumerate(sequance):
+            if se != verse[n]:
+                break
+            if en == len(sequance)-1:
+                positions.append(n)
+            n+=1
+    return positions
+
+
+
+def hellper_search_function(verse,sequance,verseNum,chapterNum,mode3):
+    
+    #split verse  to tokens
+    tokens = re.split(r' ',verse)
+    
+    if mode3:
+        verse = strip_tashkeel(verse)
+    tashkeel_ = "|".join([fatha,fathatan,damma,dammatan
+                          ,kasra,kasratan,shadda,sukun])
+    pattern = r"((\w|["+tashkeel_+"]*)*"+str(sequance)+"(\w|["+tashkeel_+"]*)*)"
+    
+    #get match_sequance
+    matches = re.findall(pattern,verse)
+    matches = [j.strip() for i in matches for j in i if j !='']
+    #check if found or not
+    if len(matches)!=0:
+        try:
+            new_tokens = verse.split()
+            positions = dict()
+            #get position of occuerance
+            lst = []
+            if len(sequance.split())>1:
+                for tok in matches:
+                    positions[tok] = (0,hellper_get_sequance_positions(
+                                      verse,tok))
+            else:
+                for tok in matches:
+                    if verse.count(tok) > 1:
+                        ls = [i for i,x in enumerate(new_tokens) if x == tok]
+                        positions[tok] = (0,ls)
+                    else:
+                        positions[tok] = (0,[new_tokens.index(tok)])
+                        
+            if chapterNum!=0 and len(sequance.split())==1:
+                for token in matches:
+                    loc,ls = positions[token]
+                    index = int(ls[loc])
+                    positions[token] = (loc+1,ls)
+                    #check if exist the same token many time
+                    lst.append((tokens[index],
+                                index+1,
+                                verseNum,
+                                chapterNum))
+                #if matched sequance token 
+                return lst   
+        except:
+            pass
+            
+        if len(sequance.split())==1:
+                #if matched sequance token
+                for token in matches:
+                    loc,ls = positions[token]
+                    index = int(ls[loc])
+                    positions[token] = (loc+1,ls)
+                    #check if exist the same token many time
+                    lst.append((tokens[index],
+                                    index+1))
+                #if matched sequance token 
+                return lst
+        else:
+            #check if mode3 False
+            if not mode3:
+                if chapterNum!=0:
+                    #if match sequance sentence
+                    return [(token,0,verseNum,chapterNum) for token in matches]
+                else:
+                    #if match sequance sentence
+                    return [(token,0) for token in matches]
+            else:
+                lst = []                
+                #if match sequance sentence
+                for token in matches:
+                    new_token = []
+                    loc,ls = positions[token]
+                    index = int(ls[loc])
+                    positions[token] = (loc+1,ls)
+                    new_token = " ".join([str(tokens[index-
+                                          len(sequance.split())+i*1+1]) 
+                                          for i in range(len(token.split()))])
+                    if chapterNum!=0:
+                        lst.append((new_token,0,verseNum,chapterNum))
+                    else:
+                        lst.append((new_token,0))
+                return lst 
+    return []
+
+
+
+
+
+
+def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
+                                verseNum=0,with_tashkeel=False,mode3=False):
+    """
+        search about sequance in verse or chapter or Quran 
+        and return matched seqance and his position if sequance
+        was token or sub-token ,and 0 if sequance was sentence.
+        
+        -cases:
+          * if found verse as string it will search in verse that entered
+          * if no chapterNum and no verseNum and  no verse it will search
+            in All Quran.
+
+          * if no verseNumber and no verse and found chapterNum it will
+            search in chapter.
+
+          * if found chapterNum and verseNum and no verse it will search
+            in verse.
+          
+        Args:
+            verse (str): it's a verse where function search
+            sequances (str): a sequance that you want to match it
+            chapterNum (int) : number of chapter 
+            verseNum (int) : number of verse
+            with_tashkeel (int) : to check if search with taskeel or not
+            mode3 (bool) : if true it will us mode 3 to search
+            
+        Returns:
+            list of tuble :  (matched_sequance ,
+                              his_position ,
+                              verse number ,
+                              chapter number )
+
+            Note: position will 0 if matched_sequance was part of sentence,
+                  and will number if  matched_sequance was token or sub-token
+    """
+    if verseNum<0 or chapterNum <0 :
+        return []
+    #remove extra spaces
+    sequance = re.sub(r" +"," ",sequance)
+    sequance = sequance.strip()
+    
+    #strip tashkeel if with_tashkeel flage is false
+    if not with_tashkeel:
+        sequance = strip_tashkeel(sequance)
+    
+    #search in verse that enterd 
+    if verse != None:
+        return hellper_search_function(verse,sequance,verseNum,chapterNum,mode3)
+    else:
+        #chech if specific chapter  
+        if chapterNum!=0:
+            #check if specific verse
+            if verseNum!=0:
+                verse = get_verse(chapterNum,verseNum,with_tashkeel)
+                return hellper_search_function(verse,sequance,
+                                               verseNum,
+                                               chapterNum,
+                                               mode3)
+            else:
+                #search in Chapter
+                verses = get_sura(chapterNum,with_tashkeel)
+                return sum([hellper_search_function(v,sequance,
+                                                    num+1,chapterNum,
+                                                    mode3) 
+                            for num,v in enumerate(verses)], [])
+        else:
+            #search in all Quran
+            final_list = []
+            for i in range(swar_num):
+                verses = get_sura(i+1,with_tashkeel)
+                final_list += sum([hellper_search_function(v,sequance,
+                                                           num+1,i+1,
+                                                           mode3) 
+                                   for num,v in enumerate(verses)], [])
+            return final_list
+    
+
+
+
+def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
+    """
+        take list of sequances and return matched sequance,
+        it search in verse ot chapter or All Quran , 
+        it return for every match :
+            1- matched sequance 
+            2- chapter number of occurrence
+            3- token number if word and 0 if sentence
+        
+        Note :
+             *if found verse != None it will use it en search .
+             
+             *if no verse and found chapterNum and verseNum it will
+              use this verse and use it to search.
+              
+             *if no verse and no verseNum and found chapterNum it will
+              search in chapter.
+             
+             *if no verse and no chapterNum and no verseNum it will
+              search in All Quran.
+        
+        it has many modes:
+            1- search with decorated sequance (with tashkeel),
+               and return matched sequance with decorates (with tashkil).
+               
+            2- search without decorated sequance (without tashkeel),
+               and return matched sequance without decorates (without tashkil).
+               
+            3- search without decorated sequance (without tashkeel),
+               and return matched sequance with decorates (with tashkil).
+            
+        
+        Args:
+            chapterNum (int): number of chapter where function search
+            verseNum (int): number of verse wher function search
+            sequancesList (list): a list of sequances that you want 
+                                  to match them
+            mode (int): this mode that you need to use and default mode 3
+
+        Returns:
+            dict() :  key is sequances and value is a list of matched_sequance and their positions)
+    """    
+    final_dict = dict()
+    #loop on all sequances
+    for sequance in sequancesList:
+        #check mode 1 (taskeel to tashkeel)
+        if mode==1:
+             final_dict[sequance] = hellper_pre_search_sequance(
+                                    sequance=sequance,
+                                    verse=verse,
+                                    chapterNum=chapterNum,
+                                    verseNum=verseNum,
+                                    with_tashkeel=True)
+        # chaeck mode 2 (without taskeel to without tashkeel)
+        elif mode==2:
+            final_dict[sequance] = hellper_pre_search_sequance(
+                                   sequance=sequance,
+                                   verse=verse,
+                                   chapterNum=chapterNum,
+                                   verseNum=verseNum,
+                                   with_tashkeel=False)
+        # chaeck mode 3 (without taskeel to with tashkeel)
+        elif mode==3:
+            sequance = strip_tashkeel(sequance)
+            final_dict[sequance] = hellper_pre_search_sequance(
+                                   sequance=sequance,
+                                   verse=verse,
+                                   chapterNum=chapterNum,
+                                   verseNum=verseNum,
+                                   with_tashkeel=True,
+                                   mode3=True)
+    return final_dict        
+
+
+
+
+def search_string_with_tashkeel(string, key):
+    """
+    string: sentence to search by key
+    key: taskeel pattern
+
+    return: (True, text that have that tashkeel pattern)
+            (Flase, '')
+
+    Assumption:
+        Searches tashkeel that is exciplitly included in string.
+
+    """
+    # tashkeel pattern
+    string_tashkeel_only = searchHelper.get_string_taskeel(string)
+
+    # searching taskeel pattern
+    results = []
+    for m in re.finditer(key, string_tashkeel_only):
+
+        spacesBeforeStart = searchHelper.\
+            count_spaces_before_index(string_tashkeel_only, m.start())
+        spacesBeforeEnd = searchHelper.\
+            count_spaces_before_index(string_tashkeel_only, m.start())
+
+        begin =  m.start() * 2 - spacesBeforeStart
+        end   = m.end() * 2 - spacesBeforeEnd
+        one_result = (m.start(), m.end())
+        results.append(one_result)
+
+    if results == []:
+        return False, []
+    else:
+        return True, results
+
+
+def buckwalter_arabic_transliteration(string, reverse=0):
+
+
+    """
+        buckwalter_arabic_transliteration get an a Unicode 
+        string and transliterate it to Buckwalter encoding or vise verse
+
+        What it does:
+            transliterate a Unicode string to buckwalter and vise verse
+
+
+        Args:
+
+            param1 (str): a string  
+            param2 (int): integer , it's an optional 
+                        if it quals to zero "zero is the defult" , 
+                        it transliterate from a Unicode string to buckwalter encoding 
+                        and vise verse if it equals to one
+
+
+        Returns:
+            str : a string, a Unicode or buckwalter 
+
+
+    """
+
+    for key, value in buck2uni.items():
+      if not reverse:
+            string = string.replace(value, key)
+      else:
+            string = string.replace(key, value)
+
+    return string
