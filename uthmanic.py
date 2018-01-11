@@ -1,10 +1,12 @@
 '''Contains Uthmanic symbols and related functions.
+    reference: en.wikipedia.org/wiki/Arabic_script_in_Unicode
 '''
 
 '''
     TODO:
         [DONE] add all uthmanic  symbols by unicode, here 
-        2 add uthmanic_filter(symbols=[uthmanic]) -> uthmanic free text.
+        2 def uthmanic_filter(symbols=[uthmanic]):
+            return 'uthmanic free text.'
 
 '''
 
@@ -25,3 +27,26 @@ small_high_rounded_zero     = '\u06df'
 empty_center_low_stop       = '\u06ea'
 small_high_upright_rectangular_zero  = '\u06e0'
 rounded_high_stop_with_filled_centre = '\u06ec'
+
+
+uthmanic = [ hamza_above,
+             small_high_meem,
+             small_low_meem,
+             small_high_seen,
+             small_low_seen,
+             small_alef,
+             small_waw,
+             small_yeh,
+             small_high_noon,
+             mad_lazim_mark,
+             tatweel,
+             alef_wasl_with_saad_above,
+             empty_centre_high_stop,
+             small_high_rounded_zero,
+             empty_center_low_stop,
+             small_high_upright_rectangular_zero,
+             rounded_high_stop_with_filled_centre ]
+
+
+def uthmanic_filter(symbols=uthmanic):
+    pass
