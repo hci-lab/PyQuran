@@ -17,6 +17,7 @@ from collections import Counter, defaultdict
 from arabic import *
 import re
 from pyarabic.araby import strip_tashkeel
+import searchHelper
 
 
 # Parsing xml
@@ -1026,3 +1027,40 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
                                    with_tashkeel=True,
                                    mode3=True)
     return final_dict        
+
+
+
+
+def search_string_with_tashkeel(string, key):
+    """
+    string: sentence to search by key
+    key: taskeel pattern
+
+    return: (True, text that have that tashkeel pattern)
+            (Flase, '')
+
+    Assumption:
+        Searches tashkeel that is exciplitly included in string.
+
+    """
+    # tashkeel pattern
+    string_tashkeel_only = searchHelper.get_string_taskeel(string)
+
+    # searching taskeel pattern
+    results = []
+    for m in re.finditer(key, string_tashkeel_only):
+
+        spacesBeforeStart = searchHelper.\
+            count_spaces_before_index(string_tashkeel_only, m.start())
+        spacesBeforeEnd = searchHelper.\
+            count_spaces_before_index(string_tashkeel_only, m.start())
+
+        begin =  m.start() * 2 - spacesBeforeStart
+        end   = m.end() * 2 - spacesBeforeEnd
+        one_result = (m.start(), m.end())
+        results.append(one_result)
+
+    if results == []:
+        return False, []
+    else:
+        return True, results
