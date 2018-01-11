@@ -1066,24 +1066,21 @@ def search_string_with_tashkeel(string, key):
         return True, results
 
 
-def buckwalter_arabic_transliteration(string, reverse=0):
+def buckwalter_arabic_transliteration(string, reverse=False):
+   """
+   buckwalter_arabic_transliteration get an a Unicode
+   tring and transliterate it to Buckwalter encoding or vise verse
 
-
-    """
-        buckwalter_arabic_transliteration get an a Unicode 
-        string and transliterate it to Buckwalter encoding or vise verse
-
-        What it does:
+    What it does:
             transliterate a Unicode string to buckwalter and vise verse
 
 
-        Args:
-
-            param1 (str): a string  
-            param2 (int): integer , it's an optional 
-                        if it quals to zero "zero is the defult" , 
-                        it transliterate from a Unicode string to buckwalter encoding 
-                        and vise verse if it equals to one
+    Args:
+         param1 (str): a string
+         param2 (bool): Boolean , it's an optional
+                        if it quals to False "False is the defult" ,
+                        it transliterate from a Unicode string to buckwalter encoding
+                        and vise verse if it equals to True
 
 
         Returns:
@@ -1091,11 +1088,9 @@ def buckwalter_arabic_transliteration(string, reverse=0):
 
 
     """
-
-    for key, value in buck2uni.items():
-      if not reverse:
+   for key, value in buck2uni.items():
+       if not reverse:
             string = string.replace(value, key)
-      else:
+       else:
             string = string.replace(key, value)
-
-    return string
+   return string

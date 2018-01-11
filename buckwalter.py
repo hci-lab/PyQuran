@@ -2,7 +2,7 @@
  Declare a dictionary with Buckwalter's ASCII symbols as the keys, and
  their unicode equivalents as values. '''
  
- buck2uni =     {
+buck2uni =     {
                 "'": u"\u0621",  # hamza-on-the-line
                 "|": u"\u0622",  # madda
                 ">": u"\u0623",  # hamza-on-'alif
