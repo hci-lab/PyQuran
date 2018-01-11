@@ -35,6 +35,12 @@ def get_sura(sura_number):
         Do not forget that the index of the reunred list starts at zero.
         So if the order aya number is x, then it's at (x-1) in the list.
 
+    Working_State: OK.
+
+    TESTING: 
+            1  Handle out of range inputs.
+            2  Handle non integer inputs.
+
     """
     sura_number -= 1
     sura = []
