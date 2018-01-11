@@ -6239,7 +6239,7 @@
 # PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #====================================================================
 #
-#  Tanzil Quran Text (Uthmani, version 1.0.2)
+#  Tanzil Quran Text (Uthmanic , version 1.0.2)
 #  Copyright (C) 2008-2010 Tanzil.net
 #  License: Creative Commons Attribution 3.0
 #
