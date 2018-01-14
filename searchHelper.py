@@ -1,6 +1,11 @@
 """searchHelper: contains helper functions for searching.
 """
-import arabic
+
+from arabic import *
+import re
+from pyarabic.araby import strip_tashkeel, strip_tatweel
+import tools
+
 
 def count_spaces_before_index(string, index):
     """counts spaces before a char in string.
@@ -201,14 +206,14 @@ def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
         if chapterNum!=0:
             #check if specific verse
             if verseNum!=0:
-                verse = get_verse(chapterNum,verseNum,with_tashkeel)
+                verse = tools.get_verse(chapterNum,verseNum,with_tashkeel)
                 return hellper_search_function(verse,sequance,
                                                verseNum,
                                                chapterNum,
                                                mode3)
             else:
                 #search in Chapter
-                verses = get_sura(chapterNum,with_tashkeel)
+                verses = tools.get_sura(chapterNum,with_tashkeel)
                 return sum([hellper_search_function(v,sequance,
                                                     num+1,chapterNum,
                                                     mode3) 
@@ -217,7 +222,7 @@ def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
             #search in all Quran
             final_list = []
             for i in range(swar_num):
-                verses = get_sura(i+1,with_tashkeel)
+                verses = tools.get_sura(i+1,with_tashkeel)
                 final_list += sum([hellper_search_function(v,sequance,
                                                            num+1,i+1,
                                                            mode3) 
