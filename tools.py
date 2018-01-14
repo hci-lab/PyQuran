@@ -407,19 +407,18 @@ def convert_text_to_numbers(text,alphabetMap):
                 List: list of numbers, where each char in the text converted to number
 
 
-            """
+    """
 
-    textToNumber=[]
-    i=0
-    if isinstance(text , list):
+    textToNumber = []
+
+    if isinstance(text, list):
         for ayah in text:
             for char in ayah:
-                textToNumber.insert(i,alphabetMap[char])
-                i=i+1
+                textToNumber.append(alphabetMap[char])
+
     else:
         for char in text:
-            textToNumber.insert(i, alphabetMap[char])
-            i = i + 1
+            textToNumber.append(alphabetMap[char])
 
     return textToNumber
 
