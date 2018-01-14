@@ -17,37 +17,49 @@ from collections import Counter, defaultdict
 from arabic import *
 import re
 from pyarabic.araby import strip_tashkeel
+import searchHelper
+from buckwalter import *
+
+# Parsing xml
+xml_file_name = 'QuranCorpus/quran-uthmani.xml'
+quran_tree = ElementTree.parse(xml_file_name)
 
 
-def get_sura(sura_number,with_tashkeel=False):
+
+
+def get_sura(sura_number, with_tashkeel=False):
     """gets an sura by returning a list of ayat al-sura.
 
     Args: 
         param1 (int): the ordered number of sura in The Mushaf.
         param2 (bool): if true return sura with tashkeel else return without
     Returns:
-         [str]: a list of ayat al-sura.
+         [str]: a list of `ayat al-sura.`
 
     Usage Note:
         Do not forget that the index of the reunred list starts at zero.
         So if the order aya number is x, then it's at (x-1) in the list.
 
+    Working_State: OK.
+
+    TESTING: 
+            1  Handle out of range inputs.
+            2  Handle non integer inputs.
+
     """
     
-    # Parsing xml
-    if not with_tashkeel:
-        xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-    else:
-        xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
-    quran_tree = ElementTree.parse(xml_file_name)
-
     sura_number -= 1
     sura = []
     suras_list = quran_tree.findall('sura')
     ayat = suras_list[sura_number]
+
     for aya in ayat:
         sura.append(aya.attrib['text'])
-    return sura
+
+    if with_tashkeel:
+       return list(map(strip_tashkeel, sura)) 
+    else:
+       return sura
 
 
 
@@ -1016,3 +1028,70 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
                                    with_tashkeel=True,
                                    mode3=True)
     return final_dict        
+
+
+
+
+def search_string_with_tashkeel(string, key):
+    """
+    string: sentence to search by key
+    key: taskeel pattern
+
+    return: (True, text that have that tashkeel pattern)
+            (Flase, '')
+
+    Assumption:
+        Searches tashkeel that is exciplitly included in string.
+
+    """
+    # tashkeel pattern
+    string_tashkeel_only = searchHelper.get_string_taskeel(string)
+
+    # searching taskeel pattern
+    results = []
+    for m in re.finditer(key, string_tashkeel_only):
+
+        spacesBeforeStart = searchHelper.\
+            count_spaces_before_index(string_tashkeel_only, m.start())
+        spacesBeforeEnd = searchHelper.\
+            count_spaces_before_index(string_tashkeel_only, m.start())
+
+        begin =  m.start() * 2 - spacesBeforeStart
+        end   = m.end() * 2 - spacesBeforeEnd
+        one_result = (m.start(), m.end())
+        results.append(one_result)
+
+    if results == []:
+        return False, []
+    else:
+        return True, results
+
+
+def buckwalter_arabic_transliteration(string, reverse=False):
+   """
+   buckwalter_arabic_transliteration get an a Unicode
+   tring and transliterate it to Buckwalter encoding or vise verse
+
+    What it does:
+            transliterate a Unicode string to buckwalter and vise verse
+
+
+    Args:
+         param1 (str): a string
+         param2 (bool): Boolean , it's an optional
+                        if it quals to False "False is the defult" ,
+                        it transliterate from a Unicode string to buckwalter encoding
+                        and vise verse if it equals to True
+
+
+        Returns:
+            str : a string, a Unicode or buckwalter 
+
+
+    """
+   for key, value in buck2uni.items():
+       if not reverse:
+            string = string.replace(value, key)
+       else:
+            string = string.replace(key, value)
+   return string
