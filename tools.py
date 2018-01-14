@@ -17,7 +17,7 @@ from collections import Counter, defaultdict
 from arabic import *
 import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel
-import searchHelper
+from searchHelper import *
 from buckwalter import *
 
 # Parsing xml
@@ -57,7 +57,7 @@ def get_sura(sura_number, with_tashkeel=False):
     for aya in ayat:
         sura.append(aya.attrib['text'])
 
-    if with_tashkeel:
+    if not with_tashkeel:
        return list(map(strip_tashkeel, sura)) 
     else:
        return sura
@@ -207,7 +207,7 @@ def check_sura_with_frequency(sura_num,freq_dec):
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
     num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
-    print(num_of_chars_in_dec ,"    ", num_of_chars_in_sura)
+    # print(num_of_chars_in_dec ,"    ", num_of_chars_in_sura)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
     else:
@@ -535,46 +535,6 @@ def count_token(text):
 
     return count
 
-def searchTokenWithOutDia(token):
-    """
-                	searchTokenWithOutDia get a token without diarictics(tashkeel)(word or sentence or phrase) and return the
-                	 table which contains verse number , chapter number, token number(index of token in  one ayah)
-
-                	What it does:
-                      search about tokens in Quran Corpus
-
-
-                    Args:
-
-                        param1 (str): a string
-
-
-                    Returns:
-                        Lists of int :  surNumber , ayatNumber, tokens number
-
-
-                    """
-
-
-
-    ayatNumber=[]
-    surNumber =[]
-    token_name=[]
-    fsurah = 1
-    lastsurah = 115
-    for suraNumber in range(fsurah, lastsurah):
-
-           for ayaNumber in range(1, get_verse_count(get_sura(suraNumber))):
-               aya=fetch_aya(suraNumber, ayaNumber)
-               ayals = araby.tokenize(aya)
-               for c in range(1,len(ayals)):
-
-                  if (token in ayals[c]):
-                     ayatNumber.append(ayaNumber)
-                     surNumber.append(suraNumber)
-                     token_name.append(ayals[c])
-    return [ayatNumber, surNumber,token_name]
-
 
 
 def separate_token_with_dicrites(token):
@@ -598,7 +558,9 @@ def separate_token_with_dicrites(token):
             hroof_with_tashkeel.append(harf_with_taskeel)
     return hroof_with_tashkeel
 
-def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
+
+
+def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_tashkeel=False):
     """this function count number of characters occurrence, 
        for specific verse or with chapter or even all Quran , 
        note if you don't pass verse and chapterNum he will get all Quran
@@ -609,7 +571,8 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
         chapterNum (int) : chapter number is a number of 'sura' 
                           that will count it , and default is 0
         verseNum (int) : verse number in sura
-        chracters (list) : list of characters that you want to count them 
+        chracters (list) : list of characters that you want to count them
+        with_tashkeel (boo) : to check if you want to search with tashkeel
     Returns:
          {dic} : a dictionary and keys is a characters 
                  and value is count of every chracter.
@@ -618,6 +581,8 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
     frequency = dict()
     #check if count specific verse
     if verse!=None:
+        if not with_tashkeel:
+            verse = strip_tashkeel(verse)
         #count frequency of chars
         frequency = frequency_of_chars_in_verse(verse,characters)
     #check if count specific chapter
@@ -627,19 +592,19 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
             #check if verseNum out of range
             if(verseNum<0):
                 return dict()
-            verse = get_sura(chapterNum)[verseNum-1]
+            verse = get_sura(chapterNum,with_tashkeel=with_tashkeel)[verseNum-1]
             #count frequency of chars
             frequency = frequency_of_chars_in_verse(verse,characters)
         else:
             #count on all chapter
-            chapter = " ".join(get_sura(chapterNum))
+            chapter = " ".join(get_sura(chapterNum,with_tashkeel=with_tashkeel))
             #count frequency of chars
             frequency = frequency_of_chars_in_verse(chapter,characters)
     else:
         #count for all Quran 
         Quran = ""
         for i in range(swar_num):
-            Quran = Quran +" "+ " ".join(get_sura(i+1))+" "
+            Quran = Quran +" "+ " ".join(get_sura(i+1,with_tashkeel=with_tashkeel))+" "
         #count frequency of chars
         frequency = frequency_of_chars_in_verse(Quran,characters)
     return frequency
