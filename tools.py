@@ -983,7 +983,8 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
             mode (int): this mode that you need to use and default mode 3
 
         Returns:
-            dict() :  key is sequances and value is a list of matched_sequance and their positions)
+            dict() :  key is sequances and value is a list of matched_sequance 
+                      and their positions
     """    
     final_dict = dict()
     #loop on all sequances
