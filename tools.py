@@ -16,7 +16,7 @@ import functools
 from collections import Counter, defaultdict
 from arabic import *
 import re
-from pyarabic.araby import strip_tashkeel
+from pyarabic.araby import strip_tashkeel, strip_tatweel
 import searchHelper
 from buckwalter import *
 
@@ -583,7 +583,7 @@ def separate_token_with_dicrites(token):
     Returns:
          [str]: a list contains the token characters with their tashkeel.
     """
-    token_without_tatweel = araby.strip_tatweel(token)
+    token_without_tatweel = strip_tatweel(token)
     print(token_without_tatweel)
     hroof_with_tashkeel = []
     for index,i in enumerate(token):
@@ -596,7 +596,6 @@ def separate_token_with_dicrites(token):
             index = k
             hroof_with_tashkeel.append(harf_with_taskeel)
     return hroof_with_tashkeel
-
 
 def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0):
     """this function count number of characters occurrence, 
