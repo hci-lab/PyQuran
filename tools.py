@@ -548,7 +548,7 @@ def separate_token_with_dicrites(token):
     print(token_without_tatweel)
     hroof_with_tashkeel = []
     for index,i in enumerate(token):
-        if((token[index] in (alphabet or alefat or hamzat) )):
+        if((token[index] in (alphabet or alefat or hamzat)or token[index] is ' ' )):
             k = index
             harf_with_taskeel =token[index]
             while((k+1) != len(token) and (token[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
