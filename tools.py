@@ -821,15 +821,15 @@ def search_string_with_tashkeel(string, key):
 
     """
     # tashkeel pattern
-    string_tashkeel_only = searchHelper.get_string_taskeel(string)
+    string_tashkeel_only = get_string_taskeel(string)
 
     # searching taskeel pattern
     results = []
     for m in re.finditer(key, string_tashkeel_only):
 
-        spacesBeforeStart = searchHelper.\
+        spacesBeforeStart = \
             count_spaces_before_index(string_tashkeel_only, m.start())
-        spacesBeforeEnd = searchHelper.\
+        spacesBeforeEnd = \
             count_spaces_before_index(string_tashkeel_only, m.start())
 
         begin =  m.start() * 2 - spacesBeforeStart
