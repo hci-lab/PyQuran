@@ -37,7 +37,7 @@ def get_string_taskeel(string):
     """
     x = ''
     for char in string:
-        if char in arabic.tashkeel or char == ' ':
+        if char in tashkeel or char == ' ':
             x += char
     return x
 
