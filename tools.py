@@ -364,25 +364,34 @@ def shape(system):
             value will be equals for alphabets that will be count as oe shape
 
 
-        """
+    """
 
-    alphabetMap=dict()
-    alphabetMap.update({" ": 0})
+    listOfAlphabet = sorted(list(alphabet))
+    print(listOfAlphabet)
 
-    newAlphabet=list(set(chain(*system)))
-    listOfAlphabet=list(alphabet)
-    indx=1
-    theRestOfAlphabets=list(set(listOfAlphabet)-set(newAlphabet))
+    alphabetMap = dict()
+
+    indx = 0
+
+    newAlphabet = sorted(list(set(chain(*system))))
+    print(newAlphabet)
+
+    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(newAlphabet)))
+    print(theRestOfAlphabets)
 
     for setOfNewAlphabet in system:
         for char in setOfNewAlphabet:
-            alphabetMap.update({char:indx})
-        indx=indx+1
+            alphabetMap.update({char: indx})
+        indx = indx + 1
+    print(alphabetMap)
 
     for char in theRestOfAlphabets:
-        alphabetMap.update({char:indx})
-        indx=indx+1
+        alphabetMap.update({char: indx})
+        indx = indx + 1
+    alphabetMap.update({" ": 70})
+    print(alphabetMap)
     return alphabetMap
+
 
 
 def convert_text_to_numbers(text,alphabetMap):
@@ -408,80 +417,89 @@ def convert_text_to_numbers(text,alphabetMap):
 
 
     """
-
-    textToNumber = []
-
-    if isinstance(text, list):
-        for ayah in text:
-            for char in ayah:
-                textToNumber.append(alphabetMap[char])
-
-    else:
-        for char in text:
-            textToNumber.append(alphabetMap[char])
-
+    i=0
+    textToNumber=[]
+    for char in text:
+        textToNumber.insert(i, alphabetMap[char])
+        i = i + 1
     return textToNumber
 
 
 def count_shape(text, system=None):
     """
-            	 count_shape get a text (surah or ayah) and count the occuerence of each shape
-            	 depends on the your system ,If you don't pass system, then it will count each char as one shape
-            	 , user pass the text "list or list of lists" that want to
-            	 count it
-            	 and the system that has sets of alphapets that will  count as one shape.
+        count_shape parses the text  and returns a N*P matrix (ndarray),
+
+        the number of rows equals to the number of verses ,
+        and the number of columns equals to the number of shapes.
+
+        What it does:
+            count the occuerence of each shape in text, depends on the your system ,
+            If you don't pass system, then it will count each char as one shape.
+
+            If `A` is a ndarray,
+            then A[i,j] is the number of occurrences of alphabet(s)[j] in the
+            verse i.
+
+        Args:
+            param1 ([str] ): a list of strings , each inner list is ayah .
+            param2([[char]]) : it's optional ,
+                                -a list of list , each iner list has alphabets that will count as one shape
+                                - If you don't pass your system, then it will count each char as one shape
+        Returns:
+            ndarray: with dimensions (N * P), where
+            `N` is the number of verses in chapter and
+            `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
+
+
+    """
 
 
 
 
 
-                What it does:
-                    count the occuerence of each shape
-
-
-                Args:
-
-                    param1 ([str] ): a list of strings , each inner list is ayah .
-                    param2([[char]]) : it's optional ,
-                                        -a list of list , each iner list has alphabets that will count as one shape
-                                        - If you don't pass your system, then it will count each char as one shape
-                Returns:
-                    Dict1: dictionary , the value of each element is the alphapets have the same shape.
-                    Dict2: dictionary , the value of each element is the count of each shape
-
-
-                """
-    if system==None:
+    listOfAlphabet = sorted(list(alphabet))
+    print(listOfAlphabet)
+    if system == None:
         alphabetMap = dict()
-        alphabetMap.update({" ": 0})
-        indx=1
-        for char in alphabet:
+
+        indx = 0
+        for char in listOfAlphabet:
             alphabetMap.update({char: indx})
             indx = indx + 1
-
+        alphabetMap.update({" ": 70})
+        print("--------alphabetMap-------")
+        print(alphabetMap)
     else:
-        alphabetMap = shape(system)
+        alphabetMap=shape(system)
 
-    textToNumber = convert_text_to_numbers(text, alphabetMap)
-    alphabetCount = Counter(textToNumber)
+    p=len(listOfAlphabet)-len(list(set(chain(
+        *system))))+len(system)#+1 #the last one for space char
+    n=len(text)
+    A=numpy.zeros((n, p), dtype=numpy.int)#(m-len(list(set(
+    # chain(*system)))))+len(system)
+    i=0
+    j=0
+    charCount =[]
+    #A[i, :] = Counter(convert_text_to_numbers(verse, alphabetMap))
+    for verse in text:
+        verse=convert_text_to_numbers(verse, alphabetMap)
+        for k in range(0,34,1) :                   #for key, value in
+            # alphabetMap.items():
+            charCount.insert(j, verse.count(k))
+
+        #for key,char in (Counter(convert_text_to_numbers(verse,
+                                                    #  alphabetMap))).items():
+            #charCount.insert(j, char)
+            j+=1
+
+        A[i, :] =charCount
+        i+=1
+        charCount=[]
+        j=0
 
 
-    alphabetAsOneShape = defaultdict(list)
-    for key, value in alphabetMap.items():
-        alphabetAsOneShape[value].append(key)
 
-    '''
-    printf = functools.partial(print, end=" ")
-    for key in viewDict:  # .encode("utf-8")
-        for val in viewDict[key]:
-            printf(val)
-        print(" : " + str(count[key]))
-        '''
-    # just delete the space
-    del alphabetCount[0]
-    del alphabetAsOneShape[0]
-
-    return alphabetAsOneShape , alphabetCount
+    return A
 
 
 def get_verse_count(surah):
