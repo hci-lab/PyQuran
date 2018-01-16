@@ -19,10 +19,11 @@ import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel
 from searchHelper import *
 from buckwalter import *
+from uthmanic import *
 
 # Parsing xml
-#xml_file_name = 'QuranCorpus/quran-uthmani.xml'
-xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
+xml_file_name = 'QuranCorpus/quran-uthmani.xml'
+#xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
 quran_tree = ElementTree.parse(xml_file_name)
 
 
@@ -57,11 +58,14 @@ def get_sura(sura_number, with_tashkeel=False):
     for aya in ayat:
         sura.append(aya.attrib['text'])
 
-    if not with_tashkeel:
-       return list(map(strip_tashkeel, sura)) 
-    else:
-       return sura
+    uthmanic_free_sura = []
+    for aya in sura:
+        uthmanic_free_sura.append(uthmanic_filter(aya))
 
+    if not with_tashkeel:
+       return list(map(strip_tashkeel, uthmanic_free_sura)) 
+    else:
+       return uthmanic_free_sura
 
 
 
@@ -548,7 +552,7 @@ def separate_token_with_dicrites(token):
     print(token_without_tatweel)
     hroof_with_tashkeel = []
     for index,i in enumerate(token):
-        if((token[index] in (alphabet or alefat or hamzat) )):
+        if((token[index] in (alphabet or alefat or hamzat)or token[index] is ' ' )):
             k = index
             harf_with_taskeel =token[index]
             while((k+1) != len(token) and (token[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
@@ -821,15 +825,15 @@ def search_string_with_tashkeel(string, key):
 
     """
     # tashkeel pattern
-    string_tashkeel_only = searchHelper.get_string_taskeel(string)
+    string_tashkeel_only = get_string_taskeel(string)
 
     # searching taskeel pattern
     results = []
     for m in re.finditer(key, string_tashkeel_only):
 
-        spacesBeforeStart = searchHelper.\
+        spacesBeforeStart = \
             count_spaces_before_index(string_tashkeel_only, m.start())
-        spacesBeforeEnd = searchHelper.\
+        spacesBeforeEnd = \
             count_spaces_before_index(string_tashkeel_only, m.start())
 
         begin =  m.start() * 2 - spacesBeforeStart

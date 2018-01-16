@@ -9,6 +9,7 @@
             return 'uthmanic free text.'
 
 '''
+import arabic
 
 hamza_above     = '\u0654'
 small_high_meem = '\u06e2'
@@ -29,24 +30,58 @@ small_high_upright_rectangular_zero  = '\u06e0'
 rounded_high_stop_with_filled_centre = '\u06ec'
 
 
-uthmanic = [ hamza_above,
-             small_high_meem,
-             small_low_meem,
-             small_high_seen,
-             small_low_seen,
-             small_alef,
-             small_waw,
-             small_yeh,
-             small_high_noon,
-             mad_lazim_mark,
-             tatweel,
-             alef_wasl_with_saad_above,
-             empty_centre_high_stop,
-             small_high_rounded_zero,
-             empty_center_low_stop,
-             small_high_upright_rectangular_zero,
-             rounded_high_stop_with_filled_centre ]
+uthmanic = [ 
+             alef_wasl_with_saad_above, # Rplace with alef
+             hamza_above, # ???????
+             small_high_meem, # Remove
+             small_low_meem, # Remove
+             small_high_seen, # Remove
+             small_low_seen, # Remove
+             small_alef, # Remove
+             small_waw, # Remove
+             small_yeh, # Remove
+             small_high_noon, # Remove
+             mad_lazim_mark, # Remove
+             tatweel, # Remove
+             empty_centre_high_stop, # Remove
+             small_high_rounded_zero, # Remove
+             empty_center_low_stop, # Remove
+             small_high_upright_rectangular_zero, # Remove
+             rounded_high_stop_with_filled_centre # Remove
+]
+
+'my_user_name'
+'''
+# Cannot fide hamza_above
+import tools
+import arabic
+x = tools.search_sequence([hamza_above])
+print(x)
 
 
-def uthmanic_filter(symbols=uthmanic):
-    pass
+quran = open('QuranCorpus/quran-uthmani.txt', 'r')
+quran = quran.read()
+#print(quran)
+print(len(quran))
+print(hamza_above in quran)
+import re
+p = re.compile(quran)
+print(p.search(hamza_above))
+print(p.findall(hamza_above))
+'''
+
+def uthmanic_filter(string, symbols=uthmanic):
+    '''removes uthmanic symbols
+    '''
+    for symbol in symbols:
+        if symbol == alef_wasl_with_saad_above:
+            string = string.replace(alef_wasl_with_saad_above, arabic.alef)
+        else:
+            string = string.replace(symbol, '')
+
+    return string
+
+'''
+for x in uthmanic:
+    print("> " + x + '\n')
+'''
