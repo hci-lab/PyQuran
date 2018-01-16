@@ -367,31 +367,23 @@ def shape(system):
     """
 
     listOfAlphabet = sorted(list(alphabet))
-    print(listOfAlphabet)
-
     alphabetMap = dict()
-
     indx = 0
 
     newAlphabet = sorted(list(set(chain(*system))))
-    print(newAlphabet)
-
     theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(newAlphabet)))
-    print(theRestOfAlphabets)
 
     for setOfNewAlphabet in system:
         for char in setOfNewAlphabet:
             alphabetMap.update({char: indx})
         indx = indx + 1
-    print(alphabetMap)
 
     for char in theRestOfAlphabets:
         alphabetMap.update({char: indx})
         indx = indx + 1
     alphabetMap.update({" ": 70})
-    print(alphabetMap)
-    return alphabetMap
 
+    return alphabetMap
 
 
 def convert_text_to_numbers(text,alphabetMap):
@@ -452,11 +444,6 @@ def count_shape(text, system=None):
 
 
     """
-
-
-
-
-
     listOfAlphabet = sorted(list(alphabet))
     print(listOfAlphabet)
     if system == None:
@@ -467,8 +454,7 @@ def count_shape(text, system=None):
             alphabetMap.update({char: indx})
             indx = indx + 1
         alphabetMap.update({" ": 70})
-        print("--------alphabetMap-------")
-        print(alphabetMap)
+
     else:
         alphabetMap=shape(system)
 
@@ -480,24 +466,16 @@ def count_shape(text, system=None):
     i=0
     j=0
     charCount =[]
-    #A[i, :] = Counter(convert_text_to_numbers(verse, alphabetMap))
     for verse in text:
         verse=convert_text_to_numbers(verse, alphabetMap)
-        for k in range(0,34,1) :                   #for key, value in
+        for k in range(0,p,1) :                   #for key, value in
             # alphabetMap.items():
             charCount.insert(j, verse.count(k))
-
-        #for key,char in (Counter(convert_text_to_numbers(verse,
-                                                    #  alphabetMap))).items():
-            #charCount.insert(j, char)
             j+=1
-
         A[i, :] =charCount
         i+=1
         charCount=[]
         j=0
-
-
 
     return A
 
@@ -1100,7 +1078,7 @@ def buckwalter_arabic_transliteration(string, reverse=False):
                         and vise verse if it equals to True
 
 
-        Returns:
+    Returns:
             str : a string, a Unicode or buckwalter 
 
 
