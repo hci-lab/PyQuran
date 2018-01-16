@@ -19,10 +19,11 @@ import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel
 from searchHelper import *
 from buckwalter import *
+from uthmanic import *
 
 # Parsing xml
-#xml_file_name = 'QuranCorpus/quran-uthmani.xml'
-xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
+xml_file_name = 'QuranCorpus/quran-uthmani.xml'
+#xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
 quran_tree = ElementTree.parse(xml_file_name)
 
 
@@ -57,11 +58,14 @@ def get_sura(sura_number, with_tashkeel=False):
     for aya in ayat:
         sura.append(aya.attrib['text'])
 
-    if not with_tashkeel:
-       return list(map(strip_tashkeel, sura)) 
-    else:
-       return sura
+    uthmanic_free_sura = []
+    for aya in sura:
+        uthmanic_free_sura.append(uthmanic_filter(aya))
 
+    if not with_tashkeel:
+       return list(map(strip_tashkeel, uthmanic_free_sura)) 
+    else:
+       return uthmanic_free_sura
 
 
 
