@@ -1089,3 +1089,26 @@ def buckwalter_arabic_transliteration(string, reverse=False):
        else:
             string = string.replace(key, value)
    return string
+
+
+def check_all_alphabet(system):
+    '''
+    check_alphabet get a list of alphabets or system(list of lists of alphabets)
+    and return the rest of arabic alphabets [alphabets in system excluded]
+    -in case sytem equals all arabic alphabets, it will return empty list
+
+    What it does:
+        return the rest of arabic alphabets that not included in system
+
+    Args:
+        param1 ([char] ): a list or list of lists of characters
+
+    Returns:
+        list: include all other arabic alphabet
+    '''
+
+    listOfAlphabet = list(alphabet)
+    if isinstance(system, list):
+        system=list(chain(*system))
+    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(system)))
+    return theRestOfAlphabets
