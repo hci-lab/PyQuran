@@ -114,20 +114,21 @@ alphabet = u''.join([
         teh_marbuta
         ])
 
-tashkeel  = (fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda)
-harakat   = (fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun)
-shortharakat  = ( fatha,   damma,   kasra,  sukun)
+tashkeel  = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda]
+harakat   = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun]
+shortharakat  = [ fatha,   damma,   kasra,  sukun]
+shortharakatWithShadda  = [ fatha,   damma,   kasra,  sukun, shadda]
 
-tanwin  = (fathatan,   dammatan,    kasratan)
+tanwin  = [fathatan,   dammatan,    kasratan]
 
 not_def_haraka = tatweel
-liguatures = (
+lamAlefLike = [
             lam_alef, 
             lam_alef_hamza_above, 
             lam_alef_hamza_below, 
             lam_alef_mad_above, 
-            )
-hamzat = (
+            ]
+hamzat = [
             hamza, 
             waw_hamza, 
             yeh_hamza, 
@@ -135,8 +136,8 @@ hamzat = (
             hamza_below, 
             alef_hamza_below, 
             alef_hamza_above, 
-            )
-alefat = (
+            ]
+alefat = [
             alef, 
             alef_mad, 
             alef_hamza_above, 
@@ -144,16 +145,27 @@ alefat = (
             alef_wasl, 
             alef_maksura, 
             small_alef, 
+        ]
+# wihtout dots. Groups
+behLike  = [beh, teh, theh, noon]
+jeemLike = [hah, khah, jeem]
+dalLike  = [dal, thal]
+rehLike  = [reh, zain]
+seenLike = [seen, sheen]
+sadLike  = [sad, dad]
+tahLike  = [tah, zah]
+ainLike  = [ain, ghain]
+fehLike  = [feh, qaf]
 
-        )
-weak   = ( alef,  waw,  yeh,  alef_maksura)
-yehlike =  ( yeh,   yeh_hamza,   alef_maksura,    small_yeh  )
 
-wawLike   = ( waw,   waw_hamza,   small_waw )
-tehLike   = ( teh,   teh_marbuta )
+weak   = [ alef,  waw,  yeh,  alef_maksura]
+yehlike =  [ yeh,   yeh_hamza,   alef_maksura,    small_yeh  ]
 
-small   = ( small_alef,  small_waw,  small_yeh)
-moon_letters = (hamza    , 
+wawLike   = [ waw,   waw_hamza,   small_waw ]
+tehLike   = [ teh,   teh_marbuta ]
+
+small   = [ small_alef,  small_waw,  small_yeh]
+moon_letters = [hamza    , 
         alef_mad         , 
         alef_hamza_above , 
         alef_hamza_below , 
@@ -171,8 +183,8 @@ moon_letters = (hamza    ,
         heh              , 
         waw              , 
         yeh
-    )
-sun_letters = (
+    ]
+sun_letters = [
         teh              , 
         theh             , 
         dal              , 
@@ -187,7 +199,7 @@ sun_letters = (
         zah              , 
         lam              , 
         noon             , 
-    )
+    ]
 
 """
     * Some alphabet building tools
