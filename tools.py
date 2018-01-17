@@ -445,7 +445,7 @@ def count_shape(text, system=None):
 
     """
     listOfAlphabet = sorted(list(alphabet))
-    print(listOfAlphabet)
+    #print(listOfAlphabet)
     if system == None:
         alphabetMap = dict()
 
