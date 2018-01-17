@@ -1095,16 +1095,16 @@ def check_all_alphabet(system):
     '''
     check_alphabet get a list of alphabets or system(list of lists of alphabets)
     and return the rest of arabic alphabets [alphabets in system excluded]
-    -in case sytem equals all arabic alphabets, it will return empty list
+    -in case sytem equals all arabic alphabets, it will return empty list.
 
     What it does:
-        return the rest of arabic alphabets that not included in system
+        return the rest of arabic alphabets that not included in system.
 
     Args:
-        param1 ([char] ): a list or list of lists of characters
+        param1 ([char] ): a list or list of lists of characters.
 
     Returns:
-        list: include all other arabic alphabet
+        list: include all other arabic alphabet.
     '''
 
     listOfAlphabet = list(alphabet)
@@ -1112,3 +1112,29 @@ def check_all_alphabet(system):
         system=list(chain(*system))
     theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(system)))
     return theRestOfAlphabets
+
+
+def check_system(system, indx=None):
+    '''
+    check_sytem get a system (list of lists ) and index (it's
+    optional) and return full sorted system or a specific index in it.
+
+    -sortion will follow this approach : system in the first with the same
+    order , then all remain alphabets sorted alphabetically .
+
+    What it does:
+        build a full sorted system and return it or a specific index in it.
+
+    Args:
+        param1 ([[char]] ):  list of lists of characters.
+        int: it's optinal , it will return this index in full sorted system.
+
+    Returns:
+        list: full sorted system or a spesefic index.
+
+    '''
+    if indx==None:
+        return (system + [[char] for char in check_all_alphabet(system)])
+    else:
+        return (system + [[char] for char in check_all_alphabet(system)])[indx]
+
