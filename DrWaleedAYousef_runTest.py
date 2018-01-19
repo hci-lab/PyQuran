@@ -94,7 +94,7 @@ results = tools.search_string_with_tashkeel(sentence, tashkeel_pattern)
 print(results)
 '''
 print(functionCall)
-print("Output:")
+print("Output: locations of matches -> (start index *inclusive*, end index *exclusive)")
 sentence = 'صِفْ ذَاْ ثَنَاْ كَمْ جَاْدَ شَخْصٌ'
 tashkeel_pattern = ar.fatha + ar.sukun
 results = tools.search_string_with_tashkeel(sentence, tashkeel_pattern)
