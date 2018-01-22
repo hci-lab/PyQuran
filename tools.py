@@ -16,7 +16,7 @@ import functools
 from collections import Counter, defaultdict
 from arabic import *
 import re
-from pyarabic.araby import strip_tashkeel, strip_tatweel
+from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
 from searchHelper import *
 from buckwalter import *
 from uthmanic import *
@@ -875,3 +875,124 @@ def buckwalter_arabic_transliteration(string, reverse=False):
        else:
             string = string.replace(key, value)
    return string
+def getTashkeelPattern(text):
+    '''
+    getTashkeelPattern is function takes the str or list(ayah or token) and converts to zero and ones
+
+
+
+    What it does:
+          take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
+            and one for char with harakat and tanwin
+
+
+    Args:
+         param1 (str): a string or list
+
+
+
+        Returns:
+            str : zero and ones for each token
+
+
+    '''
+    dic = {'ْ': 0, '': 0, 'ُ': 1, 'َ': 1, 'ِ': 1, 'ّ': 1, 'ٌ': 1, 'ً': 1, 'ٍ': 1}
+    spChar = ['','ْ','َ']
+    tashkeelPattern = []  # list of zeros and ones
+    harakat = []
+    text = ''.join(text.strip())
+    newText = ''
+    l = 0
+    tstr = ''
+    text = strip_tatweel(text)
+    #preprocessing
+    for ch in text:
+
+        if ch == 'آ':
+            newText+='أَ'
+            newText+='أْ'
+        elif ch != 'ٓ':
+            newText+=ch
+
+
+    letters, marks = separate(newText)
+    print(letters)
+    for m in marks:
+        print(m)
+        if (m != 'ـ'):
+
+            harakat.append(m)
+            tashkeelPattern.append(dic[m])
+        else:
+            harakat.append(spChar[0])
+            tashkeelPattern.append(dic[spChar[0]])
+
+
+    for lo in range(0, len(letters)):
+        if letters[lo] == ' ' and tashkeelPattern[lo] == 0:
+            tstr += ' '
+        else:
+            tstr += str(tashkeelPattern[lo])
+
+    return tstr, harakat
+def Unpack_Alaf_mad(string:str):
+    '''
+     Unpack_Alaf_mad is function takes the str or list(ayah or token) and search about alaf mad and unpack it
+
+
+
+     What it does:
+             take the Alaf mad and converts it to alaf  mad to alaf fataha and alaf sukun
+
+
+     Args:
+          param1 (str): a string or list
+
+
+
+         Returns:
+             str : ayah or token with Unpacked mad
+
+
+     '''
+    newStr = ''
+    for ch in string :
+      if ch  != 'آ' :
+        newStr+=string
+      else:
+         newStr+='أَ'
+         newStr+='أْ'
+    return newStr
+
+def strip_mark_Al_mad(str:str):
+
+    '''
+   strip_mark_Al_mad is function takes the str or list(ayah or token) and strip the mad mark
+
+
+
+    What it does:
+            take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
+            and one for char with harakat and tanwin
+
+
+    Args:
+         param1 (str): a string or list
+
+
+
+        Returns:
+            str : token or ayah without mark of mad
+
+
+    '''
+
+
+    newStr = ''
+    for ch in str:
+        print(ch)
+        if ch != 'ٓ':
+          newStr +=ch
+
+
+    return newStr
