@@ -29,7 +29,7 @@ class Erros:
 
 #==============================================================
 def separate_token_with_dicrites(token):
-    """gets a token(string) with taskeel, and returns a list of strings,
+    """gets a token(string) with tashkeel, and returns a list of strings,
     each string represents a character with its tashkeel.
     Args:
         token (str): string represents a word or aya or sura
