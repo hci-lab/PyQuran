@@ -1,11 +1,11 @@
 #import sys
 from xml.etree import ElementTree
 from pyarabic import araby
-from arabic import *
+import arabic
 from itertools import chain
 from collections import Counter, defaultdict
 
-xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
+xml_file_name = '../QuranCorpus/quran-simple-clean.xml'
 quran_tree_ = ElementTree.parse(xml_file_name)
 
 """Test Cases"""
@@ -29,21 +29,23 @@ class Erros:
 
 #==============================================================
 def separate_token_with_dicrites(token):
-    """gets a token(string) with taskeel, and returns a list of strings,
-    each string in the list represents each character in the token with its own tashkeel.
+    """gets a token(string) with tashkeel, and returns a list of strings,
+    each string represents a character with its tashkeel.
     Args:
         token (str): string represents a word or aya or sura
     Returns:
-        [str]: a list contains the token characters with their tashkeel.
+        [str]: a list contains all arabic alphabets with their tashkeel as strings.
     """
     token_without_tatweel = araby.strip_tatweel(token)
-    print(token_without_tatweel)
     hroof_with_tashkeel = []
+    another_characters = [" ","\n"]
+    all_characters = list(arabic.alphabet) + list(arabic.alefat) + list(arabic.hamzat) + another_characters
+    all_harakat = list(arabic.tashkeel)+ list(arabic.harakat)+list(arabic.shortharakat)+list(arabic.tanwin)
     for index,i in enumerate(token):
-        if((token[index] in (alphabet or alefat or hamzat) )):
+        if(token[index] in all_characters):
             k = index
-            harf_with_taskeel =token[index]
-            while((k+1) != len(token) and (token[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
+            harf_with_taskeel = token[index]
+            while((k+1) != len(token) and token[k+1] in all_harakat):
                 harf_with_taskeel =harf_with_taskeel+""+token[k+1]
                 k = k + 1
             index = k
@@ -92,21 +94,16 @@ def get_sura_name(suraNumber=None):
 
 
 def main():
-    """
-    Testing Function : separate_token_with_dicrites(token)
-    Hints:
-        1) if the received parameter is not valid, the returned list will be empty.
-        2) if the received parameter contains Arabic alphabets and another alphabets,
-        the returned list will have only the Arabic alphabets.
-    """
-    #token = "dasasslقل ما أسألكم عليه من أجر"
-    #hroof_with_tashkeel_list =  separate_token_with_dicrites(token)
-    #print(hroof_with_tashkeel_list)
 
+    #Testing Function : separate_token_with_dicrites(token)
     """
-    Testing Function : def get_sura_number(suraName):
-    Hints: if the received parameter(suraName) is not valid, the returned value(suraNumber) will be None. 
+    token = "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ"
+    hroof_with_tashkeel_list =  separate_token_with_dicrites(token)
+    print(hroof_with_tashkeel_list)
     """
+
+    #Testing Function : def get_sura_number(suraName):
+    #Hints: if the received parameter(suraName) is not valid, the returned value(suraNumber) will be None.
     """
 	suraNumber = get_sura_number("dsf")
     if suraNumber is not None :
@@ -115,10 +112,9 @@ def main():
         print(Errors.erros_dict["INVALID_SURA_NAME"])
     """
 
-	"""
-    Testing Function : def get_sura_name(suraNumber):
-    Hints: if the received parameter(suraName) is not valid, the returned value(suraNumber) will be None. 
-    """
+
+	#Testing Function : def get_sura_name(suraNumber):
+    #Hints: if the received parameter(suraName) is not valid, the returned value(suraNumber) will be None.
     """
 	suraName = get_sura_name(160)
     if suraName is not None :
