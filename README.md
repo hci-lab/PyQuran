@@ -3,6 +3,10 @@ PyQuran
 1. Why
 2. What
 
+## Install
+how to install it.
+
+
 ## Quran Arabic Corpus
 
 We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmanic Version*).
