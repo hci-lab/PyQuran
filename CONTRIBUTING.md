@@ -69,7 +69,7 @@ The body of the commit message **can be several paragraphs**, and
 please do proper word-wrap and keep columns shorter than about
 80 characters.
 
-Fixes 101
+Fixes #101
 ```
 
 
