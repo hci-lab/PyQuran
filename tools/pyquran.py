@@ -571,58 +571,6 @@ def frequency_of_chars_in_verse(verse,charaters):
     return frequency
     
 
-def get_sura_number(suraName):
-    """It takes sura name as string, and returns the and ordered number as integer:
-    Args:
-        param1 (str) :sura name
-    Returns:
-        int: It's the sura number
-    Usage Note:
-        Do not forget that the index of the returned list starts at zero.
-        So if the order Sura number is x, then it's at (x-1) in the list.
-    """
-    # get all suras
-       # Parsing xml
-
-    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-    quran_tree_ = ElementTree.parse(xml_file_name)
-
-    suras_list = quran_tree_.findall('sura')
-    suraNumber = None
-    for index in range (1,115):
-        if suras_list[index-1].attrib['name'] == suraName:
-            suraNumber = index
-    #print(suraNumber)
-    return suraNumber
-
-def get_sura_name(suraNumber=None):
-    """It takes and ordered number of a sura, and returns the sura name as string or suras' names as list:
-       - If you don't pass any parameter, then the entire Quran is targeted.
-    Args:
-        suraNumber (int): it's optional
-    Returns:
-        str: It's the sura name
-        OR
-        list: [str]
-    Usage Note:
-        Do not forget that the index of the returned list starts at zero.
-        So if the order Sura number is x, then it's at (x-1) in the list.
-    """
-    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-    quran_tree_ = ElementTree.parse(xml_file_name)
-
-    # get all suras
-    suras_list = quran_tree_.findall('sura')
-    if suraNumber is None :
-        suraName = [(suras_list[i].attrib['name']) for i in range(0,114)]
-    else:
-        # get suraName
-        suraName = suras_list[suraNumber-1].attrib['name']
-    # return suraName
-    return  suraName
-
-
-
 def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
     """
         get token from specific verse form specific chapter
