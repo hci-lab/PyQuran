@@ -2,13 +2,6 @@
     reference: en.wikipedia.org/wiki/Arabic_script_in_Unicode
 '''
 
-'''
-    TODO:
-        [DONE] add all uthmanic  symbols by unicode, here 
-        2 def uthmanic_filter(symbols=[uthmanic]):
-            return 'uthmanic free text.'
-
-'''
 import arabic
 
 hamza_above     = '\u0654'
@@ -31,23 +24,23 @@ rounded_high_stop_with_filled_centre = '\u06ec'
 
 
 uthmanic = [ 
-             alef_wasl_with_saad_above, # Rplace with alef
-             hamza_above, # ???????
-             small_high_meem, # Remove
-             small_low_meem, # Remove
-             small_high_seen, # Remove
-             small_low_seen, # Remove
-             small_alef, # Remove
-             small_waw, # Remove
-             small_yeh, # Remove
-             small_high_noon, # Remove
-             mad_lazim_mark, # Remove
-             tatweel, # Remove
-             empty_centre_high_stop, # Remove
-             small_high_rounded_zero, # Remove
-             empty_center_low_stop, # Remove
-             small_high_upright_rectangular_zero, # Remove
-             rounded_high_stop_with_filled_centre # Remove
+    alef_wasl_with_saad_above, # Rplace with alef
+    hamza_above, # ???????
+    small_high_meem, # Remove
+    small_low_meem, # Remove
+    small_high_seen, # Remove
+    small_low_seen, # Remove
+    small_alef, # Remove
+    small_waw, # Remove
+    small_yeh, # Remove
+    small_high_noon, # Remove
+    mad_lazim_mark, # Remove
+    tatweel, # Remove
+    empty_centre_high_stop, # Remove
+    small_high_rounded_zero, # Remove
+    empty_center_low_stop, # Remove
+    small_high_upright_rectangular_zero, # Remove
+    rounded_high_stop_with_filled_centre # Remove
 ]
 
 'my_user_name'
