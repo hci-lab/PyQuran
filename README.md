@@ -1,7 +1,7 @@
 PyQuran
 =======
-1. Why
-2. What
+PyQuran is a python library providing functionality working on character and word level designed to make analysis on the Quran book faster and easier.
+With PyQuran, you can quickly and easily make analysis on the holy Quran, chapters, verses, and tokens.
 
 ## Install
 Pyquran can be installed from PyPI:
