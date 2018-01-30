@@ -48,4 +48,5 @@ to avoid *emacs configuration* headache, use a terminal that supports `UTF-8` to
 
 
 
-## Copyright
+## License
+[Apache License 2.0](https://github.com/TahaMagdy/PyQuran/blob/master/LICENSE)
