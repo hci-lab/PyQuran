@@ -24,8 +24,16 @@ See also [How to contribute to PyQuran](fileName.md).
 
 
 ## Citing
+If you use PyQuran in your research, please use the following BibTeX entry.
 
-    Some Citing Format
+    @MISC {PyQuran2018,
+    author             = "Waleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa",
+    title              = "PyQuran",
+    howpublished       = "https://github.com/TahaMagdy/PyQuran",
+    month              = "feb",
+    year               = "2018"
+}
+```
 
 ## Dependencies
 [Python](https://www.python.org/) (>= 3.4)  
@@ -45,8 +53,6 @@ If you are going to run on `Emacs` shell. It *MUST* be configured to use `UTF-8`
 UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
 ```
 to avoid *emacs configuration* headache, use a terminal that supports `UTF-8` to run the code =]
-
-
 
 ## License
 [Apache License 2.0](https://github.com/TahaMagdy/PyQuran/blob/master/LICENSE)
