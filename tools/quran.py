@@ -1,10 +1,13 @@
 """This modules contains functions to retrieve from quran.
 """
 from xml.etree import ElementTree
+from pyarabic.araby import strip_tashkeel
+from uthmanic import *
 
 # Parsing xml
 xml_file_name = '../QuranCorpus/quran-uthmani.xml'
 quran_tree = ElementTree.parse(xml_file_name)
+
 
 
 
