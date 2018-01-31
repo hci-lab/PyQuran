@@ -1,3 +1,7 @@
+
+import os
+
+os.chdir('..')
 from tools import *
 import functools
 from arabic import *

@@ -1,5 +1,6 @@
 PyQuran
 =======
+<<<<<<< HEAD
 PyQuran is a python library providing functionality working on character and word level designed to make analysis on the holy Quran, chapters, verses, and tokens faster and easier.
 
 
@@ -15,6 +16,14 @@ or conda:
 [Python](https://www.python.org/) (>= 3.4)  
 [Numpy](http://www.numpy.org/) (>= 1.7.1)  
 [Pyarabic](https://github.com/linuxscout/pyarabic)
+=======
+1. Why
+2. What
+
+## Install
+how to install it.
+
+>>>>>>> master
 
 ## Quran Arabic Corpus
 
@@ -28,7 +37,18 @@ Great! Please read more details
 at [CONTRIBUTING.md](CONTRIBUTING.md).
 
 See also [How to contribute to PyQuran](fileName.md).
+<<<<<<< HEAD
+=======
 
+
+## Citing
+>>>>>>> master
+
+    Some Citing Format
+
+## Dependencies
+
+## Contact
 
 ## Citing
 If you use PyQuran in your research, please use the following BibTeX entry.
@@ -55,5 +75,11 @@ UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordin
 ```
 to avoid *emacs configuration* headache, use a terminal that supports `UTF-8` to run the code =]
 
+<<<<<<< HEAD
 ## License
 [Apache License 2.0](https://github.com/TahaMagdy/PyQuran/blob/master/LICENSE)
+=======
+
+
+## Copyright
+>>>>>>> master
