@@ -20,21 +20,17 @@ print(Al_Masad)
 
 
 print("\n[2] Testing system, count_shape()")
-functionCall = '''system = [[beh, teh, theh], [jeem, hah, khah]]
+functionCall = '''we will count this system = [[beh, teh, theh], [jeem, hah, khah]] on سورة النصر
 ''' 
 print("function call:")
 print(functionCall)
+newSystem=[[beh, teh, theh], [jeem, hah, khah]]
+print("Return NP array, rows are verses, coulmns this full system :")
+#this is the full system
+print(list(reversed(check_system(newSystem))))
 # will count this surah
-print(get_sura(110, True))
-alphabetAsOneShape, alphabetCount =count_shape(['إذا جاء نصر الله والفتح', 'ورأيت الناس يدخلون في دين الله أفواجا', 'فسبح بحمد ربك واستغفره إنه كان توابا'],[[beh, teh, theh], [jeem, hah, khah]])
-
-printf = functools.partial(print, end=" ")
-for key in alphabetAsOneShape:  # .encode("utf-8")
-    for val in alphabetAsOneShape[key]:
-        printf(val)
-    print(" : " + str(alphabetCount[key]))
-
-
+#print(get_sura(110))
+print('\n', count_shape(get_sura(110), newSystem))
 
 
 
