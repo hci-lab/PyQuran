@@ -20,13 +20,10 @@ print(Al_Masad)
 
 
 print("\n[2] Testing system, count_shape()")
-functionCall = '''system = [[ar.kaf, ar.feh], [ar.beh, ar.teh, ar.noon], [ar.ghain, ar.ain]]
-alphabetAsOneShape, alphabetCount = tools.count_shape(Al_Masad, system)
+functionCall = '''system = [[beh, teh, theh], [jeem, hah, khah]]
 ''' 
 print("function call:")
 print(functionCall)
-newSystem=[[ar.teh, ar.beh, ar.noon],[ar.dal, ar.thal],[ar.jeem, ar.hah,
-ar.khah],[ar.sad ,ar.dad, ar.tah, ar.zah]]
 # will count this surah
 print(get_sura(110, True))
 alphabetAsOneShape, alphabetCount =count_shape(['إذا جاء نصر الله والفتح', 'ورأيت الناس يدخلون في دين الله أفواجا', 'فسبح بحمد ربك واستغفره إنه كان توابا'],[[beh, teh, theh], [jeem, hah, khah]])
