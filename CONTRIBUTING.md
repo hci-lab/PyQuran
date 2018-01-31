@@ -2,23 +2,23 @@ Contributing to PyQuran
 =======================
 We use GitHub issues for reporting bugs and for feature requests.
 
-If you want ot give us a hand, you may pick one of the opened issues and solve a bug, implement a feature request
+If you want to give us a hand, you may pick one of the opened issues and solve a bug, implement a feature request
 or to suggest a new missing feature.
 
 
 ## Reporting issues
 
-When reporting a bug, use GitHub issue with the **Bug lable**, please include  as 
+When reporting a bug, use GitHub issue with the **Bug label**, please include  as 
 much details as possible about:
 - your operating system.
 - your python version.
-- a self-contained code to repreduce and demonstrate the Bug.
+- a self-contained code to reproduce and demonstrate the Bug.
 
-**Issue will be closed if the Bug cannot be repreduced.**
+**Issue will be closed if the Bug cannot be reproduced.**
 
 
 ## Feature Request
-Whenever you think *PyQuran* is missing a feature, create a GitHub issue with **Feature Request lable**,
+Whenever you think *PyQuran* is missing a feature, create a GitHub issue with **Feature Request label**,
 define what you want precisely and include sufficient examples to cover all the new feature aspects.
 
 If you would like to implement it by yourself, please read the [Contributing Code](#contributing-code) section.
@@ -38,7 +38,7 @@ and follow [this style](CodeConventions/example_google.py).
 ### contributing flow
 
 At first, fork the project [on GitHub](https://github.com/TahaMagdy/PyQuran/),
-then, create a *feature branch* and start writting your changes. 
+then, create a *feature branch* and start writing your changes. 
 We **DO NOT** accept changes to the *master branch*.
 
 Once you are done, push the changes to *your feature branch*, after that create a *pull request*
@@ -76,3 +76,4 @@ Fixes #101
 ## Tests
 
 _not_completed
+
