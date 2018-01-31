@@ -3,7 +3,7 @@ PyQuran
 PyQuran is a python library providing functionality working on character and word level designed to make analysis on the Quran book faster and easier.
 With PyQuran, you can quickly and easily make analysis on the holy Quran, chapters, verses, and tokens.
 
-##Main Features
+## Main Features
 
 ## Install
 Pyquran can be installed from PyPI:
@@ -39,11 +39,10 @@ If you use PyQuran in your research, please use the following BibTeX entry.
     howpublished       = "https://github.com/TahaMagdy/PyQuran",
     month              = "feb",
     year               = "2018"
-}
+    }
 ```
 
 ## Communication
-
 * GitHub issues: feature requests, bug reports,  install issues, thoughts, etc.  
 * [Gitter channel](https://gitter.im/TahaMagdy/PyQuran): general chat, online discussions, collaboration etc.   
 * [Stack Overflow](https://stackoverflow.com/questions/tagged/pyquran):For usage questions, You can ask on Stack Overflow or on [our mailing list](https://groups.google.com/forum/?fromgroups#!forum/blabla)
