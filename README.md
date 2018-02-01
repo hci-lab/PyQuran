@@ -59,8 +59,3 @@ If you are going to run on `Emacs` shell. It *MUST* be configured to use `UTF-8`
 UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
 ```
 to avoid *emacs configuration* headache, use a terminal that supports `UTF-8` to run the code =]
-
-## License
-[Apache License 2.0](https://github.com/TahaMagdy/PyQuran/blob/master/LICENSE)
-
-
