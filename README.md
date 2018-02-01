@@ -1,8 +1,5 @@
 PyQuran
 =======
-??? PyQuran is a python library providing functionality working on character and word level designed to make analysis on the holy Quran, chapters, verses, and tokens faster and easier.???
-
-
 
 PyQuran is a python package, that provides tools for Quranic Analysis:
 - fetch Chapeters and Verses.
