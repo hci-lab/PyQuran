@@ -1,9 +1,16 @@
 PyQuran
 =======
-PyQuran is a python library providing functionality working on character and word level designed to make analysis on the holy Quran, chapters, verses, and tokens faster and easier.
+??? PyQuran is a python library providing functionality working on character and word level designed to make analysis on the holy Quran, chapters, verses, and tokens faster and easier.???
 
 
-## Main Features
+
+PyQuran is a python package, that provides tools for Quranic Analysis:
+- fetch Chapeters and Verses.
+- search by diacritics patterns.
+- buckwalter transliteration, back and forth
+-  ??? system, shape, advanced counting (revise)???
+
+## Features
 
 ## Install
 Pyquran can be installed from PyPI:
@@ -14,15 +21,15 @@ or conda:
     conda install pyquran
 
 ## Dependencies
-[Python](https://www.python.org/) (>= 3.4)  
-[Numpy](http://www.numpy.org/) (>= 1.7.1)  
+[Python](https://www.python.org/)
+[Numpy](http://www.numpy.org/)
 [Pyarabic](https://github.com/linuxscout/pyarabic)
 
 ## Quran Arabic Corpus
 
 We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmanic Version*).
 * Text format is `UTF-8`
-* Filter Operation [Explain -- ????]
+* Filter Operation *Explain the substituation, add examples and the replaced/removed chars.
 
 ## Contributing
 Would you like  to contribute to PyQuran development?
