@@ -306,24 +306,25 @@ def shape(system):
             value will be equals for alphabets that will be count as oe shape
 
 
-        """
+    """
 
-    alphabetMap=dict()
-    alphabetMap.update({" ": 0})
+    listOfAlphabet = sorted(list(alphabet))
+    alphabetMap = dict()
+    indx = 0
 
-    newAlphabet=list(set(chain(*system)))
-    listOfAlphabet=list(alphabet)
-    indx=1
-    theRestOfAlphabets=list(set(listOfAlphabet)-set(newAlphabet))
+    newAlphabet = sorted(list(set(chain(*system))))
+    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(newAlphabet)))
 
     for setOfNewAlphabet in system:
         for char in setOfNewAlphabet:
-            alphabetMap.update({char:indx})
-        indx=indx+1
+            alphabetMap.update({char: indx})
+        indx = indx + 1
 
     for char in theRestOfAlphabets:
-        alphabetMap.update({char:indx})
-        indx=indx+1
+        alphabetMap.update({char: indx})
+        indx = indx + 1
+    alphabetMap.update({" ": 70})
+
     return alphabetMap
 
 
@@ -350,80 +351,75 @@ def convert_text_to_numbers(text,alphabetMap):
 
 
     """
-
-    textToNumber = []
-
-    if isinstance(text, list):
-        for ayah in text:
-            for char in ayah:
-                textToNumber.append(alphabetMap[char])
-
-    else:
-        for char in text:
-            textToNumber.append(alphabetMap[char])
-
+    i=0
+    textToNumber=[]
+    for char in text:
+        textToNumber.insert(i, alphabetMap[char])
+        i = i + 1
     return textToNumber
 
 
 def count_shape(text, system=None):
     """
-            	 count_shape get a text (surah or ayah) and count the occuerence of each shape
-            	 depends on the your system ,If you don't pass system, then it will count each char as one shape
-            	 , user pass the text "list or list of lists" that want to
-            	 count it
-            	 and the system that has sets of alphapets that will  count as one shape.
+        count_shape parses the text  and returns a N*P matrix (ndarray),
+
+        the number of rows equals to the number of verses ,
+        and the number of columns equals to the number of shapes.
+
+        What it does:
+            count the occuerence of each shape in text, depends on the your system ,
+            If you don't pass system, then it will count each char as one shape.
+
+            If `A` is a ndarray,
+            then A[i,j] is the number of occurrences of alphabet(s)[j] in the
+            verse i.
+
+        Args:
+            param1 ([str] ): a list of strings , each inner list is ayah .
+            param2([[char]]) : it's optional ,
+                                -a list of list , each iner list has alphabets that will count as one shape
+                                - If you don't pass your system, then it will count each char as one shape
+        Returns:
+            ndarray: with dimensions (N * P), where
+            `N` is the number of verses in chapter and
+            `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
 
 
-
-
-
-                What it does:
-                    count the occuerence of each shape
-
-
-                Args:
-
-                    param1 ([str] ): a list of strings , each inner list is ayah .
-                    param2([[char]]) : it's optional ,
-                                        -a list of list , each iner list has alphabets that will count as one shape
-                                        - If you don't pass your system, then it will count each char as one shape
-                Returns:
-                    Dict1: dictionary , the value of each element is the alphapets have the same shape.
-                    Dict2: dictionary , the value of each element is the count of each shape
-
-
-                """
-    if system==None:
+    """
+    listOfAlphabet = sorted(list(alphabet))
+    #print(listOfAlphabet)
+    if system == None:
         alphabetMap = dict()
-        alphabetMap.update({" ": 0})
-        indx=1
-        for char in alphabet:
+
+        indx = 0
+        for char in listOfAlphabet:
             alphabetMap.update({char: indx})
             indx = indx + 1
+        alphabetMap.update({" ": 70})
 
     else:
-        alphabetMap = shape(system)
+        alphabetMap=shape(system)
 
-    textToNumber = convert_text_to_numbers(text, alphabetMap)
-    alphabetCount = Counter(textToNumber)
+    p=len(listOfAlphabet)-len(list(set(chain(
+        *system))))+len(system)#+1 #the last one for space char
+    n=len(text)
+    A=numpy.zeros((n, p), dtype=numpy.int)#(m-len(list(set(
+    # chain(*system)))))+len(system)
+    i=0
+    j=0
+    charCount =[]
+    for verse in text:
+        verse=convert_text_to_numbers(verse, alphabetMap)
+        for k in range(0,p,1) :                   #for key, value in
+            # alphabetMap.items():
+            charCount.insert(j, verse.count(k))
+            j+=1
+        A[i, :] =charCount
+        i+=1
+        charCount=[]
+        j=0
 
-
-    alphabetAsOneShape = defaultdict(list)
-    for key, value in alphabetMap.items():
-        alphabetAsOneShape[value].append(key)
-
-    '''
-    printf = functools.partial(print, end=" ")
-    for key in viewDict:  # .encode("utf-8")
-        for val in viewDict[key]:
-            printf(val)
-        print(" : " + str(count[key]))
-        '''
-    # just delete the space
-    del alphabetCount[0]
-    del alphabetAsOneShape[0]
-
-    return alphabetAsOneShape , alphabetCount
+    return A
 
 
 def get_verse_count(surah):
@@ -749,7 +745,7 @@ def buckwalter_arabic_transliteration(string, reverse=False):
                         and vise verse if it equals to True
 
 
-        Returns:
+    Returns:
             str : a string, a Unicode or buckwalter 
 
 
@@ -760,6 +756,8 @@ def buckwalter_arabic_transliteration(string, reverse=False):
        else:
             string = string.replace(key, value)
    return string
+
+
 def getTashkeelPattern(text):
     '''
     getTashkeelPattern is function takes the str or list(ayah or token) and converts to zero and ones
@@ -878,4 +876,54 @@ def strip_mark_Al_mad(str:str):
         if ch != 'ٓ':
           newStr +=ch
 
+
+
     return newStr
+
+
+def check_all_alphabet(system):
+    '''
+    check_alphabet get a list of alphabets or system(list of lists of alphabets)
+    and return the rest of arabic alphabets [alphabets in system excluded]
+    -in case sytem equals all arabic alphabets, it will return empty list.
+
+    What it does:
+        return the rest of arabic alphabets that not included in system.
+
+    Args:
+        param1 ([char] ): a list or list of lists of characters.
+
+    Returns:
+        list: include all other arabic alphabet.
+    '''
+
+    listOfAlphabet = list(alphabet)
+    if isinstance(system, list):
+        system=list(chain(*system))
+    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(system)))
+    return theRestOfAlphabets
+
+
+def check_system(system, indx=None):
+    '''
+    check_sytem get a system (list of lists ) and index (it's
+    optional) and return full sorted system or a specific index in it.
+
+    -sortion will follow this approach : system in the first with the same
+    order , then all remain alphabets sorted alphabetically .
+
+    What it does:
+        build a full sorted system and return it or a specific index in it.
+
+    Args:
+        param1 ([[char]] ):  list of lists of characters.
+        int: it's optinal , it will return this index in full sorted system.
+
+    Returns:
+        list: full sorted system or a spesefic index.
+
+    '''
+    if indx==None:
+        return (system + [[char] for char in check_all_alphabet(system)])
+    else:
+        return (system + [[char] for char in check_all_alphabet(system)])[indx]
