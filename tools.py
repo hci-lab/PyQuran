@@ -916,9 +916,9 @@ def getTashkeelPattern(text):
 
 
     letters, marks = separate(newText)
-    print(letters)
+    #print(letters)
     for m in marks:
-        print(m)
+        #print(m)
         if (m != 'ـ'):
 
             harakat.append(m)
@@ -990,7 +990,7 @@ def strip_mark_Al_mad(str:str):
 
     newStr = ''
     for ch in str:
-        print(ch)
+        #print(ch)
         if ch != 'ٓ':
           newStr +=ch
 
