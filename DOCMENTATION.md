@@ -5,7 +5,7 @@
 ```
 ****
 # Features
-1. [Example](#Functions)
+1. [Example](#count-functions)
 
 ****
 * Find **chapter** with diacritics or without and its name and Find verse / Find **chapter number** / Find number of **chapters** in verse 
