@@ -6,7 +6,6 @@ This module contains tools for `Quranic Analysis`
 (More expressive description later) 
 
 """
-from xml.etree import ElementTree
 import numpy
 import operator
 from audioop import reverse
@@ -20,70 +19,8 @@ from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
 from searchHelper import *
 from buckwalter import *
 from uthmanic import *
+from quran import *
 
-# Parsing xml
-xml_file_name = 'QuranCorpus/quran-uthmani.xml'
-#xml_file_name = 'QuranCorpus/quran-simple-tashkeel.xml'
-quran_tree = ElementTree.parse(xml_file_name)
-
-
-
-
-def get_sura(sura_number, with_tashkeel=False):
-    """gets an sura by returning a list of ayat al-sura.
-
-    Args: 
-        param1 (int): the ordered number of sura in The Mushaf.
-        param2 (bool): if true return sura with tashkeel else return without
-    Returns:
-         [str]: a list of `ayat al-sura.`
-
-    Usage Note:
-        Do not forget that the index of the reunred list starts at zero.
-        So if the order aya number is x, then it's at (x-1) in the list.
-
-    Working_State: OK.
-
-    TESTING: 
-            1  Handle out of range inputs.
-            2  Handle non integer inputs.
-
-    """
-    
-    sura_number -= 1
-    sura = []
-    suras_list = quran_tree.findall('sura')
-    ayat = suras_list[sura_number]
-
-    for aya in ayat:
-        sura.append(aya.attrib['text'])
-
-    uthmanic_free_sura = []
-    for aya in sura:
-        uthmanic_free_sura.append(uthmanic_filter(aya))
-
-    if not with_tashkeel:
-       return list(map(strip_tashkeel, uthmanic_free_sura)) 
-    else:
-       return uthmanic_free_sura
-
-
-
-
-def fetch_aya(sura_number, aya_number):
-    """
-
-    Args:
-        param1 (int): the ordered number of sura in The Mus'haf.
-        param2 (int): the ordered number of aya in The Mus'haf.
-
-    Returns:
-        str: an aya as a string
-
-    """
-    aya_number -= 1
-    sura = get_sura(sura_number)
-    return sura[aya_number]
 
 
 def parse_sura(n, alphabets=['ل', 'ب']):
@@ -145,7 +82,7 @@ def parse_sura(n, alphabets=['ل', 'ب']):
 
 
 
-def get_frequancy(sentence):
+def get_frequency(sentence):
     """it take sentence that you want to compute it's 
        frequency.
 
@@ -165,11 +102,11 @@ def get_frequancy(sentence):
     
 
     
-def generate_frequancy_dictionary(suraNumber=None):
+def generate_frequency_dictionary(suraNumber=None):
     """It takes and ordered number of a sura, and returns the dictionary:
        * key is the word.  value is its frequency in the Sura.
        - If you don't pass any parameter, then the entire Quran is targeted.
-       - This function have to work on the Quran with تشكيل, because it's an
+       - This function have to work on the Quran with تشكيل, because it's an..
          important factor.
 
     Args:
@@ -184,14 +121,14 @@ def generate_frequancy_dictionary(suraNumber=None):
         #get all Quran as one sentence
         Quran = ' '.join([' '.join(get_sura(i)) for i in range(1,115)])
         #get all Quran frequency
-        frequency=get_frequancy(Quran)
+        frequency=get_frequency(Quran)
     #get frequency of suraNumber
     else:
         #get sura from QuranCorpus
         sura = get_sura(sura_number=suraNumber)
         ayat = ' '.join(sura)
         #get frequency of sura 
-        frequency = get_frequancy(ayat)
+        frequency = get_frequency(ayat)
 
     return frequency
 
@@ -280,13 +217,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
             new_freq_dic[word] = count
 
     return new_freq_dic        
-    
-    
-    
-    
 
-    
-    
 def generate_latex_table(dictionary,filename,location="."):
     """generate latex code of table of frequency 
     
@@ -369,24 +300,25 @@ def shape(system):
             value will be equals for alphabets that will be count as oe shape
 
 
-        """
+    """
 
-    alphabetMap=dict()
-    alphabetMap.update({" ": 0})
+    listOfAlphabet = sorted(list(alphabet))
+    alphabetMap = dict()
+    indx = 0
 
-    newAlphabet=list(set(chain(*system)))
-    listOfAlphabet=list(alphabet)
-    indx=1
-    theRestOfAlphabets=list(set(listOfAlphabet)-set(newAlphabet))
+    newAlphabet = sorted(list(set(chain(*system))))
+    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(newAlphabet)))
 
     for setOfNewAlphabet in system:
         for char in setOfNewAlphabet:
-            alphabetMap.update({char:indx})
-        indx=indx+1
+            alphabetMap.update({char: indx})
+        indx = indx + 1
 
     for char in theRestOfAlphabets:
-        alphabetMap.update({char:indx})
-        indx=indx+1
+        alphabetMap.update({char: indx})
+        indx = indx + 1
+    alphabetMap.update({" ": 70})
+
     return alphabetMap
 
 
@@ -413,80 +345,75 @@ def convert_text_to_numbers(text,alphabetMap):
 
 
     """
-
-    textToNumber = []
-
-    if isinstance(text, list):
-        for ayah in text:
-            for char in ayah:
-                textToNumber.append(alphabetMap[char])
-
-    else:
-        for char in text:
-            textToNumber.append(alphabetMap[char])
-
+    i=0
+    textToNumber=[]
+    for char in text:
+        textToNumber.insert(i, alphabetMap[char])
+        i = i + 1
     return textToNumber
 
 
 def count_shape(text, system=None):
     """
-            	 count_shape get a text (surah or ayah) and count the occuerence of each shape
-            	 depends on the your system ,If you don't pass system, then it will count each char as one shape
-            	 , user pass the text "list or list of lists" that want to
-            	 count it
-            	 and the system that has sets of alphapets that will  count as one shape.
+        count_shape parses the text  and returns a N*P matrix (ndarray),
+
+        the number of rows equals to the number of verses ,
+        and the number of columns equals to the number of shapes.
+
+        What it does:
+            count the occuerence of each shape in text, depends on the your system ,
+            If you don't pass system, then it will count each char as one shape.
+
+            If `A` is a ndarray,
+            then A[i,j] is the number of occurrences of alphabet(s)[j] in the
+            verse i.
+
+        Args:
+            param1 ([str] ): a list of strings , each inner list is ayah .
+            param2([[char]]) : it's optional ,
+                                -a list of list , each iner list has alphabets that will count as one shape
+                                - If you don't pass your system, then it will count each char as one shape
+        Returns:
+            ndarray: with dimensions (N * P), where
+            `N` is the number of verses in chapter and
+            `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
 
 
-
-
-
-                What it does:
-                    count the occuerence of each shape
-
-
-                Args:
-
-                    param1 ([str] ): a list of strings , each inner list is ayah .
-                    param2([[char]]) : it's optional ,
-                                        -a list of list , each iner list has alphabets that will count as one shape
-                                        - If you don't pass your system, then it will count each char as one shape
-                Returns:
-                    Dict1: dictionary , the value of each element is the alphapets have the same shape.
-                    Dict2: dictionary , the value of each element is the count of each shape
-
-
-                """
-    if system==None:
+    """
+    listOfAlphabet = sorted(list(alphabet))
+    #print(listOfAlphabet)
+    if system == None:
         alphabetMap = dict()
-        alphabetMap.update({" ": 0})
-        indx=1
-        for char in alphabet:
+
+        indx = 0
+        for char in listOfAlphabet:
             alphabetMap.update({char: indx})
             indx = indx + 1
+        alphabetMap.update({" ": 70})
 
     else:
-        alphabetMap = shape(system)
+        alphabetMap=shape(system)
 
-    textToNumber = convert_text_to_numbers(text, alphabetMap)
-    alphabetCount = Counter(textToNumber)
+    p=len(listOfAlphabet)-len(list(set(chain(
+        *system))))+len(system)#+1 #the last one for space char
+    n=len(text)
+    A=numpy.zeros((n, p), dtype=numpy.int)#(m-len(list(set(
+    # chain(*system)))))+len(system)
+    i=0
+    j=0
+    charCount =[]
+    for verse in text:
+        verse=convert_text_to_numbers(verse, alphabetMap)
+        for k in range(0,p,1) :                   #for key, value in
+            # alphabetMap.items():
+            charCount.insert(j, verse.count(k))
+            j+=1
+        A[i, :] =charCount
+        i+=1
+        charCount=[]
+        j=0
 
-
-    alphabetAsOneShape = defaultdict(list)
-    for key, value in alphabetMap.items():
-        alphabetAsOneShape[value].append(key)
-
-    '''
-    printf = functools.partial(print, end=" ")
-    for key in viewDict:  # .encode("utf-8")
-        for val in viewDict[key]:
-            printf(val)
-        print(" : " + str(count[key]))
-        '''
-    # just delete the space
-    del alphabetCount[0]
-    del alphabetAsOneShape[0]
-
-    return alphabetAsOneShape , alphabetCount
+    return A
 
 
 def get_verse_count(surah):
@@ -633,58 +560,6 @@ def frequency_of_chars_in_verse(verse,charaters):
         frequency[char] = verse.count(char)
     return frequency
     
-
-def get_sura_number(suraName):
-    """It takes sura name as string, and returns the and ordered number as integer:
-    Args:
-        param1 (str) :sura name
-    Returns:
-        int: It's the sura number
-    Usage Note:
-        Do not forget that the index of the returned list starts at zero.
-        So if the order Sura number is x, then it's at (x-1) in the list.
-    """
-    # get all suras
-       # Parsing xml
-
-    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-    quran_tree_ = ElementTree.parse(xml_file_name)
-
-    suras_list = quran_tree_.findall('sura')
-    suraNumber = None
-    for index in range (1,115):
-        if suras_list[index-1].attrib['name'] == suraName:
-            suraNumber = index
-    #print(suraNumber)
-    return suraNumber
-
-def get_sura_name(suraNumber=None):
-    """It takes and ordered number of a sura, and returns the sura name as string or suras' names as list:
-       - If you don't pass any parameter, then the entire Quran is targeted.
-    Args:
-        suraNumber (int): it's optional
-    Returns:
-        str: It's the sura name
-        OR
-        list: [str]
-    Usage Note:
-        Do not forget that the index of the returned list starts at zero.
-        So if the order Sura number is x, then it's at (x-1) in the list.
-    """
-    xml_file_name = 'QuranCorpus/quran-simple-clean.xml'
-    quran_tree_ = ElementTree.parse(xml_file_name)
-
-    # get all suras
-    suras_list = quran_tree_.findall('sura')
-    if suraNumber is None :
-        suraName = [(suras_list[i].attrib['name']) for i in range(0,114)]
-    else:
-        # get suraName
-        suraName = suras_list[suraNumber-1].attrib['name']
-    # return suraName
-    return  suraName
-
-
 
 def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
     """
@@ -864,7 +739,7 @@ def buckwalter_arabic_transliteration(string, reverse=False):
                         and vise verse if it equals to True
 
 
-        Returns:
+    Returns:
             str : a string, a Unicode or buckwalter 
 
 
@@ -875,124 +750,132 @@ def buckwalter_arabic_transliteration(string, reverse=False):
        else:
             string = string.replace(key, value)
    return string
-def getTashkeelPattern(text):
-    '''
-    getTashkeelPattern is function takes the str or list(ayah or token) and converts to zero and ones
 
 
+def get_tashkeel_binary(ayah):
+  '''
+  get_tashkeel_pattern is function takes the str or list(ayah or token) and converts to zero and ones
 
-    What it does:
-          take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
-            and one for char with harakat and tanwin
+  What it does:
+        take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
+        and one for char with harakat and tanwin
+  Args:
+       param1 (str): a string or list
 
+  Returns:
+        str : zero and ones for each token
+  '''
 
-    Args:
-         param1 (str): a string or list
+  marksDictionary = {'ْ': 0, '': 0, 'ُ': 1, 'َ': 1, 'ِ': 1, 'ّ': 1, 'ٌ': 1, 'ً': 1, 'ٍ': 1}
+  charWithOutTashkeelOrSukun = ''
+  tashkeelPatternList = []  # list of zeros and ones
+  marksList = []
 
+  # convert the List o to string without spaces
+  ayahModified = ''.join(ayah.strip())
+  tashkeelPatternStringWithSpace = ''
 
+  # check is there a tatweel in ayah or not
+  if(tatweel in ayahModified):
+     ayahModified = strip_tatweel(ayahModified)
 
-        Returns:
-            str : zero and ones for each token
+  # check whether exist alef_mad in ayah if exist unpack the alef mad
+  if (alef_mad in ayahModified):
+      ayahModified = unpack_alef_mad(ayahModified)
+  if(madda_above in ayahModified):
+     ayahModified = strip_mark_al_mad(ayahModified)
 
+  # separate tashkeel from the ayah
+  ayahOrAyatWithoutTashkeel, marks = separate(ayahModified)
 
-    '''
-    dic = {'ْ': 0, '': 0, 'ُ': 1, 'َ': 1, 'ِ': 1, 'ّ': 1, 'ٌ': 1, 'ً': 1, 'ٍ': 1}
-    spChar = ['','ْ','َ']
-    tashkeelPattern = []  # list of zeros and ones
-    harakat = []
-    text = ''.join(text.strip())
-    newText = ''
-    l = 0
-    tstr = ''
-    text = strip_tatweel(text)
-    #preprocessing
-    for ch in text:
+  for mark in marks:
+  #the pyarabic returns the char of marks without tashkeel with 'ـ' so if check about this mark if not exist
+  #append in list harakat and zero or ones in tashkeel pattern list if yes append the marks and patterns
+    if (mark != 'ـ'):
+      marksList.append(mark)
+      tashkeelPatternList.append(marksDictionary[mark])
+    else:
+      marksList.append(charWithOutTashkeelOrSukun)
+      tashkeelPatternList.append(marksDictionary[charWithOutTashkeelOrSukun])
 
-        if ch == 'آ':
-            newText+='أَ'
-            newText+='أْ'
-        elif ch != 'ٓ':
-            newText+=ch
-
-
-    letters, marks = separate(newText)
-    #print(letters)
-    for m in marks:
-        #print(m)
-        if (m != 'ـ'):
-
-            harakat.append(m)
-            tashkeelPattern.append(dic[m])
-        else:
-            harakat.append(spChar[0])
-            tashkeelPattern.append(dic[spChar[0]])
-
-
-    for lo in range(0, len(letters)):
-        if letters[lo] == ' ' and tashkeelPattern[lo] == 0:
-            tstr += ' '
-        else:
-            tstr += str(tashkeelPattern[lo])
-
-    return tstr, harakat
-def Unpack_Alaf_mad(string:str):
-    '''
-     Unpack_Alaf_mad is function takes the str or list(ayah or token) and search about alaf mad and unpack it
+  # convert list of Tashkeel pattern to String for each token in ayah separate with another token with spce
+  for posOfCharInAyah in range(0, len(ayahOrAyatWithoutTashkeel)):
+    if ayahOrAyatWithoutTashkeel[posOfCharInAyah] == ' ' and tashkeelPatternList[posOfCharInAyah] == 0:
+         tashkeelPatternStringWithSpace += ' '
+    else:
+         tashkeelPatternStringWithSpace += str(tashkeelPatternList[posOfCharInAyah])
+  return tashkeelPatternStringWithSpace, marksList
 
 
+def unpack_alef_mad(ayahWithAlefMad: str):
+  '''
+  unpack_alef_mad is function takes the str or list(ayah or ayat) and search about alef mad and unpacks it
 
-     What it does:
-             take the Alaf mad and converts it to alaf  mad to alaf fataha and alaf sukun
-
-
-     Args:
+  What it does:
+           take the Alef mad and converts the alef  mad to alef fataha and alef sukun
+  Args:
           param1 (str): a string or list
 
-
-
-         Returns:
-             str : ayah or token with Unpacked mad
-
-
-     '''
-    newStr = ''
-    for ch in string :
-      if ch  != 'آ' :
-        newStr+=string
-      else:
-         newStr+='أَ'
-         newStr+='أْ'
-    return newStr
-
-def strip_mark_Al_mad(str:str):
-
+  Returns:
+         str : ayah or token with Unpacked mad
     '''
-   strip_mark_Al_mad is function takes the str or list(ayah or token) and strip the mad mark
+
+  ayahWithUnpackAlefMad = ''
+  for charOfAyah in ayahWithAlefMad:
+     if charOfAyah != 'آ':
+         ayahWithUnpackAlefMad += charOfAyah
+     else:
+         ayahWithUnpackAlefMad += 'أَ'
+         ayahWithUnpackAlefMad += 'أْ'
+  return ayahWithUnpackAlefMad
 
 
+
+
+def check_all_alphabet(system):
+    '''
+    check_alphabet get a list of alphabets or system(list of lists of alphabets)
+    and return the rest of arabic alphabets [alphabets in system excluded]
+    -in case sytem equals all arabic alphabets, it will return empty list.
 
     What it does:
-            take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
-            and one for char with harakat and tanwin
-
+        return the rest of arabic alphabets that not included in system.
 
     Args:
-         param1 (str): a string or list
+        param1 ([char] ): a list or list of lists of characters.
 
-
-
-        Returns:
-            str : token or ayah without mark of mad
-
-
+    Returns:
+        list: include all other arabic alphabet.
     '''
 
+    listOfAlphabet = list(alphabet)
+    if isinstance(system, list):
+        system=list(chain(*system))
+    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(system)))
+    return theRestOfAlphabets
 
-    newStr = ''
-    for ch in str:
-        #print(ch)
-        if ch != 'ٓ':
-          newStr +=ch
 
+def check_system(system, indx=None):
+    '''
+    check_sytem get a system (list of lists ) and index (it's
+    optional) and return full sorted system or a specific index in it.
 
-    return newStr
+    -sortion will follow this approach : system in the first with the same
+    order , then all remain alphabets sorted alphabetically .
+
+    What it does:
+        build a full sorted system and return it or a specific index in it.
+
+    Args:
+        param1 ([[char]] ):  list of lists of characters.
+        int: it's optinal , it will return this index in full sorted system.
+
+    Returns:
+        list: full sorted system or a spesefic index.
+
+    '''
+    if indx==None:
+        return (system + [[char] for char in check_all_alphabet(system)])
+    else:
+        return (system + [[char] for char in check_all_alphabet(system)])[indx]
+
