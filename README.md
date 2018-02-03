@@ -19,11 +19,13 @@ From _PyPI_: `$ pip install pyquran`
 - [numpy](http://www.numpy.org/)
 - [pyarabic](https://github.com/linuxscout/pyarabic)
 
-## Quran Arabic Corpus
+## Quran Corpus 
+We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmani Text*).
 
-We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmanic Version*).
-* Text format is `UTF-8`
-* Filter Operation *Explain the substituation, add examples and the replaced/removed chars.
+The _Uthmani Text_ is on `UTF-8` encoding. And it is written with (*special recitation symbols*: مصطلحات الضبط).
+We provide an interface to filtere those symbols, *only the fly while fetching from the corpus*,
+we **DO NOT** change the corpus, NEVER.
+For the full details about filtering (*special recitation symbols*: مصطلحات الضبط).
 
 ## Contributing
 Would you like  to contribute to PyQuran development?
