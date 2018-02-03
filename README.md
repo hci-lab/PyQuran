@@ -32,11 +32,9 @@ we **DO NOT** change the corpus, NEVER.
 [For the full details about filtering *special recitation symbols* مصطلحات الضبط.](https://github.com/TahaMagdy/PyQuran/wiki)
 
 ## Contributing
-Would you like  to contribute to PyQuran development?
-Great! Please read more details
-at [CONTRIBUTING.md](CONTRIBUTING.md).
+To contribute and maintain *PyQuran*, Please read  [CONTRIBUTING.md](CONTRIBUTING.md).
 
-See also [How to contribute to PyQuran](fileName.md).
+See also [How to contribute to PyQuran](what_can_you_do_to_help_pyquran.md).
 
 ## Citing
 not_completed_ (need to disscuss it with the prof.)
