@@ -1,34 +1,109 @@
+# PyQuran
+
+* [Features](#features)
+* [Usage](#usage)
+* [Functions](#functions)
+    * [Access functions](#access-functions)
+    * [Manipulate functions](#manipulate-functions)
+    * [Analysis functions](#analysis-functions)
+    * [Search functions](#search-functions)
+    * [Other functions](#access-functions)
+    
+
+
+
+# Features
+
+* Access Holy-Quran :
+    - get **Chapter** with/without diacritics.
+    - get **Verse** with/without diacritics.
+    - get **Token** (word).
+    - get **Chapter name** , **Chapter number**.
+    - get **Verses number** in verse.
+* Manipulate with Holy-Quran :
+    - Separate to **Tokens** with/without diacritics.
+    - Separate to **letters** with/without diacritics.
+    - Apply your **System** on Quran.
+    - get **Binary representation** of Holy-Quran as 0's , 1's.
+    - Extract **Taskill** from sentence. 
+    - Dealing with linguistic rules like :
+        - Transfer Alef-mad **"آ"** to "أَأْ" 
+    - Convert the **unicode of arabic** text to **buckwalter encoding** and vice versa
+* Analysis Holy-Quran:
+    - get **Frequency Matrix** of letters dependent on Applied _alphabet system_.
+    - get **Frequency dictionary** of tokens.
+    - sort **Frequency dictionary** using similarity threshold.
+* Search in Holy-Quran using :
+    - **Text** and ther is a variety options.
+    - **diacritics pattern**. 
+    - **binary representation pattern** using threshold.
+
+
+
 # Usage
-****
+
 ```python
    import PyQuran as pq
 ```
-****
-# Features
-1. [Example](#count-functions)
 
-****
-* Find **chapter** with diacritics or without and its name and Find verse / Find **chapter number** / Find number of **chapters** in verse 
-* Separate the letters with diacritics from the **chapters** or the **verses** with their diacritics
-* Make a dictionary of frequency of word or verse  in dictionary in **latex form** and order the words in dictionary respect to the **degeree of similarity**
-* Count the words or characters in the verse or the chapter / Count characters dpending on customize system
-* Search about verse with **diacritics**,**not** or with **diacritics pattern**
-* Convert the **unicode of arabic** text to **buckwalter encoding** and vice versa
 
-****
 # Functions
-****
-## The important functions
-****
-|function       |function description|
-| ------------- |:-------------:|
-| count_shape   |Counts the characters depending on customize system|
-|search_sequence|searches about words or ayat or mutashabehat|
-|search_string_with_tashkeel|searches using tashkeel pattern to find verses or chapters matched pattern |
-|get_frequency|takes the sentence and returns the frequencies of words|
+
+## Access functions:
+
+##### get-sura : 
+**get_sura(suran_num,with_tashkeil)**
+- takes **sura_num** it's the number of surah  and returns sura verses and **with_tashkeil** is the diacritics option and if **_True_** return verses with diacritics and if **False** return without and defualt _false_. 
+
+```python
+  sura = pq.get_sura(108,True)
+  print(sura)
+
+  >>> ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
+```
+
+**get_sura_number** function takes the name of chapter and it returns the number of chapter
+<br>
+```python
+  suraNumber = pq.get_sura_number('الملك')
+  print(suraNumber)
+
+  >>> 67
+```
+**get_sura_name** function takes the number of chapter and it returns the name of chapter
+<br>
+```python
+  suraName = pq.get_sura_name(67)
+  print(suraName)
+
+  >>> الملك
+```
+
+**get_verse** function takes the surah and ayah number and the option of diacritics its default is **False** to activate it pass **True** then it returns the text of ayah
+<br>
+```python
+  ayahText=pq.get_verse(110,1,True)
+  print(ayahText)
+
+  >>> إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ
+
+```
+
+**get_token** function takes the **token number(position Of Token)** , **verse number** and **chapter number** the option of diacritics its default is **False** to activate it pass **True** then it returns the token
+<br>
+
+```python
+  tokenText = pq.get_token(4,1,114,True)
+  print(tokenText)
+
+  >>> النَّاسِ
+```
+
+
+
 
 ## Count functions:
-****
+
  **count_shape** function takes the shape of character as example [[bah,gem]] and <br> counts it in verse or chapter or all quran: Example:
 <br>
 ```python
@@ -81,52 +156,7 @@
   >>> {'قل أعوذ برب': [('قُلْ أَعُوذُ بِرَبِّ', 0, 1, 113), ('قُلْ أَعُوذُ بِرَبِّ', 0, 1, 114)]}
 
 ```
-**get_sura** function takes the number of surah and returns the text of surah and the option diacritics its default is **False** to activate the diacritics pass **True** option
-<br>
-```python
-  sura = pq.get_sura(108,True)
-  print(sura)
 
-  >>> ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
-```
-
-**get_sura_number** function takes the name of chapter and it returns the number of chapter
-<br>
-```python
-  suraNumber = pq.get_sura_number('الملك')
-  print(suraNumber)
-
-  >>> 67
-```
-**get_sura_name** function takes the number of chapter and it returns the name of chapter
-<br>
-```python
-  suraName = pq.get_sura_name(67)
-  print(suraName)
-
-  >>> الملك
-```
-
-**get_verse** function takes the surah and ayah number and the option of diacritics its default is **False** to activate it pass **True** then it returns the text of ayah
-<br>
-```python
-  ayahText=pq.get_verse(110,1,True)
-  print(ayahText)
-
-  >>> إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ
-
-```
-
-
-**get_token** function takes the **token number(position Of Token)** , **verse number** and **chapter number** the option of diacritics its default is **False** to activate it pass **True** then it returns the token
-<br>
-
-```python
-  tokenText = pq.get_token(4,1,114,True)
-  print(tokenText)
-
-  >>> النَّاسِ
-```
 **search_string_with_tashkeel** function takes an Ayah and Pattern **composed of (0,1)** and it returns **True** if the text has tashkeel pattern**False** if the diacritics pattern doesn't match the text and it returns the locations that matched the pattern of diacrictics start index **inclusive** and end index **exculsive**
 <br>
 ```python
