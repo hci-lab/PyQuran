@@ -21,7 +21,7 @@ PyQuran is a python package, that provides tools for *Quranic Analysis*:
 - [pyarabic](https://github.com/linuxscout/pyarabic)
 
 ## Quran Corpus 
-We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus** (*Uthmani Text*), it is in `UTF-8` encoding. You
+We use [tanzil](http://tanzil.net/docs/download) Quran Corpus (*Uthmani Text*), it is in `UTF-8` encoding. You
 can find all unique characters of Uthmanic Corpus [here](https://github.com/TahaMagdy/PyQuran/wiki).
 
 There are *special recitation symbols* مصطلحات الضبط in the *Uthmani Text*, they are a guide for the reciter
