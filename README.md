@@ -3,6 +3,16 @@ PyQuran
 
 PyQuran is a python package, that provides tools for *Quranic Analysis*:
 
+## Table of Contents
+- [Features](#features)
+- [Install](#install)
+- [Dependencies](#dependencies)
+- [Quran Corpus](#quran-corpus)
+- [Contributing](#contributing)
+- [Citing](#citing)
+- [Communication](#communication)
+- [Licence](#licence)
+
 ## Features
 - fetch Chapters and Verses.
 - search Quran by text tokens and by diacritics patterns.
