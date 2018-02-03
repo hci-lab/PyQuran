@@ -4,7 +4,7 @@ PyQuran
 PyQuran is a python package, that provides tools for *Quranic Analysis*:
 
 ## Features
-- fetch Chapeters and Verses.
+- fetch Chapters and Verses.
 - search Quran by text tokens and by diacritics patterns.
 - buckwalter transliteration, back and forth
 - Multiple **alphabetical systems**, *for more details see the [PyQuran Wiki](https://github.com/TahaMagdy/PyQuran/wiki)*
@@ -12,7 +12,8 @@ PyQuran is a python package, that provides tools for *Quranic Analysis*:
 
 
 ## Install
-From _PyPI_: `$ pip install pyquran`
+- From _PyPI_: `$ pip install pyquran`
+- From Source: `$ python3 setup.py install`
 
 
 ## Dependencies
@@ -20,12 +21,15 @@ From _PyPI_: `$ pip install pyquran`
 - [pyarabic](https://github.com/linuxscout/pyarabic)
 
 ## Quran Corpus 
-We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmani Text*).
+We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus** (*Uthmani Text*), it is in `UTF-8` encoding. You
+can find all unique characters of Uthmanic Corpus [here](https://github.com/TahaMagdy/PyQuran/wiki).
 
-The _Uthmani Text_ is on `UTF-8` encoding. And it is written with (*special recitation symbols*: مصطلحات الضبط).
-We provide an interface to filtere those symbols, *only the fly while fetching from the corpus*,
+There are *special recitation symbols* مصطلحات الضبط in the *Uthmani Text*, they are a guide for the reciter
+to know the right positions to pause and the rules of tajweed.
+We provide an interface to filter those symbols, *only the fly while fetching from the corpus*,
 we **DO NOT** change the corpus, NEVER.
-For the full details about filtering (*special recitation symbols*: مصطلحات الضبط).
+
+[For the full details about filtering *special recitation symbols* مصطلحات الضبط.](https://github.com/TahaMagdy/PyQuran/wiki)
 
 ## Contributing
 Would you like  to contribute to PyQuran development?
@@ -53,13 +57,4 @@ year               = "2018"
 
 
 ## Licence 
-not_completed_ (need to disscuss it with the prof.)
-
-
-## NOTE:
-If you are going to run on `Emacs` shell. It *MUST* be configured to use `UTF-8`;
-<br /> else you see this
-```python
-UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
-```
-to avoid *emacs configuration* headache, use a terminal that supports `UTF-8` to run the code =]
+not_completed_ (need to discuss it with the prof.)
