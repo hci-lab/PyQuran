@@ -12,12 +12,8 @@ PyQuran is a python package, that provides tools for *Quranic Analysis*:
 
 
 ## Install
-Pyquran can be installed from PyPI:
+From _PyPI_: `$ pip install pyquran`
 
-    pip install pyquran
-or conda:
-
-    conda install pyquran
 
 ## Dependencies
 - [numpy](http://www.numpy.org/)
