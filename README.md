@@ -2,9 +2,12 @@ PyQuran
 =======
 
 PyQuran is a python package, that provides tools for *Quranic Analysis*:
+- fetch Chapters and Verses.
+- search Quran by text tokens and by diacritics patterns.
+- buckwalter transliteration, back and forth
+- Multiple **alphabetical systems**, *for more details see the [PyQuran Wiki](https://github.com/TahaMagdy/PyQuran/wiki)*
 
 ## Table of Contents
-- [Features](#features)
 - [Install](#install)
 - [Dependencies](#dependencies)
 - [Quran Corpus](#quran-corpus)
@@ -13,11 +16,6 @@ PyQuran is a python package, that provides tools for *Quranic Analysis*:
 - [Communication](#communication)
 - [Licence](#licence)
 
-## Features
-- fetch Chapters and Verses.
-- search Quran by text tokens and by diacritics patterns.
-- buckwalter transliteration, back and forth
-- Multiple **alphabetical systems**, *for more details see the [PyQuran Wiki](https://github.com/TahaMagdy/PyQuran/wiki)*
 
 
 
