@@ -48,7 +48,7 @@ See also [How to contribute to PyQuran](what_can_you_do_to_help_pyquran.md).
 ## Citing
 not_completed_ (need to disscuss it with the prof.)
 Cite _PyQuran_ as the following _BibTeX_ entry.
-```latex
+```ruby
 @MISC {PyQuran2018,
 author             = "Waleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa",
 title              = "PyQuran",
