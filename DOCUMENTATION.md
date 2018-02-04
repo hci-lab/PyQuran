@@ -18,7 +18,7 @@
         * [shape](#shape)
         * [check_system](#check_system)
         * [check_all_alphabet](#check_all_alphabet)
-        * [buckwalter_translator](#buckwalter_translator)
+        * [buckwalter_transliteration](#buckwalter_transliteration)
         * [extract_tashkeel](#extract_tashkeel)
     * [Analysis functions](#analysis-functions)
         * [count_shape](#count_shape)
@@ -255,14 +255,14 @@ system = [['ت','ب'], systems.hamazatSystem]
  ```
 
 
-#### buckwalter_translator
-**buckwalter_translator(sentence, reverse)**
+#### buckwalter_transliteration
+**buckwalter_transliteration(sentence, reverse)**
 - takes an **sentence** and **reverse (optional)** the trnslate option if **True** convert **sentence** from Arabic to BuckWalter and if **False (default)** convert **sentence** from BuckWalter to Arabic.
 
 ##### note**:the encoding with **diacritics** is  different from **without diacritics**.
 
 ```python
-  buckwalterEncode = pq.buckwalter_arabic_transliteration('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
+  buckwalterEncode = pq.buckwalter_transliteration('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
   print(buckwalterEncode)
 
   >>> <in~aA >aEoTayonaka Alokawovara
