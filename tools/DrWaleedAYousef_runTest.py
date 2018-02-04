@@ -106,16 +106,16 @@ print(results)
 
 
 
-print("\n[7] get_frequancy()") 
+print("\n[7] get_frequency()") 
 print("function call:")
 functionCall = '''print('frequency of ﺎﻳﺓ 1 سﻭﺭﺓ ﺍﻼﺧﻼﺻ:')
-freq = get_frequancy(get_verse(112,1))
+freq = get_frequency(get_verse(112,1))
 print(freq)
 '''
 print(functionCall)
 print("Output:")
 print('frequency of ﺎﻳﺓ 1 سﻭﺭﺓ ﺍﻼﺧﻼﺻ:')
-freq = get_frequancy(get_verse(112,1))
+freq = get_frequency(get_verse(112,1))
 print(freq)
 
 
