@@ -46,9 +46,9 @@ print(functionCall)
 
 print("Output:")
 #from buckwalter to arabic
-print(buckwalter_arabic_transliteration("brA'p mn Allh wrswlh <lY Al*yn EAhdtm mn Alm$rkyn", 1))
+print(buckwalter_transliteration("brA'p mn Allh wrswlh <lY Al*yn EAhdtm mn Alm$rkyn", 1))
 #from arabic to buckwalter
-print(buckwalter_arabic_transliteration(get_sura(9)[0], False))
+print(buckwalter_transliteration(get_sura(9)[0], False))
 
 
 

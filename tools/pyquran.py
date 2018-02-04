@@ -695,7 +695,7 @@ def search_string_with_tashkeel(string, key):
         return True, results
 
 
-def buckwalter_translator(string, reverse=False):
+def buckwalter_transliteration(string, reverse=False):
    """
      buckwalter_translator get an a Unicode
      tring and transliterate it to Buckwalter encoding or vise verse
