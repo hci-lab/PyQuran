@@ -1,6 +1,5 @@
 # Documentation
 
-
 * [Features](#features)
 * [Imporatan information](#imporatan-information)
 * [Usage](#usage)
@@ -308,9 +307,7 @@ system = [['ت','ب'], systems.hamazatSystem]
 
 
 #### frequency_of_character 
-**frequency_of_character(characters,verse=None,**
-**                       chapterNum=0,verseNum=0,**
-**                       with_tashkeel=False)**
+**frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0,with_tashkeel=False)**
 - takes **characters** that you need to count , return dictionary that havecounts characters occurrence for verses or with chapter or even all quran and the dictionary contains the key char and values is an occurrence of character .
 - optional opptions: 
     - **verse** (str): if passed, it will applied to this string only 
@@ -438,8 +435,7 @@ system = [['ت','ب'], systems.hamazatSystem]
 
 
 #### search_with_pattern 
-**search_with_pattern(pattern,sentence=None,**
-**                    verseNum=None,chapterNum=None,**
-**                    threshold=0,op=False)**
-
+**search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=0,op=False)**
 ** comming soon =D ** 
+
+
