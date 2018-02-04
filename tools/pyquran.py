@@ -18,7 +18,6 @@ import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
 from searchHelper import *
 from buckwalter import *
-from uthmanic import *
 from quran import *
 import sys
 

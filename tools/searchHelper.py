@@ -32,7 +32,7 @@ def get_string_taskeel(string):
         param1 (str): string
         param2 (int): char index inside string
     Returns:
-         int: number of spaces before string[index]
+        list[char]: a list of diacritics found in `straing`
 
     """
     x = ''
