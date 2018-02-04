@@ -20,7 +20,7 @@ from searchHelper import *
 from buckwalter import *
 from uthmanic import *
 from quran import *
-
+import sys
 
 
 def parse_sura(n, alphabets=['ل', 'ب']):
@@ -54,7 +54,6 @@ def parse_sura(n, alphabets=['ل', 'ب']):
         2. I didn't make alphabets[] 29 by default. 
            Just try it by filling the alphabets with some letters.
     
-
     """
     # getting the nth sura
     sura  = get_sura(n)
@@ -75,7 +74,6 @@ def parse_sura(n, alphabets=['ل', 'ب']):
         j = 0
         i += 1
  
-    print(A)
     return A
 
 
@@ -84,7 +82,7 @@ def parse_sura(n, alphabets=['ل', 'ب']):
 
 def get_frequency(sentence):
     """it take sentence that you want to compute it's 
-       frequency.
+       words frequency.
 
     Args:
         sentence (string): sentece that compute it's frequency. 
@@ -298,8 +296,6 @@ def shape(system):
         Returns:
             dictionary: with all alphabets, where each char "key"  have a value
             value will be equals for alphabets that will be count as oe shape
-
-
     """
 
     listOfAlphabet = sorted(list(alphabet))
@@ -324,25 +320,18 @@ def shape(system):
 
 def convert_text_to_numbers(text,alphabetMap):
     """
-        	 convert_text_to_numbers get a text (surah or ayah) and convert it to list of numbers
-        	 depends on alphabetMap dictionary , user pass the text "list or list of list" that want to count it
-        	 and dictionary that has each chat with it's number that will convert to,and returns a list of numbers
+         convert_text_to_numbers get a text (surah or ayah) and convert it to list of numbers
+         depends on alphabetMap dictionary , user pass the text "list or list of list" that want to count      
+         and dictionary that has each chat with it's number that will convert to,and returns a list of numbers
 
+         What it does:
+         it convert each letter to a number "corresponding to dictionary given as argument"
 
-
-
-
-            What it does:
-                it convert each letter to a number "corresponding to dictionary given as argument"
-
-
-            Args:
-
-                param1 ([str] ): a list of strings , each inner list is ayah .
-                param2(dict) : a dictionary has each alphabet with it's corresponding number
-            Returns:
-                List: list of numbers, where each char in the text converted to number
-
+         Args:
+             param1 ([str] ): a list of strings , each inner list is ayah .
+             param2(dict) : a dictionary has each alphabet with it's corresponding number
+         Returns:
+             List: list of numbers, where each char in the text converted to number
 
     """
     i=0
@@ -377,7 +366,6 @@ def count_shape(text, system=None):
             ndarray: with dimensions (N * P), where
             `N` is the number of verses in chapter and
             `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
-
 
     """
     listOfAlphabet = sorted(list(alphabet))
@@ -418,62 +406,54 @@ def count_shape(text, system=None):
 
 def get_verse_count(surah):
     """
-                	 get_verse_countget get surah as a paramter and return
-                	 how many ayah in it.
+         get_verse_countget get surah as a paramter and return
+         how many ayah in it.
 
-                    What it does:
-                        count the number of verses in surah
+         What it does:  count the number of verses in surah
 
-                    Args:
+         Args:
+             param1 (str ): a strings
 
-                        param1 (str ): a strings
-
-                    Returns:
-                        int: the number of verses
-
-
-                    """
+         Returns:
+             int: the number of verses
+    """
     return len(surah)
     
 
 def count_token(text):
     """
-                	 count_token get a text (surah or ayah) and count the
-                	 number of tokens that it has.
+         count_token get a text (surah or ayah) and count the
+         number of tokens that it has.
 
-                	What it does:
-                        count the number of tokens in text
+         What it does: count the number of tokens in text
 
+         Args:
+             param1 (str or [str]): a string or list of strings
 
-                    Args:
-
-                        param1 (str or [str]): a string or list of strings
-
-
-                    Returns:
-                        int: the number of tokens
-
-
-                    """
+         Returns:
+            int: the number of tokens
+    """
     count=0
     if isinstance(text, list):
         for ayah in text:
             count=count+ayah.count(' ')+1
-
     else:
-
            count=text.count(' ')+1
-
+           
     return count
 
 
 
 def separate_token_with_dicrites(token):
-    """gets a token with taskeel, and returns a list contains the token characters with their tashkeel.
-    Args:
-        param1 (int): list contains the token characters with their tashkeel.
-    Returns:
-         [str]: a list contains the token characters with their tashkeel.
+    """
+         gets a token with taskeel, and returns a list contains the token characters with their tashkeel.
+        
+         Args:
+             param1 (str): strig that will separate it. 
+        
+         Returns:
+             [str]: a list contains the token characters with their tashkeel.
+    
     """
     token_without_tatweel = strip_tatweel(token)
     print(token_without_tatweel)
@@ -492,21 +472,23 @@ def separate_token_with_dicrites(token):
 
 
 def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_tashkeel=False):
-    """this function count number of characters occurrence, 
-       for specific verse or with chapter or even all Quran , 
-       note if you don't pass verse and chapterNum he will get all Quran
+    """
+        this function count number of characters occurrence, 
+        for specific verse or with chapter or even all Quran , 
+        note if you don't pass verse and chapterNum he will get all Quran
     
-    Args:
-        verse (str): this verse that you need to 
+        Args:
+             verse (str): this verse that you need to 
                      count it and default is None.
-        chapterNum (int) : chapter number is a number of 'sura' 
+             chapterNum (int) : chapter number is a number of 'sura' 
                           that will count it , and default is 0
-        verseNum (int) : verse number in sura
-        chracters (list) : list of characters that you want to count them
-        with_tashkeel (boo) : to check if you want to search with tashkeel
-    Returns:
-         {dic} : a dictionary and keys is a characters 
-                 and value is count of every chracter.
+             verseNum (int) : verse number in sura
+             chracters (list) : list of characters that you want to count them
+             with_tashkeel (boo) : to check if you want to search with tashkeel
+    
+        Returns:
+             {dic} : a dictionary and keys is a characters 
+                     and value is count of every chracter.
     """
     #dectionary that have frequency 
     frequency = dict()
@@ -515,7 +497,8 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
         if not with_tashkeel:
             verse = strip_tashkeel(verse)
         #count frequency of chars
-        frequency = frequency_of_chars_in_verse(verse,characters)
+        frequency = hellper_frequency_of_chars_in_verse(verse,characters)
+        
     #check if count specific chapter
     elif chapterNum!=0:
         #check if count specific verse in this chapter
@@ -525,40 +508,30 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
                 return dict()
             verse = get_sura(chapterNum,with_tashkeel=with_tashkeel)[verseNum-1]
             #count frequency of chars
-            frequency = frequency_of_chars_in_verse(verse,characters)
+            frequency = hellper_frequency_of_chars_in_verse(verse,characters)
         else:
             #count on all chapter
             chapter = " ".join(get_sura(chapterNum,with_tashkeel=with_tashkeel))
             #count frequency of chars
-            frequency = frequency_of_chars_in_verse(chapter,characters)
+            frequency = hellper_frequency_of_chars_in_verse(chapter,characters)
     else:
-        #count for all Quran 
-        Quran = ""
-        for i in range(swar_num):
-            Quran = Quran +" "+ " ".join(get_sura(i+1,with_tashkeel=with_tashkeel))+" "
-        #count frequency of chars
-        frequency = frequency_of_chars_in_verse(Quran,characters)
+        if verseNum!=0:
+            #count for specific verse in all Quran 
+            Quran = ""
+            for i in range(swar_num):
+                 Quran = Quran +" "+get_verse(i+1,verseNum,with_tashkeel=with_tashkeel)+" "
+            #count frequency of chars
+            frequency = hellper_frequency_of_chars_in_verse(Quran,characters)
+        else:
+            #count for all Quran 
+            Quran = ""
+            for i in range(swar_num):
+                 Quran = Quran +" "+ " ".join(get_sura(i+1,with_tashkeel=with_tashkeel))+" "
+            #count frequency of chars
+            frequency = hellper_frequency_of_chars_in_verse(Quran,characters)
     return frequency
 
 
-
-
-def frequency_of_chars_in_verse(verse,charaters):
-    """this function count number of characters occurrence in verse
-    Args:
-        verse (str): this verse that you need to 
-                     count it and default is None.
-        chracter (list) : list of characters that you want to count them 
-    Returns:
-        {dic} : a dictionary and keys is a characters and value is count of 
-                every chracter.
-    """
-    #dectionary that have frequency 
-    frequency = dict()
-    #count frequency of chars
-    for char in charaters:
-        frequency[char] = verse.count(char)
-    return frequency
     
 
 def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
@@ -689,14 +662,15 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
 
 def search_string_with_tashkeel(string, key):
     """
-    string: sentence to search by key
-    key: taskeel pattern
+      Args:
+         string: sentence to search by key
+         key: taskeel pattern
 
-    return: (True, text that have that tashkeel pattern)
-            (Flase, '')
-
-    Assumption:
-        Searches tashkeel that is exciplitly included in string.
+      Return: (True, text that have that tashkeel pattern)
+              (Flase, '')
+ 
+      Assumption:
+         Searches tashkeel that is exciplitly included in string.
 
     """
     # tashkeel pattern
@@ -722,27 +696,21 @@ def search_string_with_tashkeel(string, key):
         return True, results
 
 
-def buckwalter_arabic_transliteration(string, reverse=False):
+def buckwalter_translator(string, reverse=False):
    """
-   buckwalter_arabic_transliteration get an a Unicode
-   tring and transliterate it to Buckwalter encoding or vise verse
+     buckwalter_translator get an a Unicode
+     tring and transliterate it to Buckwalter encoding or vise verse
 
-    What it does:
-            transliterate a Unicode string to buckwalter and vise verse
-
-
-    Args:
+     What it does:
+         transliterate a Unicode string to buckwalter and vise verse
+     Args:
          param1 (str): a string
          param2 (bool): Boolean , it's an optional
                         if it quals to False "False is the defult" ,
                         it transliterate from a Unicode string to buckwalter encoding
                         and vise verse if it equals to True
-
-
-    Returns:
-            str : a string, a Unicode or buckwalter 
-
-
+     Returns:
+         str : a string, a Unicode or buckwalter 
     """
    for key, value in buck2uni.items():
        if not reverse:
@@ -754,16 +722,16 @@ def buckwalter_arabic_transliteration(string, reverse=False):
 
 def get_tashkeel_binary(ayah):
   '''
-  get_tashkeel_pattern is function takes the str or list(ayah or token) and converts to zero and ones
+     get_tashkeel_pattern is function takes the str or list(ayah or token) and converts to zero and ones
 
-  What it does:
-        take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
-        and one for char with harakat and tanwin
-  Args:
-       param1 (str): a string or list
+     What it does:
+           take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
+           and one for char with harakat and tanwin
+     Args:
+           param1 (str): a string or list
 
-  Returns:
-        str : zero and ones for each token
+     Returns:
+           str : zero and ones for each token
   '''
 
   marksDictionary = {'ْ': 0, '': 0, 'ُ': 1, 'َ': 1, 'ِ': 1, 'ّ': 1, 'ٌ': 1, 'ً': 1, 'ٍ': 1}
@@ -809,17 +777,17 @@ def get_tashkeel_binary(ayah):
 
 def unpack_alef_mad(ayahWithAlefMad: str):
   '''
-  unpack_alef_mad is function takes the str or list(ayah or ayat) and search about alef mad and unpacks it
+     unpack_alef_mad is function takes the str or list(ayah or ayat) 
+     and search about alef mad and unpacks it
 
-  What it does:
-           take the Alef mad and converts the alef  mad to alef fataha and alef sukun
-  Args:
-          param1 (str): a string or list
+     What it does:
+         take the Alef mad and converts the alef  mad to alef fataha and alef sukun
+     Args:
+         param1 (str): a string or list
 
-  Returns:
+     Returns:
          str : ayah or token with Unpacked mad
-    '''
-
+  '''
   ayahWithUnpackAlefMad = ''
   for charOfAyah in ayahWithAlefMad:
      if charOfAyah != 'آ':
@@ -834,18 +802,18 @@ def unpack_alef_mad(ayahWithAlefMad: str):
 
 def check_all_alphabet(system):
     '''
-    check_alphabet get a list of alphabets or system(list of lists of alphabets)
-    and return the rest of arabic alphabets [alphabets in system excluded]
-    -in case sytem equals all arabic alphabets, it will return empty list.
+     check_alphabet get a list of alphabets or system(list of lists of alphabets)
+     and return the rest of arabic alphabets [alphabets in system excluded]
+     -in case sytem equals all arabic alphabets, it will return empty list.
 
-    What it does:
-        return the rest of arabic alphabets that not included in system.
+     What it does:
+         return the rest of arabic alphabets that not included in system.
 
-    Args:
-        param1 ([char] ): a list or list of lists of characters.
+     Args:
+         param1 ([char] ): a list or list of lists of characters.
 
-    Returns:
-        list: include all other arabic alphabet.
+     Returns:
+         list: include all other arabic alphabet.
     '''
 
     listOfAlphabet = list(alphabet)
@@ -857,22 +825,21 @@ def check_all_alphabet(system):
 
 def check_system(system, indx=None):
     '''
-    check_sytem get a system (list of lists ) and index (it's
-    optional) and return full sorted system or a specific index in it.
+     check_sytem get a system (list of lists ) and index (it's
+     optional) and return full sorted system or a specific index in it.
 
-    -sortion will follow this approach : system in the first with the same
-    order , then all remain alphabets sorted alphabetically .
+     -sortion will follow this approach : system in the first with the same
+     order , then all remain alphabets sorted alphabetically .
 
-    What it does:
-        build a full sorted system and return it or a specific index in it.
+     What it does:
+         build a full sorted system and return it or a specific index in it.
 
-    Args:
-        param1 ([[char]] ):  list of lists of characters.
-        int: it's optinal , it will return this index in full sorted system.
+     Args:
+         param1 ([[char]] ):  list of lists of characters.
+         int: it's optinal , it will return this index in full sorted system.
 
-    Returns:
-        list: full sorted system or a spesefic index.
-
+     Returns:
+         list: full sorted system or a spesefic index.
     '''
     if indx==None:
         return (system + [[char] for char in check_all_alphabet(system)])

@@ -229,3 +229,24 @@ def hellper_pre_search_sequance(sequance,verse=None,chapterNum=0,
                                    for num,v in enumerate(verses)], [])
             return final_list
     
+
+def hellper_frequency_of_chars_in_verse(verse,charaters):
+    """
+        this function count number of characters occurrence in verse
+            
+        Args:
+            verse (str): this verse that you need to 
+                         count it and default is None.
+            chracter (list) : list of characters that you want to count them 
+    
+        Returns:
+            {dic} : a dictionary and keys is a characters and value is count of 
+                    every chracter.
+    """
+    #dectionary that have frequency 
+    frequency = dict()
+    #count frequency of chars
+    for char in charaters:
+        frequency[char] = verse.count(char)
+    return frequency
+    
