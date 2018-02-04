@@ -2,7 +2,7 @@
 """
 from xml.etree import ElementTree
 from pyarabic.araby import strip_tashkeel
-from uthmanic import *
+from filtering import *
 
 # Parsing xml
 xml_file_name = '../QuranCorpus/quran-uthmani.xml'
@@ -43,7 +43,7 @@ def get_sura(sura_number, with_tashkeel=False):
 
     uthmanic_free_sura = []
     for aya in sura:
-        uthmanic_free_sura.append(uthmanic_filter(aya))
+        uthmanic_free_sura.append(recitation_symbols_filter(aya))
 
     if not with_tashkeel:
        return list(map(strip_tashkeel, uthmanic_free_sura)) 
