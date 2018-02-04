@@ -6,5 +6,5 @@ umar_test.py
 .settings
 __pycache__
 __pycache__/*
-Umar_test2.ipynb
-.ipynb_checkpoints/
+tools/Umar_test2.ipynb
+tools/.ipynb_checkpoints/
