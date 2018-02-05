@@ -13,7 +13,7 @@ letters had the same rasm/form/shape/look.
 
 Muslims have decided to remove this ambiguity by adding
 dots above or below each letter of the ones which share the same rasm. Now each letter has a unique form. By the way,
-originally, Quran was written without dots on the letters.
+originally, `Quran` was written without dots on the letters.
 
 
 To enable you to use both modern system for other, we introduce *alphabetical systems*,
