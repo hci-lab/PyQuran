@@ -5,6 +5,7 @@ import pyquran as pq
 
 class Testing_pyquran(unittest.TestCase):
 
+
     def test_get_tashkeel_binary(self):
         self.assertEqual('0010101',pq.get_tashkeel_binary('الْأَحْيَاءُ')[0])
         self.assertEqual('1010 101011 001011',pq.get_tashkeel_binary('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')[0])

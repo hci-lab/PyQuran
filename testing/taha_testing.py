@@ -5,13 +5,13 @@
 """
 
 from arabic import *
-import tools
+import pyquran
 import re
 import searchHelper
 
 '''
-print(tools.get_sura(113))
-print(tools.get_sura(113, True))
+print(pyquran.get_sura(113))
+print(pyquran.get_sura(113, True))
 '''
 
 string = 'a^b*c&d a^b*c&d'
@@ -44,7 +44,7 @@ def get_string_taskeel_test(string):
         param1 (str): string
         param2 (int): char index inside string
     Returns:
-         int: number of spaces before string[index]
+        list[char]: a list of diacritics found in `straing`
 
     """
     x = ''
@@ -75,6 +75,9 @@ def search_string_with_tashkeel_test(string, key):
     """
     # tashkeel pattern
     string_tashkeel_only = searchHelper.get_string_taskeel(string)
+    print(string_tashkeel_only)
+    print(string_tashkeel_only)
+    print(string_tashkeel_only)
 
     # searching taskeel pattern
     results = []
@@ -95,11 +98,9 @@ def search_string_with_tashkeel_test(string, key):
     else:
         return True, results
         
-'''
 sentence = 'صِفْ ذَاْ ثَنَاْ كَمْ جَاْدَ شَخْصٌ'
 results = search_string_with_tashkeel_test(sentence, fatha + sukun)  
 print(results)
-'''
 
 
 def tasheel_to_names(pattern):

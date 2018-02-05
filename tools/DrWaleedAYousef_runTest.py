@@ -6,7 +6,7 @@ import functools
 import time
 
 print("\n[1] Testing get_sura()")
-functionCall = ''' Al_Masad = tools.get_sura(111)
+functionCall = ''' Al_Masad = pyquran.get_sura(111)
 ''' 
 print("function call:")
 print(functionCall)
@@ -37,18 +37,18 @@ print('\n', count_shape(get_sura(110), newSystem))
 
 print("\n[3] Transliteration between Arabic and Buckwalter")
 functionCall = '''#from buckwalter to arabic
-print(tools.buckwalter_arabic_transliteration("brA'p mn Allh wrswlh <lY Al*yn EAhdtm mn Alm$rkyn", 1))
+print(pyquran.buckwalter_arabic_transliteration("brA'p mn Allh wrswlh <lY Al*yn EAhdtm mn Alm$rkyn", 1))
 #from arabic to buckwalter
-print(tools.buckwalter_arabic_transliteration(tools.get_sura(9)[0], False))
+print(pyquran.buckwalter_arabic_transliteration(tools.get_sura(9)[0], False))
 ''' 
 print("function call:")
 print(functionCall)
 
 print("Output:")
 #from buckwalter to arabic
-print(buckwalter_arabic_transliteration("brA'p mn Allh wrswlh <lY Al*yn EAhdtm mn Alm$rkyn", 1))
+print(buckwalter_transliteration("brA'p mn Allh wrswlh <lY Al*yn EAhdtm mn Alm$rkyn", 1))
 #from arabic to buckwalter
-print(buckwalter_arabic_transliteration(get_sura(9)[0], False))
+print(buckwalter_transliteration(get_sura(9)[0], False))
 
 
 
@@ -77,7 +77,7 @@ for key,val in lis.items():
 print("\n[5] Testing separate_token_with_dicrites()")
 print("function call:")
 functionCall = '''x = 'وَاشْدُدْ بِهِ أَزْرِي وَأَصْلِحْ شَانِي'
-print(tools.separate_token_with_dicrites(x))
+print(pyquran.separate_token_with_dicrites(x))
 '''
 print(functionCall)
 x = 'وَاشْدُدْ بِهِ أَزْرِي وَأَصْلِحْ شَانِي'
@@ -92,7 +92,7 @@ print("\n[6] search with tashkeel pattern only")
 print("function call:")
 functionCall = '''sentence = 'صِفْ ذَاْ ثَنَاْ كَمْ جَاْدَ شَخْصٌ'
 tashkeel_pattern = ar.fatha + ar.sukun
-results = tools.search_string_with_tashkeel(sentence, tashkeel_pattern)
+results = pyquran.search_string_with_tashkeel(sentence, tashkeel_pattern)
 print(results)
 '''
 print(functionCall)
@@ -106,16 +106,16 @@ print(results)
 
 
 
-print("\n[7] get_frequancy()") 
+print("\n[7] get_frequency()") 
 print("function call:")
 functionCall = '''print('frequency of ﺎﻳﺓ 1 سﻭﺭﺓ ﺍﻼﺧﻼﺻ:')
-freq = get_frequancy(get_verse(112,1))
+freq = get_frequency(get_verse(112,1))
 print(freq)
 '''
 print(functionCall)
 print("Output:")
 print('frequency of ﺎﻳﺓ 1 سﻭﺭﺓ ﺍﻼﺧﻼﺻ:')
-freq = get_frequancy(get_verse(112,1))
+freq = get_frequency(get_verse(112,1))
 print(freq)
 
 

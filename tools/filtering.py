@@ -23,7 +23,7 @@ small_high_upright_rectangular_zero  = '\u06e0'
 rounded_high_stop_with_filled_centre = '\u06ec'
 
 
-uthmanic = [ 
+recitationSymbols = [ 
     alef_wasl_with_saad_above, # Rplace with alef
     hamza_above, # ???????
     small_high_meem, # Remove
@@ -63,8 +63,11 @@ print(p.search(hamza_above))
 print(p.findall(hamza_above))
 '''
 
-def uthmanic_filter(string, symbols=uthmanic):
-    '''removes uthmanic symbols
+def recitation_symbols_filter(string, symbols=recitationSymbols ):
+    '''Removes the Special Recitation Symbols from `string`
+        Args:
+            param1(str): a string to be filtered
+            param2([char]: a list of recitation symbols
     '''
     for symbol in symbols:
         if symbol == alef_wasl_with_saad_above:
@@ -75,6 +78,6 @@ def uthmanic_filter(string, symbols=uthmanic):
     return string
 
 '''
-for x in uthmanic:
+for x in recitationSymbols :
     print("> " + x + '\n')
 '''

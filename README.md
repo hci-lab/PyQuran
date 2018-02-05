@@ -1,61 +1,89 @@
 PyQuran
 =======
 
-PyQuran is a python package, that provides tools for *Quranic Analysis*:
-- fetch Chapeters and Verses.
-- search by diacritics patterns.
-- buckwalter transliteration, back and forth
--  ??? system, shape, advanced counting (revise)???
+PyQuran is a python package, that provides tools for *Quranic Analysis*.
 
-## Features
+
+It is still a small package which needs a lot of your effort. But, we think it is a seed of a fundamental general package for
+computations on `Quran` with Python, even at the most basic level which simply retrieving Quran text.
+
+*Before Islam*, Arabic letters  were without  dots—
+[*rasm*](https://en.wikipedia.org/wiki/Rasm), which resulted in ambiguty, two or three
+letters had the same rasm/form/shape/look. 
+
+Muslims have decided to remove this ambiguity by adding
+dots above or below each letter of the ones which share the same rasm. Now each letter has a unique form. By the way,
+originally, `Quran` was written without dots on the letters.
+
+
+To enable you to use both modern system for other, we introduce *alphabetical systems*,
+It is a dynamic construction of letters.—
+[Alphabetical Systems](https://github.com/TahaMagdy/PyQuran/wiki/Alphabetical-Systems).
+
+
+## Table of Contents
+- [Current Features](#current-features)
+- [Install](#install)
+- [Dependencies](#dependencies)
+- [Quran Corpus](#quran-corpus)
+- [Contributing](#contributing)
+- [Citing](#citing)
+- [Communication](#communication)
+- [Licence](#licence)
+
+
+
+## Current Features
+- fetch chapters and verses.
+- search Quran by text tokens and by diacritics patterns.
+- buckwalter transliteration, back and forth
+- Multiple **alphabetical systems**, *for more details see the [PyQuran Wiki](https://github.com/TahaMagdy/PyQuran/wiki)*
+
+
 
 ## Install
-Pyquran can be installed from PyPI:
+- From _PyPI_: `$ pip install pyquran`
+- From Source: `$ python3 setup.py install`
 
-    pip install pyquran
-or conda:
-
-    conda install pyquran
 
 ## Dependencies
-[Python](https://www.python.org/)
-[Numpy](http://www.numpy.org/)
-[Pyarabic](https://github.com/linuxscout/pyarabic)
+- [numpy](http://www.numpy.org/)
+- [pyarabic](https://github.com/linuxscout/pyarabic)
 
-## Quran Arabic Corpus
+## Quran Corpus 
+We use [tanzil](http://tanzil.net/docs/download) Quran Corpus (*Uthmani Text*), it is in `UTF-8` encoding. You
+can find all unique characters of Uthmanic Corpus
+[here](https://github.com/TahaMagdy/PyQuran/wiki/Filtering-Special-Recitation-Symbols).
 
-We use **[tanzil](http://tanzil.net/docs/download) Quran Corpus**, (*Uthmanic Version*).
-* Text format is `UTF-8`
-* Filter Operation *Explain the substituation, add examples and the replaced/removed chars.
+There are *special recitation symbols* مصطلحات الضبط in the *Uthmani Text*, they are a guide for the reciter
+to know the right positions to pause and the rules of tajweed.
+We provide an interface to filter those symbols, *only the fly while fetching from the corpus*,
+we **DO NOT** change the corpus, NEVER.
+
+[For the full details about filtering *special recitation symbols* مصطلحات الضبط.](https://github.com/TahaMagdy/PyQuran/wiki)
 
 ## Contributing
-Would you like  to contribute to PyQuran development?
-Great! Please read more details
-at [CONTRIBUTING.md](CONTRIBUTING.md).
+To contribute and maintain *PyQuran*, Please read  [CONTRIBUTING.md](CONTRIBUTING.md).
 
-See also [How to contribute to PyQuran](fileName.md).
+See also [How to contribute to PyQuran](what_can_you_do_to_help_pyquran.md).
 
 ## Citing
-If you use PyQuran in your research, please use the following BibTeX entry.
-
-    @MISC {PyQuran2018,
-    author             = "Waleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa",
-    title              = "PyQuran",
-    howpublished       = "https://github.com/TahaMagdy/PyQuran",
-    month              = "feb",
-    year               = "2018"
-    }
+not_completed_ (need to disscuss it with the prof.)
+Cite _PyQuran_ as the following _BibTeX_ entry.
+```ruby
+@MISC {PyQuran2018,
+author             = "Waleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa",
+title              = "PyQuran",
+howpublished       = "https://github.com/TahaMagdy/PyQuran",
+month              = "feb",
+year               = "2018"
+}
+```
 
 
 ## Communication
-* GitHub issues: feature requests, bug reports,  install issues, thoughts, etc.  
-* [Gitter channel](https://gitter.im/TahaMagdy/PyQuran): general chat, online discussions, collaboration, etc.   
-* [Stack Overflow](https://stackoverflow.com/questions/tagged/pyquran): For usage questions, You can ask on Stack Overflow or on [our mailing list](https://groups.google.com/forum/?fromgroups#!forum/blabla).
+ـnot_completed_
 
-## NOTE:
-If you are going to run on `Emacs` shell. It *MUST* be configured to use `UTF-8`;
-<br /> else you see this
-```python
-UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
-```
-to avoid *emacs configuration* headache, use a terminal that supports `UTF-8` to run the code =]
+
+## Licence 
+not_completed_ (need to discuss it with the prof.)
