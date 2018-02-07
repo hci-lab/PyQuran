@@ -1,3 +1,7 @@
+from sys import path
+path.append('../core')
+path.append('../tools')
+
 from quran import *
 from buckwalter import *
 from pyquran import *
