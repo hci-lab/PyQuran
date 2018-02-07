@@ -11,5 +11,10 @@ class Testing_searchHelper(unittest.TestCase):
         self.assertEqual(count_spaces_before_index(' ', 1), 1)
 
 
+    def test_get_string_taskeel(self):
+        x = 'ﺐِﺴﻣ ﺎﻠﻠﻫِ ﺎﻟﺮّﺤﻤﻧ ﺎﻟﺮَﺤﻴﻣ'
+        self.assertEqual(len(get_string_taskeel(x)), 7)
+
+
 if __name__ == '__main__':
     unittest.main()
