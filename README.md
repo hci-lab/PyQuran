@@ -17,7 +17,7 @@ originally, `Quran` was written without dots on the letters.
 
 
 To enable you to use both modern system or other, we introduce *alphabetical systems*,
-It is a dynamic construction of letters.—
+It is a dynamic construction of letters—
 [Alphabetical Systems](https://github.com/TahaMagdy/PyQuran/wiki/Alphabetical-Systems).
 
 
