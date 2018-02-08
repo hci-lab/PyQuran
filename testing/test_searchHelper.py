@@ -6,7 +6,7 @@ import unittest
 from sys import path
 path.append('../tools/')
 path.append('../core/')
-
+from quran import get_verse
 from searchHelper import *
 
 class Testing_searchHelper(unittest.TestCase):
@@ -91,11 +91,14 @@ class Testing_searchHelper(unittest.TestCase):
                                                  verseNum=1,
                                                  chapterNum=1,
                                                  mode3=True),
-                                                 [('بسم', 1, 1, 1)])
+                                                 [('بِسْمِ', 1, 1, 1)])
 
+        
+    def test_hellper_frequency_of_chars_in_verse(self):
+        ver_w_taskeel = get_verse(1,1,with_tashkeel=True)
+        self.assertEqual(hellper_frequency_of_chars_in_verse(ver_w_taskeel,['ر',"رّ","ة",'َ']),{'ة': 0, 'ر': 2, 'رّ': 2, 'َ': 4})
 
-
-       
+    
 
 if __name__ == '__main__':
     unittest.main()
