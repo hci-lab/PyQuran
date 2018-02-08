@@ -44,6 +44,12 @@ def get_string_taskeel(string):
 
 
 def hellper_get_sequance_positions(verse,sequance):
+    '''
+        this function takes verse and sequence and returns 
+        the position of match word,
+        and if sequence exists in verse more that one, it 
+        return list of first matched the word. 
+    '''
     verse = strip_tashkeel(verse)
     sequance = strip_tashkeel(sequance)
     sequance = sequance.split()
