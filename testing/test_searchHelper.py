@@ -22,5 +22,80 @@ class Testing_searchHelper(unittest.TestCase):
         self.assertEqual(len(get_string_taskeel(x)), 7)
 
 
+    def test_hellper_get_sequance_positions(self):
+       self.assertEqual(hellper_get_sequance_positions("abcd abdsacd abdscd abcd abdsacd abdscd",'abcd abdsacd'),[1,4])
+       self.assertEqual(hellper_get_sequance_positions("بسم الله الرحمن الرحيم",'بسم الله'),[1])
+       self.assertEqual(hellper_get_sequance_positions('بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ','الرَّحْمَنِ'),[2])
+
+    def test_hellper_search_function(self):
+        ver_wo_taskeel = get_verse(1,1,with_tashkeel=False)
+        ver_w_taskeel = get_verse(1,1,with_tashkeel=True)
+        self.assertEqual(hellper_search_function(verse=ver_w_taskeel,
+                                                 sequance="بِسْمِ",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=True),
+                                                 [])
+        
+        self.assertEqual(hellper_search_function(verse=ver_w_taskeel,
+                                                 sequance="بِسْمِ",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=False),
+                                                 [('بِسْمِ', 1)])
+
+        self.assertEqual(hellper_search_function(verse=ver_w_taskeel,
+                                                 sequance="بسم",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=False),
+                                                 [])
+        
+        self.assertEqual(hellper_search_function(verse=ver_w_taskeel,
+                                                 sequance="بسم",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=True),
+                                                 [('بِسْمِ', 1)])
+
+        self.assertEqual(hellper_search_function(verse=ver_wo_taskeel,
+                                                 sequance="بِسْمِ",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=False),
+                                                 [])
+        
+        self.assertEqual(hellper_search_function(verse=ver_wo_taskeel,
+                                                 sequance="بِسْمِ",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=True),
+                                                 [])
+
+        self.assertEqual(hellper_search_function(verse=ver_wo_taskeel,
+                                                 sequance="بسم",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=False),
+                                                 [('بسم', 1)]
+)
+        self.assertEqual(hellper_search_function(verse=ver_wo_taskeel,
+                                                 sequance="بسم",
+                                                 verseNum=0,
+                                                 chapterNum=0,
+                                                 mode3=True),
+                                                 [('بسم', 1)])
+
+        self.assertEqual(hellper_search_function(verse=ver_w_taskeel,
+                                                 sequance="بسم",
+                                                 verseNum=1,
+                                                 chapterNum=1,
+                                                 mode3=True),
+                                                 [('بسم', 1, 1, 1)])
+
+
+
+       
+
 if __name__ == '__main__':
     unittest.main()
