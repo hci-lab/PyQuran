@@ -161,13 +161,13 @@ def check_sura_with_frequency(sura_num,freq_dec):
 
 def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
     """this function using to cluster words using similarity 
-    and sort every bunch of word  by most common and sort bunches 
-    descending in same time 
+       and sort every bunch of word  by most common and sort bunches 
+       descending in same time 
     
-    Args:
-        frequency_dictionary (dict): frequency dictionary that need to sort
-    Returns:
-        dict : sorted dictionary 
+       Args:
+          frequency_dictionary (dict): frequency dictionary that need to sort
+       Returns:
+          dict : sorted dictionary 
     """
     # list of dictionaries and every dictionary has similar words and we will call every dictionary as 'X'
     list_of_dics = []
@@ -218,6 +218,8 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
             new_freq_dic[word] = count
 
     return new_freq_dic        
+
+
 
 def generate_latex_table(dictionary,filename,location="."):
     """generate latex code of table of frequency 
