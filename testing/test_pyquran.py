@@ -36,5 +36,8 @@ class Testing_pyquran(unittest.TestCase):
         subAyah = ' يُسَبِّحُ لِلَّهِ مَا فِي السَّمَوَاتِ وَمَا فِي الْأَرْضِ الْمَلِكِ الْقُدُّوسِ الْعَزِيزِ الْحَكِيمِ'
         binaryPatternX =  get_tashkeel_binary(subAyah)[0]
         self.assertEqual(binaryPatternX,binaryPatternY)
+
+
+
 if __name__ == '__main__':
     unittest.main()
