@@ -6,6 +6,10 @@ This module contains tools for `Quranic Analysis`
 (More expressive description later) 
 
 """
+# Adding another searching path
+from sys import path
+path.append('../tools/')
+
 import numpy
 import operator
 from audioop import reverse
