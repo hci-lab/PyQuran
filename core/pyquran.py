@@ -753,8 +753,7 @@ def get_tashkeel_binary(ayah):
   # check whether exist alef_mad in ayah if exist unpack the alef mad
   if (alef_mad in ayahModified):
       ayahModified = unpack_alef_mad(ayahModified)
-  if(madda_above in ayahModified):
-     ayahModified = strip_mark_al_mad(ayahModified)
+
 
   # separate tashkeel from the ayah
   ayahOrAyatWithoutTashkeel, marks = separate(ayahModified)
