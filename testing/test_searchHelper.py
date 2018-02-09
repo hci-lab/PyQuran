@@ -8,6 +8,7 @@ path.append('../tools/')
 path.append('../core/')
 from quran import get_verse
 from searchHelper import *
+from pyquran import get_tashkeel_binary
 
 class Testing_searchHelper(unittest.TestCase):
 
@@ -98,7 +99,36 @@ class Testing_searchHelper(unittest.TestCase):
         ver_w_taskeel = get_verse(1,1,with_tashkeel=True)
         self.assertEqual(hellper_frequency_of_chars_in_verse(ver_w_taskeel,['ر',"رّ","ة",'َ']),{'ة': 0, 'ر': 2, 'رّ': 2, 'َ': 4})
 
-    
 
+    def test_hamming_distance(self):
+        self.assertEqual(hamming_distance("abcd",'absc'),2)
+        self.assertEqual(hamming_distance("مرحبا كيف حالك",'مورحبا كيف حالك'),13)
+
+    def test_get_word_num(self):
+        self.assertEqual(get_word_num(15,"hellow how are you"),3)
+        self.assertEqual(get_word_num(7,"hellow how are you"),1)
+
+    def  test_hellper_search_with_pattern(self):
+        aya = get_verse(1,1,with_tashkeel=True)
+        pattern = get_tashkeel_binary(aya)
+        result = hellper_search_with_pattern('101',pattern[0],aya)
+        self.assertEqual(result,['بِسْمِ', 'الرَّحْمَنِ', 'الرَّحِيمِ'])
+
+        result = hellper_search_with_pattern('101',pattern[0],aya,ratio=0.5)
+        self.assertEqual(result,['بِسْمِ',
+                                 'بِسْمِ اللَّهِ',
+                                 'اللَّهِ',
+                                 'اللَّهِ الرَّحْمَنِ',
+                                 'الرَّحْمَنِ',
+                                 'الرَّحْمَنِ الرَّحِيمِ',
+                                 'الرَّحِيمِ'])
+
+        result = hellper_search_with_pattern('1011',pattern[0],aya)
+        self.assertEqual(result,['الرَّحْمَنِ'])
+
+        result = hellper_search_with_pattern('10111',pattern[0],aya)
+        self.assertEqual(result,[])
+
+        
 if __name__ == '__main__':
     unittest.main()
