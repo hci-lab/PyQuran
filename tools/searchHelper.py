@@ -256,3 +256,62 @@ def hellper_frequency_of_chars_in_verse(verse,charaters):
         frequency[char] = verse.count(char)
     return frequency
     
+
+
+
+
+def hamming_distance(s1, s2):
+    '''
+        get number of different character in s1 and s2
+    '''
+    return sum(el1 != el2 for el1, el2 in zip(s1, s2))
+
+
+def get_word_num(char_num,sentece):
+    '''
+       take's the position of letter and return the position 
+       of word that has this letter
+    '''
+    lis = [len(i) for i in sentece.split()]
+    coun = 0
+    for i,l in enumerate(lis):
+        coun +=l
+        if char_num <= coun:
+            return i
+
+def hellper_search_with_pattern(pattern,sentence_pattern,sentence,ratio=1):
+    '''
+       this function takes 0's,1's pattern and retuen matched words 
+       from sentence pattern dependent on the ratio to adopt threshold.
+       
+       Args:
+           pattern (str): 0's,1's pattern that you need to search.
+           sentence_pattern (str): 0's,1's pattern of sentence to search inside it.
+           sentence (str): the real sentence in text format.
+           ratio (float): threshold of similarity , if 1 it will get the similar exactly,
+                          and if not ,it will get dependant on ratio number.
+                          
+       Return:
+           [[list]] : it will return list of listes that have matched word, or 
+                      matched senteces and return empty list if not found.
+    '''
+    sentence_pattern_sequance = sentence_pattern.replace(" ","")
+    pattern_len = len(pattern)
+    if pattern_len >len(sentence):
+        return  []
+    lis = []
+    s=0
+    e=pattern_len
+    i=0
+    while i <= len(sentence_pattern_sequance)-pattern_len: 
+        sen = sentence_pattern_sequance[s:e]
+        dif = hamming_distance(sen,pattern)/pattern_len
+        if 1-dif >= ratio:
+            matched =sentence.split()[get_word_num(s+1,sentence_pattern):get_word_num(e,sentence_pattern)+1]
+            matched = " ".join(matched)
+            if matched not in lis:
+                lis.append(matched)
+        s +=1
+        e +=1
+        i+=1
+    return lis
