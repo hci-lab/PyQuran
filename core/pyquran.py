@@ -866,7 +866,7 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
     
        Note : it's takes time dependent on your threshold and size of chapter,
               so it's not support to search on All-Quran becouse 
-              it take very long time more than 11 min,
+              it take very long time more than 11 min.
     '''
     if threshold > 1 or threshold < 0:
         sys.exit('Threshold should be 0 <= Threshold <= 1')
