@@ -2,7 +2,7 @@
 """
 from xml.etree import ElementTree
 from pyarabic.araby import strip_tashkeel
-from arabic import swar_num
+from arabic import swar_nums
 from filtering import *
 
 # Parsing xml

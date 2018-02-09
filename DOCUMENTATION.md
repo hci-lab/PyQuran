@@ -427,7 +427,7 @@ system = [['ت','ب'], systems.hamazatSystem]
 
   sentence = 'صِفْ ذَاْ ثَنَاْ كَمْ جَاْدَ شَخْصٌ'
   tashkeel_pattern = ar.fatha + ar.sukun
-  results = search_string_with_tashkeel(sentence,tashkeel_pattern)
+  results = pq.search_string_with_tashkeel(sentence,tashkeel_pattern)
   print(results)
 
   >>> [(3, 5), (7, 9), (10, 12), (13, 15), (17, 19)]
@@ -435,7 +435,24 @@ system = [['ت','ب'], systems.hamazatSystem]
 
 
 #### search_with_pattern 
-**search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=0,op=False)**
-** comming soon =D ** 
+**search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1)**
+- this function use to search in 0's,1's pattern and return matched words from sentence pattern dependent on the    threshold, it takes a **patter** that you need to looking for , and **sentence (optional)** (sentence where will   search), **chapterNum (opetional)** and **verseNum (opetional)** and return list of matched words and sentences. 
 
+    - Cases: 
+        1. if pass sentece only or with another args 
+           it will search in sentece only.
+        2. if not passed sentence and passed verseNum and chapterNum,
+           it will search in this verseNum that exist in chapterNum only.
+        3. if not passed sentence,verseNum and passed chapterNum only,
+           it will search in this specific chapter only
+    
+      * Note : it's takes time dependent on your threshold and size of chapter, so it's not support to search on All-Quran becouse it take very long time more than 11 min.
+
+```python
+
+  result = pq.search_with_pattern(pattern="01111",chapterNum=1,threshold=0.9)
+  print(result)
+  
+  >>>['الرَّحِيمِ مَلِكِ', 'نَعْبُدُ وَإِيَّاكَ', 'الْمُسْتَقِيمَ صِرَطَ']
+```
 

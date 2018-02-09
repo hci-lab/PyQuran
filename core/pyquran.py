@@ -161,13 +161,13 @@ def check_sura_with_frequency(sura_num,freq_dec):
 
 def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
     """this function using to cluster words using similarity 
-    and sort every bunch of word  by most common and sort bunches 
-    descending in same time 
+       and sort every bunch of word  by most common and sort bunches 
+       descending in same time 
     
-    Args:
-        frequency_dictionary (dict): frequency dictionary that need to sort
-    Returns:
-        dict : sorted dictionary 
+       Args:
+          frequency_dictionary (dict): frequency dictionary that need to sort
+       Returns:
+          dict : sorted dictionary 
     """
     # list of dictionaries and every dictionary has similar words and we will call every dictionary as 'X'
     list_of_dics = []
@@ -218,6 +218,8 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
             new_freq_dic[word] = count
 
     return new_freq_dic        
+
+
 
 def generate_latex_table(dictionary,filename,location="."):
     """generate latex code of table of frequency 
@@ -830,3 +832,79 @@ def check_system(system, indx=None):
     else:
         return (system + [[char] for char in check_all_alphabet(system)])[indx]
 
+
+
+def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
+    '''
+       this function use to search in 0's,1's pattern and
+       return matched words from sentence pattern 
+       dependent on the ratio to adopt threshold.
+       
+       Args:
+           pattern (str): 0's,1's pattern that you need to search.
+           sentence (str): Arabic string with tashkeel where 
+                           function will search.
+           verseNum (int): number of specific verse where
+                           will search.
+           chapterNum (int): number of specific chapter 
+                             where will search.
+           threshold (float): threshold of similarity , if 1 it will
+                              get the similar exactly, and if not ,it will 
+                              get dependant on threshold number.
+        
+       Cases: 
+           1- if pass sentece only or with another args 
+              it will search in sentece only.
+           2- if not passed sentence and passed verseNum and chapterNum,
+              it will search in this verseNum that exist in chapterNum only.
+           3- if not passed sentence,verseNum and passed chapterNum only,
+              it will search in this specific chapter only
+    
+       Return:
+           [list] : it will return list that have matched word, or 
+                    matched senteces and return empty list if not found.
+    
+       Note : it's takes time dependent on your threshold and size of chapter,
+              so it's not support to search on All-Quran becouse 
+              it take very long time more than 11 min.
+    '''
+    if threshold > 1 or threshold < 0:
+        sys.exit('Threshold should be 0 <= Threshold <= 1')
+    pattern = pattern.replace(' ','')
+    if len(pattern)<=0:
+        sys.exit('pattern don\'t passed')
+    
+    #check if sentece exist
+    if sentence != None:
+        #convert sentence to 0/1
+        sentence_pattern,taskieel = get_tashkeel_binary(sentence)
+        return hellper_search_with_pattern(pattern=pattern,
+                                           sentence_pattern=sentence_pattern,
+                                           sentence=sentence,
+                                           ratio=threshold)
+    else:
+        #check if search in specific chapter
+        if chapterNum != None:
+            #check if search in specific verese
+            if verseNum != None:
+                sentence = get_verse(chapterNum=chapterNum,
+                                     verseNum=verseNum,
+                                     with_tashkeel=True)
+            #search in all chapter
+            else:
+                sentence = " ".join(get_sura(chapterNum,True))
+        #search in all Quran
+        else:
+            sys.exit('please send sentece or verseNum and chapterNum to search.')
+        
+        #convert sentence to 0/1
+        sentence_pattern,taskieel = get_tashkeel_binary(sentence)
+        sentence_pattern_without_spaces = sentence_pattern.replace(" ","")
+        #check if no pattern exist
+        if pattern not in sentence_pattern_without_spaces:
+            return []
+        else:
+            return hellper_search_with_pattern(pattern=pattern,
+                                               sentence_pattern=sentence_pattern,
+                                               sentence=sentence,
+                                               ratio=threshold)
