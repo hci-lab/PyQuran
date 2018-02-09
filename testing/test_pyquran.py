@@ -144,7 +144,30 @@ class Testing_pyquran(unittest.TestCase):
         real={'الرحمن': [], 'بِسْمِ اللَّهِ': [('بِسْمِ اللَّهِ', 0, 1, 1)]}
         self.assertEqual(result,real)
 
-        
+
+    def test_search_with_pattern(self):
+        result = search_with_pattern(pattern="01101011000101",chapterNum=2)
+        real=['ءَامِنُوا كَمَا ءَامَنَ النَّاسُ', 'وَلَتَجِدَنَّهُمْ أَحْرَصَ النَّاسِ', 'بِالْمَعْرُوفِ حَقًّا عَلَى الْمُتَّقِينَ', 'بِالْمَعْرُوفِ حَقًّا عَلَى الْمُحْسِنِينَ', 'لِلتَّقْوَى وَلَا تَنسَوُا الْفَضْلَ']
+        self.assertEqual(result,real)
+
+        result=search_with_pattern(pattern="0110101100111010101",chapterNum=2)
+        self.assertEqual(result,[])
+
+        result = search_with_pattern(pattern="01111",chapterNum=1)
+        real = ['الرَّحِيمِ مَلِكِ', 'نَعْبُدُ وَإِيَّاكَ', 'الْمُسْتَقِيمَ صِرَطَ']
+        self.assertEqual(result,real)
+
+        try:
+            search_with_pattern(pattern="01111")
+            result=True
+        except:
+            result=False
+        self.assertEqual(result,False)
+            
+
+        result=search_with_pattern(pattern="01111",chapterNum=1,threshold=0.9)
+        real=['الرَّحِيمِ مَلِكِ', 'نَعْبُدُ وَإِيَّاكَ', 'الْمُسْتَقِيمَ صِرَطَ']
+        self.assertEqual(result,real)
         
 if __name__ == '__main__':
     unittest.main()
