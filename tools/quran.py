@@ -71,9 +71,21 @@ def fetch_aya(sura_number, aya_number):
         str: an aya as a string
 
     """
+
+    message = "Sura number must be an integer between 1 to 114, inclusive."
+    error.is_int(sura_number, message)
+
+    message = "Aya number is a positive integer."
+    error.is_int(sura_number, message)
+
+
     aya_number -= 1
     sura = get_sura(sura_number)
+    if aya_number > len(sura) - 1:
+        raise ValueError('Aya number most not exceed the number of ayat in sura.')
     return sura[aya_number]
+
+
 
 def retrieve_qruan_as_one_strint():
     pass
