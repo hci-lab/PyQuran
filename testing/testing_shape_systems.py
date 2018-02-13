@@ -42,6 +42,10 @@ sura  = quran.get_sura(108)
 countMatrix = pyquran.count_shape(sura, syst1)
 
 # Use columnGuide to know which coulmn
+# secod parameter is optional, in this case
+# the shape at index 5 is returned
+# If you do not pass,  it returns all shapes,
+# with the same column order.
 columnGuide = pyquran.check_system(syst1, 5)
 
 print(columnGuide)
