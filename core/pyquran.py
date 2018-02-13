@@ -10,6 +10,7 @@ This module contains tools for `Quranic Analysis`
 from sys import path
 path.append('../tools/')
 
+import error
 import numpy
 import operator
 from audioop import reverse
@@ -661,6 +662,9 @@ def search_string_with_tashkeel(string, key):
          Searches tashkeel that is exciplitly included in string.
 
     """
+
+    error.is_string(string, 'You must pass an string.')
+
     # tashkeel pattern
     string_tashkeel_only = get_string_taskeel(string)
 
