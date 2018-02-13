@@ -30,6 +30,7 @@ withoutDotSystem.append(fehLike)
 '''
 hamazatSystem = [hamzat]
 
+default = sorted(alphabet)
 '''
 print(withoutDotSystem)
 print(hamazatSystem)

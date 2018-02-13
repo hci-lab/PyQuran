@@ -32,6 +32,7 @@ example
 # Preparing a system
 syst1 = systems.withoutDotSystem
 syst2 = systems.hamazatSystem
+defualtSyst = systems.default
 newSystem = [[beh, teh, alef], 
              [jeem, hah, khah]]
 
@@ -39,14 +40,14 @@ newSystem = [[beh, teh, alef],
 sura  = quran.get_sura(108)
 
 # Computing count shape matrix
-countMatrix = pyquran.count_shape(sura, syst1)
+countMatrix = pyquran.count_shape(sura)
 
 # Use columnGuide to know which coulmn
 # secod parameter is optional, in this case
 # the shape at index 5 is returned
 # If you do not pass,  it returns all shapes,
 # with the same column order.
-columnGuide = pyquran.check_system(syst1, 5)
+columnGuide = pyquran.check_system(defualtSyst)
 
 print(columnGuide)
 print(countMatrix)
