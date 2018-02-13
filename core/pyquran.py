@@ -387,8 +387,7 @@ def count_shape(text, system=None):
     else:
         alphabetMap=shape(system)
 
-    p=len(listOfAlphabet)-len(list(set(chain(
-        *system))))+len(system)#+1 #the last one for space char
+    p=len(listOfAlphabet)-len(list(set(chain(*system))))+len(system)#+1 #the last one for space char
     n=len(text)
     A=numpy.zeros((n, p), dtype=numpy.int)#(m-len(list(set(
     # chain(*system)))))+len(system)
