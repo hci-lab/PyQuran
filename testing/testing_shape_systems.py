@@ -47,7 +47,7 @@ countMatrix = pyquran.count_shape(sura)
 # the shape at index 5 is returned
 # If you do not pass,  it returns all shapes,
 # with the same column order.
-columnGuide = pyquran.check_system(defualtSyst)
+columnGuide = pyquran.check_system(defualtSyst, 5)
 
 print(columnGuide)
 print(countMatrix)
