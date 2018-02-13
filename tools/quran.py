@@ -34,6 +34,15 @@ def get_sura(sura_number, with_tashkeel=False):
 
     """
     
+    if type(sura_number) is not int or sura_number < 1:
+        message = "Sura number must be an integer between 1 to 114, inclusive."
+        raise ValueError(message)
+
+    if type(with_tashkeel) is not bool:
+        message = "The second parameter must be bool, it an optional False by default"
+        raise ValueError(message)
+       
+    
     sura_number -= 1
     sura = []
     suras_list = quran_tree.findall('sura')
