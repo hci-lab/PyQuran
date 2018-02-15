@@ -11,3 +11,4 @@ tools/.ipynb_checkpoints/
 core/.pyquran.py.swp
 *.pyc
 *.txt
+*.ipyb
