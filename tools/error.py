@@ -10,5 +10,5 @@ def is_bool(boolean, message):
         raise ValueError(message)
 
 def is_string(string, message):
-    if type(string) is not string:
+    if type(string) is not str:
         raise ValueError(message)
