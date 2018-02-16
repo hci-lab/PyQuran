@@ -232,9 +232,9 @@ def treat_as_the_same(listOfLetter, letter, text):
         str: a text after changing all the `listOfLetter` to that char `letter`
     
     Example:
-        line = 'قل أعوذ برب الناس'
         print(treat_as_the_same([alef_hamza_above], alef, line))
         print(treat_as_the_same([ain], qaf, line))
         
         
     """
+    pass

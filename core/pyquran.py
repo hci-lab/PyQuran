@@ -383,12 +383,13 @@ def count_shape(text, system=None):
             alphabetMap.update({char: indx})
             indx = indx + 1
         alphabetMap.update({" ": 70})
+        p=len(listOfAlphabet)#+1 #the last one for space char
 
     else:
         alphabetMap=shape(system)
 
-    p=len(listOfAlphabet)-len(list(set(chain(
-        *system))))+len(system)#+1 #the last one for space char
+        p=len(listOfAlphabet)-len(list(set(chain(
+            *system))))+len(system)#+1 #the last one for space char
     n=len(text)
     A=numpy.zeros((n, p), dtype=numpy.int)#(m-len(list(set(
     # chain(*system)))))+len(system)
