@@ -128,7 +128,8 @@ class Testing_pyquran(unittest.TestCase):
         self.assertEqual(get_token(4,1,1),'الرحيم')
         self.assertEqual(get_token(5,1,1),'')
         self.assertEqual(get_token(20,0,5),'')
-        self.assertEqual(get_token(20,0,-5),'')
+        with self.assertRaises(ValueError): 
+           get_token(20,0,-5)
         self.assertEqual(get_token(95,1,5),'')
         self.assertEqual(get_token(4,1,1,with_tashkeel=True),'الرَّحِيمِ')
 
