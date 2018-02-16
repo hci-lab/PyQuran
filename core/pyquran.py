@@ -18,6 +18,7 @@ from itertools import chain
 import functools
 from collections import Counter, defaultdict
 from arabic import *
+import arabic
 import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
 from searchHelper import *
@@ -93,6 +94,8 @@ def get_frequency(sentence):
     Returns:
         dict: {str: int}
     """
+    if type(sentence) != str:
+        raise TypeError('sentece should be string')
     # split sentence to words     
     word_list = sentence.split()
     #compute count of uniqe words 
@@ -116,6 +119,11 @@ def generate_frequency_dictionary(suraNumber=None):
     Returns:
         dict: {str: int}
     """
+    if type(suraNumber) != int and suraNumber != None :
+        raise TypeError('suraNumber should be integer')
+    if suraNumber <=0 or suraNumber > arabic.swar_num:
+        raise ValueError('suraNumber should be in range [1-114]')
+
     frequency = {}
     #get all Quran if suraNumber is None
     if suraNumber == None:
@@ -145,6 +153,13 @@ def check_sura_with_frequency(sura_num,freq_dec):
         Boolean: True :- if compatible 
                  Flase :- if not
     """
+    if type(sura_num) != int:
+        raise TypeError('sura_num should be integer')
+    if type(freq_dec) != dict:
+        raise TypeError('freq_dec should be dictionary')
+    if sura_num <=0:
+        raise ValueError('sura_num should be in range [1-114]')
+
     #get number of chars in frequency dec
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
@@ -169,6 +184,13 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
        Returns:
           dict : sorted dictionary 
     """
+    if type(threshold) != float:
+        raise TypeError('threshold should be float')
+    if type(frequency_dictionary) != dict:
+        raise TypeError('frequency_dictionary should be dictionary')
+    if threshold < 0 or threshold > 1:
+        raise ValueError('threshold should be float number in range [0-1]')
+    
     # list of dictionaries and every dictionary has similar words and we will call every dictionary as 'X'
     list_of_dics = []
     # this dictionary key is a position of 'X' and value the sum of frequencies of 'X'
@@ -233,6 +255,11 @@ def generate_latex_table(dictionary,filename,location="."):
                  Flase :- if something wrong with folder name    
         
     """
+    if type(filename) != str:
+        raise TypeError('filename should be string')
+    if type(dictionary) != dict:
+        raise TypeError('dictionary should be dictionary')
+    
     head_code = """\\documentclass{article}
 %In the preamble section include the arabtex and utf8 packages
 \\usepackage{arabtex}
@@ -496,6 +523,15 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
              {dic} : a dictionary and keys is a characters 
                      and value is count of every chracter.
     """
+    if type(characters) != list:
+        raise TypeError('characters should be list of characters')
+    if type(verse) != str and verse != None:
+        raise TypeError('str should be string')
+    if type(chapterNum) != int:
+        raise TypeError('chapterNum  should be integer')
+    if type(verseNum) != int:
+        raise TypeError('verseNum  should be integer')
+    
     #dectionary that have frequency 
     frequency = dict()
     #check if count specific verse
@@ -507,11 +543,13 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
         
     #check if count specific chapter
     elif chapterNum!=0:
+        if chapterNum <0 or chapterNum > arabic.swar_num:
+            raise ValueError('chapterNum should be integer number in range [1-114]')
         #check if count specific verse in this chapter
         if verseNum!=0:
             #check if verseNum out of range
             if(verseNum<0):
-                return dict()
+                raise ValueError('chapterNum should be positive integer ')
             verse = get_sura(chapterNum,with_tashkeel=with_tashkeel)[verseNum-1]
             #count frequency of chars
             frequency = hellper_frequency_of_chars_in_verse(verse,characters)
@@ -522,6 +560,8 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
             frequency = hellper_frequency_of_chars_in_verse(chapter,characters)
     else:
         if verseNum!=0:
+            if(verseNum<0):
+                raise ValueError('chapterNum should be positive integer ')
             #count for specific verse in all Quran 
             Quran = ""
             for i in range(swar_num):
@@ -553,8 +593,20 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
         Returns:
             str :  return verse
     """
-    if(chapterNum > swar_num or verseNum<=0 or tokenNum<=0):
-        return ""
+    if type(tokenNum) != int:
+        raise TypeError('tokenNum should be integer')
+    if type(chapterNum) != int:
+        raise TypeError('chapterNum  should be integer')
+    if type(verseNum) != int:
+        raise TypeError('verseNum  should be integer')
+
+    if chapterNum < 0 or chapterNum > arabic.swar_num:
+        raise ValueError('chapterNum should be integer number in range [1-114]')
+    if tokenNum <= 0:
+        raise ValueError('tokenNum should be positive integer numbers and > 0')
+    if(verseNum<0):
+        raise ValueError('chapterNum should be positive integer ')
+
     try:
         tokens = get_sura(chapterNum,with_tashkeel)[verseNum-1].split()
         if tokenNum > len(tokens):
@@ -613,7 +665,24 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
         Returns:
             dict() :  key is sequances and value is a list of matched_sequance 
                       and their positions
-    """    
+    """
+    if type(sequancesList) != list:
+        raise TypeError('sequancesList should to be list of strings')
+    if type(verse) != str and verse != None:
+        raise TypeError('verse should to be string')
+    if type(chapterNum) != int:
+        raise ValueError('chapterNum  should be integer')
+    if type(verseNum) != int:
+        raise ValueError('verseNum  should be integer')
+
+    if chapterNum < 0 or chapterNum > arabic.swar_num:
+        raise ValueError('chapterNum should be integer number in range [1-114]')
+    if(verseNum<0):
+        raise ValueError('verseNumr should be positive integer and > 0')
+    if mode <= 0 or mode > 3:
+        raise ValueError('mode should be positive integer numbers 1,2 or 3 only')
+    
+    
     final_dict = dict()
     #loop on all sequances
     for sequance in sequancesList:
@@ -869,11 +938,25 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
               so it's not support to search on All-Quran becouse 
               it take very long time more than 11 min.
     '''
+    if type(pattern) != str or len(pattern)!= (pattern.count('0')+pattern.count('1')):
+        raise TypeError('pattern should to be string of 0\'s and 1\'s like \'011011010\'')
+    if type(sentence) != str and sentence != None:
+        raise TypeError('sentece should to be string')
+    if type(chapterNum) != int and chapterNum != None:
+        raise TypeError('chapterNum  should be integer')
+    if type(verseNum) != int and verseNum != None:
+        raise TypeError('verseNum  should be integer')
+
+    if chapterNum < 0 or chapterNum > arabic.swar_num:
+        raise ValueError('chapterNum should be integer number in range [1-114]')
+    if(verseNum!=None and  verseNum<0):
+        raise ValueError('verseNumr should be positive integer and > 0')
+    
     if threshold > 1 or threshold < 0:
-        sys.exit('Threshold should be 0 <= Threshold <= 1')
+       raise ValueError('Threshold should be 0 <= Threshold <= 1')
     pattern = pattern.replace(' ','')
     if len(pattern)<=0:
-        sys.exit('pattern don\'t passed')
+        raise ValueError('pattern don\'t passed')
     
     #check if sentece exist
     if sentence != None:
@@ -896,7 +979,7 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
                 sentence = " ".join(get_sura(chapterNum,True))
         #search in all Quran
         else:
-            sys.exit('please send sentece or verseNum and chapterNum to search.')
+            raise ValueError('please send sentece or verseNum and chapterNum to search.')
         
         #convert sentence to 0/1
         sentence_pattern,taskieel = get_tashkeel_binary(sentence)
