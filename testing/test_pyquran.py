@@ -194,7 +194,7 @@ class Testing_pyquran(unittest.TestCase):
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
 
-       def test_buckwalter_transliteration(self):
+    def test_buckwalter_transliteration(self):
            # test case 1:"from arabic without tashkeel to buckwalter "
            self.assertEqual(buckwalter_transliteration("مرحبا"), "mrHbA")
 
@@ -209,6 +209,12 @@ class Testing_pyquran(unittest.TestCase):
            expectedTransliteration = "مُتَسَاوِينَ فِي ٱلْكَرَامَةِ وَٱلْحُقُوقِ."
            self.assertEqual(buckwalter_transliteration(bulkwalter, True),
                             expectedTransliteration)
+
+    def test_get_verse_count(self):
+        # count elfatha with basmala
+        self.assertEqual(get_verse_count(get_sura(1)), 7)
+
+        self.assertEqual(get_verse_count(get_sura(9)), 129)
 
 
 if __name__ == '__main__':
