@@ -216,6 +216,12 @@ class Testing_pyquran(unittest.TestCase):
 
         self.assertEqual(get_verse_count(get_sura(9)), 129)
 
+    def test_count_token(self):
+        # count sura's tokens
+        self.assertEqual(count_token(get_sura(112)), 15)
+        # count ayah's tokens
+        self.assertEqual(count_token(get_sura(112)[0]), 4)
+
 
 if __name__ == '__main__':
     unittest.main()
