@@ -1,7 +1,7 @@
 """unittest module for pyquran.py
 """
 import unittest
-
+import numpy as np
 # Adding another searching path
 from sys import path
 path.append('../tools/')
@@ -168,6 +168,31 @@ class Testing_pyquran(unittest.TestCase):
         result=search_with_pattern(pattern="01111",chapterNum=1,threshold=0.9)
         real=['الرَّحِيمِ مَلِكِ', 'نَعْبُدُ وَإِيَّاكَ', 'الْمُسْتَقِيمَ صِرَطَ']
         self.assertEqual(result,real)
-        
+
+
+    def test_count_shape(self):
+       # test case 1: small surah with system
+       system = [[beh, teh, theh], [jeem, hah, khah]]
+       returnedNParray = count_shape(get_sura(110), system)
+       expectedFROW = [1, 2, 1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 1,
+                       0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3,
+                       0, 1, 1, 1, 0, 0]
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       # test case 2: big surah with system
+       system = [[beh, teh, theh], [jeem, hah, khah]]
+       returnedNParray = count_shape(get_sura(2), system)
+       self.assertEqual(returnedNParray.shape, (286, 32))
+
+      # test case 3: without system
+       returnedNParray = count_shape(get_sura(110))
+       expectedFROW = [1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 0, 1, 1,
+                       0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+                       1, 0, 0, 3, 0, 1, 1, 1, 0, 0]
+       self.assertEqual(returnedNParray.shape, (3, 36))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+
 if __name__ == '__main__':
     unittest.main()
