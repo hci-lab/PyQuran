@@ -194,5 +194,22 @@ class Testing_pyquran(unittest.TestCase):
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
 
+       def test_buckwalter_transliteration(self):
+           # test case 1:"from arabic without tashkeel to buckwalter "
+           self.assertEqual(buckwalter_transliteration("مرحبا"), "mrHbA")
+
+           # test case 2:"from arabic with tashkeel to buckwalter "
+           arabicText = "يُولَدُ جَمِيعُ ٱلنّاسِ أَحْرَارًا مُتَسَاوِينَ فِي ٱلْكَرَامَةِ وَٱلْحُقُوقِ. وَقَدْ وُهِبُوا عَقْلًا وَضَمِيرًا وَعَلَيْهِمْ أَنْ يُعَامِلَ بَعْضُهُمْ بَعْضًا بِرُوحِ ٱلْإِخَاءِ"
+           expectedTransliteration = "yuwladu jamiyEu {ln~Asi >aHoraArFA mutasaAwiyna fiy {lokaraAmapi wa{loHuquwqi. waqado wuhibuwA EaqolFA waDamiyrFA waEalayohimo >ano yuEaAmila baEoDuhumo baEoDFA biruwHi {lo<ixaA'i"
+           self.assertEqual(buckwalter_transliteration(arabicText),
+                            expectedTransliteration)
+
+           # test case 3:"from buckwalter to arabic"
+           bulkwalter = "mutasaAwiyna fiy {lokaraAmapi wa{loHuquwqi."
+           expectedTransliteration = "مُتَسَاوِينَ فِي ٱلْكَرَامَةِ وَٱلْحُقُوقِ."
+           self.assertEqual(buckwalter_transliteration(bulkwalter, True),
+                            expectedTransliteration)
+
+
 if __name__ == '__main__':
     unittest.main()
