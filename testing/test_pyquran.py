@@ -175,7 +175,7 @@ class Testing_pyquran(unittest.TestCase):
     def test_count_shape(self):
        # test case 1: small surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
-       returnedNParray = count_shape(get_sura(110), system)
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
        expectedFROW = [1, 2, 1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 1,
                        0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3,
                        0, 1, 1, 1, 0, 0]
@@ -184,11 +184,11 @@ class Testing_pyquran(unittest.TestCase):
 
        # test case 2: big surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
-       returnedNParray = count_shape(get_sura(2), system)
+       returnedNParray = pyquran.count_shape(quran.get_sura(2), system)
        self.assertEqual(returnedNParray.shape, (286, 32))
 
       # test case 3: without system
-       returnedNParray = count_shape(get_sura(110))
+       returnedNParray = pyquran.count_shape(quran.get_sura(110))
        expectedFROW = [1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 0, 1, 1,
                        0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
                        1, 0, 0, 3, 0, 1, 1, 1, 0, 0]
@@ -198,31 +198,31 @@ class Testing_pyquran(unittest.TestCase):
 
     def test_buckwalter_transliteration(self):
            # test case 1:"from arabic without tashkeel to buckwalter "
-           self.assertEqual(buckwalter_transliteration("مرحبا"), "mrHbA")
+           self.assertEqual(pyquran.buckwalter_transliteration("مرحبا"), "mrHbA")
 
            # test case 2:"from arabic with tashkeel to buckwalter "
            arabicText = "يُولَدُ جَمِيعُ ٱلنّاسِ أَحْرَارًا مُتَسَاوِينَ فِي ٱلْكَرَامَةِ وَٱلْحُقُوقِ. وَقَدْ وُهِبُوا عَقْلًا وَضَمِيرًا وَعَلَيْهِمْ أَنْ يُعَامِلَ بَعْضُهُمْ بَعْضًا بِرُوحِ ٱلْإِخَاءِ"
            expectedTransliteration = "yuwladu jamiyEu {ln~Asi >aHoraArFA mutasaAwiyna fiy {lokaraAmapi wa{loHuquwqi. waqado wuhibuwA EaqolFA waDamiyrFA waEalayohimo >ano yuEaAmila baEoDuhumo baEoDFA biruwHi {lo<ixaA'i"
-           self.assertEqual(buckwalter_transliteration(arabicText),
+           self.assertEqual(pyquran.buckwalter_transliteration(arabicText),
                             expectedTransliteration)
 
            # test case 3:"from buckwalter to arabic"
            bulkwalter = "mutasaAwiyna fiy {lokaraAmapi wa{loHuquwqi."
            expectedTransliteration = "مُتَسَاوِينَ فِي ٱلْكَرَامَةِ وَٱلْحُقُوقِ."
-           self.assertEqual(buckwalter_transliteration(bulkwalter, True),
+           self.assertEqual(pyquran.buckwalter_transliteration(bulkwalter, True),
                             expectedTransliteration)
 
     def test_get_verse_count(self):
         # count elfatha with basmala
-        self.assertEqual(get_verse_count(get_sura(1)), 7)
+        self.assertEqual(pyquran.get_verse_count(quran.get_sura(1)), 7)
 
-        self.assertEqual(get_verse_count(get_sura(9)), 129)
+        self.assertEqual(pyquran.get_verse_count(quran.get_sura(9)), 129)
 
     def test_count_token(self):
         # count sura's tokens
-        self.assertEqual(count_token(get_sura(112)), 15)
+        self.assertEqual(pyquran.count_token(quran.get_sura(112)), 15)
         # count ayah's tokens
-        self.assertEqual(count_token(get_sura(112)[0]), 4)
+        self.assertEqual(pyquran.count_token(quran.get_sura(112)[0]), 4)
 
 
 if __name__ == '__main__':
