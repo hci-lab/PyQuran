@@ -1,6 +1,9 @@
 """This module contains Arabic tools for text analysis
 """
 
+# Umar; remove this to quran and correct the spelling to `suar_num`
+swar_num = 114
+
 # letters.
 hamza            = u'\u0621'
 alef_mad         = u'\u0622'
