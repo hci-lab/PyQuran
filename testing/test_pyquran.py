@@ -171,12 +171,24 @@ class Testing_pyquran(unittest.TestCase):
 
 
     def test_count_shape(self):
+       '''
        # test case 1: small surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
        returnedNParray = count_shape(get_sura(110), system)
        expectedFROW = [1, 2, 1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 1,
                        0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3,
                        0, 1, 1, 1, 0, 0]
+
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+       '''
+       # test case 1: small surah with system
+       system = [[beh, teh, theh], [jeem, hah, khah]]
+       returnedNParray = count_shape(get_sura(110), system)
+       expectedFROW = [1, 0, 0, 0, 1, 0, 4, 1, 0, 2, 0, 1, 1,
+                       0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3,
+                       0, 1, 1, 1, 0, 0]
+
        self.assertEqual(returnedNParray.shape, (3, 32))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
