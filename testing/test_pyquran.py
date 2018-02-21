@@ -205,6 +205,15 @@ class Testing_pyquran(unittest.TestCase):
        self.assertEqual(returnedNParray.shape, (3, 36))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
+       # Test case 4: repeat a char in two subsystems
+       system = [[beh, teh, theh], [jeem, hah, khah, beh]]
+       self.assertRaises(ValueError, count_shape, get_sura(110), system)
+
+       # Test case 5: path system as a list not list of lists
+       system = [beh, teh, theh]
+       self.assertRaises(ValueError, count_shape, get_sura(110), system)
+
+
 
     def test_buckwalter_transliteration(self):
            # test case 1:"from arabic without tashkeel to buckwalter "
