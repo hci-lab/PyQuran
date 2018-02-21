@@ -203,17 +203,6 @@ class Systems:
     '''
     def __init__(self):
         # 
-        '''
-        [['ب', 'ت', 'ث', 'ن'], 
-         ['ح', 'خ', 'ج'],
-         ['د', 'ذ'],
-         ['ر', 'ز'],
-         ['س', 'ش'],
-         ['ص', 'ض'], 
-         ['ط', 'ظ'], 
-         ['ع', 'غ'], 
-         ['ف', 'ق']]
-        '''
         self.withoutDots = [behLike,
                             jeemLike,
                             dalLike,
@@ -225,9 +214,17 @@ class Systems:
                             fehLike]
 
         # 
+        self.hamazat = [hamzat]
+
+        # 
+        self.default = alphabet
+# END CLASS
+
 
 systems = Systems()
 print(systems.withoutDots)
+print(systems.hamazat)
+print(systems.default)
 
 
 
