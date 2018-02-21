@@ -196,6 +196,42 @@ sun_letters = [
         noon             , 
     ]
 
+
+# Systems
+class Systems:
+    '''A container for systems.
+    '''
+    def __init__(self):
+        # 
+        '''
+        [['ب', 'ت', 'ث', 'ن'], 
+         ['ح', 'خ', 'ج'],
+         ['د', 'ذ'],
+         ['ر', 'ز'],
+         ['س', 'ش'],
+         ['ص', 'ض'], 
+         ['ط', 'ظ'], 
+         ['ع', 'غ'], 
+         ['ف', 'ق']]
+        '''
+        self.withoutDots = [behLike,
+                            jeemLike,
+                            dalLike,
+                            rehLike,
+                            seenLike,
+                            sadLike,
+                            tahLike,
+                            ainLike,
+                            fehLike]
+
+        # 
+
+systems = Systems()
+print(systems.withoutDots)
+
+
+
+
 """
     * Some alphabet building tools
 """
