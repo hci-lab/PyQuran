@@ -394,7 +394,6 @@ def count_shape(text, system=None):
 
     """
     listOfAlphabet = sorted(list(alphabet))
-
     if system == None:
         alphabetMap = dict()
 
@@ -846,11 +845,16 @@ def check_system(system, indx=None):
      Returns:
          list: full sorted system or a spesefic index.
     '''
-    if indx==None:
-        return (system + [[char] for char in check_all_alphabet(system)])
-    else:
-        return (system + [[char] for char in check_all_alphabet(system)])[indx]
+    listOfAlphabet = sorted(list(alphabet))
+    p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
 
+    systemDict = shape(system)
+    fullSys = [[key for key, value in systemDict.items() if value == i] for i
+               in range(p)]
+    if indx==None:
+        return fullSys
+    else:
+        return fullSys[indx]
 
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
