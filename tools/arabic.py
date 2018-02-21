@@ -207,14 +207,14 @@ class Systems:
     def __init__(self):
         # 
         self.withoutDots = [behLike,
-                            jeemLike,
-                            dalLike,
-                            rehLike,
-                            seenLike,
-                            sadLike,
-                            tahLike,
-                            ainLike,
-                            fehLike]
+        jeemLike,
+        dalLike,
+        rehLike,
+        seenLike,
+        sadLike,
+        tahLike,
+        ainLike,
+        fehLike]
 
         # 
         self.hamazat = [hamzat]
