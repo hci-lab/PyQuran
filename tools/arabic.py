@@ -70,7 +70,7 @@ simple_lam_alef_hamza_below  = u'\u0644\u0625'
 simple_lam_alef_mad_above  = u'\u0644\u0622'
 
 # Lists
-alphabet = u''.join([
+alphabet = [
         hamza,   
         alef_hamza_above,  
         waw_hamza,  
@@ -107,7 +107,7 @@ alphabet = u''.join([
         alef_mad,  
         alef_maksura,  
         teh_marbuta
-        ])
+        ]
 
 tashkeel  = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda]
 harakat   = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun]
@@ -199,7 +199,7 @@ sun_letters = [
 
 # Systems
 class Systems:
-    '''A container for systems.
+    '''A container of systems.
     '''
     def __init__(self):
         # 
@@ -221,10 +221,8 @@ class Systems:
 # END CLASS
 
 
+# Exporting object
 systems = Systems()
-print(systems.withoutDots)
-print(systems.hamazat)
-print(systems.default)
 
 
 
