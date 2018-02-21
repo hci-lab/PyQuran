@@ -1,10 +1,6 @@
 """This module contains Arabic tools for text analysis
 """
 
-#number of swra in Quran
-swar_num = 114
-
-
 # letters.
 hamza            = u'\u0621'
 alef_mad         = u'\u0622'
@@ -47,7 +43,6 @@ hamza_above      = u'\u0654'
 hamza_below      = u'\u0655'
 alef_wasl        = u'\u0671'
 
-
 tatweel          = u'\u0640'
 
 # diacritics
@@ -76,6 +71,11 @@ simple_lam_alef_mad_above  = u'\u0644\u0622'
 
 # Lists
 alphabet = u''.join([
+        hamza,   
+        alef_hamza_above,  
+        waw_hamza,  
+        alef_hamza_below,
+        yeh_hamza, 
         alef, 
         beh,
         teh,
@@ -104,12 +104,7 @@ alphabet = u''.join([
         heh,  
         waw,  
         yeh, 
-        hamza,   
         alef_mad,  
-        alef_hamza_above,  
-        waw_hamza,  
-        alef_hamza_below,
-        yeh_hamza, 
         alef_maksura,  
         teh_marbuta
         ])
