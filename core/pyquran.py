@@ -10,21 +10,30 @@ This module contains tools for `Quranic Analysis`
 from sys import path
 path.append('../tools/')
 
+import quran
+import sys
+import error
 import numpy
 import operator
-from audioop import reverse
-import difflib as dif
-from itertools import chain
-import functools
-from collections import Counter, defaultdict
-from arabic import *
-import arabic
 import re
+import searchHelper
+import functools
+import difflib as dif
+import arabic
+from arabic import *
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
-from searchHelper import *
+
+
+from audioop import reverse
+from itertools import chain
+from collections import Counter, defaultdict
 from buckwalter import *
+from searchHelper import *
+import buckwalter
 from quran import *
 import sys
+import shapeHelper
+
 
 
 def parse_sura(n, alphabets=['ل', 'ب']):
@@ -60,7 +69,7 @@ def parse_sura(n, alphabets=['ل', 'ب']):
     
     """
     # getting the nth sura
-    sura  = get_sura(n)
+    sura  = quran.get_sura(n)
     # getting the ndarray dimensions 
     a = len(sura)
     m = len(alphabets)
@@ -128,13 +137,13 @@ def generate_frequency_dictionary(suraNumber=None):
     #get all Quran if suraNumber is None
     if suraNumber == None:
         #get all Quran as one sentence
-        Quran = ' '.join([' '.join(get_sura(i)) for i in range(1,115)])
+        Quran = ' '.join([' '.join(quran.get_sura(i)) for i in range(1,115)])
         #get all Quran frequency
         frequency=get_frequency(Quran)
     #get frequency of suraNumber
     else:
         #get sura from QuranCorpus
-        sura = get_sura(sura_number=suraNumber)
+        sura = quran.get_sura(sura_number=suraNumber)
         ayat = ' '.join(sura)
         #get frequency of sura 
         frequency = get_frequency(ayat)
@@ -163,7 +172,7 @@ def check_sura_with_frequency(sura_num,freq_dec):
     #get number of chars in frequency dec
     num_of_chars_in_dec = sum([len(word)*count for word,count in freq_dec.items()])
     #get number of chars in  original sura
-    num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in get_sura(sura_num)])
+    num_of_chars_in_sura = sum([len(aya.replace(' ',''))  for aya in quran.get_sura(sura_num)])
     # print(num_of_chars_in_dec ,"    ", num_of_chars_in_sura)
     if num_of_chars_in_dec == num_of_chars_in_sura:
         return True
@@ -313,12 +322,6 @@ def generate_latex_table(dictionary,filename,location="."):
     except:
         return False
 
-#I will move it to helper file
-def searcher(system, ch):
-    for i in range(0, len(system), 1):
-        if ch in system[i]:
-            return i #return i
-
 
 def shape(system):
     """
@@ -349,11 +352,11 @@ def shape(system):
         elif char in newAlphabet:
             #sublist that contain this char(give all chars the same indx)
             #drop this sublist from the system
-            systemItem = searcher(newSys, char)
+            systemItem = shapeHelper.searcher(newSys, char)
             for char in newSys[systemItem]:
                 alphabetMap.update({char: indx})
 
-            newSys.remove(newSys[systemItem])
+            newSys=newSys[0:systemItem]+newSys[systemItem+1:]
             newAlphabet = sorted(list(set(chain(*newSys))))
             indx = indx + 1
     '''
@@ -368,30 +371,6 @@ def shape(system):
     '''
     alphabetMap.update({" ": 70})
     return alphabetMap
-
-
-def convert_text_to_numbers(text,alphabetMap):
-    """
-         convert_text_to_numbers get a text (surah or ayah) and convert it to list of numbers
-         depends on alphabetMap dictionary , user pass the text "list or list of list" that want to count      
-         and dictionary that has each chat with it's number that will convert to,and returns a list of numbers
-
-         What it does:
-         it convert each letter to a number "corresponding to dictionary given as argument"
-
-         Args:
-             param1 ([str] ): a list of strings , each inner list is ayah .
-             param2(dict) : a dictionary has each alphabet with it's corresponding number
-         Returns:
-             List: list of numbers, where each char in the text converted to number
-
-    """
-    i=0
-    textToNumber=[]
-    for char in text:
-        textToNumber.insert(i, alphabetMap[char])
-        i = i + 1
-    return textToNumber
 
 
 def count_shape(text, system=None):
@@ -420,6 +399,8 @@ def count_shape(text, system=None):
             `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
 
     """
+
+    #"there are a intersection between subsets"
     listOfAlphabet = sorted(list(alphabet))
     if system == None:
         alphabetMap = dict()
@@ -432,8 +413,12 @@ def count_shape(text, system=None):
         p=len(listOfAlphabet)#+1 #the last one for space char
 
     else:
-       # if not isinstance(system, list):
-            #raise ValueError ("system must be list of list not list")
+        for subSys in system:
+            if not isinstance(subSys, list):
+                raise ValueError ("system must be list of list not list")
+        if shapeHelper.check_repetation(system):
+            raise ValueError("there are a repetation in your system")
+
         p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
         alphabetMap=shape(system)
     n=len(text)
@@ -442,7 +427,7 @@ def count_shape(text, system=None):
     j=0
     charCount =[]
     for verse in text:
-        verse=convert_text_to_numbers(verse, alphabetMap)
+        verse=shapeHelper.convert_text_to_numbers(verse, alphabetMap)
         for k in range(0,p,1) :
             charCount.insert(j, verse.count(k))
             j+=1
@@ -556,7 +541,7 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
         if not with_tashkeel:
             verse = strip_tashkeel(verse)
         #count frequency of chars
-        frequency = hellper_frequency_of_chars_in_verse(verse,characters)
+        frequency = searchHelper.hellper_frequency_of_chars_in_verse(verse,characters)
         
     #check if count specific chapter
     elif chapterNum!=0:
@@ -567,14 +552,14 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
             #check if verseNum out of range
             if(verseNum<0):
                 raise ValueError('chapterNum should be positive integer ')
-            verse = get_sura(chapterNum,with_tashkeel=with_tashkeel)[verseNum-1]
+            verse = quran.get_sura(chapterNum,with_tashkeel=with_tashkeel)[verseNum-1]
             #count frequency of chars
-            frequency = hellper_frequency_of_chars_in_verse(verse,characters)
+            frequency = searchHelper.hellper_frequency_of_chars_in_verse(verse,characters)
         else:
             #count on all chapter
-            chapter = " ".join(get_sura(chapterNum,with_tashkeel=with_tashkeel))
+            chapter = " ".join(quran.get_sura(chapterNum,with_tashkeel=with_tashkeel))
             #count frequency of chars
-            frequency = hellper_frequency_of_chars_in_verse(chapter,characters)
+            frequency = searchHelper.hellper_frequency_of_chars_in_verse(chapter,characters)
     else:
         if verseNum!=0:
             if(verseNum<0):
@@ -582,16 +567,16 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
             #count for specific verse in all Quran 
             Quran = ""
             for i in range(swar_num):
-                 Quran = Quran +" "+get_verse(i+1,verseNum,with_tashkeel=with_tashkeel)+" "
+                 Quran = Quran +" "+quran.get_verse(i+1,verseNum,with_tashkeel=with_tashkeel)+" "
             #count frequency of chars
-            frequency = hellper_frequency_of_chars_in_verse(Quran,characters)
+            frequency = searchHelper.hellper_frequency_of_chars_in_verse(Quran,characters)
         else:
             #count for all Quran 
             Quran = ""
             for i in range(swar_num):
-                 Quran = Quran +" "+ " ".join(get_sura(i+1,with_tashkeel=with_tashkeel))+" "
+                 Quran = Quran +" "+ " ".join(quran.get_sura(i+1,with_tashkeel=with_tashkeel))+" "
             #count frequency of chars
-            frequency = hellper_frequency_of_chars_in_verse(Quran,characters)
+            frequency = searchHelper.hellper_frequency_of_chars_in_verse(Quran,characters)
     return frequency
 
 
@@ -625,7 +610,7 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
         raise ValueError('chapterNum should be positive integer ')
 
     try:
-        tokens = get_sura(chapterNum,with_tashkeel)[verseNum-1].split()
+        tokens = quran.get_sura(chapterNum,with_tashkeel)[verseNum-1].split()
         if tokenNum > len(tokens):
             return ""
         else:
@@ -705,7 +690,7 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
     for sequance in sequancesList:
         #check mode 1 (taskeel to tashkeel)
         if mode==1:
-             final_dict[sequance] = hellper_pre_search_sequance(
+             final_dict[sequance] = searchHelper.hellper_pre_search_sequance(
                                     sequance=sequance,
                                     verse=verse,
                                     chapterNum=chapterNum,
@@ -713,7 +698,7 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
                                     with_tashkeel=True)
         # chaeck mode 2 (without taskeel to without tashkeel)
         elif mode==2:
-            final_dict[sequance] = hellper_pre_search_sequance(
+            final_dict[sequance] = searchHelper.hellper_pre_search_sequance(
                                    sequance=sequance,
                                    verse=verse,
                                    chapterNum=chapterNum,
@@ -722,7 +707,7 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
         # chaeck mode 3 (without taskeel to with tashkeel)
         elif mode==3:
             sequance = strip_tashkeel(sequance)
-            final_dict[sequance] = hellper_pre_search_sequance(
+            final_dict[sequance] = searchHelper.hellper_pre_search_sequance(
                                    sequance=sequance,
                                    verse=verse,
                                    chapterNum=chapterNum,
@@ -747,17 +732,20 @@ def search_string_with_tashkeel(string, key):
          Searches tashkeel that is exciplitly included in string.
 
     """
+
+    error.is_string(string, 'You must pass an string.')
+
     # tashkeel pattern
-    string_tashkeel_only = get_string_taskeel(string)
+    string_tashkeel_only = searchHelper.get_string_taskeel(string)
 
     # searching taskeel pattern
     results = []
     for m in re.finditer(key, string_tashkeel_only):
 
         spacesBeforeStart = \
-            count_spaces_before_index(string_tashkeel_only, m.start())
+            searchHelper.count_spaces_before_index(string_tashkeel_only, m.start())
         spacesBeforeEnd = \
-            count_spaces_before_index(string_tashkeel_only, m.start())
+            searchHelper.count_spaces_before_index(string_tashkeel_only, m.start())
 
         begin =  m.start() * 2 - spacesBeforeStart
         end   = m.end() * 2 - spacesBeforeEnd
@@ -786,7 +774,7 @@ def buckwalter_transliteration(string, reverse=False):
      Returns:
          str : a string, a Unicode or buckwalter 
     """
-   for key, value in buck2uni.items():
+   for key, value in buckwalter.buck2uni.items():
        if not reverse:
             string = string.replace(value, key)
        else:
@@ -914,6 +902,9 @@ def check_system(system, indx=None):
      Returns:
          list: full sorted system or a spesefic index.
     '''
+    if shapeHelper.check_repetation(system) == True:
+        raise ValueError ("there are a repetation in your system")
+
     listOfAlphabet = sorted(list(alphabet))
     p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
 
@@ -984,7 +975,7 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
     if sentence != None:
         #convert sentence to 0/1
         sentence_pattern,taskieel = get_tashkeel_binary(sentence)
-        return hellper_search_with_pattern(pattern=pattern,
+        return searchHelper.hellper_search_with_pattern(pattern=pattern,
                                            sentence_pattern=sentence_pattern,
                                            sentence=sentence,
                                            ratio=threshold)
@@ -993,12 +984,12 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
         if chapterNum != None:
             #check if search in specific verese
             if verseNum != None:
-                sentence = get_verse(chapterNum=chapterNum,
+                sentence = quran.get_verse(chapterNum=chapterNum,
                                      verseNum=verseNum,
                                      with_tashkeel=True)
             #search in all chapter
             else:
-                sentence = " ".join(get_sura(chapterNum,True))
+                sentence = " ".join(quran.get_sura(chapterNum,True))
         #search in all Quran
         else:
             raise ValueError('please send sentece or verseNum and chapterNum to search.')
@@ -1010,7 +1001,7 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
         if pattern not in sentence_pattern_without_spaces:
             return []
         else:
-            return hellper_search_with_pattern(pattern=pattern,
+            return searchHelper.hellper_search_with_pattern(pattern=pattern,
                                                sentence_pattern=sentence_pattern,
                                                sentence=sentence,
                                                ratio=threshold)
