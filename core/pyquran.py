@@ -23,14 +23,11 @@ import arabic
 from arabic import *
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
 
-
 from audioop import reverse
 from itertools import chain
 from collections import Counter, defaultdict
-from buckwalter import *
-from searchHelper import *
+
 import buckwalter
-from quran import *
 import sys
 import shapeHelper
 
