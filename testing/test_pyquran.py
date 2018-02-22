@@ -171,17 +171,6 @@ class Testing_pyquran(unittest.TestCase):
 
 
     def test_count_shape(self):
-       '''
-       # test case 1: small surah with system
-       system = [[beh, teh, theh], [jeem, hah, khah]]
-       returnedNParray = count_shape(get_sura(110), system)
-       expectedFROW = [1, 2, 1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 1,
-                       0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3,
-                       0, 1, 1, 1, 0, 0]
-
-       self.assertEqual(returnedNParray.shape, (3, 32))
-       self.assertEqual(list(returnedNParray[0]), expectedFROW)
-       '''
        # test case 1: small surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
        returnedNParray = count_shape(get_sura(110), system)
@@ -209,10 +198,19 @@ class Testing_pyquran(unittest.TestCase):
        system = [[beh, teh, theh], [jeem, hah, khah, beh]]
        self.assertRaises(ValueError, count_shape, get_sura(110), system)
 
-       # Test case 5: path system as a list not list of lists
-       system = [beh, teh, theh]
-       self.assertRaises(ValueError, count_shape, get_sura(110), system)
+       # Test case 5: path a system (as a list not list of lists)
+       self.assertRaises(ValueError, count_shape, get_sura(110), [beh, teh, theh])
+       self.assertRaises(ValueError, count_shape, get_sura(110), [[beh, teh, theh], hah])
 
+    def test_check_system(self):
+        system = [[beh, teh, theh], [jeem, hah, khah]]
+        actualList = check_system(system)
+        self.assertEqual(len(actualList), 32)
+        indx = sorted(list(alphabet)).index(beh)
+        self.assertEqual(actualList[indx], [beh, teh, theh])
+        indx = sorted(list(alphabet)).index(jeem)
+        # subtract 2 because teh and theh count as beh(all of them equal 7)
+        self.assertEqual(actualList[indx-2], [jeem, hah, khah])
 
 
     def test_buckwalter_transliteration(self):

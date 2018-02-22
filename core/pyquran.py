@@ -21,10 +21,10 @@ from arabic import *
 import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
 from searchHelper import *
-from buckwalter import *
+import buckwalter
 from quran import *
 import sys
-from shapeHelper import *
+import shapeHelper
 
 def parse_sura(n, alphabets=['ل', 'ب']):
     """parses the sura and returns a matrix (ndarray),
@@ -316,11 +316,11 @@ def shape(system):
         elif char in newAlphabet:
             #sublist that contain this char(give all chars the same indx)
             #drop this sublist from the system
-            systemItem = searcher(newSys, char)
+            systemItem = shapeHelper.searcher(newSys, char)
             for char in newSys[systemItem]:
                 alphabetMap.update({char: indx})
 
-            newSys.remove(newSys[systemItem])
+            newSys=newSys[0:systemItem]+newSys[systemItem+1:]
             newAlphabet = sorted(list(set(chain(*newSys))))
             indx = indx + 1
     '''
@@ -377,9 +377,10 @@ def count_shape(text, system=None):
         p=len(listOfAlphabet)#+1 #the last one for space char
 
     else:
-        if not isinstance(system[0], list):
-            raise ValueError ("system must be list of list not list")
-        if check_repetation(system):
+        for subSys in system:
+            if not isinstance(subSys, list):
+                raise ValueError ("system must be list of list not list")
+        if shapeHelper.check_repetation(system):
             raise ValueError("there are a repetation in your system")
 
         p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
@@ -390,7 +391,7 @@ def count_shape(text, system=None):
     j=0
     charCount =[]
     for verse in text:
-        verse=convert_text_to_numbers(verse, alphabetMap)
+        verse=shapeHelper.convert_text_to_numbers(verse, alphabetMap)
         for k in range(0,p,1) :
             charCount.insert(j, verse.count(k))
             j+=1
@@ -692,7 +693,7 @@ def buckwalter_transliteration(string, reverse=False):
      Returns:
          str : a string, a Unicode or buckwalter 
     """
-   for key, value in buck2uni.items():
+   for key, value in buckwalter.buck2uni.items():
        if not reverse:
             string = string.replace(value, key)
        else:
@@ -820,7 +821,7 @@ def check_system(system, indx=None):
      Returns:
          list: full sorted system or a spesefic index.
     '''
-    if check_repetation(system) == True:
+    if shapeHelper.check_repetation(system) == True:
         raise ValueError ("there are a repetation in your system")
 
     listOfAlphabet = sorted(list(alphabet))
