@@ -22,10 +22,18 @@ import difflib as dif
 import arabic
 from arabic import *
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
+
+
 from audioop import reverse
 from itertools import chain
 from collections import Counter, defaultdict
 from buckwalter import *
+from searchHelper import *
+import buckwalter
+from quran import *
+import sys
+import shapeHelper
+
 
 
 def parse_sura(n, alphabets=['ل', 'ب']):
@@ -315,7 +323,6 @@ def generate_latex_table(dictionary,filename,location="."):
         return False
 
 
-
 def shape(system):
     """
     	 shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
@@ -330,7 +337,7 @@ def shape(system):
             dictionary: with all alphabets, where each char "key"  have a value
             value will be equals for alphabets that will be count as oe shape
     """
-
+    newSys=system
     listOfAlphabet = sorted(list(alphabet))
     alphabetMap = dict()
     indx = 0
@@ -338,6 +345,21 @@ def shape(system):
     newAlphabet = sorted(list(set(chain(*system))))
     theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(newAlphabet)))
 
+    for char in listOfAlphabet:
+        if char in theRestOfAlphabets:
+            alphabetMap.update({char: indx})
+            indx = indx + 1
+        elif char in newAlphabet:
+            #sublist that contain this char(give all chars the same indx)
+            #drop this sublist from the system
+            systemItem = shapeHelper.searcher(newSys, char)
+            for char in newSys[systemItem]:
+                alphabetMap.update({char: indx})
+
+            newSys=newSys[0:systemItem]+newSys[systemItem+1:]
+            newAlphabet = sorted(list(set(chain(*newSys))))
+            indx = indx + 1
+    '''
     for setOfNewAlphabet in system:
         for char in setOfNewAlphabet:
             alphabetMap.update({char: indx})
@@ -346,33 +368,9 @@ def shape(system):
     for char in theRestOfAlphabets:
         alphabetMap.update({char: indx})
         indx = indx + 1
+    '''
     alphabetMap.update({" ": 70})
-
     return alphabetMap
-
-
-def convert_text_to_numbers(text,alphabetMap):
-    """
-         convert_text_to_numbers get a text (surah or ayah) and convert it to list of numbers
-         depends on alphabetMap dictionary , user pass the text "list or list of list" that want to count      
-         and dictionary that has each chat with it's number that will convert to,and returns a list of numbers
-
-         What it does:
-         it convert each letter to a number "corresponding to dictionary given as argument"
-
-         Args:
-             param1 ([str] ): a list of strings , each inner list is ayah .
-             param2(dict) : a dictionary has each alphabet with it's corresponding number
-         Returns:
-             List: list of numbers, where each char in the text converted to number
-
-    """
-    i=0
-    textToNumber=[]
-    for char in text:
-        textToNumber.insert(i, alphabetMap[char])
-        i = i + 1
-    return textToNumber
 
 
 def count_shape(text, system=None):
@@ -401,8 +399,9 @@ def count_shape(text, system=None):
             `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
 
     """
+
+    #"there are a intersection between subsets"
     listOfAlphabet = sorted(list(alphabet))
-    #print(listOfAlphabet)
     if system == None:
         alphabetMap = dict()
 
@@ -414,20 +413,22 @@ def count_shape(text, system=None):
         p=len(listOfAlphabet)#+1 #the last one for space char
 
     else:
-        alphabetMap=shape(system)
+        for subSys in system:
+            if not isinstance(subSys, list):
+                raise ValueError ("system must be list of list not list")
+        if shapeHelper.check_repetation(system):
+            raise ValueError("there are a repetation in your system")
 
-        p=len(listOfAlphabet)-len(list(set(chain(
-            *system))))+len(system)#+1 #the last one for space char
+        p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
+        alphabetMap=shape(system)
     n=len(text)
-    A=numpy.zeros((n, p), dtype=numpy.int)#(m-len(list(set(
-    # chain(*system)))))+len(system)
+    A=numpy.zeros((n, p), dtype=numpy.int)
     i=0
     j=0
     charCount =[]
     for verse in text:
-        verse=convert_text_to_numbers(verse, alphabetMap)
-        for k in range(0,p,1) :                   #for key, value in
-            # alphabetMap.items():
+        verse=shapeHelper.convert_text_to_numbers(verse, alphabetMap)
+        for k in range(0,p,1) :
             charCount.insert(j, verse.count(k))
             j+=1
         A[i, :] =charCount
@@ -773,7 +774,7 @@ def buckwalter_transliteration(string, reverse=False):
      Returns:
          str : a string, a Unicode or buckwalter 
     """
-   for key, value in buck2uni.items():
+   for key, value in buckwalter.buck2uni.items():
        if not reverse:
             string = string.replace(value, key)
        else:
@@ -901,11 +902,19 @@ def check_system(system, indx=None):
      Returns:
          list: full sorted system or a spesefic index.
     '''
-    if indx==None:
-        return (system + [[char] for char in check_all_alphabet(system)])
-    else:
-        return (system + [[char] for char in check_all_alphabet(system)])[indx]
+    if shapeHelper.check_repetation(system) == True:
+        raise ValueError ("there are a repetation in your system")
 
+    listOfAlphabet = sorted(list(alphabet))
+    p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
+
+    systemDict = shape(system)
+    fullSys = [[key for key, value in systemDict.items() if value == i] for i
+               in range(p)]
+    if indx==None:
+        return fullSys
+    else:
+        return fullSys[indx]
 
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
