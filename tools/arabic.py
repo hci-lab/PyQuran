@@ -1,9 +1,8 @@
 """This module contains Arabic tools for text analysis
 """
 
-#number of swra in Quran
+# Umar; remove this to quran and correct the spelling to `suar_num`
 swar_num = 114
-
 
 # letters.
 hamza            = u'\u0621'
@@ -47,7 +46,6 @@ hamza_above      = u'\u0654'
 hamza_below      = u'\u0655'
 alef_wasl        = u'\u0671'
 
-
 tatweel          = u'\u0640'
 
 # diacritics
@@ -75,7 +73,12 @@ simple_lam_alef_hamza_below  = u'\u0644\u0625'
 simple_lam_alef_mad_above  = u'\u0644\u0622'
 
 # Lists
-alphabet = u''.join([
+alphabet = [
+        hamza,   
+        alef_hamza_above,  
+        waw_hamza,  
+        alef_hamza_below,
+        yeh_hamza, 
         alef, 
         beh,
         teh,
@@ -104,15 +107,10 @@ alphabet = u''.join([
         heh,  
         waw,  
         yeh, 
-        hamza,   
         alef_mad,  
-        alef_hamza_above,  
-        waw_hamza,  
-        alef_hamza_below,
-        yeh_hamza, 
         alef_maksura,  
         teh_marbuta
-        ])
+        ]
 
 tashkeel  = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda]
 harakat   = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun]
@@ -200,6 +198,37 @@ sun_letters = [
         lam              , 
         noon             , 
     ]
+
+
+# Systems
+class Systems:
+    '''A container of systems.
+    '''
+    def __init__(self):
+        # 
+        self.withoutDots = [behLike,
+        jeemLike,
+        dalLike,
+        rehLike,
+        seenLike,
+        sadLike,
+        tahLike,
+        ainLike,
+        fehLike]
+
+        # 
+        self.hamazat = [hamzat]
+
+        # 
+        self.default = alphabet
+# END CLASS
+
+
+# Exporting object
+systems = Systems()
+
+
+
 
 """
     * Some alphabet building tools

@@ -3,6 +3,7 @@
 '''
 
 import arabic
+import error
 
 hamza_above     = '\u0654'
 small_high_meem = '\u06e2'
@@ -69,6 +70,9 @@ def recitation_symbols_filter(string, symbols=recitationSymbols ):
             param1(str): a string to be filtered
             param2([char]: a list of recitation symbols
     '''
+    
+    error.is_string(string, 'You must pass an string')
+
     for symbol in symbols:
         if symbol == alef_wasl_with_saad_above:
             string = string.replace(alef_wasl_with_saad_above, arabic.alef)
