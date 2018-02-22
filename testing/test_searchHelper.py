@@ -6,6 +6,7 @@ import unittest
 from sys import path
 path.append('../tools/')
 path.append('../core/')
+
 from quran import get_verse
 from searchHelper import *
 from pyquran import get_tashkeel_binary

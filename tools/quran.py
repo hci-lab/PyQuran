@@ -3,7 +3,8 @@
 from xml.etree import ElementTree
 from pyarabic.araby import strip_tashkeel
 from arabic import swar_num
-from filtering import *
+import filtering
+import error
 
 # Parsing xml
 xml_file_name = '../QuranCorpus/quran-uthmani.xml'
@@ -34,6 +35,13 @@ def get_sura(sura_number, with_tashkeel=False):
 
     """
     
+    message = "Sura number must be an integer between 1 to 114, inclusive."
+    error.is_int(sura_number, message)
+
+    message = "The second parameter must be bool, it an optional False by default"
+    error.is_bool(with_tashkeel, message)
+       
+    
     sura_number -= 1
     sura = []
     suras_list = quran_tree.findall('sura')
@@ -44,14 +52,12 @@ def get_sura(sura_number, with_tashkeel=False):
 
     uthmanic_free_sura = []
     for aya in sura:
-        uthmanic_free_sura.append(recitation_symbols_filter(aya))
+        uthmanic_free_sura.append(filtering.recitation_symbols_filter(aya))
 
     if not with_tashkeel:
        return list(map(strip_tashkeel, uthmanic_free_sura)) 
     else:
        return uthmanic_free_sura
-
-
 
 
 def fetch_aya(sura_number, aya_number):
@@ -65,9 +71,21 @@ def fetch_aya(sura_number, aya_number):
         str: an aya as a string
 
     """
+
+    message = "Sura number must be an integer between 1 to 114, inclusive."
+    error.is_int(sura_number, message)
+
+    message = "Aya number is a positive integer."
+    error.is_int(sura_number, message)
+
+
     aya_number -= 1
     sura = get_sura(sura_number)
+    if aya_number > len(sura) - 1:
+        raise ValueError('Aya number most not exceed the number of ayat in sura.')
     return sura[aya_number]
+
+
 
 def retrieve_qruan_as_one_strint():
     pass
