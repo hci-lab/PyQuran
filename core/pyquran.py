@@ -22,9 +22,13 @@ import difflib as dif
 import arabic
 from arabic import *
 from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
+
+
 from audioop import reverse
 from itertools import chain
 from collections import Counter, defaultdict
+
+
 import buckwalter
 import sys
 import shapeHelper
@@ -909,6 +913,12 @@ def check_system(system, indx=None):
     else:
         return fullSys[indx]
 
+#print(quran.get_sura(110))
+#system = [[jeem, alef_hamza_above, waw, ghain], [meem, sheen, teh_marbuta,
+        # zah],
+              #   [lam, alef_maksura, dal]]
+#print(count_shape(quran.get_sura(110), system))
+#print(check_system(system))
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
     '''

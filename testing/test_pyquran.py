@@ -184,6 +184,36 @@ class Testing_pyquran(unittest.TestCase):
        self.assertEqual(returnedNParray.shape, (3, 32))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
+       # Shuffle a subsystem "same result expected"
+       system = [[theh, beh, teh], [jeem, hah, khah]]
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       #Shuffle system "same result expected"
+       system = [[jeem, hah, khah], [theh, beh, teh]]
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       system = [[hah, jeem, khah], [theh, teh, beh]]
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       #build a very strange system :"D
+       system = [[jeem, alef_hamza_above, waw, ghain], [meem, sheen,
+                                                        teh_marbuta, zah],
+                 [lam, alef_maksura, dal]]
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       expectedFROW = [1, 0, 2, 0, 1, 0, 4, 0, 0, 1, 0, 1,
+                       0, 3, 1, 1, 0, 0, 1, 0, 0, 0, 1,
+                       0, 0, 1, 1, 0]
+       self.assertEqual(returnedNParray.shape, (3, 28))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+
+
 
        # test case 2: big surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
