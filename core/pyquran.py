@@ -906,30 +906,12 @@ def check_system(system, indx=None):
     p = len(alphabet) - len(list(set(chain(*system)))) + len(system)
 
     systemDict = shape(system)
-    print("blablabla")
-    for key, value in systemDict.items():
-        print(key)
     fullSys = [[key for key, value in systemDict.items() if value == i] for i
                in range(p)]
     if indx==None:
         return fullSys
     else:
         return fullSys[indx]
-
-#print(quran.get_sura(110))
-'''
-system = [[jeem, alef_hamza_above, waw, ghain],
-          [meem, sheen, teh_marbuta,zah],
-          [lam, alef_maksura, dal]]
-          
-
-print(count_shape(quran.get_sura(110), system))
-print(check_system(system))
-'''
-print(alphabet[7])
-system = [[beh, teh, theh], [jeem, hah, khah]]
-print(check_system(system, 7) == [beh, teh, theh])
-#print(check_system(system))
 
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
