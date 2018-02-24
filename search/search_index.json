@@ -1,0 +1,179 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "PyQuran: The Python package for Quranic Analysis\n\n\nPyQuran is a python package, that provides tools for \nQuranic Analysis\n.\n\n\nIt is still a small package which needs a lot of your effort. But, we think it is a seed of a fundamental general package for\ncomputations on \nQuran\n with Python, even at the most basic level which simply retrieving Quran text.\n\n\nBefore Islam\n, Arabic letters  were without  dots\u2014\n\nrasm\n, which resulted in ambiguty, two or three\nletters had the same rasm/form/shape/look. \n\n\nMuslims have decided to remove this ambiguity by adding\ndots above or below each letter of the ones which share the same rasm. Now each letter has a unique form. By the way,\noriginally, \nQuran\n was written without dots on the letters.\n\n\nTo enable you to use both modern system or other, we introduce \nalphabetical systems\n,\nIt is a dynamic construction of letters\u2014\n\nAlphabetical Systems\n.\n\n\nCurrent Features\n\n\n\n\nfetch chapters and verses.\n\n\nsearch Quran by text tokens and by diacritics patterns.\n\n\nbuckwalter transliteration, back and forth\n\n\nMultiple \nalphabetical systems\n, \nfor more details see the \nPyQuran Wiki\n\n\n\n\nInstall\n\n\n\n\nFrom \nPyPI\n: \n$ pip3 install pyquran\n\n\nFrom Source: \n$ python3 setup.py install\n\n\n\n\nDependencies\n\n\n\n\nnumpy\n\n\npyarabic\n\n\n\n\nQuran Corpus\n\n\nWe use \ntanzil\n Quran Corpus (\nUthmani Text\n), it is in \nUTF-8\n encoding. You\ncan find all unique characters of Uthmanic Corpus\n\nhere\n.\n\n\nThere are \nspecial recitation symbols\n \u0645\u0635\u0637\u0644\u062d\u0627\u062a \u0627\u0644\u0636\u0628\u0637 in the \nUthmani Text\n, they are a guide for the reciter\nto know the right positions to pause and the rules of tajweed.\nWe provide an interface to filter those symbols, \nonly the fly while fetching from the corpus\n,\nwe \nDO NOT\n change the corpus, NEVER.\n\n\nFor the full details about filtering \nspecial recitation symbols\n \u0645\u0635\u0637\u0644\u062d\u0627\u062a \u0627\u0644\u0636\u0628\u0637.\n\n\nContributing\n\n\nTo contribute and maintain \nPyQuran\n, Please read  \nCONTRIBUTING.md\n.\n\n\nSee also \nHow to contribute to PyQuran\n.\n\n\nCiting\n\n\nnot_completed_ (need to disscuss it with the prof.)\nCite \nPyQuran\n as the following \nBibTeX\n entry.\n\n\n@MISC {PyQuran2018,\nauthor             = \nWaleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa\n,\ntitle              = \nPyQuran\n,\nhowpublished       = \nhttps://github.com/TahaMagdy/PyQuran\n,\nmonth              = \nfeb\n,\nyear               = \n2018\n\n}\n\n\n\n\nCommunication\n\n\n\u0640not_completed_\n\n\nLicence\n\n\nnot_completed_ (need to discuss it with the prof.)", 
+            "title": "PyQuran: The Python package for Quranic Analysis"
+        }, 
+        {
+            "location": "/#pyquran-the-python-package-for-quranic-analysis", 
+            "text": "PyQuran is a python package, that provides tools for  Quranic Analysis .  It is still a small package which needs a lot of your effort. But, we think it is a seed of a fundamental general package for\ncomputations on  Quran  with Python, even at the most basic level which simply retrieving Quran text.  Before Islam , Arabic letters  were without  dots\u2014 rasm , which resulted in ambiguty, two or three\nletters had the same rasm/form/shape/look.   Muslims have decided to remove this ambiguity by adding\ndots above or below each letter of the ones which share the same rasm. Now each letter has a unique form. By the way,\noriginally,  Quran  was written without dots on the letters.  To enable you to use both modern system or other, we introduce  alphabetical systems ,\nIt is a dynamic construction of letters\u2014 Alphabetical Systems .", 
+            "title": "PyQuran: The Python package for Quranic Analysis"
+        }, 
+        {
+            "location": "/#current-features", 
+            "text": "fetch chapters and verses.  search Quran by text tokens and by diacritics patterns.  buckwalter transliteration, back and forth  Multiple  alphabetical systems ,  for more details see the  PyQuran Wiki", 
+            "title": "Current Features"
+        }, 
+        {
+            "location": "/#install", 
+            "text": "From  PyPI :  $ pip3 install pyquran  From Source:  $ python3 setup.py install", 
+            "title": "Install"
+        }, 
+        {
+            "location": "/#dependencies", 
+            "text": "numpy  pyarabic", 
+            "title": "Dependencies"
+        }, 
+        {
+            "location": "/#quran-corpus", 
+            "text": "We use  tanzil  Quran Corpus ( Uthmani Text ), it is in  UTF-8  encoding. You\ncan find all unique characters of Uthmanic Corpus here .  There are  special recitation symbols  \u0645\u0635\u0637\u0644\u062d\u0627\u062a \u0627\u0644\u0636\u0628\u0637 in the  Uthmani Text , they are a guide for the reciter\nto know the right positions to pause and the rules of tajweed.\nWe provide an interface to filter those symbols,  only the fly while fetching from the corpus ,\nwe  DO NOT  change the corpus, NEVER.  For the full details about filtering  special recitation symbols  \u0645\u0635\u0637\u0644\u062d\u0627\u062a \u0627\u0644\u0636\u0628\u0637.", 
+            "title": "Quran Corpus"
+        }, 
+        {
+            "location": "/#contributing", 
+            "text": "To contribute and maintain  PyQuran , Please read   CONTRIBUTING.md .  See also  How to contribute to PyQuran .", 
+            "title": "Contributing"
+        }, 
+        {
+            "location": "/#citing", 
+            "text": "not_completed_ (need to disscuss it with the prof.)\nCite  PyQuran  as the following  BibTeX  entry.  @MISC {PyQuran2018,\nauthor             =  Waleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa ,\ntitle              =  PyQuran ,\nhowpublished       =  https://github.com/TahaMagdy/PyQuran ,\nmonth              =  feb ,\nyear               =  2018 \n}", 
+            "title": "Citing"
+        }, 
+        {
+            "location": "/#communication", 
+            "text": "\u0640not_completed_", 
+            "title": "Communication"
+        }, 
+        {
+            "location": "/#licence", 
+            "text": "not_completed_ (need to discuss it with the prof.)", 
+            "title": "Licence"
+        }, 
+        {
+            "location": "/Alphabetical-Systems/", 
+            "text": "What do we mean by Alphabetical Systems?!", 
+            "title": "Alphabetical Systems"
+        }, 
+        {
+            "location": "/CONTRIBUTING/", 
+            "text": "Contributing to PyQuran\n\n\nWe use GitHub issues for reporting bugs and for feature requests.\n\n\nIf you want to give us a hand, you may pick one of the opened issues and solve a bug, implement a feature request\nor to suggest a new missing feature.\n\n\nReporting issues\n\n\nWhen reporting a bug, use GitHub issue with the \nBug label\n, please include  as \nmuch details as possible about:\n- your operating system.\n- your python version.\n- a self-contained code to reproduce and demonstrate the Bug.\n\n\nIssue will be closed if the Bug cannot be reproduced.\n\n\nFeature Request\n\n\nWhenever you think \nPyQuran\n is missing a feature, create a GitHub issue with \nFeature Request label\n,\ndefine what you want precisely and include sufficient examples to cover all the new feature aspects.\n\n\nIf you would like to implement it by yourself, please read the \nContributing Code\n section.\n\n\nContributing Code\n\n\n_not_completed\n\n\ncode conventions\n\n\nYour code have to meet \nthese standartds\n,\nand follow \nthis style\n.\n\n\ncontributing flow\n\n\nAt first, fork the project \non GitHub\n,\nthen, create a \nfeature branch\n and start writing your changes. \nWe \nDO NOT\n accept changes to the \nmaster branch\n.\n\n\nOnce you are done, push the changes to \nyour feature branch\n, after that create a \npull request\n\nwith an expressive title and description.\n\n\ncommit messages\n\n\nIt is so important to commit properly\n, we expect you to commit every one logical change.\nA commit message should describe what have been changed, why, and reference issues fixed (if\nany). \n\n\nCommit Message Properties\n:\n1. The Fist line is the commit title, should be less then or equal 50 characters, it must be expressive.\n2. Keep the second line blank.\n3. Wrap all other lines in the message body at 80 columns.\n4. Include \nFixes #N\n, where \nN\n is the issue number the commit\n    fixes, if any.\n\n\nCommits should look like the following:\n\n\nexplain commit in one line\n\nBody of commit message is a few lines of text, explaining things\nin more detail, possibly giving some background about the issue\nbeing fixed, etc.\n\nThe body of the commit message **can be several paragraphs**, and\nplease do proper word-wrap and keep columns shorter than about\n80 characters.\n\nFixes #101\n\n\n\n\nTests\n\n\n_not_completed", 
+            "title": "CONTRIBUTING"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#contributing-to-pyquran", 
+            "text": "We use GitHub issues for reporting bugs and for feature requests.  If you want to give us a hand, you may pick one of the opened issues and solve a bug, implement a feature request\nor to suggest a new missing feature.", 
+            "title": "Contributing to PyQuran"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#reporting-issues", 
+            "text": "When reporting a bug, use GitHub issue with the  Bug label , please include  as \nmuch details as possible about:\n- your operating system.\n- your python version.\n- a self-contained code to reproduce and demonstrate the Bug.  Issue will be closed if the Bug cannot be reproduced.", 
+            "title": "Reporting issues"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#feature-request", 
+            "text": "Whenever you think  PyQuran  is missing a feature, create a GitHub issue with  Feature Request label ,\ndefine what you want precisely and include sufficient examples to cover all the new feature aspects.  If you would like to implement it by yourself, please read the  Contributing Code  section.", 
+            "title": "Feature Request"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#contributing-code", 
+            "text": "_not_completed", 
+            "title": "Contributing Code"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#code-conventions", 
+            "text": "Your code have to meet  these standartds ,\nand follow  this style .", 
+            "title": "code conventions"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#contributing-flow", 
+            "text": "At first, fork the project  on GitHub ,\nthen, create a  feature branch  and start writing your changes. \nWe  DO NOT  accept changes to the  master branch .  Once you are done, push the changes to  your feature branch , after that create a  pull request \nwith an expressive title and description.", 
+            "title": "contributing flow"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#commit-messages", 
+            "text": "It is so important to commit properly , we expect you to commit every one logical change.\nA commit message should describe what have been changed, why, and reference issues fixed (if\nany).   Commit Message Properties :\n1. The Fist line is the commit title, should be less then or equal 50 characters, it must be expressive.\n2. Keep the second line blank.\n3. Wrap all other lines in the message body at 80 columns.\n4. Include  Fixes #N , where  N  is the issue number the commit\n    fixes, if any.  Commits should look like the following:  explain commit in one line\n\nBody of commit message is a few lines of text, explaining things\nin more detail, possibly giving some background about the issue\nbeing fixed, etc.\n\nThe body of the commit message **can be several paragraphs**, and\nplease do proper word-wrap and keep columns shorter than about\n80 characters.\n\nFixes #101", 
+            "title": "commit messages"
+        }, 
+        {
+            "location": "/CONTRIBUTING/#tests", 
+            "text": "_not_completed", 
+            "title": "Tests"
+        }, 
+        {
+            "location": "/FAQ/", 
+            "text": "Hello!", 
+            "title": "FAQ"
+        }, 
+        {
+            "location": "/Filtering-Special-Recitation-Symbols/", 
+            "text": "Quran Corpus\n\n\nAs it is mentioned in \nREADME\n\nwe use the \nUthmani Text\n of Quran from \ntanzil\n.\n\nThis is the its hashing \nMD5 (quran-uthmani.xml) = 6aae945d556a1b28cfe682c0ea5ab518\n.\n\n\nQuran is an Arabic book, which is written is Arabic Alphabet, but the \nQuran scholars\n have put\nsome marks to help reciters and readers in pronouncing and give them some guidance like the kind of \nsome letters and pause marks.\n\n\nThose are the unique characters in the corpus.\n\n((Table Unicode | Symbol  | Kind {letter/mark}))\n\n\nFiltering Recitation Symbols\n\n\nWhile fetching fetching from corpus, we run the following method to remove all\nthe recitation marks\u2014\nthey are NOT letters\n\u2014.\n\n\nThe only thing we replace, is the Alef wasl: \u0671, we add Alef: \u0627 instead, because alef wasl and alef are the same\none letter in Arabic, but alef wasl has a mark above it to indicate that it is not pronounced\nas a glottal stop in case of continuing, \nRead more about Alef Wasl\n.\n\n\nThis filtering is done in run time, we of course \ndo not\n change the corpus at all.\n\n\nThe functions code does filtering:\n\n\ndef recitation_symbols_filter(string, symbols=recitationSymbols ):\n    '''Removes the Special Recitation Symbols from `string`\n    \u00a6   Args:\n    \u00a6   \u00a6   param1(str): a string to be filtered\n    \u00a6   \u00a6   param2([char]): a list of recitation symbols\n    '''\n    for symbol in symbols:\n    \u00a6   if symbol == alef_wasl_with_saad_above:\n    \u00a6   \u00a6   string = string.replace(alef_wasl_with_saad_above, arabic.alef)\n    \u00a6   else:\n    \u00a6   \u00a6   string = string.replace(symbol, '')\n\n    return string\n\n\n\n\n\n\nAlso feel free to report any bug or lingual error, you are most welcome, just fire an issue.", 
+            "title": "Quran Corpus"
+        }, 
+        {
+            "location": "/Filtering-Special-Recitation-Symbols/#quran-corpus", 
+            "text": "As it is mentioned in  README \nwe use the  Uthmani Text  of Quran from  tanzil . \nThis is the its hashing  MD5 (quran-uthmani.xml) = 6aae945d556a1b28cfe682c0ea5ab518 .  Quran is an Arabic book, which is written is Arabic Alphabet, but the  Quran scholars  have put\nsome marks to help reciters and readers in pronouncing and give them some guidance like the kind of \nsome letters and pause marks.  Those are the unique characters in the corpus. \n((Table Unicode | Symbol  | Kind {letter/mark}))", 
+            "title": "Quran Corpus"
+        }, 
+        {
+            "location": "/Filtering-Special-Recitation-Symbols/#filtering-recitation-symbols", 
+            "text": "While fetching fetching from corpus, we run the following method to remove all\nthe recitation marks\u2014 they are NOT letters \u2014.  The only thing we replace, is the Alef wasl: \u0671, we add Alef: \u0627 instead, because alef wasl and alef are the same\none letter in Arabic, but alef wasl has a mark above it to indicate that it is not pronounced\nas a glottal stop in case of continuing,  Read more about Alef Wasl .  This filtering is done in run time, we of course  do not  change the corpus at all.  The functions code does filtering:  def recitation_symbols_filter(string, symbols=recitationSymbols ):\n    '''Removes the Special Recitation Symbols from `string`\n    \u00a6   Args:\n    \u00a6   \u00a6   param1(str): a string to be filtered\n    \u00a6   \u00a6   param2([char]): a list of recitation symbols\n    '''\n    for symbol in symbols:\n    \u00a6   if symbol == alef_wasl_with_saad_above:\n    \u00a6   \u00a6   string = string.replace(alef_wasl_with_saad_above, arabic.alef)\n    \u00a6   else:\n    \u00a6   \u00a6   string = string.replace(symbol, '')\n\n    return string   Also feel free to report any bug or lingual error, you are most welcome, just fire an issue.", 
+            "title": "Filtering Recitation Symbols"
+        }, 
+        {
+            "location": "/Home/", 
+            "text": "FAQ\n \u2014 answers to frequently asked questions\n\n\n\n\nDocumentation\n\n\nThis is suitable for the \nPyQuran\n users.\n\n\nDevelopment\n\n\nThis section is for \nPyQuran\n maintainers.\n\n\n\n\n\n\nProject Structure\n\n\nPyQuran\n is organized as the following:\n\n\ncore\n: contains main functions/modules.\n\n\ntools\n: contains helper functions/modules.\n\n\ntesting\n: contains unit tests for each module.\n\n\nQuranCorpus\n: contains Quran corpus and corpus hashes.\n\n\n\n\n.\n\u2502   README.md\n\u2502   setup.py\n|   __init__.py\n|       ...\n|\n\u2514\u2500\u2500\u2500core\n\u2502   \u2502   pyquran.py\n\u2502   \u2502      ...   \n|\n\u2514\u2500\u2500\u2500tools\n|   \u2502   filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500testing\n|   \u2502   test_filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500QuranCorpus\n    \u2502   quran-uthmani.xml\n    |      ...", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/Home/#documentation", 
+            "text": "This is suitable for the  PyQuran  users.", 
+            "title": "Documentation"
+        }, 
+        {
+            "location": "/Home/#development", 
+            "text": "This section is for  PyQuran  maintainers.", 
+            "title": "Development"
+        }, 
+        {
+            "location": "/Home/#project-structure", 
+            "text": "PyQuran  is organized as the following:  core : contains main functions/modules.  tools : contains helper functions/modules.  testing : contains unit tests for each module.  QuranCorpus : contains Quran corpus and corpus hashes.   .\n\u2502   README.md\n\u2502   setup.py\n|   __init__.py\n|       ...\n|\n\u2514\u2500\u2500\u2500core\n\u2502   \u2502   pyquran.py\n\u2502   \u2502      ...   \n|\n\u2514\u2500\u2500\u2500tools\n|   \u2502   filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500testing\n|   \u2502   test_filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500QuranCorpus\n    \u2502   quran-uthmani.xml\n    |      ...", 
+            "title": "Project Structure"
+        }, 
+        {
+            "location": "/PyQuran-Founders/", 
+            "text": "Graduation Project\n\n\nContacts\n\n\nWaleed A. Yousef, Ph.D.  \nwyousef at fci dot Helwan dot edu dot eg\n\nTaha Magdy: tahamagdy@fci.helwan.edu.eg\n\nUmar Mohammed: umar.ibrahime@fci.helwan.edu.eg", 
+            "title": "Graduation Project"
+        }, 
+        {
+            "location": "/PyQuran-Founders/#graduation-project", 
+            "text": "", 
+            "title": "Graduation Project"
+        }, 
+        {
+            "location": "/PyQuran-Founders/#contacts", 
+            "text": "Waleed A. Yousef, Ph.D.   wyousef at fci dot Helwan dot edu dot eg \nTaha Magdy: tahamagdy@fci.helwan.edu.eg \nUmar Mohammed: umar.ibrahime@fci.helwan.edu.eg", 
+            "title": "Contacts"
+        }, 
+        {
+            "location": "/Wiki-Home/", 
+            "text": "FAQ\n \u2014 answers to frequently asked questions\n\n\n\n\nDocumentation\n\n\nThis is suitable for the \nPyQuran\n users.\n\n\nDevelopment\n\n\nThis section is for \nPyQuran\n maintainers.\n\n\n\n\n\n\nProject Structure\n\n\nPyQuran\n is organized as the following:\n\n\ncore\n: contains main functions/modules.\n\n\ntools\n: contains helper functions/modules.\n\n\ntesting\n: contains unit tests for each module.\n\n\nQuranCorpus\n: contains Quran corpus and corpus hashes.\n\n\n\n\n.\n\u2502   README.md\n\u2502   setup.py\n|   __init__.py\n|       ...\n|\n\u2514\u2500\u2500\u2500core\n\u2502   \u2502   pyquran.py\n\u2502   \u2502      ...   \n|\n\u2514\u2500\u2500\u2500tools\n|   \u2502   filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500testing\n|   \u2502   test_filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500QuranCorpus\n    \u2502   quran-uthmani.xml\n    |      ...", 
+            "title": "Wiki Home"
+        }, 
+        {
+            "location": "/Wiki-Home/#documentation", 
+            "text": "This is suitable for the  PyQuran  users.", 
+            "title": "Documentation"
+        }, 
+        {
+            "location": "/Wiki-Home/#development", 
+            "text": "This section is for  PyQuran  maintainers.", 
+            "title": "Development"
+        }, 
+        {
+            "location": "/Wiki-Home/#project-structure", 
+            "text": "PyQuran  is organized as the following:  core : contains main functions/modules.  tools : contains helper functions/modules.  testing : contains unit tests for each module.  QuranCorpus : contains Quran corpus and corpus hashes.   .\n\u2502   README.md\n\u2502   setup.py\n|   __init__.py\n|       ...\n|\n\u2514\u2500\u2500\u2500core\n\u2502   \u2502   pyquran.py\n\u2502   \u2502      ...   \n|\n\u2514\u2500\u2500\u2500tools\n|   \u2502   filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500testing\n|   \u2502   test_filtering.py\n|   |      ...\n\u2502   \n\u2514\u2500\u2500\u2500QuranCorpus\n    \u2502   quran-uthmani.xml\n    |      ...", 
+            "title": "Project Structure"
+        }
+    ]
+}
