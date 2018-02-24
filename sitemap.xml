@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/Alphabetical-Systems/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,15 @@
     
     <url>
      <loc>/CONTRIBUTING/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/DOCUMENTATION/</loc>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +36,7 @@
     
     <url>
      <loc>/FAQ/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +44,7 @@
     
     <url>
      <loc>/Filtering-Special-Recitation-Symbols/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -44,7 +52,7 @@
     
     <url>
      <loc>/Home/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -52,7 +60,7 @@
     
     <url>
      <loc>/PyQuran-Founders/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -60,7 +68,7 @@
     
     <url>
      <loc>/Wiki-Home/</loc>
-     <lastmod>2018-02-24</lastmod>
+     <lastmod>2018-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
