@@ -914,11 +914,18 @@ def check_system(system, indx=None):
         return fullSys[indx]
 
 #print(quran.get_sura(110))
-#system = [[jeem, alef_hamza_above, waw, ghain], [meem, sheen, teh_marbuta,
-        # zah],
-              #   [lam, alef_maksura, dal]]
-#print(count_shape(quran.get_sura(110), system))
-#print(check_system(system))
+'''
+system = [[jeem, alef_hamza_above, waw, ghain],
+          [meem, sheen, teh_marbuta,zah],
+          [lam, alef_maksura, dal]]
+          
+
+print(count_shape(quran.get_sura(110), system))
+print(check_system(system))
+'''
+print(alphabet[7])
+system = [[beh, teh, theh], [jeem, hah, khah]]
+print(check_system(system, 7) == [beh, teh, theh])
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
     '''
