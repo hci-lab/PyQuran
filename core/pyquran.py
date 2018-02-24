@@ -32,7 +32,7 @@ from collections import Counter, defaultdict
 import buckwalter
 import sys
 import shapeHelper
-
+from collections import OrderedDict
 
 
 def parse_sura(n, alphabets=['ل', 'ب']):
@@ -337,7 +337,7 @@ def shape(system):
             value will be equals for alphabets that will be count as oe shape
     """
     newSys=system
-    alphabetMap = dict()
+    alphabetMap = OrderedDict()
     indx = 0
 
     newAlphabet = list(set(chain(*system)))
@@ -906,6 +906,9 @@ def check_system(system, indx=None):
     p = len(alphabet) - len(list(set(chain(*system)))) + len(system)
 
     systemDict = shape(system)
+    print("blablabla")
+    for key, value in systemDict.items():
+        print(key)
     fullSys = [[key for key, value in systemDict.items() if value == i] for i
                in range(p)]
     if indx==None:
@@ -926,6 +929,8 @@ print(check_system(system))
 print(alphabet[7])
 system = [[beh, teh, theh], [jeem, hah, khah]]
 print(check_system(system, 7) == [beh, teh, theh])
+#print(check_system(system))
+
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
     '''
