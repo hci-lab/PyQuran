@@ -74,13 +74,15 @@ simple_lam_alef_mad_above  = u'\u0644\u0622'
 
 # Lists
 alphabet = [
-        hamza,   
+        hamza,
+        alef_mad,   
         alef_hamza_above,  
         waw_hamza,  
         alef_hamza_below,
         yeh_hamza, 
         alef, 
         beh,
+        teh_marbuta,
         teh,
         theh,
         jeem,  
@@ -106,10 +108,8 @@ alphabet = [
         noon,  
         heh,  
         waw,  
-        yeh, 
-        alef_mad,  
-        alef_maksura,  
-        teh_marbuta
+        alef_maksura, 
+        yeh
         ]
 
 tashkeel  = [fathatan, dammatan,  kasratan, fatha, damma, kasra, sukun, shadda]

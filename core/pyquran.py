@@ -27,10 +27,11 @@ from audioop import reverse
 from itertools import chain
 from collections import Counter, defaultdict
 
+
 import buckwalter
 import sys
 import shapeHelper
-
+from collections import OrderedDict
 
 
 def parse_sura(n, alphabets=['ل', 'ب']):
@@ -335,14 +336,13 @@ def shape(system):
             value will be equals for alphabets that will be count as oe shape
     """
     newSys=system
-    listOfAlphabet = sorted(list(alphabet))
-    alphabetMap = dict()
+    alphabetMap = OrderedDict()
     indx = 0
 
-    newAlphabet = sorted(list(set(chain(*system))))
-    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(newAlphabet)))
+    newAlphabet = list(set(chain(*system)))
+    theRestOfAlphabets = list(set(alphabet) - set(newAlphabet))
 
-    for char in listOfAlphabet:
+    for char in alphabet:
         if char in theRestOfAlphabets:
             alphabetMap.update({char: indx})
             indx = indx + 1
@@ -354,7 +354,7 @@ def shape(system):
                 alphabetMap.update({char: indx})
 
             newSys=newSys[0:systemItem]+newSys[systemItem+1:]
-            newAlphabet = sorted(list(set(chain(*newSys))))
+            newAlphabet = list(set(chain(*newSys)))
             indx = indx + 1
     '''
     for setOfNewAlphabet in system:
@@ -398,16 +398,15 @@ def count_shape(text, system=None):
     """
 
     #"there are a intersection between subsets"
-    listOfAlphabet = sorted(list(alphabet))
     if system == None:
         alphabetMap = dict()
 
         indx = 0
-        for char in listOfAlphabet:
+        for char in alphabet:
             alphabetMap.update({char: indx})
             indx = indx + 1
         alphabetMap.update({" ": 70})
-        p=len(listOfAlphabet)#+1 #the last one for space char
+        p=len(alphabet)#+1 #the last one for space char
 
     else:
         for subSys in system:
@@ -416,8 +415,8 @@ def count_shape(text, system=None):
         if shapeHelper.check_repetation(system):
             raise ValueError("there are a repetation in your system")
 
-        p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
-        alphabetMap=shape(system)
+        p = len(alphabet) - len(list(set(chain(*system)))) + len(system)
+        alphabetMap = shape(system)
     n=len(text)
     A=numpy.zeros((n, p), dtype=numpy.int)
     i=0
@@ -874,10 +873,10 @@ def check_all_alphabet(system):
          list: include all other arabic alphabet.
     '''
 
-    listOfAlphabet = list(alphabet)
+
     if isinstance(system, list):
         system=list(chain(*system))
-    theRestOfAlphabets = sorted(list(set(listOfAlphabet) - set(system)))
+    theRestOfAlphabets = list(set(alphabet) - set(system))
     return theRestOfAlphabets
 
 
@@ -902,8 +901,8 @@ def check_system(system, indx=None):
     if shapeHelper.check_repetation(system) == True:
         raise ValueError ("there are a repetation in your system")
 
-    listOfAlphabet = sorted(list(alphabet))
-    p = len(listOfAlphabet) - len(list(set(chain(*system)))) + len(system)
+
+    p = len(alphabet) - len(list(set(chain(*system)))) + len(system)
 
     systemDict = shape(system)
     fullSys = [[key for key, value in systemDict.items() if value == i] for i

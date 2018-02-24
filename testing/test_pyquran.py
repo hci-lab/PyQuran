@@ -176,13 +176,53 @@ class Testing_pyquran(unittest.TestCase):
     def test_count_shape(self):
 
        # test case 1: small surah with system
-       system = [[beh, teh, theh], [jeem, hah, khah]]
+
+       system = [[beh, teh, theh],
+                 [jeem, hah, khah]]
+
+
        returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
        expectedFROW = [1, 0, 0, 0, 1, 0, 4, 1, 0, 2, 0, 1, 1,
                        0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
                        0, 3, 0, 1, 1, 1, 0, 0]
        self.assertEqual(returnedNParray.shape, (3, 32))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       # Shuffle a subsystem "same result expected"
+       system = [[theh, beh, teh],
+                 [jeem, hah, khah]]
+
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       #Shuffle system "same result expected"
+       system = [[jeem, hah, khah],
+                 [theh, beh, teh]]
+
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       system = [[hah, jeem, khah],
+                 [theh, teh, beh]]
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+       #build a very strange system :"D
+       system = [[jeem, alef_hamza_above, waw, ghain],
+                 [meem, sheen, teh_marbuta, zah],
+                 [lam, alef_maksura, dal]]
+
+       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       expectedFROW = [1, 0, 2, 0, 1, 0, 4, 0, 0, 1, 0, 1,
+                       0, 3, 1, 1, 0, 0, 1, 0, 0, 0, 1,
+                       0, 0, 1, 1, 0]
+       self.assertEqual(returnedNParray.shape, (3, 28))
+       self.assertEqual(list(returnedNParray[0]), expectedFROW)
+
+
 
 
        # test case 2: big surah with system
@@ -211,9 +251,9 @@ class Testing_pyquran(unittest.TestCase):
         system = [[beh, teh, theh], [jeem, hah, khah]]
         actualList = pyquran.check_system(system)
         self.assertEqual(len(actualList), 32)
-        indx = sorted(list(alphabet)).index(beh)
+        indx = list(alphabet).index(beh)
         self.assertEqual(actualList[indx], [beh, teh, theh])
-        indx = sorted(list(alphabet)).index(jeem)
+        indx = list(alphabet).index(jeem)
         # subtract 2 because teh and theh count as beh(all of them equal 7)
         self.assertEqual(actualList[indx-2], [jeem, hah, khah])
 
