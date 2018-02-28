@@ -18,8 +18,8 @@
   <script>
     // Current page data
     var mkdocs_page_name = "For maintainers";
-    var mkdocs_page_input_path = "maintainers.md";
-    var mkdocs_page_url = "/maintainers/";
+    var mkdocs_page_input_path = "CONTRIBUTING.md";
+    var mkdocs_page_url = "/CONTRIBUTING/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -64,7 +64,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../methods guide/">تهبيد</a>
+    <a class="" href="../analysis_tools/">Analysis Tools</a>
 	    </li>
           
             <li class="toctree-l1 current">
@@ -72,6 +72,21 @@
     <a class="current" href="./">For maintainers</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#contributing-to-pyquran">Contributing to PyQuran</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#reporting-issues">Reporting issues</a></li>
+        
+            <li><a class="toctree-l3" href="#feature-request">Feature Request</a></li>
+        
+            <li><a class="toctree-l3" href="#contributing-code">Contributing Code</a></li>
+        
+            <li><a class="toctree-l3" href="#tests">Tests</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -100,7 +115,7 @@
     <li>For maintainers</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/maintainers.md"
+        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/CONTRIBUTING.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -110,7 +125,58 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="contributing-to-pyquran">Contributing to PyQuran</h1>
+<p>We use GitHub issues for reporting bugs and for feature requests.</p>
+<p>If you want to give us a hand, you may pick one of the opened issues and solve a bug, implement a feature request
+or to suggest a new missing feature.</p>
+<h2 id="reporting-issues">Reporting issues</h2>
+<p>When reporting a bug, use GitHub issue with the <strong>Bug label</strong>, please include  as 
+much details as possible about:
+- your operating system.
+- your python version.
+- a self-contained code to reproduce and demonstrate the Bug.</p>
+<p><strong>Issue will be closed if the Bug cannot be reproduced.</strong></p>
+<h2 id="feature-request">Feature Request</h2>
+<p>Whenever you think <em>PyQuran</em> is missing a feature, create a GitHub issue with <strong>Feature Request label</strong>,
+define what you want precisely and include sufficient examples to cover all the new feature aspects.</p>
+<p>If you would like to implement it by yourself, please read the <a href="#contributing-code">Contributing Code</a> section.</p>
+<h2 id="contributing-code">Contributing Code</h2>
+<p>_not_completed</p>
+<h3 id="code-conventions">code conventions</h3>
+<p>Your code have to meet <a href="CodeConventions/README.md">these standartds</a>,
+and follow <a href="../CodeConventions/example_google.py">this style</a>.</p>
+<h3 id="contributing-flow">contributing flow</h3>
+<p>At first, fork the project <a href="https://github.com/TahaMagdy/PyQuran/">on GitHub</a>,
+then, create a <em>feature branch</em> and start writing your changes. 
+We <strong>DO NOT</strong> accept changes to the <em>master branch</em>.</p>
+<p>Once you are done, push the changes to <em>your feature branch</em>, after that create a <em>pull request</em>
+with an expressive title and description.</p>
+<h3 id="commit-messages">commit messages</h3>
+<p><strong>It is so important to commit properly</strong>, we expect you to commit every one logical change.
+A commit message should describe what have been changed, why, and reference issues fixed (if
+any). </p>
+<p><strong>Commit Message Properties</strong>:
+1. The Fist line is the commit title, should be less then or equal 50 characters, it must be expressive.
+2. Keep the second line blank.
+3. Wrap all other lines in the message body at 80 columns.
+4. Include <code>Fixes #N</code>, where <em>N</em> is the issue number the commit
+    fixes, if any.</p>
+<p>Commits should look like the following:</p>
+<pre><code class="text">explain commit in one line
+
+Body of commit message is a few lines of text, explaining things
+in more detail, possibly giving some background about the issue
+being fixed, etc.
+
+The body of the commit message **can be several paragraphs**, and
+please do proper word-wrap and keep columns shorter than about
+80 characters.
+
+Fixes #101
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+<p>_not_completed</p>
               
             </div>
           </div>
@@ -119,7 +185,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../methods guide/" class="btn btn-neutral" title="تهبيد"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../analysis_tools/" class="btn btn-neutral" title="Analysis Tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -147,7 +213,7 @@
           <a href="http://github.com/tahamagdy/pyquran/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../methods guide/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../analysis_tools/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
     </span>

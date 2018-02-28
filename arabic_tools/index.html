@@ -73,6 +73,10 @@
         
             <li><a class="toctree-l3" href="#buckwalter_transliteration">buckwalter_transliteration</a></li>
         
+            <li><a class="toctree-l3" href="#separate_token_with_diacritics">separate_token_with_diacritics</a></li>
+        
+            <li><a class="toctree-l3" href="#unpack_alef_mad">unpack_alef_mad</a></li>
+        
         </ul>
     
 
@@ -81,12 +85,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../methods guide/">تهبيد</a>
+    <a class="" href="../analysis_tools/">Analysis Tools</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../maintainers/">For maintainers</a>
+    <a class="" href="../CONTRIBUTING/">For maintainers</a>
 	    </li>
           
         </ul>
@@ -264,6 +268,35 @@ Out:
 <pre><code class="python">q.buckwalter_transliteration('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
 Out: &lt;in~aA &gt;aEoTayonaka Alokawovara
 </code></pre>
+
+<h3 id="separate_token_with_diacritics">separate_token_with_diacritics</h3>
+<pre><code class="python">separate_token_with_diacritics(sentence)
+</code></pre>
+
+<p>Grouping each letter with its diacritics. </p>
+<p><strong>Argument</strong></p>
+<ul>
+<li><strong>sentence</strong>: (str)</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
+Out: ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
+</code></pre>
+
+<h3 id="unpack_alef_mad">unpack_alef_mad</h3>
+<p><strong>unpack_alef_mad</strong></p>
+<pre><code class="python">unpack_alef_mad(sentance)
+</code></pre>
+
+<p>Factors alef_mad in a sentance into alef_hamza and alef and returns the sentance.</p>
+<p><strong>Argument</strong></p>
+<ul>
+<li><strong>sentance</strong>: (str)</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">q.unpack_alef_mad('آ')
+Out: 'أْأَ'
+</code></pre>
               
             </div>
           </div>
@@ -271,7 +304,7 @@ Out: &lt;in~aA &gt;aEoTayonaka Alokawovara
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../methods guide/" class="btn btn-neutral float-right" title="تهبيد">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../analysis_tools/" class="btn btn-neutral float-right" title="Analysis Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../quran_tools/" class="btn btn-neutral" title="Basic Tools for Quran"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -305,7 +338,7 @@ Out: &lt;in~aA &gt;aEoTayonaka Alokawovara
         <span><a href="../quran_tools/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../methods guide/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../analysis_tools/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

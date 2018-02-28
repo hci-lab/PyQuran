@@ -27,7 +27,7 @@
 
     
     <url>
-     <loc>/methods guide/</loc>
+     <loc>/analysis_tools/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -35,7 +35,7 @@
 
     
     <url>
-     <loc>/maintainers/</loc>
+     <loc>/CONTRIBUTING/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
