@@ -523,8 +523,6 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
     """
     if type(characters) != list:
         raise TypeError('characters should be list of characters')
-    if type(verse) != str and verse != None:
-        raise TypeError('str should be string')
     if type(chapterNum) != int:
         raise TypeError('chapterNum  should be integer')
     if type(verseNum) != int:
@@ -534,6 +532,8 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
     frequency = dict()
     #check if count specific verse
     if verse!=None:
+        if type(verse) != str:
+            raise TypeError('verse should be string')
         if not with_tashkeel:
             verse = strip_tashkeel(verse)
         #count frequency of chars
@@ -922,9 +922,9 @@ system = [[jeem, alef_hamza_above, waw, ghain],
 print(count_shape(quran.get_sura(110), system))
 print(check_system(system))
 '''
-print(alphabet[7])
+#print(alphabet[7])
 system = [[beh, teh, theh], [jeem, hah, khah]]
-print(check_system(system, 7) == [beh, teh, theh])
+#print(check_system(system, 7) == [beh, teh, theh])
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
     '''
