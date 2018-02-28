@@ -2,43 +2,45 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+        
     <url>
      <loc>/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     
 
     
+        
     <url>
      <loc>/quran_tools/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
+        
     <url>
      <loc>/arabic_tools/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
+        
     <url>
      <loc>/analysis_tools/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     
 
     
+        
     <url>
      <loc>/CONTRIBUTING/</loc>
      <lastmod>2018-02-28</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     
 
 </urlset>
