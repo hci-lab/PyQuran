@@ -53,6 +53,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>/code_conventions/</loc>
+     <lastmod>2018-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
 </urlset>
