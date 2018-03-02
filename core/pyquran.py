@@ -33,6 +33,10 @@ import sys
 import shapeHelper
 from collections import OrderedDict
 
+from xml.etree.ElementTree import ElementTree
+from xml.etree.ElementTree import Element
+import xml.etree.ElementTree as etree
+from xml.dom import minidom
 
 def parse_sura(n, alphabets=['ل', 'ب']):
     """parses the sura and returns a matrix (ndarray),
@@ -1054,3 +1058,19 @@ def frequency_quran_level():
         quranWordsFrequences.append(suraWordsFrequeces)
 
     return quranWordsFrequences
+
+
+def prettify(elem):
+    """Return a pretty-printed XML string for the Element.
+    """
+    rough_string = etree.tostring(elem, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    return reparsed.toprettyxml(indent="  ")
+
+
+def quran_words_frequences_data():
+    """Generate the entire words frequences of Quran into XML or JSON
+
+    """
+    pass
+
