@@ -1005,15 +1005,17 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
 def frequency_sura_level(suraNumber):
     """Computes the frequency dictionary for a sura
 
-    * frequency dictionary is a python dict.
-      its key is (str) word, its value is (int) word frequency
-
     Args:
         suraNumber (int)
 
     Return:
         [{word(str): word frequency(int)}]: 
             A list of frequency dictionaries for each verse of Sura.
+
+    Note:
+        * frequency dictionary is a python dict, which carryies word frequences
+          for an aya.
+        * Its key is (str) word, its value is (int) word frequency
     """
     # A list of frequency dictionaries
     frequency_ayat_list = []
@@ -1022,3 +1024,33 @@ def frequency_sura_level(suraNumber):
 
     return frequency_ayat_list
 
+
+def frequency_quran_level():
+    """Compute the words frequences of the Quran.
+
+    Returns:
+        [sura_level_frequency_dict]: Revise the output of frequency_sura_level.
+
+
+    Note:
+        * quranWordsFrequences contains 114 sura_level_words_frequences.
+        * Each sura_level_words_frequences contains frequency dictionary
+            for every aya.
+
+        In [19]: len(quran_words_frequences)
+        Out[19]: 114
+
+                 # Al Fati-ha
+        In [20]: len(quran_words_frequences[0])
+        Out[20]: 7
+    """
+
+    # * A list of sura level frequencies.
+    # * Each element is a list of ayat el-sura frequencies.
+    quranWordsFrequences = []
+
+    for suraNumber in range(1, 114 +1):
+        suraWordsFrequeces = frequency_sura_level(suraNumber)
+        quranWordsFrequences.append(suraWordsFrequeces)
+
+    return quranWordsFrequences
