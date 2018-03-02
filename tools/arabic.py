@@ -6,6 +6,7 @@ swar_num = 114
 
 # letters.
 hamza            = u'\u0621'
+hamza_above      = u'\u0654' # 
 alef_mad         = u'\u0622'
 alef_hamza_above = u'\u0623'
 waw_hamza        = u'\u0624'

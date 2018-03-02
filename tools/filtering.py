@@ -5,7 +5,7 @@
 import arabic
 import error
 
-hamza_above     = '\u0654'
+hamza_above     = '\u0654' # u'\u0654'
 small_high_meem = '\u06e2'
 small_low_meem  = '\u06ed'
 small_high_seen = '\u06dc'
@@ -25,7 +25,7 @@ rounded_high_stop_with_filled_centre = '\u06ec'
 
 
 recitationSymbols = [ 
-    alef_wasl_with_saad_above, # Rplace with alef
+    alef_wasl_with_saad_above, # Replace with alef
     hamza_above, # ???????
     small_high_meem, # Remove
     small_low_meem, # Remove
@@ -64,7 +64,19 @@ print(p.search(hamza_above))
 print(p.findall(hamza_above))
 '''
 
-def recitation_symbols_filter(string, symbols=recitationSymbols ):
+"""
+    problems;
+        * 'ء' is removed from AlNsaa 92  u'\u0621'
+        * hamza_above     = '\u0654' # u'\u0654'
+        * 1:126 الأخر what is this hamza?! is it أ or alef + hamza above?
+
+    In [1]: u'\u0621'
+    Out[1]: 'ء'
+
+    In [2]: '\u0654'
+    Out[2]: 'ٔ'
+"""
+def recitation_symbols_filter(string, symbols=recitationSymbols):
     '''Removes the Special Recitation Symbols from `string`
         Args:
             param1(str): a string to be filtered
@@ -76,6 +88,9 @@ def recitation_symbols_filter(string, symbols=recitationSymbols ):
     for symbol in symbols:
         if symbol == alef_wasl_with_saad_above:
             string = string.replace(alef_wasl_with_saad_above, arabic.alef)
+        # Do not remove
+        elif symbol == hamza_above:
+            continue
         else:
             string = string.replace(symbol, '')
 
