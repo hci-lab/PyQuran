@@ -1029,6 +1029,24 @@ def frequency_sura_level(suraNumber):
     return frequency_ayat_list
 
 
+def get_unique_words():
+    """retuerns a set of all unique words in Quran
+
+    TODO:
+        need to support suras as well.
+    """
+    # Unique words
+    words_set = set()
+    for i in range(1, 114+1):
+        sura  = quran.get_sura(i)
+        for aya in sura:
+            wordsList = aya.split(' ')
+            for word in wordsList:
+                words_set.add(word)
+
+    return words_set
+
+
 def frequency_quran_level():
     """Compute the words frequences of the Quran.
 
