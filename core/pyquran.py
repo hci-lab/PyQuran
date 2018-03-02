@@ -1001,3 +1001,24 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
                                                sentence_pattern=sentence_pattern,
                                                sentence=sentence,
                                                ratio=threshold)
+
+def frequency_sura_level(suraNumber):
+    """Computes the frequency dictionary for a sura
+
+    * frequency dictionary is a python dict.
+      its key is (str) word, its value is (int) word frequency
+
+    Args:
+        suraNumber (int)
+
+    Return:
+        [{word(str): word frequency(int)}]: 
+            A list of frequency dictionaries for each verse of Sura.
+    """
+    # A list of frequency dictionaries
+    frequency_ayat_list = []
+    for aya in quran.get_sura(suraNumber):
+        frequency_ayat_list.append(get_frequency(aya))
+
+    return frequency_ayat_list
+
