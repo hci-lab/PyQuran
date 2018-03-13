@@ -2,10 +2,23 @@
 """
 import unittest
 import numpy as np
+
 # Adding another searching path
 from sys import path
-path.append('../tools/')
-path.append('../core/')
+import os
+
+# The current path of the current module.
+path_current_module = os.path.dirname(os.path.abspath(__file__))
+tools_modules = '../tools/'
+core_modules = '../core/'
+
+tools_path = os.path.join(path_current_module, tools_modules)
+core_path  = os.path.join(path_current_module, core_modules)
+
+path.append(tools_path)
+path.append(core_path)
+
+
 
 from arabic import *
 import quran
@@ -182,10 +195,10 @@ class Testing_pyquran(unittest.TestCase):
 
 
        returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
-       expectedFROW = [1, 0, 0, 0, 1, 0, 4, 1, 0, 2, 0, 1, 1,
+       expectedFROW = [1, 0, 0, 0, 0, 1, 0, 4, 1, 0, 2, 0, 1, 1,
                        0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
                        0, 3, 0, 1, 1, 1, 0, 0]
-       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
        # Shuffle a subsystem "same result expected"
@@ -193,7 +206,7 @@ class Testing_pyquran(unittest.TestCase):
                  [jeem, hah, khah]]
 
        returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
-       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
        #Shuffle system "same result expected"
@@ -201,13 +214,13 @@ class Testing_pyquran(unittest.TestCase):
                  [theh, beh, teh]]
 
        returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
-       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
        system = [[hah, jeem, khah],
                  [theh, teh, beh]]
        returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
-       self.assertEqual(returnedNParray.shape, (3, 32))
+       self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
        #build a very strange system :"D
@@ -216,10 +229,10 @@ class Testing_pyquran(unittest.TestCase):
                  [lam, alef_maksura, dal]]
 
        returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
-       expectedFROW = [1, 0, 2, 0, 1, 0, 4, 0, 0, 1, 0, 1,
+       expectedFROW = [1, 0, 0, 2, 0, 1, 0, 4, 0, 0, 1, 0, 1,
                        0, 3, 1, 1, 0, 0, 1, 0, 0, 0, 1,
                        0, 0, 1, 1, 0]
-       self.assertEqual(returnedNParray.shape, (3, 28))
+       self.assertEqual(returnedNParray.shape, (3, 29))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
 
@@ -228,14 +241,14 @@ class Testing_pyquran(unittest.TestCase):
        # test case 2: big surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
        returnedNParray = pyquran.count_shape(quran.get_sura(2), system)
-       self.assertEqual(returnedNParray.shape, (286, 32))
+       self.assertEqual(returnedNParray.shape, (286, 33))
 
       # test case 3: without system
        returnedNParray = pyquran.count_shape(quran.get_sura(110))
-       expectedFROW = [1, 0, 0, 0, 1, 0, 4, 0, 0, 1, 0, 1, 1,
+       expectedFROW = [1, 0, 0, 0, 0, 1, 0, 4, 0, 0, 1, 0, 1, 1,
                        0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
                        1, 0, 0, 3, 0, 1, 1, 1, 0, 0]
-       self.assertEqual(returnedNParray.shape, (3, 36))
+       self.assertEqual(returnedNParray.shape, (3, 37))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
        # Test case 4: repeat a char in two subsystems
@@ -250,7 +263,7 @@ class Testing_pyquran(unittest.TestCase):
     def test_check_system(self):
         system = [[beh, teh, theh], [jeem, hah, khah]]
         actualList = pyquran.check_system(system)
-        self.assertEqual(len(actualList), 32)
+        self.assertEqual(len(actualList), 33)
         indx = list(alphabet).index(beh)
         self.assertEqual(actualList[indx], [beh, teh, theh])
         indx = list(alphabet).index(jeem)

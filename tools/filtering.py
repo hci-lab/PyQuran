@@ -81,6 +81,12 @@ def recitation_symbols_filter(string, symbols=recitationSymbols):
         Args:
             param1(str): a string to be filtered
             param2([char]: a list of recitation symbols
+
+    Issues:
+        * Some small litters have diacritics when they are removed
+          their diacritics remains.
+
+        * pyarabic strip_tashkeel -> revise it.
     '''
     
     error.is_string(string, 'You must pass an string')
