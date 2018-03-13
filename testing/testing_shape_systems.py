@@ -1,8 +1,19 @@
+# Adding another searching path
 from sys import path
-path.append('../tools/')
-path.append('../core/')
+import os
 
-import systems
+# The current path of the current module.
+path_current_module = os.path.dirname(os.path.abspath(__file__))
+tools_modules = '../tools/'
+core_modules = '../core/'
+
+tools_path = os.path.join(path_current_module, tools_modules)
+core_path  = os.path.join(path_current_module, core_modules)
+
+
+path.append(tools_path)
+path.append(core_path)
+
 import pyquran
 import quran
 from arabic import *
@@ -30,8 +41,8 @@ example
 '''
 
 # Preparing a system
-syst1 = systems.withoutDotSystem
-syst2 = systems.hamazatSystem
+syst1 = systems.withoutDots
+syst2 = systems.hamazat
 defualtSyst = systems.default
 newSystem = [[beh, teh, alef], 
              [jeem, hah, khah]]
