@@ -8,7 +8,17 @@ This module contains tools for `Quranic Analysis`
 """
 # Adding another searching path
 from sys import path
-path.append('../tools/')
+import os
+
+# The current path of the current module.
+path_current_module = os.path.dirname(os.path.abspath(__file__))
+tools_modules = '../tools/'
+tools_path = os.path.join(path_current_module, tools_modules)
+
+path.append(tools_path)
+
+
+
 
 import quran
 import sys
@@ -33,6 +43,10 @@ import sys
 import shapeHelper
 from collections import OrderedDict
 
+from xml.etree.ElementTree import ElementTree
+from xml.etree.ElementTree import Element
+import xml.etree.ElementTree as etree
+from xml.dom import minidom
 
 def parse_sura(n, alphabets=['ل', 'ب']):
     """parses the sura and returns a matrix (ndarray),
@@ -1025,6 +1039,42 @@ def frequency_sura_level(suraNumber):
     return frequency_ayat_list
 
 
+def get_unique_words():
+    """retuerns a set of all unique words in Quran
+
+    TODO:
+        need to support suras as well.
+    """
+    # Unique words
+    words_set = set()
+    for i in range(1, 114+1):
+        sura  = quran.get_sura(i)
+        for aya in sura:
+            wordsList = aya.split(' ')
+            for word in wordsList:
+                words_set.add(word)
+
+    return words_set
+
+
+def get_words():
+    """returns a list of all words in Quran
+
+    TODO:
+        need to support suras as well.
+    """
+    # words
+    words_list = list()
+    for i in range(1, 114+1):
+        sura  = quran.get_sura(i)
+        for aya in sura:
+            wordsList = aya.split(' ')
+            for word in wordsList:
+                words_list.append(word)
+
+    return words_list
+
+
 def frequency_quran_level():
     """Compute the words frequences of the Quran.
 
@@ -1054,3 +1104,97 @@ def frequency_quran_level():
         quranWordsFrequences.append(suraWordsFrequeces)
 
     return quranWordsFrequences
+
+
+def prettify(elem):
+    """Return a pretty-printed XML string for the Element.
+    """
+    rough_string = etree.tostring(elem, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    return reparsed.toprettyxml(indent="  ")
+
+
+def quran_words_frequences_data(fileName):
+    """Generate the entire words frequences of Quran into XML or JSON
+
+    ToDo:
+        Sould support JSONs as well.
+    """
+
+    # Computing unique words
+    unique_words = get_unique_words()
+    comma_separated_unique_words = ''
+    for word in unique_words:
+        comma_separated_unique_words += word + ','
+
+    # Removing the extra commas
+    comma_separated_unique_words = comma_separated_unique_words.strip(',')
+
+
+
+    # * Creating quran_words_frequences_data -- the root tag
+    root = Element('quran_words_frequences')
+    root.set('unique_words', comma_separated_unique_words)
+
+    # * Add root to the tree
+    tree = ElementTree(root)
+
+
+    for suraNumber in range(1, 114 +1):
+
+        sura = quran.get_sura(suraNumber)
+
+        # * Creating sura Tag
+        suraTag = Element('sura')
+
+        # * set number attribute
+        suraTag.set('number', str(suraNumber))
+
+        # * set sura unique words
+        # ??? update get_unique_words
+        # suraTag.set('sura_unique_words', suraUniquewords)
+
+        ayaCounter = 1
+        for aya in sura:
+
+            # Create aya Tag
+            ayaTag = Element('aya')
+            ayaTag.set('number', str(ayaCounter))
+
+            # * Computes the words frequency for aya
+            ayaWordsDict = get_frequency(aya)
+
+            words_comma_separated = ''
+            occurrence_comma_separated = ''
+
+            for word in ayaWordsDict:
+                words_comma_separated += word + ','
+                occurrence_comma_separated += str(ayaWordsDict[word]) + ','
+
+            # * The same order
+            words_comma_separated = words_comma_separated.strip(',')
+            occurrence_comma_separated = occurrence_comma_separated.strip(',')
+
+            # * Add words & frequencies attributes
+            ayaTag.set('unique_words', words_comma_separated)
+            ayaTag.set('unique_words_frequencies', occurrence_comma_separated)
+
+
+            # * Add aya tag to sura tag
+            suraTag.append(ayaTag)
+
+            ayaCounter += 1
+
+        # * add suraTag to the root
+        root.append(suraTag)
+
+
+    # print(prettify(root))
+
+    file = open(fileName, 'w')
+    file.write(prettify(root))
+    file.close()
+
+
+
+

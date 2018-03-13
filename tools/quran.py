@@ -5,10 +5,21 @@ from pyarabic.araby import strip_tashkeel
 from arabic import swar_num
 import filtering
 import error
+import os
+
+# Relative path to this modul's location in PyQuran.
+corpus_xml_relative_path= '../QuranCorpus/quran-uthmani.xml'
+
+# The current path of the current module.
+current_path  = os.path.dirname(os.path.abspath(__file__))
+# Joining this module's path with the relative path of the corpus
+corpus_path = os.path.join(current_path, corpus_xml_relative_path)
+
+
+
 
 # Parsing xml
-xml_file_name = '../QuranCorpus/quran-uthmani.xml'
-quran_tree = ElementTree.parse(xml_file_name)
+quran_tree = ElementTree.parse(corpus_path)
 
 
 
