@@ -76,6 +76,7 @@ simple_lam_alef_mad_above  = u'\u0644\u0622'
 # Lists
 alphabet = [
         hamza,
+        hamza_above,
         alef_mad,   
         alef_hamza_above,  
         waw_hamza,  
