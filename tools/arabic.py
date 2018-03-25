@@ -133,9 +133,9 @@ hamzat = [
             waw_hamza, 
             yeh_hamza, 
             hamza_above, 
-            hamza_below, 
             alef_hamza_below, 
             alef_hamza_above, 
+            alef_mad
             ]
 alefat = [
             alef, 
