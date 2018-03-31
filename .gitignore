@@ -12,3 +12,4 @@ core/.pyquran.py.swp
 *.pyc
 *.txt
 *.ipyb
+*.ipynb
