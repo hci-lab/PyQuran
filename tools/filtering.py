@@ -4,6 +4,7 @@
 
 import arabic
 import error
+import re
 
 hamza_above     = '\u0654' # u'\u0654'
 small_high_meem = '\u06e2'
@@ -26,7 +27,7 @@ rounded_high_stop_with_filled_centre = '\u06ec'
 
 recitationSymbols = [ 
     alef_wasl_with_saad_above, # Replace with alef
-    hamza_above, # ???????
+    hamza_above, # Remain
     small_high_meem, # Remove
     small_low_meem, # Remove
     small_high_seen, # Remove
@@ -76,6 +77,33 @@ print(p.findall(hamza_above))
     In [2]: '\u0654'
     Out[2]: 'ٔ'
 """
+
+def get_patterns():
+    patterns = []
+    for x in [small_yeh, small_waw] :
+        for y in arabic.shortharakat:
+            patterns.append(x + y)
+
+    return patterns + [small_yeh, small_waw]
+
+patterns_list = get_patterns()
+
+remove_no_tashkeel_after = [
+        small_high_meem, # Remove
+        small_low_meem, # Remove
+        small_high_seen, # Remove
+        small_low_seen, # Remove
+        small_alef, # Remove
+        small_high_noon, # Remove
+        mad_lazim_mark, # Remove
+        tatweel, # Remove
+        empty_centre_high_stop, # Remove
+        small_high_rounded_zero, # Remove
+        empty_center_low_stop, # Remove
+        small_high_upright_rectangular_zero, # Remove
+        rounded_high_stop_with_filled_centre # Remove
+]
+
 def recitation_symbols_filter(string, symbols=recitationSymbols):
     '''Removes the Special Recitation Symbols from `string`
         Args:
@@ -94,11 +122,14 @@ def recitation_symbols_filter(string, symbols=recitationSymbols):
     for symbol in symbols:
         if symbol == alef_wasl_with_saad_above:
             string = string.replace(alef_wasl_with_saad_above, arabic.alef)
-        # Do not remove
+        # Do not remove hamza_above
         elif symbol == hamza_above:
             continue
-        else:
+        elif symbol in remove_no_tashkeel_after:
             string = string.replace(symbol, '')
+        else:
+            for pat in patterns_list:
+                string = re.sub( pat , '', string)
 
     return string
 
