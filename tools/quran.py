@@ -60,6 +60,11 @@ def get_sura(sura_number, with_tashkeel=False, basmalah=False):
     for aya in ayat:
         sura.append(aya.attrib['text'])
 
+    if basmalah and sura_number != 1 -1 and sura_number != 9 -1:
+        #suras_list[0][0].attrib['text']
+        bismilah = [suras_list[0][0].attrib['text']]
+        sura = bismilah + sura
+
     uthmanic_free_sura = []
     for aya in sura:
         uthmanic_free_sura.append(filtering.recitation_symbols_filter(aya))
