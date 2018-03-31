@@ -269,3 +269,11 @@ def treat_as_the_same(listOfLetter, letter, text):
         
     """
     pass
+
+def strip_tashkeel(string):
+    for char in string:
+       if char in tashkeel:
+            string = string.replace(char, '')
+    return string
+
+
