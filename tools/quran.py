@@ -102,8 +102,12 @@ def fetch_aya(sura_number, aya_number):
 
 
 
-def retrieve_qruan_as_one_strint():
-    pass
+def retrieve_qruan_as_one_string():
+    quran_string = ''
+    for i in range (1, 115):
+        for aya in get_sura(i, with_tashkeel=True):
+                quran_string += aya + ' '
+    return quran_string
 
 def get_sura_number(suraName):
     """It takes sura name as string, and returns the an ordered number(integer) of the sura
