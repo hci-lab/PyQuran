@@ -1,8 +1,7 @@
 """This modules contains functions to retrieve from quran.
 """
 from xml.etree import ElementTree
-from pyarabic.araby import strip_tashkeel
-from arabic import swar_num
+import arabic as ar
 import filtering
 import error
 import os
@@ -25,7 +24,7 @@ quran_tree = ElementTree.parse(corpus_path)
 
 
 
-def get_sura(sura_number, with_tashkeel=False):
+def get_sura(sura_number, with_tashkeel=False, basmalah=False):
     """gets an sura by returning a list of ayat al-sura.
 
     Args: 
@@ -61,12 +60,17 @@ def get_sura(sura_number, with_tashkeel=False):
     for aya in ayat:
         sura.append(aya.attrib['text'])
 
+    if basmalah and sura_number != 1 -1 and sura_number != 9 -1:
+        #suras_list[0][0].attrib['text']
+        bismilah = [suras_list[0][0].attrib['text']]
+        sura = bismilah + sura
+
     uthmanic_free_sura = []
     for aya in sura:
         uthmanic_free_sura.append(filtering.recitation_symbols_filter(aya))
 
     if not with_tashkeel:
-       return list(map(strip_tashkeel, uthmanic_free_sura)) 
+       return list(map(ar.strip_tashkeel, uthmanic_free_sura)) 
     else:
        return uthmanic_free_sura
 
@@ -98,8 +102,12 @@ def fetch_aya(sura_number, aya_number):
 
 
 
-def retrieve_qruan_as_one_strint():
-    pass
+def retrieve_qruan_as_one_string():
+    quran_string = ''
+    for i in range (1, 115):
+        for aya in get_sura(i, with_tashkeel=True):
+                quran_string += aya + ' '
+    return quran_string
 
 def get_sura_number(suraName):
     """It takes sura name as string, and returns the an ordered number(integer) of the sura
@@ -157,7 +165,7 @@ def get_verse(chapterNum,verseNum,with_tashkeel=False):
         Returns:
             str :  return verse
     """
-    if(chapterNum > swar_num or verseNum<=0):
+    if(chapterNum > ar.swar_num or verseNum<=0):
         return ""
     try:
         return get_sura(chapterNum,with_tashkeel)[verseNum-1]

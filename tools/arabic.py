@@ -133,9 +133,9 @@ hamzat = [
             waw_hamza, 
             yeh_hamza, 
             hamza_above, 
-            hamza_below, 
             alef_hamza_below, 
             alef_hamza_above, 
+            alef_mad
             ]
 alefat = [
             alef, 
@@ -269,3 +269,11 @@ def treat_as_the_same(listOfLetter, letter, text):
         
     """
     pass
+
+def strip_tashkeel(string):
+    for char in string:
+       if char in tashkeel:
+            string = string.replace(char, '')
+    return string
+
+
