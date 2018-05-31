@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Code Conventios - PyQuran</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Code Conventios";
+    var mkdocs_page_input_path = "code_conventions.md";
+    var mkdocs_page_url = "/code_conventions/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> PyQuran</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hello World!</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="..">Home</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Users Documentation</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../quran_tools/">Basic Tools for Quran</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../arabic_tools/">Arabic Tools</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../analysis_tools/">Analysis Tools</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Maintainers</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../CONTRIBUTING/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Wiki-Home/">Package Strucutre</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Filtering-Special-Recitation-Symbols/">Quran Corpus</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Code Conventios</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#code-conventions-do-not-use-emacs">Code Conventions (DO NOT USE EMACS)</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#rules">Rules</a></li>
+        
+            <li><a class="toctree-l4" href="#naming">Naming</a></li>
+        
+            <li><a class="toctree-l4" href="#function-prototype">Function prototype</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#google-standards-example">Google Standards Example</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">PyQuran</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Maintainers &raquo;</li>
+        
+      
+    
+    <li>Code Conventios</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/code_conventions.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="code-conventions-do-not-use-emacs">Code Conventions (DO NOT USE EMACS)</h1>
+<p>This helps everyone to read and maintain the code even when they maintains
+someone else code<br>
+<strong>Please restrict to the rules.</strong></p>
+<h2 id="rules">Rules</h2>
+<ul>
+<li>A line <strong>must not</strong> exceed <em>80 character</em> length.</li>
+<li>Use <strong>Spaces</strong> not <strong>Tabs</strong>.</li>
+<li>Always return to <code>example_google.py</code> file.</li>
+<li>We dissagree with <code>example_goole.py</code> in variables naming ONLY, <br>
+       and <strong>we agree with it in the whole entire rest</strong>.</li>
+</ul>
+<h2 id="naming">Naming</h2>
+<ul>
+<li><strong>Class Name</strong>: <a href="https://en.wikipedia.org/wiki/PascalCase">PascalCase</a>: initial letter is <strong>upper case</strong></li>
+<li><em>Examples</em>: <code>Class, NewClass, ...</code></li>
+<li><strong>Function</strong>: <a href="https://en.wikipedia.org/wiki/Snake_case">snake_case</a>: Lowercase underscore-separated names.</li>
+<li><em>Examples</em>: <code>foo, foo_name, ...</code></li>
+<li><strong>Variables</strong>: <a href="https://en.wikipedia.org/wiki/Camel_case">lowerCamelCase</a>: initial letter is <strong>lower case</strong> and rest are PascalCasee.</li>
+<li><em>Examples</em>: <code>variable, varibaleName, ...</code></li>
+</ul>
+<h2 id="function-prototype">Function prototype</h2>
+<ul>
+<li>Functions should have a description followed by sections as in the following example.</li>
+<li>You don't need to include all section, but include what makes the function as clear as possible.</li>
+<li><strong>Function prototypes also used for proposed functions</strong>.</li>
+</ul>
+<pre><code class="python">def function_with_types_in_docstring(param1, param2):
+    &quot;&quot;&quot;Here you write a  rigorous description of the function
+
+    Args:
+        param1 (int): The first parameter.
+        param2 (str): The second parameter.
+
+    Returns:
+        bool: The return value. True for success, False otherwise.
+
+    Note:
+        Do not include the `self` parameter in the ``Args`` section.
+
+    &quot;&quot;&quot;
+    # Empty Line
+    pass # in case it is just a prototype (not implemented yet) 
+</code></pre>
+
+<h1 id="google-standards-example">Google Standards Example</h1>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&quot;&quot;&quot;Example Google style docstrings.
+
+This module demonstrates documentation as specified by the `Google Python
+Style Guide`_. Docstrings may extend over multiple lines. Sections are created
+with a section header and a colon followed by a block of indented text.
+
+Example:
+    Examples can be given using either the ``Example`` or ``Examples``
+    sections. Sections support any reStructuredText formatting, including
+    literal blocks::
+
+        $ python example_google.py
+
+Section breaks are created by resuming unindented text. Section breaks
+are also implicitly created anytime a new section starts.
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+        Either form is acceptable, but the two should not be mixed. Choose
+        one convention to document module level variables and be consistent
+        with it.
+
+Todo:
+    * For module TODOs
+    * You have to also use ``sphinx.ext.todo`` extension
+
+.. _Google Python Style Guide:
+   http://google.github.io/styleguide/pyguide.html
+
+&quot;&quot;&quot;
+
+module_level_variable1 = 12345
+
+module_level_variable2 = 98765
+&quot;&quot;&quot;int: Module level variable documented inline.
+
+The docstring may span multiple lines. The type may optionally be specified
+on the first line, separated by a colon.
+&quot;&quot;&quot;
+
+
+def function_with_types_in_docstring(param1, param2):
+    &quot;&quot;&quot;Example function with types documented in the docstring.
+
+    `PEP 484`_ type annotations are supported. If attribute, parameter, and
+    return types are annotated according to `PEP 484`_, they do not need to be
+    included in the docstring:
+
+    Args:
+        param1 (int): The first parameter.
+        param2 (str): The second parameter.
+
+    Returns:
+        bool: The return value. True for success, False otherwise.
+
+    .. _PEP 484:
+        https://www.python.org/dev/peps/pep-0484/
+
+    &quot;&quot;&quot;
+
+
+def function_with_pep484_type_annotations(param1: int, param2: str) -&gt; bool:
+    &quot;&quot;&quot;Example function with PEP 484 type annotations.
+
+    Args:
+        param1: The first parameter.
+        param2: The second parameter.
+
+    Returns:
+        The return value. True for success, False otherwise.
+
+    &quot;&quot;&quot;
+
+
+def module_level_function(param1, param2=None, *args, **kwargs):
+    &quot;&quot;&quot;This is an example of a module level function.
+
+    Function parameters should be documented in the ``Args`` section. The name
+    of each parameter is required. The type and description of each parameter
+    is optional, but should be included if not obvious.
+
+    If \*args or \*\*kwargs are accepted,
+    they should be listed as ``*args`` and ``**kwargs``.
+
+    The format for a parameter is::
+
+        name (type): description
+            The description may span multiple lines. Following
+            lines should be indented. The &quot;(type)&quot; is optional.
+
+            Multiple paragraphs are supported in parameter
+            descriptions.
+
+    Args:
+        param1 (int): The first parameter.
+        param2 (:obj:`str`, optional): The second parameter. Defaults to None.
+            Second line of description should be indented.
+        *args: Variable length argument list.
+        **kwargs: Arbitrary keyword arguments.
+
+    Returns:
+        bool: True if successful, False otherwise.
+
+        The return type is optional and may be specified at the beginning of
+        the ``Returns`` section followed by a colon.
+
+        The ``Returns`` section may span multiple lines and paragraphs.
+        Following lines should be indented to match the first line.
+
+        The ``Returns`` section supports any reStructuredText formatting,
+        including literal blocks::
+
+            {
+                'param1': param1,
+                'param2': param2
+            }
+
+    Raises:
+        AttributeError: The ``Raises`` section is a list of all exceptions
+            that are relevant to the interface.
+        ValueError: If `param2` is equal to `param1`.
+
+    &quot;&quot;&quot;
+    if param1 == param2:
+        raise ValueError('param1 may not be equal to param2')
+    return True
+
+
+def example_generator(n):
+    &quot;&quot;&quot;Generators have a ``Yields`` section instead of a ``Returns`` section.
+
+    Args:
+        n (int): The upper limit of the range to generate, from 0 to `n` - 1.
+
+    Yields:
+        int: The next number in the range of 0 to `n` - 1.
+
+    Examples:
+        Examples should be written in doctest format, and should illustrate how
+        to use the function.
+
+        &gt;&gt;&gt; print([i for i in example_generator(4)])
+        [0, 1, 2, 3]
+
+    &quot;&quot;&quot;
+    for i in range(n):
+        yield i
+
+
+class ExampleError(Exception):
+    &quot;&quot;&quot;Exceptions are documented in the same way as classes.
+
+    The __init__ method may be documented in either the class level
+    docstring, or as a docstring on the __init__ method itself.
+
+    Either form is acceptable, but the two should not be mixed. Choose one
+    convention to document the __init__ method and be consistent with it.
+
+    Note:
+        Do not include the `self` parameter in the ``Args`` section.
+
+    Args:
+        msg (str): Human readable string describing the exception.
+        code (:obj:`int`, optional): Error code.
+
+    Attributes:
+        msg (str): Human readable string describing the exception.
+        code (int): Exception error code.
+
+    &quot;&quot;&quot;
+
+    def __init__(self, msg, code):
+        self.msg = msg
+        self.code = code
+
+
+class ExampleClass(object):
+    &quot;&quot;&quot;The summary line for a class docstring should fit on one line.
+
+    If the class has public attributes, they may be documented here
+    in an ``Attributes`` section and follow the same formatting as a
+    function's ``Args`` section. Alternatively, attributes may be documented
+    inline with the attribute's declaration (see __init__ method below).
+
+    Properties created with the ``@property`` decorator should be documented
+    in the property's getter method.
+
+    Attributes:
+        attr1 (str): Description of `attr1`.
+        attr2 (:obj:`int`, optional): Description of `attr2`.
+
+    &quot;&quot;&quot;
+
+    def __init__(self, param1, param2, param3):
+        &quot;&quot;&quot;Example of docstring on the __init__ method.
+
+        The __init__ method may be documented in either the class level
+        docstring, or as a docstring on the __init__ method itself.
+
+        Either form is acceptable, but the two should not be mixed. Choose one
+        convention to document the __init__ method and be consistent with it.
+
+        Note:
+            Do not include the `self` parameter in the ``Args`` section.
+
+        Args:
+            param1 (str): Description of `param1`.
+            param2 (:obj:`int`, optional): Description of `param2`. Multiple
+                lines are supported.
+            param3 (:obj:`list` of :obj:`str`): Description of `param3`.
+
+        &quot;&quot;&quot;
+        self.attr1 = param1
+        self.attr2 = param2
+        self.attr3 = param3  #: Doc comment *inline* with attribute
+
+        #: list of str: Doc comment *before* attribute, with type specified
+        self.attr4 = ['attr4']
+
+        self.attr5 = None
+        &quot;&quot;&quot;str: Docstring *after* attribute, with type specified.&quot;&quot;&quot;
+
+    @property
+    def readonly_property(self):
+        &quot;&quot;&quot;str: Properties should be documented in their getter method.&quot;&quot;&quot;
+        return 'readonly_property'
+
+    @property
+    def readwrite_property(self):
+        &quot;&quot;&quot;:obj:`list` of :obj:`str`: Properties with both a getter and setter
+        should only be documented in their getter method.
+
+        If the setter method contains notable behavior, it should be
+        mentioned here.
+        &quot;&quot;&quot;
+        return ['readwrite_property']
+
+    @readwrite_property.setter
+    def readwrite_property(self, value):
+        value
+
+    def example_method(self, param1, param2):
+        &quot;&quot;&quot;Class methods are similar to regular functions.
+
+        Note:
+            Do not include the `self` parameter in the ``Args`` section.
+
+        Args:
+            param1: The first parameter.
+            param2: The second parameter.
+
+        Returns:
+            True if successful, False otherwise.
+
+        &quot;&quot;&quot;
+        return True
+
+    def __special__(self):
+        &quot;&quot;&quot;By default special members with docstrings are not included.
+
+        Special members are any methods or attributes that start with and
+        end with a double underscore. Any special member with a docstring
+        will be included in the output, if
+        ``napoleon_include_special_with_doc`` is set to True.
+
+        This behavior can be enabled by changing the following setting in
+        Sphinx's conf.py::
+
+            napoleon_include_special_with_doc = True
+
+        &quot;&quot;&quot;
+        pass
+
+    def __special_without_docstring__(self):
+        pass
+
+    def _private(self):
+        &quot;&quot;&quot;By default private members are not included.
+
+        Private members are any methods or attributes that start with an
+        underscore and are *not* special. By default they are not included
+        in the output.
+
+        This behavior can be changed such that private members *are* included
+        by changing the following setting in Sphinx's conf.py::
+
+            napoleon_include_private_with_doc = True
+
+        &quot;&quot;&quot;
+        pass
+
+    def _private_without_docstring(self):
+        pass
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../Filtering-Special-Recitation-Symbols/" class="btn btn-neutral" title="Quran Corpus"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/tahamagdy/pyquran/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Filtering-Special-Recitation-Symbols/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
