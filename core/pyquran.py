@@ -489,26 +489,31 @@ def count_token(text):
 
 
 
-def separate_token_with_dicrites(token):
+def grouping_letter_diacritics(sentance):
+    """Grouping each letter with its diacritics.
+
+        Args:
+            sentance: str
+
+        Returns:
+            [str]: a list of _x_, where _x_ is the letter accompanied with its
+            diacritics.
+
+    Example:
+    ```python
+    q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')\n
+    >>> ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
+    ```
     """
-         gets a token with taskeel, and returns a list contains the token characters with their tashkeel.
-
-         Args:
-             param1 (str): strig that will separate it.
-
-         Returns:
-             [str]: a list contains the token characters with their tashkeel.
-
-    """
-    token_without_tatweel = strip_tatweel(token)
-    print(token_without_tatweel)
+    sentance_without_tatweel = strip_tatweel(sentance)
+    print(sentance_without_tatweel)
     hroof_with_tashkeel = []
-    for index,i in enumerate(token):
-        if((token[index] in (alphabet or alefat or hamzat)or token[index] is ' ' )):
+    for index,i in enumerate(sentance):
+        if((sentance[index] in (alphabet or alefat or hamzat)or sentance[index] is ' ' )):
             k = index
-            harf_with_taskeel =token[index]
-            while((k+1) != len(token) and (token[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
-                harf_with_taskeel =harf_with_taskeel+""+token[k+1]
+            harf_with_taskeel =sentance[index]
+            while((k+1) != len(sentance) and (sentance[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
+                harf_with_taskeel =harf_with_taskeel+""+sentance[k+1]
                 k = k + 1
             index = k
             hroof_with_tashkeel.append(harf_with_taskeel)
@@ -769,20 +774,23 @@ def search_string_with_tashkeel(string, key):
 
 
 def buckwalter_transliteration(string, reverse=False):
-   """
-     buckwalter_translator get an a Unicode
-     tring and transliterate it to Buckwalter encoding or vise verse
+   """Back and forth Arabic-Bauckwalter transliteration. Revise [Buckwalter](https://en.wikipedia.org/wiki/Buckwalter_transliteration)
 
-     What it does:
-         transliterate a Unicode string to buckwalter and vise verse
      Args:
-         param1 (str): a string
-         param2 (bool): Boolean , it's an optional
-                        if it quals to False "False is the defult" ,
-                        it transliterate from a Unicode string to buckwalter encoding
-                        and vise verse if it equals to True
+         string: to be transliterated.
+         reverse: Optional boolean. `False` transliterates from Arabic to
+         Bauckwalter, `True` transliterates from Bauckwalter to Arabic.
+
      Returns:
-         str : a string, a Unicode or buckwalter
+         str: transliterated string.
+
+
+
+    Example:
+    ```python
+    q.buckwalter_transliteration('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')\n
+    >>> <in~aA >aEoTayonaka Alokawovara
+    ```
     """
    for key, value in buckwalter.buck2uni.items():
        if not reverse:
@@ -846,20 +854,23 @@ def get_tashkeel_binary(ayah):
   return tashkeelPatternStringWithSpace, marksList
 
 
-def unpack_alef_mad(ayahWithAlefMad):
-  ''' unpack_alef_mad is function takes the str or list(ayah or ayat)
-     and search about alef mad and unpacks it
+def factor_alef_mad(sentance):
+  '''Factors alef_mad in a sentance into alef_hamza and alef and returns the sentance.
 
-     What it does:
-         take the Alef mad and converts the alef  mad to alef fataha and alef sukun
      Args:
-         param1 (str): a string or list
+         sentance: str, a string or list.
 
      Returns:
-         str : ayah or token with Unpacked mad
+         str: sentance having the alef_mad factored
+
+     Example:
+    ```python
+    q.unpack_alef_mad('آ')\n
+    >>> 'أْأَ'
+    ```
   '''
   ayahWithUnpackAlefMad = ''
-  for charOfAyah in ayahWithAlefMad:
+  for charOfAyah in sentance:
      if charOfAyah != 'آ':
          ayahWithUnpackAlefMad += charOfAyah
      else:
@@ -893,26 +904,62 @@ def check_all_alphabet(system):
     return theRestOfAlphabets
 
 
-def check_system(system, indx=None):
-    '''
-     check_sytem get a system (list of lists ) and index (it's
-     optional) and return full sorted system or a specific index in it.
+def check_system(system, index=None):
+    ''' Returns the alphabet including treated-as-one letters. If you pass the index as the second optional arguement, it returns the letter of the that index only, not the hole alphabet.
 
-     -sortion will follow this approach : system in the first with the same
-     order , then all remain alphabets sorted alphabetically .
-
-     What it does:
-         build a full sorted system and return it or a specific index in it.
 
      Args:
-         param1 ([[char]] ):  list of lists of characters.
-         int: it's optinal , it will return this index in full sorted system.
+        system: [[char]], a list of letters, where each letter to be treated as
+        one letter are in one sub-list,  see  [Alphabetical Systems](#alphabetical-systems).
+        index: Optional integer, is a index of a letter in the new system.
 
      Returns:
-         list: full sorted system or a spesefic index.
+         list: full sorted system or a specific index.
+
+    Example:
+    ```python
+    q.check_system([['alef', 'beh']])\n
+    >>> [['ء'],
+        ['آ'],
+        ['أ', 'ب'],
+        ['ؤ'],
+        ['إ'],
+        ['ئ'],
+        ['ا'],
+        ['ة'],
+        ['ت'],
+        ['ث'],
+        ['ج'],
+        ['ح'],
+        ['خ'],
+        ['د'],
+        ['ذ'],
+        ['ر'],
+        ['ز'],
+        ['س'],
+        ['ش'],
+        ['ص'],
+        ['ض'],
+        ['ط'],
+        ['ظ'],
+        ['ع'],
+        ['غ'],
+        ['ف'],
+        ['ق'],
+        ['ك'],
+        ['ل'],
+        ['م'],
+        ['ن'],
+        ['ه'],
+        ['و'],
+        ['ى'],
+        ['ي']]
+    ```
+    The previous example prints each letter as one element in a new alphabet list,
+    as you can see the two letters alef and beh are considered one letter.
     '''
     if shapeHelper.check_repetation(system) == True:
-        raise ValueError ("there are a repetation in your system")
+        raise ValueError ("there is a repetition in your system")
 
 
     p = len(alphabet) - len(list(set(chain(*system)))) + len(system)
@@ -920,10 +967,10 @@ def check_system(system, indx=None):
     systemDict = shape(system)
     fullSys = [[key for key, value in systemDict.items() if value == i] for i
                in range(p)]
-    if indx==None:
+    if index==None:
         return fullSys
     else:
-        return fullSys[indx]
+        return fullSys[index]
 
 
 def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,threshold=1):
