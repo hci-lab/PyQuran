@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Arabic Tools - PyQuran</title>
+  <title>Arabic tools - PyQuran</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Arabic Tools";
+    var mkdocs_page_name = "Arabic tools";
     var mkdocs_page_input_path = "arabic_tools.md";
     var mkdocs_page_url = "/arabic_tools/";
   </script>
@@ -49,13 +49,7 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Hello World!</span>
-    <ul class="subnav">
-                <li class="">
-                    
     <a class="" href="..">Home</a>
-                </li>
-    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -64,11 +58,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../quran_tools/">Basic Tools for Quran</a>
+    <a class="" href="../quran_tools/">Quran Retrieving tools</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Arabic Tools</a>
+    <a class="current" href="./">Arabic tools</a>
     <ul class="subnav">
             
     <li class="toctree-l3"><a href="#alphabets">Alphabets</a></li>
@@ -80,11 +74,13 @@
         
             <li><a class="toctree-l4" href="#check_system">check_system</a></li>
         
+            <li><a class="toctree-l4" href="#factor_alef_mad">factor_alef_mad</a></li>
+        
+            <li><a class="toctree-l4" href="#grouping_letter_diacritics">grouping_letter_diacritics</a></li>
+        
+            <li><a class="toctree-l4" href="#strip_tashkeel">strip_tashkeel</a></li>
+        
             <li><a class="toctree-l4" href="#buckwalter_transliteration">buckwalter_transliteration</a></li>
-        
-            <li><a class="toctree-l4" href="#separate_token_with_diacritics">separate_token_with_diacritics</a></li>
-        
-            <li><a class="toctree-l4" href="#unpack_alef_mad">unpack_alef_mad</a></li>
         
         </ul>
     
@@ -93,7 +89,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../analysis_tools/">Analysis Tools</a>
+    <a class="" href="../analysis_tools/">Analysis tools</a>
                 </li>
     </ul>
 	    </li>
@@ -147,10 +143,10 @@
         
       
     
-    <li>Arabic Tools</li>
+    <li>Arabic tools</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/arabic_tools.md"
+        <a href="https://github.com/hci-lab/pyquran-private/edit/master/docs/arabic_tools.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -229,7 +225,7 @@ Out:
  ['ف', 'ق']]
 </code></pre>
 
-<p><strong>Construct a user-defined system</strong>:</p>
+<p><strong>Constructing a user-defined system</strong>:</p>
 <pre><code class="python">system = [[alef_hamza_above, alef],[beh, teh]]
 </code></pre>
 
@@ -241,93 +237,150 @@ filtering, etc.</p>
 <pre><code class="python">check_system(system, index=None)
 </code></pre>
 
-<p>Returns the alphabet including treated-as-one letters. If you pass the index as
-the second optional arguement, it returns the letter of the that index only, not the
-hole alphabet.</p>
+<p>Returns the alphabet including treated-as-one letters. If you pass the index as the second optional arguement, it returns the letter of the that index only, not the hole alphabet.</p>
 <p><strong>Arguments</strong></p>
 <ul>
-<li><strong>system</strong>:  a list of letters, where each letter to be treated as one letter
-  are in one sublist. see <a href="#alphabetical-systems">Alphabetical Systems</a></li>
-<li><strong>index</strong>: (int) is a index of a letter in the new system.</li>
+<li>
+<p><strong>system</strong>: [[char]], a list of letters, where each letter to be treated as
+one letter are in one sub-list,  see  <a href="#alphabetical-systems">Alphabetical Systems</a>.</p>
+</li>
+<li>
+<p><strong>index</strong>: Optional integer, is a index of a letter in the new system.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>list</strong>: full sorted system or a specific index.</li>
 </ul>
 <p><strong>Example</strong></p>
-<p>This prints each letter as one element in a new alphabet list, as you can see the
-two letters <em>alef</em> and <em>beh</em> are considered one letter.</p>
 <pre><code class="python">q.check_system([['alef', 'beh']])
-Out: 
-[['ء'],
- ['آ'],
- ['أ', 'ب'],
- ['ؤ'],
- ['إ'],
- ['ئ'],
- ['ا'],
- ['ة'],
- ['ت'],
- ['ث'],
- ['ج'],
- ['ح'],
- ['خ'],
- ['د'],
- ['ذ'],
- ['ر'],
- ['ز'],
- ['س'],
- ['ش'],
- ['ص'],
- ['ض'],
- ['ط'],
- ['ظ'],
- ['ع'],
- ['غ'],
- ['ف'],
- ['ق'],
- ['ك'],
- ['ل'],
- ['م'],
- ['ن'],
- ['ه'],
- ['و'],
- ['ى'],
- ['ي']]
 
+&gt;&gt;&gt; [['ء'],
+['آ'],
+['أ', 'ب'],
+['ؤ'],
+['إ'],
+['ئ'],
+['ا'],
+['ة'],
+['ت'],
+['ث'],
+['ج'],
+['ح'],
+['خ'],
+['د'],
+['ذ'],
+['ر'],
+['ز'],
+['س'],
+['ش'],
+['ص'],
+['ض'],
+['ط'],
+['ظ'],
+['ع'],
+['غ'],
+['ف'],
+['ق'],
+['ك'],
+['ل'],
+['م'],
+['ن'],
+['ه'],
+['و'],
+['ى'],
+['ي']]
+</code></pre>
+
+<p>The previous example prints each letter as one element in a new alphabet list,
+as you can see the two letters alef and beh are considered one letter.</p>
+<hr />
+<h3 id="factor_alef_mad">factor_alef_mad</h3>
+<pre><code class="python">factor_alef_mad(sentance)
+</code></pre>
+
+<p>Factors alef_mad in a sentance into alef_hamza and alef and returns the sentance.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>sentance</strong>: str, a string or list.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>str</strong>: sentance having the alef_mad factored</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">q.unpack_alef_mad('آ')
+
+&gt;&gt;&gt; 'أْأَ'
+</code></pre>
+
+<hr />
+<h3 id="grouping_letter_diacritics">grouping_letter_diacritics</h3>
+<pre><code class="python">grouping_letter_diacritics(sentance)
+</code></pre>
+
+<p>Grouping each letter with its diacritics.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>sentance</strong>: str</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>[str]</strong>: a list of <em>x</em>, where <em>x</em> is the letter accompanied with its
+diacritics.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
+
+&gt;&gt;&gt; ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
+</code></pre>
+
+<hr />
+<h3 id="strip_tashkeel">strip_tashkeel</h3>
+<pre><code class="python">strip_tashkeel(string)
+</code></pre>
+
+<p>convert any letter in the <code>listOfLetter</code> to <code>letter</code> in the given text</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>string</strong>: str, to drop tashkeel from.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">x = q.quran.get_verse(12, 2, with_tashkeel=True)
+
+x
+
+&gt;&gt;&gt; 'إِنَّا أَنزَلْنَهُ قُرْءَنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ'
+
+q.strip_tashkeel(x)
+
+&gt;&gt;&gt; 'إنا أنزلنه قرءنا عربيا لعلكم تعقلون'
 </code></pre>
 
 <hr />
 <h3 id="buckwalter_transliteration">buckwalter_transliteration</h3>
-<p>Back and forth bauckwalter-arabic transliteration.</p>
-<p><strong>NOTE</strong>: Revise <a href="https://en.wikipedia.org/wiki/Buckwalter_transliteration">Buckwalter</a></p>
+<pre><code class="python">buckwalter_transliteration(string, reverse=False)
+</code></pre>
+
+<p>Back and forth Arabic-Bauckwalter transliteration. Revise <a href="https://en.wikipedia.org/wiki/Buckwalter_transliteration">Buckwalter</a></p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><strong>string</strong>: to be transliterated.</p>
+</li>
+<li>
+<p><strong>reverse</strong>: Optional boolean. <code>False</code> transliterates from Arabic to
+ Bauckwalter, <code>True</code> transliterates from Bauckwalter to Arabic.</p>
+</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>str</strong>: transliterated string.</li>
+</ul>
+<p><strong>Example</strong></p>
 <pre><code class="python">q.buckwalter_transliteration('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
-Out: &lt;in~aA &gt;aEoTayonaka Alokawovara
-</code></pre>
 
-<h3 id="separate_token_with_diacritics">separate_token_with_diacritics</h3>
-<pre><code class="python">separate_token_with_diacritics(sentence)
-</code></pre>
-
-<p>Grouping each letter with its diacritics. </p>
-<p><strong>Argument</strong></p>
-<ul>
-<li><strong>sentence</strong>: (str)</li>
-</ul>
-<p><strong>Example</strong></p>
-<pre><code class="python">q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
-Out: ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
-</code></pre>
-
-<h3 id="unpack_alef_mad">unpack_alef_mad</h3>
-<p><strong>unpack_alef_mad</strong></p>
-<pre><code class="python">unpack_alef_mad(sentance)
-</code></pre>
-
-<p>Factors alef_mad in a sentance into alef_hamza and alef and returns the sentance.</p>
-<p><strong>Argument</strong></p>
-<ul>
-<li><strong>sentance</strong>: (str)</li>
-</ul>
-<p><strong>Example</strong></p>
-<pre><code class="python">q.unpack_alef_mad('آ')
-Out: 'أْأَ'
+&gt;&gt;&gt; &lt;in~aA &gt;aEoTayonaka Alokawovara
 </code></pre>
               
             </div>
@@ -336,10 +389,10 @@ Out: 'أْأَ'
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../analysis_tools/" class="btn btn-neutral float-right" title="Analysis Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../analysis_tools/" class="btn btn-neutral float-right" title="Analysis tools">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../quran_tools/" class="btn btn-neutral" title="Basic Tools for Quran"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../quran_tools/" class="btn btn-neutral" title="Quran Retrieving tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -364,7 +417,7 @@ Out: 'أْأَ'
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="http://github.com/tahamagdy/pyquran/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/hci-lab/pyquran-private/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../quran_tools/" style="color: #fcfcfc;">&laquo; Previous</a></span>

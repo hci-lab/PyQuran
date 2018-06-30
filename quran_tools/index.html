@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Basic Tools for Quran - PyQuran</title>
+  <title>Quran Retrieving tools - PyQuran</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Basic Tools for Quran";
+    var mkdocs_page_name = "Quran Retrieving tools";
     var mkdocs_page_input_path = "quran_tools.md";
     var mkdocs_page_url = "/quran_tools/";
   </script>
@@ -49,13 +49,7 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Hello World!</span>
-    <ul class="subnav">
-                <li class="">
-                    
     <a class="" href="..">Home</a>
-                </li>
-    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -64,20 +58,20 @@
     <ul class="subnav">
                 <li class=" current">
                     
-    <a class="current" href="./">Basic Tools for Quran</a>
+    <a class="current" href="./">Quran Retrieving tools</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#retrieving-quran">Retrieving Quran</a></li>
+    <li class="toctree-l3"><a href="#importing-pyquran">Importing PyQuran</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#get_sura">get_sura</a></li>
         
-            <li><a class="toctree-l4" href="#fetch_aya">fetch_aya</a></li>
-        
-            <li><a class="toctree-l4" href="#get_sura_name">get_sura_name</a></li>
+            <li><a class="toctree-l4" href="#get_verse">get_verse</a></li>
         
             <li><a class="toctree-l4" href="#get_sura_number">get_sura_number</a></li>
+        
+            <li><a class="toctree-l4" href="#get_sura_name">get_sura_name</a></li>
         
         </ul>
     
@@ -86,11 +80,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../arabic_tools/">Arabic Tools</a>
+    <a class="" href="../arabic_tools/">Arabic tools</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../analysis_tools/">Analysis Tools</a>
+    <a class="" href="../analysis_tools/">Analysis tools</a>
                 </li>
     </ul>
 	    </li>
@@ -144,10 +138,10 @@
         
       
     
-    <li>Basic Tools for Quran</li>
+    <li>Quran Retrieving tools</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/quran_tools.md"
+        <a href="https://github.com/hci-lab/pyquran-private/edit/master/docs/quran_tools.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -157,73 +151,116 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="retrieving-quran">Retrieving Quran</h1>
-<p>PyQuran is a set of functions and variables.</p>
+                <h2 id="importing-pyquran">Importing PyQuran</h2>
 <pre><code class="python">import pyquran as q
 </code></pre>
 
 <h3 id="get_sura">get_sura</h3>
-<pre><code class="python">get_sura(sura_number, with_tashkeel=False)
+<pre><code class="python">get_sura(sura_number, with_tashkeel=False, basmalah=False)
 </code></pre>
 
-<p>Returns a list of verses, where verses are nothing but strings.</p>
+<p>returns a sura as a list of verses.</p>
 <p><strong>Arguments</strong></p>
 <ul>
-<li><strong>sura_number</strong>:   (int)the ordered number of sura in The Mushaf, starting from 1.</li>
-<li><strong>with_tashkeel</strong>: (bool) to return verses with diacritics to not.</li>
+<li>
+<p><strong>sura_number</strong>: 1 &lt;= Integer &lt;= 114, the ordered number of sura in Mushaf.</p>
+</li>
+<li>
+<p><strong>with_tashkeel</strong>: Boolean, if true return sura with tashkeel else return
+       without.</p>
+</li>
+<li>
+<p><strong>basmalah</strong>: Boolean, adding basmalah as aya.</p>
+</li>
 </ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>[str]</strong>: a list of sura's ayat.</li>
+</ul>
+<p><strong>Note</strong></p>
+<p>Index statrts at zero.
+So if the order number of an aya is x, then it's at (x-1) in the returned
+list.</p>
 <p><strong>Example</strong></p>
-<pre><code class="python">q.get_sura(108, True)
-Out: ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
+<pre><code class="python">   q.get_sura(108, with_tashkeel=True)
+
+   &gt;&gt;&gt; ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
 </code></pre>
 
 <hr />
-<h3 id="fetch_aya">fetch_aya</h3>
-<pre><code class="python">q.fetch_aya(sura_number, aya_number)
+<h3 id="get_verse">get_verse</h3>
+<pre><code class="python">get_verse(sura_number, verse_number, with_tashkeel=False)
 </code></pre>
 
-<p>Returns a verse.</p>
+<p>get specific verse form specific chapter</p>
 <p><strong>Arguments</strong></p>
 <ul>
-<li><strong>sura_number</strong>: (int) the ordered number of sura in The Mus'haf.</li>
-<li><strong>aya_number</strong>:  (int) the ordered number of aya in The Mus'haf.</li>
+<li>
+<p><strong>sura_number</strong>: 1 &lt;= Integer &lt;= 114, the ordered number of sura in Mushaf.</p>
+</li>
+<li>
+<p><strong>verse_number</strong>: Integer &gt; 0,  number of verse.</p>
+</li>
+<li>
+<p><strong>with_tashkeel</strong>: Boolean, if true return sura with tashkeel else return
+           without.</p>
+</li>
 </ul>
-<p><strong>Example</strong></p>
-<pre><code class="python">q.fetch_aya(1, 2)
-Out: 'الحمد لله رب العلمين'
-</code></pre>
-
-<hr />
-<h3 id="get_sura_name">get_sura_name</h3>
-<pre><code class="python">q.get_sura_name(suraNumber=None)
-</code></pre>
-
-<p>Returns the Arabic name of a Sura.</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Returns</strong></p>
 <ul>
-<li><strong>suraNumber</strong>:   (int) the ordered number of sura in The Mushaf, starting from 1.</li>
+<li><strong>str</strong>:  a verse.</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">q.get_sura_name(2)
-Out: 'البقرة'
+<pre><code class="python">q.get_verse(sura_number=1, verse_number=2)
+
+&gt;&gt;&gt; 'الحمد لله رب العلمين'
 </code></pre>
 
 <hr />
 <h3 id="get_sura_number">get_sura_number</h3>
-<pre><code class="python">q.get_sura_number(suraName)
+<pre><code class="python">get_sura_number(sura_name)
 </code></pre>
 
-<p>Returns the Arabic name of a Sura.</p>
 <p><strong>Arguments</strong></p>
+<p>sura_name (str) : string represents the sura name.</p>
+<p><strong>Returns</strong></p>
 <ul>
-<li><strong>suraName</strong>:  (str) The Arabic Sura name.</li>
+<li><strong>int</strong>: the sura number which name is sura_name.</li>
 </ul>
+<p><strong>Note</strong></p>
+<p>Do not forget that the index of the returned list starts at zero.
+So if the order Sura number is x, then it's at (x-1) in the list.</p>
 <p><strong>Example</strong></p>
 <pre><code class="python">pq.get_sura_number('الملك')
+
 &gt;&gt;&gt; 67
 </code></pre>
 
 <hr />
+<h3 id="get_sura_name">get_sura_name</h3>
+<pre><code class="python">get_sura_name(sura_number=None)
+</code></pre>
+
+<p>Returns the name of <code>sura_number</code>. If <code>sura_number=None</code> a list of all
+sura's names is retunred.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong>sura_number</strong>: Optional, 1 &lt;= Integer &lt;= 114, the ordered number of sura in Mushaf.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li>
+<p><strong>str</strong>: the sura name which number is sura_number.</p>
+</li>
+<li>
+<p><strong>[srt]</strong>: list of all suras' names (if the sura_number parameter is None).</p>
+</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python">q.get_sura_name(2)
+
+&gt;&gt;&gt; 'البقرة'
+</code></pre>
               
             </div>
           </div>
@@ -231,7 +268,7 @@ Out: 'البقرة'
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../arabic_tools/" class="btn btn-neutral float-right" title="Arabic Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../arabic_tools/" class="btn btn-neutral float-right" title="Arabic tools">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -259,7 +296,7 @@ Out: 'البقرة'
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="http://github.com/tahamagdy/pyquran/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/hci-lab/pyquran-private/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
