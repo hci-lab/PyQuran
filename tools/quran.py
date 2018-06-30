@@ -25,24 +25,26 @@ quran_tree = ElementTree.parse(corpus_path)
 
 
 def get_sura(sura_number, with_tashkeel=False, basmalah=False):
-    """gets an sura by returning a list of ayat al-sura.
+    """returns a sura as a list of verses.
 
-    Args: 
-        param1 (int): the ordered number of sura in The Mushaf.
-        param2 (bool): if true return sura with tashkeel else return without
+    Args:
+        sura_number: 1 <= Integer <= 114, the ordered number of sura in Mushaf.
+        with_tashkeel: Boolean, if true return sura with tashkeel else return
+                       without.
+        basmalah: Boolean, adding basmalah as aya.
     Returns:
-         [str]: a list of `ayat al-sura.`
+         [str]: a list of sura's ayat.
 
-    Usage Note:
-        Do not forget that the index of the reunred list starts at zero.
-        So if the order aya number is x, then it's at (x-1) in the list.
+    Note:
+        Index statrts at zero.
+        So if the order number of an aya is x, then it's at (x-1) in the returned
+        list.
 
-    Working_State: OK.
-
-    TESTING: 
-            1  Handle out of range inputs.
-            2  Handle non integer inputs.
-
+    Example:
+    ```python
+       q.get_sura(108, with_tashkeel=True)\n
+       >>> ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
+    ```
     """
     
     message = "Sura number must be an integer between 1 to 114, inclusive."
@@ -109,43 +111,53 @@ def retrieve_qruan_as_one_string():
                 quran_string += aya + ' '
     return quran_string
 
-def get_sura_number(suraName):
-    """It takes sura name as string, and returns the an ordered number(integer) of the sura
+def get_sura_number(sura_name):
+    """
     Args:
-        suraName (str) : string represents the sura name.
+        sura_name (str) : string represents the sura name.
     Returns:
-        int: the sura number which name is suraName.
-    Usage Note:
+        int: the sura number which name is sura_name.
+    Note:
         Do not forget that the index of the returned list starts at zero.
         So if the order Sura number is x, then it's at (x-1) in the list.
+
+    Example:
+    ```python
+    pq.get_sura_number('الملك')\n
+    >>> 67
+    ```
     """
     suras_list = quran_tree.findall('sura')
     suraNumber = None
-    for index in range (1,115):
-        if suras_list[index-1].attrib['name'] == suraName:
+    for index in range (1, 115):
+        if suras_list[index-1].attrib['name'] == sura_name:
             suraNumber = index
     return suraNumber
 
-def get_sura_name(suraNumber=None):
-    """It takes and ordered number of a sura, and returns the sura name as string or
-	returns a list contains all suras' names if you don't pass any parameter (the entire Quran is targeted).
+def get_sura_name(sura_number=None):
+    """Returns the name of `sura_number`. If `sura_number=None` a list of all
+    sura's names is retunred.
+
     Args:
-        suraNumber (int): it's optional
+        sura_number: Optional, 1 <= Integer <= 114, the ordered number of sura in Mushaf.
+
     Returns:
-        str: the sura name which number is suraNumber
-        OR
-        [srt]: list of all suras' names (if the suraNumber parameter is None)
-    Usage Note:
-        Do not forget that the index of the returned list starts at zero.
-        So if the order Sura number is x, then it's at (x-1) in the list.
+        str: the sura name which number is sura_number.
+        [srt]: list of all suras' names (if the sura_number parameter is None).
+
+    Example:
+    ```python
+    q.get_sura_name(2)\n
+    >>> 'البقرة'
+    ```
     """
     # get all suras
     suras_list = quran_tree.findall('sura')
-    if suraNumber is None :
+    if sura_number is None :
         suraName = [(suras_list[i].attrib['name']) for i in range(0,114)]
     else:
         # get suraName
-        suraName = suras_list[suraNumber-1].attrib['name']
+        suraName = suras_list[sura_number-1].attrib['name']
     # return suraName
     return  suraName
 
@@ -153,21 +165,28 @@ def get_sura_name(suraNumber=None):
 
 # Redandant: 
 # 
-def get_verse(chapterNum,verseNum,with_tashkeel=False):
+def get_verse(sura_number, verse_number, with_tashkeel=False):
     """
         get specific verse form specific chapter
         
         Args:
-            chapterNum (int): number of chapter 
-            verseNum (int): number of verse 
-            with_tashkeel (int) : to check if search with taskeel or not
+            sura_number: 1 <= Integer <= 114, the ordered number of sura in Mushaf.
+            verse_number: Integer > 0,  number of verse.
+            with_tashkeel: Boolean, if true return sura with tashkeel else return
+                           without.
 
         Returns:
-            str :  return verse
+            str:  a verse.
+
+        Example:
+        ```python
+        q.get_verse(sura_number=1, verse_number=2)\n
+        >>> 'الحمد لله رب العلمين'
+        ```
     """
-    if(chapterNum > ar.swar_num or verseNum<=0):
+    if(sura_number > ar.swar_num or verse_number<=0):
         return ""
     try:
-        return get_sura(chapterNum,with_tashkeel)[verseNum-1]
+        return get_sura(sura_number,with_tashkeel)[verse_number-1]
     except:
         return ""
