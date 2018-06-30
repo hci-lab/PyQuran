@@ -271,6 +271,16 @@ def treat_as_the_same(listOfLetter, letter, text):
     pass
 
 def strip_tashkeel(string):
+    """convert any letter in the `listOfLetter` to `letter` in the given text
+
+    Args:
+        string (str): to drop tashkeel from.
+
+    
+    Example:
+        
+        
+    """
     for char in string:
        if char in tashkeel:
             string = string.replace(char, '')
