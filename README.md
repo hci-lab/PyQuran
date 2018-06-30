@@ -72,7 +72,7 @@ not_completed_ (need to disscuss it with the prof.)
 Cite _PyQuran_ as the following _BibTeX_ entry.
 ```ruby
 @MISC {PyQuran2018,
-author             = "Waleed A. Yousef and Umar Mohamed and Ali Osama and Abdullah Ramzy and Taha Magdy and Ali H. Abdelmonim  and Mostafa Alaa",
+author             = "Human Computer Interaction Lab, Helwan University. (HCILAB)",
 title              = "PyQuran",
 howpublished       = "https://github.com/TahaMagdy/PyQuran",
 month              = "feb",
