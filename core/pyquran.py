@@ -114,6 +114,12 @@ def get_frequency(sentence):
 
     Returns:
         dict: {str: int}
+
+    Example:
+    ```python
+    pq.get_frequency(quran.get_verse(1,1))
+    >>> {'الرحمن': 1, 'الرحيم': 1, 'الله': 1, 'بسم': 1}
+    ```
     """
     if type(sentence) != str:
         raise TypeError('sentece should be string')
@@ -128,9 +134,9 @@ def get_frequency(sentence):
 
 
 def generate_frequency_dictionary(suraNumber=None):
-    """It takes and ordered number of a sura, and returns the dictionary:
-       * key is the word.  value is its frequency in the Sura.
-       - If you don't pass any parameter, then the entire Quran is targeted.
+    """It takes a number of  sura,then order ot and returns the dictionary:
+       * **key** is the word and  **value** is a frequency in the Sura.
+       - If you don't pass any parameter, then the target will be  **all Quran**.
        - This function have to work on the Quran with تشكيل, because it's an..
          important factor.
 
@@ -139,6 +145,12 @@ def generate_frequency_dictionary(suraNumber=None):
 
     Returns:
         dict: {str: int}
+
+    Example:
+    ```python
+    pq.generate_frequency_dictionary(114)
+    >>> {'أعوذ': 1, 'إله': 1, 'الجنة': 1, 'الخناس': 1, 'الذى': 1, 'الناس': 4, 'الوسواس': 1, 'برب': 1, 'شر': 1, 'صدور': 1, 'فى': 1, 'قل': 1, 'ملك': 1, 'من': 2, 'والناس': 1, 'يوسوس': 1}
+    ```
     """
     if type(suraNumber) != int and suraNumber != None :
         raise TypeError('suraNumber should be integer')
@@ -173,6 +185,12 @@ def check_sura_with_frequency(sura_num,freq_dec):
     Returns:
         Boolean: True :- if compatible
                  Flase :- if not
+    Example:
+    ```python
+    frequency_dic = pq.generate_frequency_dictionary(114)
+    pq.check_sura_with_frequency(frequency_dic)
+    >>> True
+    ```
     """
     if type(sura_num) != int:
         raise TypeError('sura_num should be integer')
@@ -197,13 +215,21 @@ def check_sura_with_frequency(sura_num,freq_dec):
 
 def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
     """this function using to cluster words using similarity
-       and sort every bunch of word  by most common and sort bunches
-       descending in same time
+    and sort every bunch of word  by most common and sort bunches
+    descending in same time
 
-       Args:
-          frequency_dictionary (dict): frequency dictionary that need to sort
-       Returns:
-          dict : sorted dictionary
+    Args:
+        frequency_dictionary (dict): frequency dictionary that need to sort
+    Returns:
+        dict : {str: int} sorted dictionary
+    
+    Example:
+    ```python
+    frequency_dic = pq.generate_frequency_dictionary(114)
+    pq.sort_dictionary_by_similarity(frequency_dic)
+    # this dictionary is sorted using similarity 0.8 
+    >>> {'أعوذ': 1, 'إذا': 2, 'العقد': 1, 'الفلق': 1, 'النفثت': 1, 'برب': 1, 'حاسد': 1, 'حسد': 1, 'خلق': 1, 'شر': 4, 'غاسق': 1, 'فى': 1, 'قل': 1, 'ما': 1, 'من': 1, 'وقب': 1, 'ومن': 3}
+    ```
     """
     if type(threshold) != float:
         raise TypeError('threshold should be float')
@@ -275,6 +301,13 @@ def generate_latex_table(dictionary,filename,location="."):
         Boolean: True :- if Done
                  Flase :- if something wrong with folder name
 
+    Example:
+    ```python
+    frequency_dic = pq.generate_frequency_dictionary(114)
+    pq.generate_latex_table(frequency_dic,'filename','../location')
+    # it's mean Done, the file 'filename.tex' is ginerated 
+    >>> True
+    ```
     """
     if type(filename) != str:
         raise TypeError('filename should be string')
@@ -524,7 +557,7 @@ def grouping_letter_diacritics(sentance):
 def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_tashkeel=False):
     """
         this function count number of characters occurrence,
-        for specific verse or with chapter or even all Quran ,
+        for specific verse or  chapter or even all Quran ,
         note if you don't pass verse and chapterNum he will get all Quran
 
         Args:
@@ -537,13 +570,27 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
              with_tashkeel (boo) : to check if you want to search with tashkeel
 
         Returns:
-             {dic} : a dictionary and keys is a characters
+             {dic} : {str : int} a dictionary and keys is a characters
                      and value is count of every chracter.
+
+        Example:
+        ```python
+        pq.frequency_of_character(['أ',"ب","تُ"],verseNum=2,with_tashkeel=False)
+        #that will count the vers number **2** in all swar
+        >>> {'أ': 101, 'ب': 133, 'تُ': 0}
+
+        pq.frequency_of_character(['أ',"ب","تُ"],chapterNum=1,verseNum=2,with_tashkeel=False)
+        #that will count the vers number **2** in chapter **1**
+        >>> {'أ': 0, 'ب': 1, 'تُ': 0}
+
+        pq.frequency_of_character(['أ',"ب","تُ"],chapterNum=1,verseNum=2,with_tashkeel=False)
+        #that will count in **all Quran**
+        >>> {'أ': 8900, 'ب': 11491, 'تُ': 2149}
+
+        ```
     """
     if type(characters) != list:
         raise TypeError('characters should be list of characters')
-    if type(verse) != str and verse != None:
-        raise TypeError('str should be string')
     if type(chapterNum) != int:
         raise TypeError('chapterNum  should be integer')
     if type(verseNum) != int:
@@ -553,6 +600,8 @@ def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_
     frequency = dict()
     #check if count specific verse
     if verse!=None:
+        if type(verse) != str:
+            raise TypeError('verse should be string')
         if not with_tashkeel:
             verse = strip_tashkeel(verse)
         #count frequency of chars
@@ -609,6 +658,12 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
 
         Returns:
             str :  return verse
+    
+        Example:
+        ```python
+        pq.get_token(tokenNum=4,verseNum=1,chapterNum=1,with_tashkeel=True)
+        >>> 'الرَّحِيمِ'
+        ```
     """
     if type(tokenNum) != int:
         raise TypeError('tokenNum should be integer')
@@ -682,6 +737,22 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
         Returns:
             dict() :  key is sequances and value is a list of matched_sequance
                       and their positions
+
+        Example:
+        ```python
+        # search in chapter = 1 only using mode 3 (default)
+        pq.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
+        #it will return 
+        #{'sequance-1' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ],
+        # 'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }
+        # Note : position == 0 if sequance is a sentence and == word position if sequance is a word 
+        >>> {'ملك يوم الدين': [('مَلِكِ يَوْمِ الدِّينِ', 0, 4, 1)]}
+
+        # search in all Quran using mode 3 (default)
+        pq.search_sequence(sequancesList=['ملك يوم'])
+        >>> {'ملك يوم': [('مَلِكِ يَوْمِ', 0, 4, 1),  ('الْمُلْكُ يَوْمَ', 0, 73, 6),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 56, 22),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 26, 25)]}
+
+        ```   
     """
     if type(sequancesList) != list:
         raise TypeError('sequancesList should to be list of strings')
@@ -992,12 +1063,13 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
                               get dependant on threshold number.
 
        Cases:
-           1- if pass sentece only or with another args
+           1- if pass **sentece** only or with another args
               it will search in sentece only.
-           2- if not passed sentence and passed verseNum and chapterNum,
+           2- if not passed **sentence** , passed **verseNum** and **chapterNum**,
               it will search in this verseNum that exist in chapterNum only.
-           3- if not passed sentence,verseNum and passed chapterNum only,
-              it will search in this specific chapter only
+           3- if not passed **sentence**,**verseNum** and passed **chapterNum** only,
+              it will search in this specific chapter only.
+           4- if not pass any args it will search in **all Quran** (not recommended, take long time).
 
        Return:
            [list] : it will return list that have matched word, or
@@ -1006,6 +1078,13 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
        Note : it's takes time dependent on your threshold and size of chapter,
               so it's not support to search on All-Quran becouse
               it take very long time more than 11 min.
+    
+       Example:
+       ```python
+       # it will search in chapter **1** only
+       pq.search_with_pattern("011101",chapterNum=1)
+       >>> ['لِلَّهِ رَبِّ', 'الْعَلَمِينَ', 'أَنْعَمْتَ عَلَيْهِمْ', 'الْمَغْضُوبِ عَلَيْهِمْ']
+       ```
     '''
     if type(pattern) != str or len(pattern)!= (pattern.count('0')+pattern.count('1')):
         raise TypeError('pattern should to be string of 0\'s and 1\'s like \'011011010\'')
