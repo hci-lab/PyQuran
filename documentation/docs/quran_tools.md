@@ -1,0 +1,108 @@
+## Importing PyQuran
+```python
+import pyquran as q
+```
+
+### get_sura
+
+
+```python
+get_sura(sura_number, with_tashkeel=False, basmalah=False)
+```
+
+
+gets an sura by returning a list of ayat al-sura.
+
+ 
+- __Args__: 
+param1 (int): the ordered number of sura in The Mushaf.
+param2 (bool): if true return sura with tashkeel else return without
+ 
+- __Returns__:
+  
+- __[str]__: a list of `ayat al-sura.`
+
+Usage Note:
+Do not forget that the index of the reunred list starts at zero.
+So if the order aya number is x, then it's at (x-1) in the list.
+
+ 
+- __Working_State__: OK.
+
+ 
+- __TESTING__: 
+1  Handle out of range inputs.
+2  Handle non integer inputs.
+
+
+----
+
+### get_verse
+
+
+```python
+get_verse(chapterNum, verseNum, with_tashkeel=False)
+```
+
+
+
+get specific verse form specific chapter
+
+ 
+- __Args__:
+chapterNum (int): number of chapter 
+verseNum (int): number of verse 
+with_tashkeel (int) : to check if search with taskeel or not
+
+ 
+- __Returns__:
+str :  return verse
+
+----
+
+### get_sura_number
+
+
+```python
+get_sura_number(suraName)
+```
+
+
+It takes sura name as string, and returns the an ordered number(integer) of the sura
+ 
+- __Args__:
+suraName (str) : string represents the sura name.
+ 
+- __Returns__:
+ 
+- __int__: the sura number which name is suraName.
+Usage Note:
+Do not forget that the index of the returned list starts at zero.
+So if the order Sura number is x, then it's at (x-1) in the list.
+
+----
+
+### get_sura_name
+
+
+```python
+get_sura_name(suraNumber=None)
+```
+
+
+It takes and ordered number of a sura, and returns the sura name as string or
+	returns a list contains all suras' names if you don't pass any parameter (the entire Quran is targeted).
+ 
+- __Args__:
+suraNumber (int): it's optional
+ 
+- __Returns__:
+ 
+- __str__: the sura name which number is suraNumber
+OR
+ 
+- __[srt]__: list of all suras' names (if the suraNumber parameter is None)
+Usage Note:
+Do not forget that the index of the returned list starts at zero.
+So if the order Sura number is x, then it's at (x-1) in the list.
+
