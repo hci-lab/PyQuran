@@ -44,8 +44,8 @@ PAGES = [
       'functions': [
           pyquran.check_system,
           pyquran.shape,
-          pyquran.unpack_alef_mad,
-          pyquran.separate_token_with_dicrites,
+          pyquran.factor_alef_mad,
+          pyquran.grouping_letter_diacritics,
           arabic.alphabet_excluding,
           arabic.strip_tashkeel,
           pyquran.get_tashkeel_binary,
