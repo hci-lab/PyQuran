@@ -184,22 +184,22 @@ def process_function_docstring(docstring):
     docstring = re.sub(r'What it does\n',
                        r'__What it does__\n\n',
                        docstring)  
-    docstring = re.sub(r'Args\n',
+    docstring = re.sub(r'Args:\n',
                        r'\n__Args__\n\n',
                        docstring)  
-    docstring = re.sub(r'Note\n',
+    docstring = re.sub(r'Note:\n',
                        r'\n__Note__\n\n',
                        docstring)  
-    docstring = re.sub(r'Returns\n',
+    docstring = re.sub(r'Returns:\n',
                        r'\n__Returns__\n\n',
                        docstring)
-    docstring = re.sub(r'Assumption\n',
+    docstring = re.sub(r'Assumption:\n',
                        r'\n__Assumption__\n\n',
                        docstring)
-    docstring = re.sub(r'Cases\n',
+    docstring = re.sub(r'Cases:\n',
                        r'\n__Cases__\n\n',
                        docstring)
-    docstring = re.sub(r'Issue\n',
+    docstring = re.sub(r'Issue:\n',
                        r'\n__Issue__\n\n',
                        docstring)
 
