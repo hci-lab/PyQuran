@@ -922,7 +922,7 @@ def get_tashkeel_binary(ayah):
 
 
 def factor_alef_mad(sentance):
-  '''Factors alef_mad in a sentance into alef_hamza and alef and returns the sentance.
+  '''It returns the `sentance` having alef_mad factored into alef_hamza and alef_wasel.
 
      Args:
          sentance: str, a string or list.
