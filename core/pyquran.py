@@ -222,12 +222,12 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
         frequency_dictionary (dict): frequency dictionary that need to sort
     Returns:
         dict : {str: int} sorted dictionary
-    
+
     Example:
     ```python
     frequency_dic = pq.generate_frequency_dictionary(114)
     pq.sort_dictionary_by_similarity(frequency_dic)
-    # this dictionary is sorted using similarity 0.8 
+    # this dictionary is sorted using similarity 0.8
     >>> {'أعوذ': 1, 'إذا': 2, 'العقد': 1, 'الفلق': 1, 'النفثت': 1, 'برب': 1, 'حاسد': 1, 'حسد': 1, 'خلق': 1, 'شر': 4, 'غاسق': 1, 'فى': 1, 'قل': 1, 'ما': 1, 'من': 1, 'وقب': 1, 'ومن': 3}
     ```
     """
@@ -305,7 +305,7 @@ def generate_latex_table(dictionary,filename,location="."):
     ```python
     frequency_dic = pq.generate_frequency_dictionary(114)
     pq.generate_latex_table(frequency_dic,'filename','../location')
-    # it's mean Done, the file 'filename.tex' is ginerated 
+    # it's mean Done, the file 'filename.tex' is ginerated
     >>> True
     ```
     """
@@ -369,10 +369,9 @@ def generate_latex_table(dictionary,filename,location="."):
 
 
 def shape(system):
-    """
-    	 shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
-    	 that want to count it as on shape "inner list" and returns a dictionary has the same value
-         for each set of alphabets and diffrent values for the rest of alphabets
+    """shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
+       that want to count it as on shape "inner list" and returns a dictionary has the same value
+       for each set of alphabets and diffrent values for the rest of alphabets
 
         Args:
 
@@ -418,30 +417,27 @@ def shape(system):
 
 
 def count_shape(text, system=None):
-    """
-        count_shape parses the text  and returns a N*P matrix (ndarray),
+    """counts the occerences of each letter (As `system` defines) in sura.
 
-        the number of rows equals to the number of verses ,
-        and the number of columns equals to the number of shapes.
+    Args:
+        text: [str], a list of strings , each inner list is ayah .
+        system: Optional, [[char]], revise [Alphabetical Systems](#alphabetical-systems),
+        if `system` is not passed, the normal alphabet is applied.
 
-        What it does:
-            count the occuerence of each shape in text, depends on the your system ,
-            If you don't pass system, then it will count each char as one shape.
+    Returns:
+        (N * P) ndarray: N is the number of verses, P is the alphabet (as defined in `system`).
 
-            If `A` is a ndarray,
-            then A[i,j] is the number of occurrences of alphabet(s)[j] in the
-            verse i.
+    Example:
+    ```python
+    newSystem = [[beh, teh, theh], [jeem, hah, khah]]
+    q.count_shape(get_sura(110), newSystem)
 
-        Args:
-            param1 ([str] ): a list of strings , each inner list is ayah .
-            param2([[char]]) : it's optional ,
-                                -a list of list , each iner list has alphabets that will count as one shape
-                                - If you don't pass your system, then it will count each char as one shape
-        Returns:
-            ndarray: with dimensions (N * P), where
-            `N` is the number of verses in chapter and
-            `P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
-
+    >>>[
+    [1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
+    [1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
+    [6 2 0 0 0 0 1 0 4 0 1 0 2 0 2 0 0 0 0 0 0 1 2 0 2 0 1 2 2 2 0 0]
+    ]
+    ```
     """
 
     #"there are a intersection between subsets"
@@ -658,7 +654,7 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
 
         Returns:
             str :  return verse
-    
+
         Example:
         ```python
         pq.get_token(tokenNum=4,verseNum=1,chapterNum=1,with_tashkeel=True)
@@ -742,17 +738,17 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
         ```python
         # search in chapter = 1 only using mode 3 (default)
         pq.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
-        #it will return 
+        #it will return
         #{'sequance-1' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ],
         # 'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }
-        # Note : position == 0 if sequance is a sentence and == word position if sequance is a word 
+        # Note : position == 0 if sequance is a sentence and == word position if sequance is a word
         >>> {'ملك يوم الدين': [('مَلِكِ يَوْمِ الدِّينِ', 0, 4, 1)]}
 
         # search in all Quran using mode 3 (default)
         pq.search_sequence(sequancesList=['ملك يوم'])
         >>> {'ملك يوم': [('مَلِكِ يَوْمِ', 0, 4, 1),  ('الْمُلْكُ يَوْمَ', 0, 73, 6),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 56, 22),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 26, 25)]}
 
-        ```   
+        ```
     """
     if type(sequancesList) != list:
         raise TypeError('sequancesList should to be list of strings')
@@ -808,8 +804,8 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
 def search_string_with_tashkeel(string, key):
     """
       Args:
-         string: sentence to search by key
-         key: taskeel pattern
+         string: str, sentence to search by key.
+         key: str, taskeel pattern.
 
       Return: (True, text that have that tashkeel pattern)
               (Flase, '')
@@ -1078,7 +1074,7 @@ def search_with_pattern(pattern,sentence=None,verseNum=None,chapterNum=None,thre
        Note : it's takes time dependent on your threshold and size of chapter,
               so it's not support to search on All-Quran becouse
               it take very long time more than 11 min.
-    
+
        Example:
        ```python
        # it will search in chapter **1** only
