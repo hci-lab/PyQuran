@@ -57,14 +57,12 @@ PAGES = [
        'page': 'analysis_tools.md',
        'functions': [
            pyquran.count_shape,
-           pyquran.count_token,
            pyquran.frequency_of_character,
            pyquran.generate_frequency_dictionary,
            pyquran.sort_dictionary_by_similarity,
            pyquran.check_sura_with_frequency,
            pyquran.search_sequence,
            pyquran.search_string_with_tashkeel,
-           pyquran.search_with_pattern,
           ]},
 
 
