@@ -32,23 +32,22 @@ PAGES = [
         {
        'page': 'quran_tools.md',
        'functions': [
-          quran.get_sura,
-          quran.get_verse,
-          quran.get_sura_number,
-          quran.get_sura_name,
+          quran.get_sura,#
+          quran.get_verse,#
+          quran.get_sura_number,#
+          quran.get_sura_name,#
        ]
        },
 
      {
       'page': 'arabic_tools.md',
       'functions': [
-          pyquran.check_system,
-          pyquran.shape,
-          pyquran.factor_alef_mad,
-          pyquran.grouping_letter_diacritics,
-          arabic.alphabet_excluding,
-          arabic.strip_tashkeel,
-          pyquran.get_tashkeel_binary,
+          pyquran.check_system, #
+          pyquran.shape, #
+          pyquran.factor_alef_mad, #
+          pyquran.grouping_letter_diacritics,#
+          arabic.alphabet_excluding,#
+          arabic.strip_tashkeel,#
           pyquran.check_all_alphabet,
           pyquran.buckwalter_transliteration,
          ]},
