@@ -236,17 +236,49 @@ systems = Systems()
     * Some alphabet building tools
 """
 def alphabet_excluding(excludedLetters):
-    """returns the alphabet excluding the given letters.
+    """returns the alphabet excluding `excludedLetters`.
 
     Args:
-        excludedLetters (list['char']): letters to be excluded from the alphabet
+        excludedLetters: list[Char], letters to be excluded from the alphabet.
 
     Returns:
-        str: alphabet excluding the given excludedLetters
+        str: alphabet excluding  `excludedLetters`.
 
-    Calling:
-        print(alphabet_excluding([alef, beh, qaf, teh]))
-
+    Example:
+        ```python
+         q.alphabet_excluding([q.alef, q.beh, q.qaf, q.teh, q.dal, q.yeh, q.alef_mad])
+         >>>
+         ['ء',
+         'ٔ',
+         'أ',
+         'ؤ',
+         'إ',
+         'ئ',
+         'ة',
+         'ث',
+         'ج',
+         'ح',
+         'خ',
+         'ذ',
+         'ر',
+         'ز',
+         'س',
+         'ش',
+         'ص',
+         'ض',
+         'ط',
+         'ظ',
+         'ع',
+         'غ',
+         'ف',
+         'ك',
+         'ل',
+         'م',
+         'ن',
+         'ه',
+         'و',
+         'ى']
+        ```
     """
     return [x for x in alphabet if x not in excludedLetters]
 
