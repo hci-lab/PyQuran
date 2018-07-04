@@ -311,11 +311,11 @@ def strip_tashkeel(string):
 
     Example:
     ```python
-    x = q.quran.get_verse(12, 2, with_tashkeel=True)\n
-    x\n
+    x = q.quran.get_verse(12, 2, with_tashkeel=True)
+    x
     >>> 'إِنَّا أَنزَلْنَهُ قُرْءَنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ'
 
-    q.strip_tashkeel(x)\n
+    q.strip_tashkeel(x)
     >>> 'إنا أنزلنه قرءنا عربيا لعلكم تعقلون'
     ```
 
