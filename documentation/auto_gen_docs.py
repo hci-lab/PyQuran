@@ -202,6 +202,9 @@ def process_function_docstring(docstring):
     docstring = re.sub(r'Issue:\n',
                        r'\n__Issue__\n\n',
                        docstring)
+    docstring = re.sub(r'Example:\n',
+                       r'\n__Example__\n\n',
+                       docstring)
 
     docstring = re.sub(r'   ([^\s\\]+):(.*)\n',
                        r'\n    - __\1__:\2\n',
