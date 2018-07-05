@@ -30,7 +30,7 @@ class Testing_pyquran(unittest.TestCase):
     def test_search_string_with_tashkeel(self):
         sentence = 'ﺺِﻓْ ﺫَﺍْ ﺚَﻧَﺍْ ﻚَﻣْ ﺝَﺍْﺩَ ﺶَﺨْﺻٌ'
         x = pyquran.search_string_with_tashkeel(sentence, fatha + sukun)
-        y = (True, [(3, 5), (7, 9), (10, 12), (13, 15), (17, 19)])
+        y = [(3, 5), (7, 9), (10, 12), (13, 15), (17, 19)]
         self.assertEqual(x, y)
 
 

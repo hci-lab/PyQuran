@@ -134,17 +134,13 @@ def get_frequency(sentence):
 
 
 def generate_frequency_dictionary(suraNumber=None):
-    """It takes a number of  sura,then order ot and returns the dictionary:
-       * **key** is the word and  **value** is a frequency in the Sura.
-       - If you don't pass any parameter, then the target will be  **all Quran**.
-       - This function have to work on the Quran with تشكيل, because it's an..
-         important factor.
+    """computes the frequency dictionary; wher key is a unique word and values is the its occurrence.
 
     Args:
         suraNumber (int): it's optional
 
     Returns:
-        dict: {str: int}
+        dict: key is word, str; value is its occurrences, int.
 
     Example:
     ```python
@@ -219,7 +215,7 @@ def sort_dictionary_by_similarity(frequency_dictionary,threshold=0.8):
     descending in same time
 
     Args:
-        frequency_dictionary (dict): frequency dictionary that need to sort
+        frequency_dictionary: dict, frequency dictionary to be sorted.
     Returns:
         dict : {str: int} sorted dictionary
 
@@ -425,18 +421,17 @@ def count_shape(text, system=None):
         if `system` is not passed, the normal alphabet is applied.
 
     Returns:
-        (N * P) ndarray: N is the number of verses, P is the alphabet (as defined in `system`).
+        (N * P) ndarray (Matrix A): N is the number of verses, P is the alphabet (as defined in `system`).\n
+        `A[i][j]` is the number of the letter `j` in the verse `i`.
 
     Example:
     ```python
     newSystem = [[beh, teh, theh], [jeem, hah, khah]]
     q.count_shape(get_sura(110), newSystem)
 
-    >>>[
-    [1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
+    >>>[[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
     [1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
-    [6 2 0 0 0 0 1 0 4 0 1 0 2 0 2 0 0 0 0 0 0 1 2 0 2 0 1 2 2 2 0 0]
-    ]
+    [6 2 0 0 0 0 1 0 4 0 1 0 2 0 2 0 0 0 0 0 0 1 2 0 2 0 1 2 2 2 0 0]]
     ```
     """
 
@@ -550,20 +545,18 @@ def grouping_letter_diacritics(sentance):
 
 
 
-def frequency_of_character(characters,verse=None,chapterNum=0,verseNum=0 , with_tashkeel=False):
-    """
-        this function count number of characters occurrence,
-        for specific verse or  chapter or even all Quran ,
-        note if you don't pass verse and chapterNum he will get all Quran
+def frequency_of_character(characters, verse=None, chapterNum=0, verseNum=0, with_tashkeel=False):
+    """counts the number of characters in a specific verse or  sura or even the entrire Quran ,
+
+        Note:
+             If you don't pass verse and chapterNum he will get all Quran
 
         Args:
-             verse (str): this verse that you need to
-                     count it and default is None.
-             chapterNum (int) : chapter number is a number of 'sura'
-                          that will count it , and default is 0
-             verseNum (int) : verse number in sura
-             chracters (list) : list of characters that you want to count them
-             with_tashkeel (boo) : to check if you want to search with tashkeel
+             verse: str, this verse that you need to count it and default is None.
+             chapterNum, int, chapter number is a number of 'sura' that will count it , and default is 0.
+             verseNum: int, verse number in sura.
+             chracters: [], list of characters that you want to count them.
+             with_tashkeel: Bool, to check if you want to search with tashkeel.
 
         Returns:
              {dic} : {str : int} a dictionary and keys is a characters
@@ -692,13 +685,12 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
 
 
 def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
-    """
-        take list of sequances and return matched sequance,
-        it search in verse ot chapter or All Quran ,
-        it return for every match :
-            1- matched sequance
-            2- chapter number of occurrence
-            3- token number if word and 0 if sentence
+    """take list of sequances and return matched sequance,
+       it search in verse ot chapter or All Quran ,
+       it return for every match :
+           1- matched sequance
+           2- chapter number of occurrence
+           3- token number if word and 0 if sentence
 
         Note :
              *if found verse != None it will use it en search .
@@ -724,15 +716,13 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
 
 
         Args:
-            chapterNum (int): number of chapter where function search
-            verseNum (int): number of verse wher function search
-            sequancesList (list): a list of sequances that you want
-                                  to match them
-            mode (int): this mode that you need to use and default mode 3
+            chapterNum: int, number of chapter where function search.
+            verseNum: int, number of verse wher function search.
+            sequancesList: [], a list of sequances that you want to match them.
+            mode: int, this mode that you need to use and default mode 3.
 
         Returns:
-            dict() :  key is sequances and value is a list of matched_sequance
-                      and their positions
+            dict:  key is sequances and value is a list of matched_sequance and their positions.
 
         Example:
         ```python
@@ -807,11 +797,21 @@ def search_string_with_tashkeel(string, key):
          string: str, sentence to search by key.
          key: str, taskeel pattern.
 
-      Return: (True, text that have that tashkeel pattern)
-              (Flase, '')
 
       Assumption:
          Searches tashkeel that is exciplitly included in string.
+
+      Returns:
+         find: list of pairs where x and y are the start and end index of the matched.
+         nod-found: []
+
+      Example:
+        ```python
+        string = 'صِفْ ذَاْ ثَنَاْ كَمْ جَاْدَ شَخْصٌ'
+        q.search_string_with_tashkeel(string, 'َْ')
+
+        >>> [(3, 5), (7, 9), (10, 12), (13, 15), (17, 19)]
+        ```
 
     """
 
@@ -835,9 +835,9 @@ def search_string_with_tashkeel(string, key):
         results.append(one_result)
 
     if results == []:
-        return False, []
+        return []
     else:
-        return True, results
+        return results
 
 
 def buckwalter_transliteration(string, reverse=False):
