@@ -42,7 +42,7 @@ def get_sura(sura_number, with_tashkeel=False, basmalah=False):
 
     Example:
     ```python
-       q.get_sura(108, with_tashkeel=True)\n
+       q.quran.get_sura(108, with_tashkeel=True)\n
        >>> ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
     ```
     """
@@ -123,7 +123,7 @@ def get_sura_number(sura_name):
 
     Example:
     ```python
-    pq.get_sura_number('الملك')\n
+    pq.quran.get_sura_number('الملك')\n
     >>> 67
     ```
     """
@@ -147,7 +147,7 @@ def get_sura_name(sura_number=None):
 
     Example:
     ```python
-    q.get_sura_name(2)\n
+    q.quran.get_sura_name(2)\n
     >>> 'البقرة'
     ```
     """
@@ -180,7 +180,7 @@ def get_verse(sura_number, verse_number, with_tashkeel=False):
 
         Example:
         ```python
-        q.get_verse(sura_number=1, verse_number=2)\n
+        q.quran.get_verse(sura_number=1, verse_number=2)\n
         >>> 'الحمد لله رب العلمين'
         ```
     """

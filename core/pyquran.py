@@ -841,7 +841,8 @@ def search_string_with_tashkeel(string, key):
 
 
 def buckwalter_transliteration(string, reverse=False):
-   """Back and forth Arabic-Bauckwalter transliteration. Revise [Buckwalter](https://en.wikipedia.org/wiki/Buckwalter_transliteration)
+   """Back and forth Arabic-Bauckwalter transliteration.
+      Revise [Buckwalter](https://en.wikipedia.org/wiki/Buckwalter_transliteration)
 
      Args:
          string: to be transliterated.
@@ -946,29 +947,6 @@ def factor_alef_mad(sentance):
   return ayahWithUnpackAlefMad
 
 
-
-
-def check_all_alphabet(system):
-    '''
-     check_alphabet get a list of alphabets or system(list of lists of alphabets)
-     and return the rest of arabic alphabets [alphabets in system excluded]
-     -in case sytem equals all arabic alphabets, it will return empty list.
-
-     What it does:
-         return the rest of arabic alphabets that not included in system.
-
-     Args:
-         param1 ([char] ): a list or list of lists of characters.
-
-     Returns:
-         list: include all other arabic alphabet.
-    '''
-
-
-    if isinstance(system, list):
-        system=list(chain(*system))
-    theRestOfAlphabets = list(set(alphabet) - set(system))
-    return theRestOfAlphabets
 
 
 def check_system(system, index=None):

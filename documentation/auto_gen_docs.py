@@ -48,8 +48,7 @@ PAGES = [
           pyquran.grouping_letter_diacritics,#
           arabic.alphabet_excluding,#
           arabic.strip_tashkeel,#
-          pyquran.check_all_alphabet,
-          pyquran.buckwalter_transliteration,
+          pyquran.buckwalter_transliteration,#
          ]},
 
         {
