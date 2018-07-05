@@ -74,9 +74,13 @@
         
             <li><a class="toctree-l4" href="#check_system">check_system</a></li>
         
+            <li><a class="toctree-l4" href="#shape">shape</a></li>
+        
             <li><a class="toctree-l4" href="#factor_alef_mad">factor_alef_mad</a></li>
         
             <li><a class="toctree-l4" href="#grouping_letter_diacritics">grouping_letter_diacritics</a></li>
+        
+            <li><a class="toctree-l4" href="#alphabet_excluding">alphabet_excluding</a></li>
         
             <li><a class="toctree-l4" href="#strip_tashkeel">strip_tashkeel</a></li>
         
@@ -115,11 +119,6 @@
     <a class="" href="../code_conventions/">Code Conventios</a>
                 </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../authors/">Authors</a>
 	    </li>
           
         </ul>
@@ -243,7 +242,7 @@ filtering, etc.</p>
 </code></pre>
 
 <p>Returns the alphabet including treated-as-one letters. If you pass the index as the second optional arguement, it returns the letter of the that index only, not the hole alphabet.</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <ul>
 <li>
 <p><strong>system</strong>: [[char]], a list of letters, where each letter to be treated as
@@ -300,12 +299,28 @@ one letter are in one sub-list,  see  <a href="#alphabetical-systems">Alphabetic
 <p>The previous example prints each letter as one element in a new alphabet list,
 as you can see the two letters alef and beh are considered one letter.</p>
 <hr />
+<h3 id="shape">shape</h3>
+<pre><code class="python">shape(system)
+</code></pre>
+
+<p>shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
+   that want to count it as on shape "inner list" and returns a dictionary has the same value
+   for each set of alphabets and diffrent values for the rest of alphabets</p>
+<p><strong>Args</strong></p>
+<p>param1 ([[char]]): a list of list of alphabets , each inner list have
+          alphabets that with be count  as one shape .</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>dictionary</strong>: with all alphabets, where each char "key"  have a value
+value will be equals for alphabets that will be count as oe shape</li>
+</ul>
+<hr />
 <h3 id="factor_alef_mad">factor_alef_mad</h3>
 <pre><code class="python">factor_alef_mad(sentance)
 </code></pre>
 
-<p>Factors alef_mad in a sentance into alef_hamza and alef and returns the sentance.</p>
-<p><strong>Arguments</strong></p>
+<p>It returns the <code>sentance</code> having alef_mad factored into alef_hamza and alef_wasel.</p>
+<p><strong>Args</strong></p>
 <ul>
 <li><strong>sentance</strong>: str, a string or list.</li>
 </ul>
@@ -325,7 +340,7 @@ as you can see the two letters alef and beh are considered one letter.</p>
 </code></pre>
 
 <p>Grouping each letter with its diacritics.</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <ul>
 <li><strong>sentance</strong>: str</li>
 </ul>
@@ -341,24 +356,70 @@ diacritics.</li>
 </code></pre>
 
 <hr />
+<h3 id="alphabet_excluding">alphabet_excluding</h3>
+<pre><code class="python">alphabet_excluding(excludedLetters)
+</code></pre>
+
+<p>returns the alphabet excluding <code>excludedLetters</code>.</p>
+<p><strong>Args</strong></p>
+<ul>
+<li><strong>excludedLetters</strong>: list[Char], letters to be excluded from the alphabet.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>str</strong>: alphabet excluding  <code>excludedLetters</code>.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="python"> q.alphabet_excluding([q.alef, q.beh, q.qaf, q.teh, q.dal, q.yeh, q.alef_mad])
+ &gt;&gt;&gt;
+ ['ء',
+ 'ٔ',
+ 'أ',
+ 'ؤ',
+ 'إ',
+ 'ئ',
+ 'ة',
+ 'ث',
+ 'ج',
+ 'ح',
+ 'خ',
+ 'ذ',
+ 'ر',
+ 'ز',
+ 'س',
+ 'ش',
+ 'ص',
+ 'ض',
+ 'ط',
+ 'ظ',
+ 'ع',
+ 'غ',
+ 'ف',
+ 'ك',
+ 'ل',
+ 'م',
+ 'ن',
+ 'ه',
+ 'و',
+ 'ى']
+</code></pre>
+
+<hr />
 <h3 id="strip_tashkeel">strip_tashkeel</h3>
 <pre><code class="python">strip_tashkeel(string)
 </code></pre>
 
 <p>convert any letter in the <code>listOfLetter</code> to <code>letter</code> in the given text</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <ul>
 <li><strong>string</strong>: str, to drop tashkeel from.</li>
 </ul>
 <p><strong>Example</strong></p>
 <pre><code class="python">x = q.quran.get_verse(12, 2, with_tashkeel=True)
-
 x
-
 &gt;&gt;&gt; 'إِنَّا أَنزَلْنَهُ قُرْءَنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ'
 
 q.strip_tashkeel(x)
-
 &gt;&gt;&gt; 'إنا أنزلنه قرءنا عربيا لعلكم تعقلون'
 </code></pre>
 
@@ -367,8 +428,9 @@ q.strip_tashkeel(x)
 <pre><code class="python">buckwalter_transliteration(string, reverse=False)
 </code></pre>
 
-<p>Back and forth Arabic-Bauckwalter transliteration. Revise <a href="https://en.wikipedia.org/wiki/Buckwalter_transliteration">Buckwalter</a></p>
-<p><strong>Arguments</strong></p>
+<p>Back and forth Arabic-Bauckwalter transliteration.
+  Revise <a href="https://en.wikipedia.org/wiki/Buckwalter_transliteration">Buckwalter</a></p>
+<p><strong>Args</strong></p>
 <ul>
 <li>
 <p><strong>string</strong>: to be transliterated.</p>

@@ -112,11 +112,6 @@
     </ul>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../authors/">Authors</a>
-	    </li>
-          
         </ul>
       </div>
       &nbsp;
@@ -160,12 +155,15 @@
 <pre><code class="python">import pyquran as q
 </code></pre>
 
+<ul>
+<li>Quran retrieving tools are in <code>q.quran</code>. </li>
+</ul>
 <h3 id="get_sura">get_sura</h3>
 <pre><code class="python">get_sura(sura_number, with_tashkeel=False, basmalah=False)
 </code></pre>
 
 <p>returns a sura as a list of verses.</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <ul>
 <li>
 <p><strong>sura_number</strong>: 1 &lt;= Integer &lt;= 114, the ordered number of sura in Mushaf.</p>
@@ -187,7 +185,7 @@
 So if the order number of an aya is x, then it's at (x-1) in the returned
 list.</p>
 <p><strong>Example</strong></p>
-<pre><code class="python">   q.get_sura(108, with_tashkeel=True)
+<pre><code class="python">   q.quran.get_sura(108, with_tashkeel=True)
 
    &gt;&gt;&gt; ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
 </code></pre>
@@ -198,7 +196,7 @@ list.</p>
 </code></pre>
 
 <p>get specific verse form specific chapter</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <ul>
 <li>
 <p><strong>sura_number</strong>: 1 &lt;= Integer &lt;= 114, the ordered number of sura in Mushaf.</p>
@@ -216,7 +214,7 @@ list.</p>
 <li><strong>str</strong>:  a verse.</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">q.get_verse(sura_number=1, verse_number=2)
+<pre><code class="python">q.quran.get_verse(sura_number=1, verse_number=2)
 
 &gt;&gt;&gt; 'الحمد لله رب العلمين'
 </code></pre>
@@ -226,7 +224,7 @@ list.</p>
 <pre><code class="python">get_sura_number(sura_name)
 </code></pre>
 
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <p>sura_name (str) : string represents the sura name.</p>
 <p><strong>Returns</strong></p>
 <ul>
@@ -236,7 +234,7 @@ list.</p>
 <p>Do not forget that the index of the returned list starts at zero.
 So if the order Sura number is x, then it's at (x-1) in the list.</p>
 <p><strong>Example</strong></p>
-<pre><code class="python">pq.get_sura_number('الملك')
+<pre><code class="python">pq.quran.get_sura_number('الملك')
 
 &gt;&gt;&gt; 67
 </code></pre>
@@ -248,7 +246,7 @@ So if the order Sura number is x, then it's at (x-1) in the list.</p>
 
 <p>Returns the name of <code>sura_number</code>. If <code>sura_number=None</code> a list of all
 sura's names is retunred.</p>
-<p><strong>Arguments</strong></p>
+<p><strong>Args</strong></p>
 <ul>
 <li><strong>sura_number</strong>: Optional, 1 &lt;= Integer &lt;= 114, the ordered number of sura in Mushaf.</li>
 </ul>
@@ -262,7 +260,7 @@ sura's names is retunred.</p>
 </li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">q.get_sura_name(2)
+<pre><code class="python">q.quran.get_sura_name(2)
 
 &gt;&gt;&gt; 'البقرة'
 </code></pre>
