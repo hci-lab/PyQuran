@@ -26,7 +26,7 @@ It is a dynamic construction of letters—
 
 
 ## Current Features
-- Quran Relieving.
+- Quran Retrieving.
 - Advanced Searching, by Text and Diacritics Patterns.
 - Buckwalter Transliteration, back and forth.
 - Multiple **alphabetical systems**.
