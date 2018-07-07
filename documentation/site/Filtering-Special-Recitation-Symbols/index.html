@@ -49,13 +49,7 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Hello World!</span>
-    <ul class="subnav">
-                <li class="">
-                    
     <a class="" href="..">Home</a>
-                </li>
-    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -64,15 +58,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../quran_tools/">Basic Tools for Quran</a>
+    <a class="" href="../quran_tools/">Quran Retrieving tools</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../arabic_tools/">Arabic Tools</a>
+    <a class="" href="../arabic_tools/">Arabic tools</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../analysis_tools/">Analysis Tools</a>
+    <a class="" href="../analysis_tools/">Analysis tools</a>
                 </li>
     </ul>
 	    </li>
@@ -112,6 +106,11 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../authors/">Authors</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -141,7 +140,7 @@
     <li>Quran Corpus</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/Filtering-Special-Recitation-Symbols.md"
+        <a href="https://github.com/hci-lab/pyquran-private/edit/master/docs/Filtering-Special-Recitation-Symbols.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -167,24 +166,10 @@ the recitation marks <strong>they are NOT letters</strong>.</p>
 one letter in Arabic, but alef wasl has a mark above it to indicate that it is not pronounced
 as a glottal stop in case of continuing, <a href="https://en.wikipedia.org/wiki/Hamza#Hamzat_wa%E1%B9%A3l">Read more about Alef Wasl</a>.</p>
 <p>This filtering is done in run time. We <strong>do not</strong> change the corpus at all.</p>
-<p><strong><a href="https://github.com/TahaMagdy/PyQuran/blob/4a90340211490ea054cda6b96f4c7b4695df0661/tools/uthmanic.py#L66">The functions code does filtering:</a></strong></p>
-<pre><code class="python">def recitation_symbols_filter(string, symbols=recitationSymbols ):
-    '''Removes the Special Recitation Symbols from `string`
-    ¦   Args:
-    ¦   ¦   param1(str): a string to be filtered
-    ¦   ¦   param2([char]): a list of recitation symbols
-    '''
-    for symbol in symbols:
-    ¦   if symbol == alef_wasl_with_saad_above:
-    ¦   ¦   string = string.replace(alef_wasl_with_saad_above, arabic.alef)
-    ¦   else:
-    ¦   ¦   string = string.replace(symbol, '')
-
-    return string
-</code></pre>
-
+<p><strong><a href="https://github.com/hci-lab/PyQuran-Private/blob/master/tools/filtering.py#L67:L82">source</a></strong></p>
 <blockquote>
-<p>Also feel free to report any bugs or lingual errors, you are most welcome, just fire an issue.</p>
+<p>Also feel free to report any bugs or lingual errors, you are most welcome, just
+open  an <a href="https://github.com/hci-lab/PyQuran/issues">issue</a>.</p>
 </blockquote>
               
             </div>
@@ -221,7 +206,7 @@ as a glottal stop in case of continuing, <a href="https://en.wikipedia.org/wiki/
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="http://github.com/tahamagdy/pyquran/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/hci-lab/pyquran-private/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../Wiki-Home/" style="color: #fcfcfc;">&laquo; Previous</a></span>
