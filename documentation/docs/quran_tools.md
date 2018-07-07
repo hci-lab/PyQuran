@@ -3,6 +3,8 @@
 import pyquran as q
 ```
 
+- Quran retrieving tools are in `q.quran`. 
+
 ### get_sura
 
 
@@ -11,29 +13,39 @@ get_sura(sura_number, with_tashkeel=False, basmalah=False)
 ```
 
 
-gets an sura by returning a list of ayat al-sura.
+returns a sura as a list of verses.
+
+
+__Args__
 
  
-- __Args__: 
-param1 (int): the ordered number of sura in The Mushaf.
-param2 (bool): if true return sura with tashkeel else return without
+- __sura_number__: 1 <= Integer <= 114, the ordered number of sura in Mushaf.
  
-- __Returns__:
+- __with_tashkeel__: Boolean, if true return sura with tashkeel else return
+	   without.
+ 
+- __basmalah__: Boolean, adding basmalah as aya.
+
+__Returns__
+
   
-- __[str]__: a list of `ayat al-sura.`
+- __[str]__: a list of sura's ayat.
 
-Usage Note:
-Do not forget that the index of the reunred list starts at zero.
-So if the order aya number is x, then it's at (x-1) in the list.
 
- 
-- __Working_State__: OK.
+__Note__
 
- 
-- __TESTING__: 
-1  Handle out of range inputs.
-2  Handle non integer inputs.
+Index statrts at zero.
+So if the order number of an aya is x, then it's at (x-1) in the returned
+list.
 
+
+__Example__
+
+```python
+   q.quran.get_sura(108, with_tashkeel=True)
+
+   >>> ['إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ', 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ']
+```
 
 ----
 
@@ -41,22 +53,38 @@ So if the order aya number is x, then it's at (x-1) in the list.
 
 
 ```python
-get_verse(chapterNum, verseNum, with_tashkeel=False)
+get_verse(sura_number, verse_number, with_tashkeel=False)
 ```
 
 
 
 get specific verse form specific chapter
 
- 
-- __Args__:
-chapterNum (int): number of chapter 
-verseNum (int): number of verse 
-with_tashkeel (int) : to check if search with taskeel or not
+
+__Args__
 
  
-- __Returns__:
-str :  return verse
+- __sura_number__: 1 <= Integer <= 114, the ordered number of sura in Mushaf.
+ 
+- __verse_number__: Integer > 0,  number of verse.
+ 
+- __with_tashkeel__: Boolean, if true return sura with tashkeel else return
+		   without.
+
+
+__Returns__
+
+ 
+- __str__:  a verse.
+
+
+__Example__
+
+```python
+q.quran.get_verse(sura_number=1, verse_number=2)
+
+>>> 'الحمد لله رب العلمين'
+```
 
 ----
 
@@ -64,21 +92,34 @@ str :  return verse
 
 
 ```python
-get_sura_number(suraName)
+get_sura_number(sura_name)
 ```
 
 
-It takes sura name as string, and returns the an ordered number(integer) of the sura
+
+
+__Args__
+
+sura_name (str) : string represents the sura name.
+
+__Returns__
+
  
-- __Args__:
-suraName (str) : string represents the sura name.
- 
-- __Returns__:
- 
-- __int__: the sura number which name is suraName.
-Usage Note:
+- __int__: the sura number which name is sura_name.
+
+__Note__
+
 Do not forget that the index of the returned list starts at zero.
 So if the order Sura number is x, then it's at (x-1) in the list.
+
+
+__Example__
+
+```python
+pq.quran.get_sura_number('الملك')
+
+>>> 67
+```
 
 ----
 
@@ -86,23 +127,33 @@ So if the order Sura number is x, then it's at (x-1) in the list.
 
 
 ```python
-get_sura_name(suraNumber=None)
+get_sura_name(sura_number=None)
 ```
 
 
-It takes and ordered number of a sura, and returns the sura name as string or
-	returns a list contains all suras' names if you don't pass any parameter (the entire Quran is targeted).
+Returns the name of `sura_number`. If `sura_number=None` a list of all
+sura's names is retunred.
+
+
+__Args__
+
  
-- __Args__:
-suraNumber (int): it's optional
+- __sura_number__: Optional, 1 <= Integer <= 114, the ordered number of sura in Mushaf.
+
+
+__Returns__
+
  
-- __Returns__:
+- __str__: the sura name which number is sura_number.
  
-- __str__: the sura name which number is suraNumber
-OR
- 
-- __[srt]__: list of all suras' names (if the suraNumber parameter is None)
-Usage Note:
-Do not forget that the index of the returned list starts at zero.
-So if the order Sura number is x, then it's at (x-1) in the list.
+- __[srt]__: list of all suras' names (if the sura_number parameter is None).
+
+
+__Example__
+
+```python
+q.quran.get_sura_name(2)
+
+>>> 'البقرة'
+```
 

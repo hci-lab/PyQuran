@@ -6,58 +6,79 @@ count_shape(text, system=None)
 ```
 
 
+counts the occerences of each letter (As `system` defines) in sura.
 
-count_shape parses the text  and returns a N*P matrix (ndarray),
 
-the number of rows equals to the number of verses ,
-and the number of columns equals to the number of shapes.
-
-What it does:
-count the occuerence of each shape in text, depends on the your system ,
-If you don't pass system, then it will count each char as one shape.
-
-If `A` is a ndarray,
-then A[i,j] is the number of occurrences of alphabet(s)[j] in the
-verse i.
+__Args__
 
  
-- __Args__:
-param1 ([str] ): a list of strings , each inner list is ayah .
-param2([[char]]) : it's optional ,
-		-a list of list , each iner list has alphabets that will count as one shape
-		- If you don't pass your system, then it will count each char as one shape
+- __text__: [str], a list of strings , each inner list is ayah .
  
-- __Returns__:
- 
-- __ndarray__: with dimensions (N * P), where
-`N` is the number of verses in chapter and
-`P` the number of elements in system + the number of alphapets as on char [alphabets in system excluded]
+- __system__: Optional, [[char]], revise [Alphabetical Systems](#alphabetical-systems),
+if `system` is not passed, the normal alphabet is applied.
 
+
+__Returns__
+
+(N * P) ndarray (Matrix A): N is the number of verses, P is the alphabet (as defined in `system`).
+
+`A[i][j]` is the number of the letter `j` in the verse `i`.
+
+
+__Example__
+
+```python
+newSystem = [[beh, teh, theh], [jeem, hah, khah]]
+q.count_shape(get_sura(110), newSystem)
+
+>>>[[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
+[1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
+[6 2 0 0 0 0 1 0 4 0 1 0 2 0 2 0 0 0 0 0 0 1 2 0 2 0 1 2 2 2 0 0]]
+```
 
 ----
 
-### count_token
+### search_string_with_tashkeel
 
 
 ```python
-count_token(text)
+search_string_with_tashkeel(string, key)
 ```
 
 
 
- count_token get a text (surah or ayah) and count the
- number of tokens that it has.
-
- What it does: count the number of tokens in text
+  
+__Args__
 
   
-- __Args__:
- param1 (str or [str]): a string or list of strings
+- __string__: str, sentence to search by key.
+  
+- __key__: str, taskeel pattern.
+
 
   
-- __Returns__:
- 
-- __int__: the number of tokens
+__Assumption__
+
+ Searches tashkeel that is exciplitly included in string.
+
+  
+__Returns__
+
+  
+- __find__: list of pairs where x and y are the start and end index of the matched.
+  
+- __nod-found__: []
+
+  
+__Example__
+
+```python
+string = 'صِفْ ذَاْ ثَنَاْ كَمْ جَاْدَ شَخْصٌ'
+q.search_string_with_tashkeel(string, 'َْ')
+
+>>> [(3, 5), (7, 9), (10, 12), (13, 15), (17, 19)]
+```
+
 
 ----
 
@@ -69,25 +90,49 @@ frequency_of_character(characters, verse=None, chapterNum=0, verseNum=0, with_ta
 ```
 
 
+counts the number of characters in a specific verse or  sura or even the entrire Quran ,
 
-this function count number of characters occurrence,
-for specific verse or with chapter or even all Quran ,
-note if you don't pass verse and chapterNum he will get all Quran
 
- 
-- __Args__:
- verse (str): this verse that you need to
-	 count it and default is None.
- chapterNum (int) : chapter number is a number of 'sura'
-		  that will count it , and default is 0
- verseNum (int) : verse number in sura
- chracters (list) : list of characters that you want to count them
- with_tashkeel (boo) : to check if you want to search with tashkeel
+__Note__
 
- 
-- __Returns__:
- {dic} : a dictionary and keys is a characters
+ If you don't pass verse and chapterNum he will get all Quran
+
+
+__Args__
+
+  
+- __verse__: str, this verse that you need to count it and default is None.
+ chapterNum, int, chapter number is a number of 'sura' that will count it , and default is 0.
+  
+- __verseNum__: int, verse number in sura.
+  
+- __chracters__: [], list of characters that you want to count them.
+  
+- __with_tashkeel__: Bool, to check if you want to search with tashkeel.
+
+
+__Returns__
+
+ {dic} : {str : int} a dictionary and keys is a characters
 	 and value is count of every chracter.
+
+
+__Example__
+
+```python
+pq.frequency_of_character(['أ',"ب","تُ"],verseNum=2,with_tashkeel=False)
+#that will count the vers number **2** in all swar
+>>> {'أ': 101, 'ب': 133, 'تُ': 0}
+
+pq.frequency_of_character(['أ',"ب","تُ"],chapterNum=1,verseNum=2,with_tashkeel=False)
+#that will count the vers number **2** in chapter **1**
+>>> {'أ': 0, 'ب': 1, 'تُ': 0}
+
+pq.frequency_of_character(['أ',"ب","تُ"],chapterNum=1,verseNum=2,with_tashkeel=False)
+#that will count in **all Quran**
+>>> {'أ': 8900, 'ب': 11491, 'تُ': 2149}
+
+```
 
 ----
 
@@ -99,20 +144,26 @@ generate_frequency_dictionary(suraNumber=None)
 ```
 
 
-It takes and ordered number of a sura, and returns the dictionary:
-   * key is the word.  value is its frequency in the Sura.
-   - If you don't pass any parameter, then the entire Quran is targeted.
-   - This function have to work on the Quran with تشكيل, because it's an..
- important factor.
+computes the frequency dictionary; wher key is a unique word and values is the its occurrence.
 
- 
-- __Args__:
+
+__Args__
+
 suraNumber (int): it's optional
 
+
+__Returns__
+
  
-- __Returns__:
- 
-- __dict__: {str: int}
+- __dict__: key is word, str; value is its occurrences, int.
+
+
+__Example__
+
+```python
+pq.generate_frequency_dictionary(114)
+>>> {'أعوذ': 1, 'إله': 1, 'الجنة': 1, 'الخناس': 1, 'الذى': 1, 'الناس': 4, 'الوسواس': 1, 'برب': 1, 'شر': 1, 'صدور': 1, 'فى': 1, 'قل': 1, 'ملك': 1, 'من': 2, 'والناس': 1, 'يوسوس': 1}
+```
 
 ----
 
@@ -125,15 +176,28 @@ sort_dictionary_by_similarity(frequency_dictionary, threshold=0.8)
 
 
 this function using to cluster words using similarity
-   and sort every bunch of word  by most common and sort bunches
-   descending in same time
+and sort every bunch of word  by most common and sort bunches
+descending in same time
 
 
-- __Args__:
-  frequency_dictionary (dict): frequency dictionary that need to sort
+__Args__
 
-- __Returns__:
-  dict : sorted dictionary
+ 
+- __frequency_dictionary__: dict, frequency dictionary to be sorted.
+
+__Returns__
+
+dict : {str: int} sorted dictionary
+
+
+__Example__
+
+```python
+frequency_dic = pq.generate_frequency_dictionary(114)
+pq.sort_dictionary_by_similarity(frequency_dic)
+# this dictionary is sorted using similarity 0.8
+>>> {'أعوذ': 1, 'إذا': 2, 'العقد': 1, 'الفلق': 1, 'النفثت': 1, 'برب': 1, 'حاسد': 1, 'حسد': 1, 'خلق': 1, 'شر': 4, 'غاسق': 1, 'فى': 1, 'قل': 1, 'ما': 1, 'من': 1, 'وقب': 1, 'ومن': 3}
+```
 
 ----
 
@@ -148,15 +212,25 @@ check_sura_with_frequency(sura_num, freq_dec)
 this function check if frequency dictionary of specific sura is
 compatible with original sura in shapes count
 
- 
-- __Args__:
+
+__Args__
+
 suraNumber (int): sura number
 
- 
-- __Returns__:
+
+__Returns__
+
  
 - __Boolean__: True :- if compatible
 	 Flase :- if not
+
+__Example__
+
+```python
+frequency_dic = pq.generate_frequency_dictionary(114)
+pq.check_sura_with_frequency(frequency_dic)
+>>> True
+```
 
 ----
 
@@ -168,13 +242,12 @@ search_sequence(sequancesList, verse=None, chapterNum=0, verseNum=0, mode=3)
 ```
 
 
-
 take list of sequances and return matched sequance,
-it search in verse ot chapter or All Quran ,
-it return for every match :
-1- matched sequance
-2- chapter number of occurrence
-3- token number if word and 0 if sentence
+   it search in verse ot chapter or All Quran ,
+   it return for every match :
+   1- matched sequance
+   2- chapter number of occurrence
+   3- token number if word and 0 if sentence
 
 Note :
  *if found verse != None it will use it en search .
@@ -199,89 +272,47 @@ it has many modes:
    and return matched sequance with decorates (with tashkil).
 
 
- 
-- __Args__:
-chapterNum (int): number of chapter where function search
-verseNum (int): number of verse wher function search
-sequancesList (list): a list of sequances that you want
-		  to match them
-mode (int): this mode that you need to use and default mode 3
+
+__Args__
 
  
-- __Returns__:
-dict() :  key is sequances and value is a list of matched_sequance
-	  and their positions
-
-----
-
-### search_string_with_tashkeel
-
-
-```python
-search_string_with_tashkeel(string, key)
-```
+- __chapterNum__: int, number of chapter where function search.
+ 
+- __verseNum__: int, number of verse wher function search.
+ 
+- __sequancesList__: [], a list of sequances that you want to match them.
+ 
+- __mode__: int, this mode that you need to use and default mode 3.
 
 
+__Returns__
 
-   
-- __Args__:
-  
-- __string__: sentence to search by key
-  
-- __key__: taskeel pattern
-
-   
-- __Return__: (True, text that have that tashkeel pattern)
-  (Flase, '')
-
-   
-- __Assumption__:
- Searches tashkeel that is exciplitly included in string.
+ 
+- __dict__:  key is sequances and value is a list of matched_sequance and their positions.
 
 
-----
-
-### search_with_pattern
-
+__Example__
 
 ```python
-search_with_pattern(pattern, sentence=None, verseNum=None, chapterNum=None, threshold=1)
+  
+   __search in chapter = 1 only using mode 3 (default)__
+
+pq.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
+#it will return
+#{'sequance-1' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ],
+  
+   __'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }__
+
+  
+   __Note : position == 0 if sequance is a sentence and == word position if sequance is a word__
+
+>>> {'ملك يوم الدين': [('مَلِكِ يَوْمِ الدِّينِ', 0, 4, 1)]}
+
+  
+   __search in all Quran using mode 3 (default)__
+
+pq.search_sequence(sequancesList=['ملك يوم'])
+>>> {'ملك يوم': [('مَلِكِ يَوْمِ', 0, 4, 1),  ('الْمُلْكُ يَوْمَ', 0, 73, 6),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 56, 22),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 26, 25)]}
+
 ```
-
-
-
-   this function use to search in 0's,1's pattern and
-   return matched words from sentence pattern
-   dependent on the ratio to adopt threshold.
-
-
-- __Args__:
-   pattern (str): 0's,1's pattern that you need to search.
-   sentence (str): Arabic string with tashkeel where
-		   function will search.
-   verseNum (int): number of specific verse where
-		   will search.
-   chapterNum (int): number of specific chapter
-		 where will search.
-   threshold (float): threshold of similarity , if 1 it will
-		  get the similar exactly, and if not ,it will
-		  get dependant on threshold number.
-
-
-- __Cases__:
-   1- if pass sentece only or with another args
-  it will search in sentece only.
-   2- if not passed sentence and passed verseNum and chapterNum,
-  it will search in this verseNum that exist in chapterNum only.
-   3- if not passed sentence,verseNum and passed chapterNum only,
-  it will search in this specific chapter only
-
-
-- __Return__:
-   [list] : it will return list that have matched word, or
-	matched senteces and return empty list if not found.
-
-   Note : it's takes time dependent on your threshold and size of chapter,
-  so it's not support to search on All-Quran becouse
-  it take very long time more than 11 min.
 

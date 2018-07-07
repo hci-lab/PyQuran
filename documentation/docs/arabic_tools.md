@@ -90,30 +90,72 @@ filtering, etc.
 
 
 ```python
-check_system(system, indx=None)
+check_system(system, index=None)
 ```
 
 
+ Returns the alphabet including treated-as-one letters. If you pass the index as the second optional arguement, it returns the letter of the that index only, not the hole alphabet.
 
- check_sytem get a system (list of lists ) and index (it's
- optional) and return full sorted system or a specific index in it.
 
- -sortion will follow this approach : system in the first with the same
- order , then all remain alphabets sorted alphabetically .
+ 
+__Args__
 
- What it does:
- build a full sorted system and return it or a specific index in it.
+ 
+- __system__: [[char]], a list of letters, where each letter to be treated as
+one letter are in one sub-list,  see  [Alphabetical Systems](#alphabetical-systems).
+ 
+- __index__: Optional integer, is a index of a letter in the new system.
+
+ 
+__Returns__
 
   
-- __Args__:
- param1 ([[char]] ):  list of lists of characters.
-  
-- __int__: it's optinal , it will return this index in full sorted system.
+- __list__: full sorted system or a specific index.
 
-  
-- __Returns__:
-  
-- __list__: full sorted system or a spesefic index.
+
+__Example__
+
+```python
+q.check_system([['alef', 'beh']])
+
+>>> [['ء'],
+['آ'],
+['أ', 'ب'],
+['ؤ'],
+['إ'],
+['ئ'],
+['ا'],
+['ة'],
+['ت'],
+['ث'],
+['ج'],
+['ح'],
+['خ'],
+['د'],
+['ذ'],
+['ر'],
+['ز'],
+['س'],
+['ش'],
+['ص'],
+['ض'],
+['ط'],
+['ظ'],
+['ع'],
+['غ'],
+['ف'],
+['ق'],
+['ك'],
+['ل'],
+['م'],
+['ن'],
+['ه'],
+['و'],
+['ى'],
+['ي']]
+```
+The previous example prints each letter as one element in a new alphabet list,
+as you can see the two letters alef and beh are considered one letter.
 
 ----
 
@@ -125,67 +167,89 @@ shape(system)
 ```
 
 
+shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
+   that want to count it as on shape "inner list" and returns a dictionary has the same value
+   for each set of alphabets and diffrent values for the rest of alphabets
 
-	 shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
-	 that want to count it as on shape "inner list" and returns a dictionary has the same value
- for each set of alphabets and diffrent values for the rest of alphabets
 
- 
-- __Args__:
+__Args__
+
 
 param1 ([[char]]): a list of list of alphabets , each inner list have
 		  alphabets that with be count  as one shape .
- 
-- __Returns__:
+
+__Returns__
+
  
 - __dictionary__: with all alphabets, where each char "key"  have a value
 value will be equals for alphabets that will be count as oe shape
 
 ----
 
-### unpack_alef_mad
+### factor_alef_mad
 
 
 ```python
-unpack_alef_mad(ayahWithAlefMad)
+factor_alef_mad(sentance)
 ```
 
 
- unpack_alef_mad is function takes the str or list(ayah or ayat)
- and search about alef mad and unpacks it
+It returns the `sentance` having alef_mad factored into alef_hamza and alef_wasel.
 
- What it does:
- take the Alef mad and converts the alef  mad to alef fataha and alef sukun
-  
-- __Args__:
- param1 (str): a string or list
+ 
+__Args__
 
   
-- __Returns__:
- str : ayah or token with Unpacked mad
+- __sentance__: str, a string or list.
+
+ 
+__Returns__
+
+  
+- __str__: sentance having the alef_mad factored
+
+ 
+__Example__
+
+```python
+q.unpack_alef_mad('آ')
+
+>>> 'أْأَ'
+```
   
 ----
 
-### separate_token_with_dicrites
+### grouping_letter_diacritics
 
 
 ```python
-separate_token_with_dicrites(token)
+grouping_letter_diacritics(sentance)
 ```
 
 
+Grouping each letter with its diacritics.
 
- gets a token with taskeel, and returns a list contains the token characters with their tashkeel.
 
-  
-- __Args__:
- param1 (str): strig that will separate it.
+__Args__
 
-  
-- __Returns__:
-  
-- __[str]__: a list contains the token characters with their tashkeel.
+ 
+- __sentance__: str
 
+
+__Returns__
+
+ 
+- __[str]__: a list of _x_, where _x_ is the letter accompanied with its
+diacritics.
+
+
+__Example__
+
+```python
+q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
+
+>>> ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
+```
 
 ----
 
@@ -197,21 +261,57 @@ alphabet_excluding(excludedLetters)
 ```
 
 
-returns the alphabet excluding the given letters.
+returns the alphabet excluding `excludedLetters`.
+
+
+__Args__
 
  
-- __Args__:
-excludedLetters (list['char']): letters to be excluded from the alphabet
+- __excludedLetters__: list[Char], letters to be excluded from the alphabet.
+
+
+__Returns__
 
  
-- __Returns__:
- 
-- __str__: alphabet excluding the given excludedLetters
+- __str__: alphabet excluding  `excludedLetters`.
 
- 
-- __Calling__:
-print(alphabet_excluding([alef, beh, qaf, teh]))
 
+__Example__
+
+```python
+ q.alphabet_excluding([q.alef, q.beh, q.qaf, q.teh, q.dal, q.yeh, q.alef_mad])
+ >>>
+ ['ء',
+ 'ٔ',
+ 'أ',
+ 'ؤ',
+ 'إ',
+ 'ئ',
+ 'ة',
+ 'ث',
+ 'ج',
+ 'ح',
+ 'خ',
+ 'ذ',
+ 'ر',
+ 'ز',
+ 'س',
+ 'ش',
+ 'ص',
+ 'ض',
+ 'ط',
+ 'ظ',
+ 'ع',
+ 'غ',
+ 'ف',
+ 'ك',
+ 'ل',
+ 'م',
+ 'ن',
+ 'ه',
+ 'و',
+ 'ى']
+```
 
 ----
 
@@ -225,66 +325,26 @@ strip_tashkeel(string)
 
 convert any letter in the `listOfLetter` to `letter` in the given text
 
- 
-- __Args__:
-string (str): to drop tashkeel from.
 
+__Args__
 
  
-- __Example__:
+- __string__: str, to drop tashkeel from.
 
 
 
-----
-
-### get_tashkeel_binary
-
+__Example__
 
 ```python
-get_tashkeel_binary(ayah)
+x = q.quran.get_verse(12, 2, with_tashkeel=True)
+x
+>>> 'إِنَّا أَنزَلْنَهُ قُرْءَنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ'
+
+q.strip_tashkeel(x)
+>>> 'إنا أنزلنه قرءنا عربيا لعلكم تعقلون'
 ```
 
 
-
- get_tashkeel_pattern is function takes the str or list(ayah or token) and converts to zero and ones
-
- What it does:
-   take token whether ayah or sub ayah and maps it to zero for sukoon and char without diarictics
-   and one for char with harakat and tanwin
-  
-- __Args__:
-   param1 (str): a string or list
-
-  
-- __Returns__:
-   str : zero and ones for each token
-  
-----
-
-### check_all_alphabet
-
-
-```python
-check_all_alphabet(system)
-```
-
-
-
- check_alphabet get a list of alphabets or system(list of lists of alphabets)
- and return the rest of arabic alphabets [alphabets in system excluded]
- -in case sytem equals all arabic alphabets, it will return empty list.
-
- What it does:
- return the rest of arabic alphabets that not included in system.
-
-  
-- __Args__:
- param1 ([char] ): a list or list of lists of characters.
-
-  
-- __Returns__:
-  
-- __list__: include all other arabic alphabet.
 
 ----
 
@@ -296,20 +356,32 @@ buckwalter_transliteration(string, reverse=False)
 ```
 
 
+Back and forth Arabic-Bauckwalter transliteration.
+  Revise [Buckwalter](https://en.wikipedia.org/wiki/Buckwalter_transliteration)
 
- buckwalter_translator get an a Unicode
- tring and transliterate it to Buckwalter encoding or vise verse
+ 
+__Args__
 
- What it does:
- transliterate a Unicode string to buckwalter and vise verse
   
-- __Args__:
- param1 (str): a string
- param2 (bool): Boolean , it's an optional
-		if it quals to False "False is the defult" ,
-		it transliterate from a Unicode string to buckwalter encoding
-		and vise verse if it equals to True
+- __string__: to be transliterated.
   
-- __Returns__:
- str : a string, a Unicode or buckwalter
+- __reverse__: Optional boolean. `False` transliterates from Arabic to
+ Bauckwalter, `True` transliterates from Bauckwalter to Arabic.
+
+ 
+__Returns__
+
+  
+- __str__: transliterated string.
+
+
+
+
+__Example__
+
+```python
+q.buckwalter_transliteration('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
+
+>>> <in~aA >aEoTayonaka Alokawovara
+```
 
