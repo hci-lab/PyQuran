@@ -4,8 +4,19 @@ import unittest
 
 # Adding another searching path
 from sys import path
-path.append('../tools/')
-path.append('../core/')
+import os
+
+# The current path of the current module.
+path_current_module = os.path.dirname(os.path.abspath(__file__))
+tools_modules = '../tools/'
+core_modules = '../core/'
+
+tools_path = os.path.join(path_current_module, tools_modules)
+core_path  = os.path.join(path_current_module, core_modules)
+
+
+path.append(tools_path)
+path.append(core_path)
 
 from quran import *
 

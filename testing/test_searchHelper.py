@@ -1,11 +1,19 @@
 """unittest module for searchHelper.py
 """
 import unittest
-
-# Adding another searching path
+import os
 from sys import path
-path.append('../tools/')
-path.append('../core/')
+
+# The current path of the current module.
+path_current_module = os.path.dirname(os.path.abspath(__file__))
+tools_modules = '../tools/'
+core_modules = '../core/'
+
+tools_path = os.path.join(path_current_module, tools_modules)
+core_path  = os.path.join(path_current_module, core_modules)
+
+path.append(tools_path)
+path.append(core_path)
 
 from quran import get_verse
 from searchHelper import *

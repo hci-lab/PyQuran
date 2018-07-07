@@ -6,6 +6,7 @@ swar_num = 114
 
 # letters.
 hamza            = u'\u0621'
+hamza_above      = u'\u0654' #
 alef_mad         = u'\u0622'
 alef_hamza_above = u'\u0623'
 waw_hamza        = u'\u0624'
@@ -75,40 +76,41 @@ simple_lam_alef_mad_above  = u'\u0644\u0622'
 # Lists
 alphabet = [
         hamza,
-        alef_mad,   
-        alef_hamza_above,  
-        waw_hamza,  
+        hamza_above,
+        alef_mad,
+        alef_hamza_above,
+        waw_hamza,
         alef_hamza_below,
-        yeh_hamza, 
-        alef, 
+        yeh_hamza,
+        alef,
         beh,
         teh_marbuta,
         teh,
         theh,
-        jeem,  
-        hah,  
-        khah, 
+        jeem,
+        hah,
+        khah,
         dal,
         thal,
-        reh,  
-        zain,  
-        seen, 
-        sheen,  
-        sad,  
-        dad,  
-        tah, 
-        zah, 
+        reh,
+        zain,
+        seen,
+        sheen,
+        sad,
+        dad,
+        tah,
+        zah,
         ain,
-        ghain,  
-        feh,  
-        qaf,  
-        kaf, 
-        lam,  
-        meem,  
-        noon,  
-        heh,  
-        waw,  
-        alef_maksura, 
+        ghain,
+        feh,
+        qaf,
+        kaf,
+        lam,
+        meem,
+        noon,
+        heh,
+        waw,
+        alef_maksura,
         yeh
         ]
 
@@ -121,28 +123,28 @@ tanwin  = [fathatan,   dammatan,    kasratan]
 
 not_def_haraka = tatweel
 lamAlefLike = [
-            lam_alef, 
-            lam_alef_hamza_above, 
-            lam_alef_hamza_below, 
-            lam_alef_mad_above, 
+            lam_alef,
+            lam_alef_hamza_above,
+            lam_alef_hamza_below,
+            lam_alef_mad_above,
             ]
 hamzat = [
-            hamza, 
-            waw_hamza, 
-            yeh_hamza, 
-            hamza_above, 
-            hamza_below, 
-            alef_hamza_below, 
-            alef_hamza_above, 
+            hamza,
+            waw_hamza,
+            yeh_hamza,
+            hamza_above,
+            alef_hamza_below,
+            alef_hamza_above,
+            alef_mad
             ]
 alefat = [
-            alef, 
-            alef_mad, 
-            alef_hamza_above, 
-            alef_hamza_below, 
-            alef_wasl, 
-            alef_maksura, 
-            small_alef, 
+            alef,
+            alef_mad,
+            alef_hamza_above,
+            alef_hamza_below,
+            alef_wasl,
+            alef_maksura,
+            small_alef,
         ]
 # wihtout dots. Groups
 behLike  = [beh, teh, theh, noon]
@@ -163,40 +165,40 @@ wawLike   = [ waw,   waw_hamza,   small_waw ]
 tehLike   = [ teh,   teh_marbuta ]
 
 small   = [ small_alef,  small_waw,  small_yeh]
-moon_letters = [hamza    , 
-        alef_mad         , 
-        alef_hamza_above , 
-        alef_hamza_below , 
-        alef             , 
-        beh              , 
-        jeem             , 
-        hah              , 
-        khah             , 
-        ain              , 
-        ghain            , 
-        feh              , 
-        qaf              , 
-        kaf              , 
-        meem             , 
-        heh              , 
-        waw              , 
+moon_letters = [hamza    ,
+        alef_mad         ,
+        alef_hamza_above ,
+        alef_hamza_below ,
+        alef             ,
+        beh              ,
+        jeem             ,
+        hah              ,
+        khah             ,
+        ain              ,
+        ghain            ,
+        feh              ,
+        qaf              ,
+        kaf              ,
+        meem             ,
+        heh              ,
+        waw              ,
         yeh
     ]
 sun_letters = [
-        teh              , 
-        theh             , 
-        dal              , 
-        thal             , 
-        reh              , 
-        zain             , 
-        seen             , 
-        sheen            , 
-        sad              , 
-        dad              , 
-        tah              , 
-        zah              , 
-        lam              , 
-        noon             , 
+        teh              ,
+        theh             ,
+        dal              ,
+        thal             ,
+        reh              ,
+        zain             ,
+        seen             ,
+        sheen            ,
+        sad              ,
+        dad              ,
+        tah              ,
+        zah              ,
+        lam              ,
+        noon             ,
     ]
 
 
@@ -205,7 +207,7 @@ class Systems:
     '''A container of systems.
     '''
     def __init__(self):
-        # 
+        #
         self.withoutDots = [behLike,
         jeemLike,
         dalLike,
@@ -216,10 +218,10 @@ class Systems:
         ainLike,
         fehLike]
 
-        # 
+        #
         self.hamazat = [hamzat]
 
-        # 
+        #
         self.default = alphabet
 # END CLASS
 
@@ -234,17 +236,49 @@ systems = Systems()
     * Some alphabet building tools
 """
 def alphabet_excluding(excludedLetters):
-    """returns the alphabet excluding the given letters.
+    """returns the alphabet excluding `excludedLetters`.
 
     Args:
-        excludedLetters (list['char']): letters to be excluded from the alphabet
+        excludedLetters: list[Char], letters to be excluded from the alphabet.
 
     Returns:
-        str: alphabet excluding the given excludedLetters
+        str: alphabet excluding  `excludedLetters`.
 
-    Calling:
-        print(alphabet_excluding([alef, beh, qaf, teh]))
-        
+    Example:
+        ```python
+         q.alphabet_excluding([q.alef, q.beh, q.qaf, q.teh, q.dal, q.yeh, q.alef_mad])
+         >>>
+         ['ء',
+         'ٔ',
+         'أ',
+         'ؤ',
+         'إ',
+         'ئ',
+         'ة',
+         'ث',
+         'ج',
+         'ح',
+         'خ',
+         'ذ',
+         'ر',
+         'ز',
+         'س',
+         'ش',
+         'ص',
+         'ض',
+         'ط',
+         'ظ',
+         'ع',
+         'غ',
+         'ف',
+         'ك',
+         'ل',
+         'م',
+         'ن',
+         'ه',
+         'و',
+         'ى']
+        ```
     """
     return [x for x in alphabet if x not in excludedLetters]
 
@@ -253,17 +287,41 @@ def treat_as_the_same(listOfLetter, letter, text):
     """convert any letter in the `listOfLetter` to `letter` in the given text
 
     Args:
-        listOfLetter (['chars'] or str) 
+        listOfLetter (['chars'] or str)
         letter (char)
         text (str)
 
     Returns:
         str: a text after changing all the `listOfLetter` to that char `letter`
-    
+
     Example:
         print(treat_as_the_same([alef_hamza_above], alef, line))
         print(treat_as_the_same([ain], qaf, line))
-        
-        
+
+
     """
     pass
+
+def strip_tashkeel(string):
+    """convert any letter in the `listOfLetter` to `letter` in the given text
+
+    Args:
+        string: str, to drop tashkeel from.
+
+
+    Example:
+    ```python
+    x = q.quran.get_verse(12, 2, with_tashkeel=True)
+    x
+    >>> 'إِنَّا أَنزَلْنَهُ قُرْءَنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ'
+
+    q.strip_tashkeel(x)
+    >>> 'إنا أنزلنه قرءنا عربيا لعلكم تعقلون'
+    ```
+
+
+    """
+    for char in string:
+       if char in tashkeel:
+            string = string.replace(char, '')
+    return string

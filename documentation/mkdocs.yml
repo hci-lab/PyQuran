@@ -1,0 +1,22 @@
+site_name: PyQuran
+theme: 'readthedocs'
+docs_dir: docs
+repo_url: https://github.com/hci-lab/pyquran-private
+
+
+# Documentation Layout
+pages:
+- Home: 'index.md'
+- Users Documentation:
+    # Generated: run ./generate to update those files; according to the docs
+    #            changed inside the code
+    - Quran Retrieving tools: 'quran_tools.md'
+    - Arabic tools: 'arabic_tools.md'
+    - Analysis tools: 'analysis_tools.md'
+- Maintainers:
+    - Getting Started: 'CONTRIBUTING.md'
+    - Package Strucutre: 'Wiki-Home.md'
+    - Quran Corpus: 'Filtering-Special-Recitation-Symbols.md'
+    - Code Conventios: 'code_conventions.md'
+- Authors: 'authors.md'
+
