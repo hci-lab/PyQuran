@@ -31,8 +31,7 @@ _not_completed
 
 
 ### code conventions
-Your code have to meet [these standartds](CodeConventions/README.md),
-and follow [this style](CodeConventions/example_google.py).
+Your code have to meet [these standartds](code_conventions.md).
 
 
 ### contributing flow
@@ -75,5 +74,13 @@ Fixes #101
 
 ## Tests
 
-_not_completed
+We write a test module for every PyQuran module under `PyQuran/testing`.
 
+**Naming**
+If the module is called *X*, then its testing module is called *test_X*.
+*test_x* must have tough unit tests for every single function. 
+
+
+**Note** it is inevitable to run all testing modules before you make any pull
+request. Pull Requests will not be accepted if there is one fail in testing
+modules. So, please run them all first.

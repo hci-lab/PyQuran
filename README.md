@@ -53,12 +53,10 @@ We provide an interface to filter those symbols, *only the fly while fetching fr
 we **DO NOT** change the corpus, NEVER.
 
 [For the full details about filtering *special recitation symbols* مصطلحات
-الضبط.](Filtering-Special-Recitation-Symbols.md)
+الضبط.](https://hci-lab.github.io/PyQuran-Private/Filtering-Special-Recitation-Symbols/#recitation-symbols)
 
 ## Contributing
-To contribute and maintain *PyQuran*, Please read  [CONTRIBUTING.md](CONTRIBUTING.md).
-
-See also [How to contribute to PyQuran](what_can_you_do_to_help_pyquran.md).
+To contribute and maintain *PyQuran*, Please read  [CONTRIBUTING.md](https://hci-lab.github.io/PyQuran-Private/CONTRIBUTING).
 
 ## Citing
 ```
