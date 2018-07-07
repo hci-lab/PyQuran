@@ -45,7 +45,7 @@ It is a dynamic construction of letters—
 ## Quran Corpus 
 We use [tanzil](http://tanzil.net/docs/download) Quran Corpus (*Uthmani Text*), it is in `UTF-8` encoding. You
 can find all unique characters of Uthmanic Corpus
-[here](Filtering-Special-Recitation-Symbols.md).
+[here](https://hci-lab.github.io/PyQuran-Private/Filtering-Special-Recitation-Symbols/#recitation-symbols).
 
 There are *special recitation symbols* مصطلحات الضبط in the *Uthmani Text*, they are a guide for the reciter
 to know the right positions to pause and the rules of tajweed.
