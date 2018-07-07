@@ -19,14 +19,15 @@ originally, `Quran` was written without dots on the letters.
 
 To enable you to use both modern system or other, we introduce *alphabetical systems*,
 It is a dynamic construction of letters—
-[Alphabetical Systems](arabic_tools/#alphabetical-systems).
+[Alphabetical Systems](https://hci-lab.github.io/PyQuran-Private/arabic_tools/#alphabetical-systems).
+
 
 
 
 
 
 ## Current Features
-- Quran Relieving.
+- Quran Retrieving.
 - Advanced Searching, by Text and Diacritics Patterns.
 - Buckwalter Transliteration, back and forth.
 - Multiple **alphabetical systems**.
