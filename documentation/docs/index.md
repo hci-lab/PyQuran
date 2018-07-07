@@ -65,15 +65,20 @@ not_completed_ (need to disscuss it with the prof.)
 Cite _PyQuran_ as the following _BibTeX_ entry.
 ```ruby
 @MISC {PyQuran2018,
-author             = "Waleed A. Yousef",
-title              = "PyQuran",
-howpublished       = "https://github.com/TahaMagdy/PyQuran",
-month              = "feb",
+author = "
+ Waleed A. Yousef and
+ Taha M. Madbouly and
+ Omar M. Ibrahime and 
+ Ali H. El-Kassas and 
+ Ali O. Hassan and 
+ Abdallah R. Albohy",
+title              = "PyQuran: The Python package for Quranic Analysis",
+howpublished       = "https://hci-lab.github.io/PyQuran-Private",
 year               = "2018"
 }
 ```
 
 
 ## Communication
-_not_completed_
+[Author Page](https://hci-lab.github.io/PyQuran-Private/authors/authors)
 
