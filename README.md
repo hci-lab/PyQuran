@@ -76,5 +76,5 @@ year = "2018"}
 
 
 ## Communication
-[Author Page](https://hci-lab.github.io/PyQuran-Private/authors/authors)
+[Author Page](https://hci-lab.github.io/PyQuran-Private/authors)
 
