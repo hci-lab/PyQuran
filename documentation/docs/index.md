@@ -29,7 +29,7 @@ It is a dynamic construction of letters—
 - fetch chapters and verses.
 - search Quran by text tokens and by diacritics patterns.
 - buckwalter transliteration, back and forth
-- Multiple **alphabetical systems**, *for more details see the [PyQuran
+- Multiple **alphabetical systems**, *for more details see [PyQuran
   Documentation](https://hci-lab.github.io/PyQuran-Private/)*
 
 
