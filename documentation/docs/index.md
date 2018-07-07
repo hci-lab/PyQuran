@@ -25,6 +25,7 @@ It is a dynamic construction of letters—
 
 
 
+
 ## Current Features
 - Quran Retrieving.
 - Advanced Searching, by Text and Diacritics Patterns.
