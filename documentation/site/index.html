@@ -47,38 +47,32 @@
 	<ul class="current">
 	  
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <span class="caption-text">Hello World!</span>
-    <ul class="subnav">
-                <li class=" current">
-                    
     <a class="current" href=".">Home</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#pyquran-the-python-package-for-quranic-analysis">PyQuran: The Python package for Quranic Analysis</a></li>
+    <li class="toctree-l2"><a href="#pyquran-the-python-package-for-quranic-analysis">PyQuran: The Python package for Quranic Analysis</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#current-features">Current Features</a></li>
+            <li><a class="toctree-l3" href="#current-features">Current Features</a></li>
         
-            <li><a class="toctree-l4" href="#install">Install</a></li>
+            <li><a class="toctree-l3" href="#install">Install</a></li>
         
-            <li><a class="toctree-l4" href="#dependencies">Dependencies</a></li>
+            <li><a class="toctree-l3" href="#dependencies">Dependencies</a></li>
         
-            <li><a class="toctree-l4" href="#quran-corpus">Quran Corpus</a></li>
+            <li><a class="toctree-l3" href="#quran-corpus">Quran Corpus</a></li>
         
-            <li><a class="toctree-l4" href="#contributing">Contributing</a></li>
+            <li><a class="toctree-l3" href="#contributing">Contributing</a></li>
         
-            <li><a class="toctree-l4" href="#citing">Citing</a></li>
+            <li><a class="toctree-l3" href="#citing">Citing</a></li>
         
-            <li><a class="toctree-l4" href="#communication">Communication</a></li>
+            <li><a class="toctree-l3" href="#communication">Communication</a></li>
         
         </ul>
     
 
-    </ul>
-                </li>
     </ul>
 	    </li>
           
@@ -88,15 +82,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="quran_tools/">Basic Tools for Quran</a>
+    <a class="" href="quran_tools/">Quran Retrieving tools</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="arabic_tools/">Arabic Tools</a>
+    <a class="" href="arabic_tools/">Arabic tools</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="analysis_tools/">Analysis Tools</a>
+    <a class="" href="analysis_tools/">Analysis tools</a>
                 </li>
     </ul>
 	    </li>
@@ -124,6 +118,11 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="authors/">Authors</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -145,15 +144,11 @@
     <li><a href=".">Docs</a> &raquo;</li>
     
       
-        
-          <li>Hello World! &raquo;</li>
-        
-      
     
     <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="http://github.com/tahamagdy/pyquran/edit/master/docs/index.md"
+        <a href="https://github.com/hci-lab/pyquran-private/edit/master/docs/index.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -176,13 +171,14 @@ dots above or below each letter of the ones which share the same rasm. Now each 
 originally, <code>Quran</code> was written without dots on the letters.</p>
 <p>To enable you to use both modern system or other, we introduce <em>alphabetical systems</em>,
 It is a dynamic construction of letters—
-<a href="./arabic_tools/#alphabetical-systems">Alphabetical Systems</a>.</p>
+<a href="https://hci-lab.github.io/PyQuran-Private/arabic_tools/#alphabetical-systems">Alphabetical Systems</a>.</p>
 <h2 id="current-features">Current Features</h2>
 <ul>
-<li>fetch chapters and verses.</li>
-<li>search Quran by text tokens and by diacritics patterns.</li>
-<li>buckwalter transliteration, back and forth</li>
-<li>Multiple <strong>alphabetical systems</strong>, <em>for more details see the <a href="https://github.com/TahaMagdy/PyQuran/wiki">PyQuran Wiki</a></em></li>
+<li>Quran Retrieving.</li>
+<li>Advanced Searching, by Text and Diacritics Patterns.</li>
+<li>Buckwalter Transliteration, back and forth.</li>
+<li>Multiple <strong>alphabetical systems</strong>.</li>
+<li>Words Frequency Table المعجم الترددى للألفاظ .</li>
 </ul>
 <h2 id="install">Install</h2>
 <ul>
@@ -197,30 +193,30 @@ It is a dynamic construction of letters—
 <h2 id="quran-corpus">Quran Corpus</h2>
 <p>We use <a href="http://tanzil.net/docs/download">tanzil</a> Quran Corpus (<em>Uthmani Text</em>), it is in <code>UTF-8</code> encoding. You
 can find all unique characters of Uthmanic Corpus
-<a href="Filtering-Special-Recitation-Symbols/">here</a>.</p>
+<a href="https://hci-lab.github.io/PyQuran-Private/Filtering-Special-Recitation-Symbols/#recitation-symbols">here</a>.</p>
 <p>There are <em>special recitation symbols</em> مصطلحات الضبط in the <em>Uthmani Text</em>, they are a guide for the reciter
 to know the right positions to pause and the rules of tajweed.
 We provide an interface to filter those symbols, <em>only the fly while fetching from the corpus</em>,
 we <strong>DO NOT</strong> change the corpus, NEVER.</p>
-<p><a href="Filtering-Special-Recitation-Symbols/">For the full details about filtering <em>special recitation symbols</em> مصطلحات
+<p><a href="https://hci-lab.github.io/PyQuran-Private/Filtering-Special-Recitation-Symbols/#recitation-symbols">For the full details about filtering <em>special recitation symbols</em> مصطلحات
 الضبط.</a></p>
 <h2 id="contributing">Contributing</h2>
-<p>To contribute and maintain <em>PyQuran</em>, Please read  <a href="CONTRIBUTING/">CONTRIBUTING.md</a>.</p>
-<p>See also <a href="what_can_you_do_to_help_pyquran.md">How to contribute to PyQuran</a>.</p>
+<p>To contribute and maintain <em>PyQuran</em>, Please read  <a href="https://hci-lab.github.io/PyQuran-Private/CONTRIBUTING">CONTRIBUTING.md</a>.</p>
 <h2 id="citing">Citing</h2>
-<p>not_completed_ (need to disscuss it with the prof.)
-Cite <em>PyQuran</em> as the following <em>BibTeX</em> entry.</p>
-<pre><code class="ruby">@MISC {PyQuran2018,
-author             = &quot;Waleed A. Yousef&quot;,
-title              = &quot;PyQuran&quot;,
-howpublished       = &quot;https://github.com/TahaMagdy/PyQuran&quot;,
-month              = &quot;feb&quot;,
-year               = &quot;2018&quot;
-}
+<pre><code>@MISC {PyQuran2018,
+author = &quot;Waleed A. Yousef and 
+          Taha M. Madbouly and
+          Omar M. Ibrahime and
+          Ali H. El-Kassas and
+          Ali O. Hassan and
+          Abdallah R. Albohy&quot;,
+title = &quot;PyQuran: The Python package for Quranic Analysis&quot;,
+howpublished = &quot;https://hci-lab.github.io/PyQuran-Private&quot;,
+year = &quot;2018&quot;}
 </code></pre>
 
 <h2 id="communication">Communication</h2>
-<p><em>not_completed</em></p>
+<p><a href="https://hci-lab.github.io/PyQuran-Private/authors">Author Page</a></p>
               
             </div>
           </div>
@@ -228,7 +224,7 @@ year               = &quot;2018&quot;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="quran_tools/" class="btn btn-neutral float-right" title="Basic Tools for Quran">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="quran_tools/" class="btn btn-neutral float-right" title="Quran Retrieving tools">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -254,7 +250,7 @@ year               = &quot;2018&quot;
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="http://github.com/tahamagdy/pyquran/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/hci-lab/pyquran-private/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
       
@@ -271,6 +267,6 @@ year               = &quot;2018&quot;
 </html>
 
 <!--
-MkDocs version : 0.17.2
-Build Date UTC : 2018-03-01 13:00:20
+MkDocs version : 0.17.4
+Build Date UTC : 2018-07-07 08:41:10
 -->
