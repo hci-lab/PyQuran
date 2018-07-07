@@ -31,6 +31,7 @@ It is a dynamic construction of letters—
 - Advanced Searching, by Text and Diacritics Patterns.
 - Buckwalter Transliteration, back and forth.
 - Multiple **alphabetical systems**.
+- Words Frequency Table المعجم الترددى للألفاظ .
 
 
 ## Install
