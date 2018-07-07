@@ -26,12 +26,10 @@ It is a dynamic construction of letters—
 
 
 ## Current Features
-- fetch chapters and verses.
-- search Quran by text tokens and by diacritics patterns.
-- buckwalter transliteration, back and forth
-- Multiple **alphabetical systems**, *for more details see [PyQuran
-  Documentation](https://hci-lab.github.io/PyQuran-Private/)*
-
+- Quran Relieving.
+- Advanced Searching, by Text and Diacritics Patterns.
+- Buckwalter Transliteration, back and forth.
+- Multiple **alphabetical systems**.
 
 
 ## Install
