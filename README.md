@@ -1,10 +1,11 @@
-PyQuran
-=======
-
-PyQuran is a python package, that provides tools for *Quranic Analysis*.
+# PyQuran: The Python package for Quranic Analysis
 
 
-It is still a small package which needs a lot of your effort. But, we think it is a seed of a fundamental general package for
+PyQuran is a package which provides tools for *Quranic Analysis*.
+
+
+It is still a small package which needs a lot of your effort. We believe that it
+is a seed of a fundamental general package for
 computations on `Quran` with Python, even at the most basic level which simply retrieving Quran text.
 
 *Before Islam*, Arabic letters  were without  dots—
@@ -18,18 +19,9 @@ originally, `Quran` was written without dots on the letters.
 
 To enable you to use both modern system or other, we introduce *alphabetical systems*,
 It is a dynamic construction of letters—
-[Alphabetical Systems](https://github.com/TahaMagdy/PyQuran/wiki/Alphabetical-Systems).
+[Alphabetical Systems](arabic_tools/#alphabetical-systems).
 
 
-## Table of Contents
-- [Current Features](#current-features)
-- [Install](#install)
-- [Dependencies](#dependencies)
-- [Quran Corpus](#quran-corpus)
-- [Contributing](#contributing)
-- [Citing](#citing)
-- [Communication](#communication)
-- [Licence](#licence)
 
 
 
@@ -42,7 +34,7 @@ It is a dynamic construction of letters—
 
 
 ## Install
-- From _PyPI_: `$ pip install pyquran`
+- From _PyPI_: `$ pip3 install pyquran`
 - From Source: `$ python3 setup.py install`
 
 
@@ -53,14 +45,15 @@ It is a dynamic construction of letters—
 ## Quran Corpus 
 We use [tanzil](http://tanzil.net/docs/download) Quran Corpus (*Uthmani Text*), it is in `UTF-8` encoding. You
 can find all unique characters of Uthmanic Corpus
-[here](https://github.com/TahaMagdy/PyQuran/wiki/Filtering-Special-Recitation-Symbols).
+[here](Filtering-Special-Recitation-Symbols.md).
 
 There are *special recitation symbols* مصطلحات الضبط in the *Uthmani Text*, they are a guide for the reciter
 to know the right positions to pause and the rules of tajweed.
 We provide an interface to filter those symbols, *only the fly while fetching from the corpus*,
 we **DO NOT** change the corpus, NEVER.
 
-[For the full details about filtering *special recitation symbols* مصطلحات الضبط.](https://github.com/TahaMagdy/PyQuran/wiki)
+[For the full details about filtering *special recitation symbols* مصطلحات
+الضبط.](Filtering-Special-Recitation-Symbols.md)
 
 ## Contributing
 To contribute and maintain *PyQuran*, Please read  [CONTRIBUTING.md](CONTRIBUTING.md).
@@ -72,18 +65,20 @@ not_completed_ (need to disscuss it with the prof.)
 Cite _PyQuran_ as the following _BibTeX_ entry.
 ```ruby
 @MISC {PyQuran2018,
-author             = "Human Computer Interaction Lab, Helwan University. (HCILAB)",
-title              = "PyQuran",
-howpublished       = "https://github.com/TahaMagdy/PyQuran",
-month              = "feb",
+author = "
+ Waleed A. Yousef and
+ Taha M. Madbouly and
+ Omar M. Ibrahime and 
+ Ali H. El-Kassas and 
+ Ali O. Hassan and 
+ Abdallah R. Albohy",
+title              = "PyQuran: The Python package for Quranic Analysis",
+howpublished       = "https://hci-lab.github.io/PyQuran-Private",
 year               = "2018"
 }
 ```
 
 
 ## Communication
-ـnot_completed_
+[Author Page](https://hci-lab.github.io/PyQuran-Private/authors/authors)
 
-
-## Licence 
-not_completed_ (need to discuss it with the prof.)
