@@ -23,22 +23,8 @@ as a glottal stop in case of continuing, [Read more about Alef Wasl](https://en.
 
 This filtering is done in run time. We **do not** change the corpus at all.
 
-**[The functions code does filtering:](https://github.com/TahaMagdy/PyQuran/blob/4a90340211490ea054cda6b96f4c7b4695df0661/tools/uthmanic.py#L66)**
-```python
-def recitation_symbols_filter(string, symbols=recitationSymbols ):
-    '''Removes the Special Recitation Symbols from `string`
-    ¦   Args:
-    ¦   ¦   param1(str): a string to be filtered
-    ¦   ¦   param2([char]): a list of recitation symbols
-    '''
-    for symbol in symbols:
-    ¦   if symbol == alef_wasl_with_saad_above:
-    ¦   ¦   string = string.replace(alef_wasl_with_saad_above, arabic.alef)
-    ¦   else:
-    ¦   ¦   string = string.replace(symbol, '')
+**[source](https://github.com/hci-lab/PyQuran-Private/blob/master/tools/filtering.py#L67:L82)**
 
-    return string
-```
-
-> Also feel free to report any bugs or lingual errors, you are most welcome, just fire an issue.
+> Also feel free to report any bugs or lingual errors, you are most welcome, just
+> open  an [issue](https://github.com/hci-lab/PyQuran/issues).
 
