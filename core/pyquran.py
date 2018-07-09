@@ -685,33 +685,35 @@ def get_token(tokenNum,verseNum,chapterNum,with_tashkeel=False):
 
 
 def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
-    """take list of sequances and return matched sequance,
-       it search in verse ot chapter or All Quran ,
+    """take list of sequances and return matched sequance, it search in verse ot
+    chapter or All Quran ,
+
        it return for every match :
-           1- matched sequance
-           2- chapter number of occurrence
-           3- token number if word and 0 if sentence
+           1 - matched sequance
+           2 - chapter number of occurrence
+           3 - token number if word and 0 if sentence
 
         Note :
-             *if found verse != None it will use it en search .
+             - if found verse != None it will use it en search .
 
-             *if no verse and found chapterNum and verseNum it will
-              use this verse and use it to search.
+             - if no verse and found chapterNum and verseNum it will
+             - use this verse and use it to search.
 
-             *if no verse and no verseNum and found chapterNum it will
-              search in chapter.
+             - if no verse and no verseNum and found chapterNum it will
+             - search in chapter.
 
-             *if no verse and no chapterNum and no verseNum it will
+             - if no verse and no chapterNum and no verseNum it will
               search in All Quran.
 
         it has many modes:
-            1- search with decorated sequance (with tashkeel),
-               and return matched sequance with decorates (with tashkil).
 
-            2- search without decorated sequance (without tashkeel),
-               and return matched sequance without decorates (without tashkil).
+            - search with decorated sequance (with tashkeel),
+              and return matched sequance with decorates (with tashkil).
 
-            3- search without decorated sequance (without tashkeel),
+            - search without decorated sequance (without tashkeel),
+              and return matched sequance without decorates (without tashkil).
+
+            - search without decorated sequance (without tashkeel),
                and return matched sequance with decorates (with tashkil).
 
 
