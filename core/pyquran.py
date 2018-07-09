@@ -1119,16 +1119,39 @@ def frequency_sura_level(suraNumber):
     """Computes the frequency dictionary for a sura
 
     Args:
-        suraNumber (int)
+        suraNumber: 1 <= Int <= 114.
 
     Return:
-        [{word(str): word frequency(int)}]:
-            A list of frequency dictionaries for each verse of Sura.
+        [aya_frequency_dictionary]: the key of  `aya_frequency_dictionary` is a
+        unique word in aya and the corresponding value is its frequency.
+        A list of frequency dictionaries for each verse of Sura.
+
 
     Note:
-        * frequency dictionary is a python dict, which carryies word frequences
+        * frequency dictionary is a python dict, which carries word frequencies
           for an aya.
         * Its key is (str) word, its value is (int) word frequency
+
+    Example:
+    
+    ```python
+    q.frequency_sura_level(suraNumber=1)
+
+    >>> [{بسم': 1, 'الله': 1, 'الرحمن': 1, 'الرحيم': 1'},
+{الحمد': 1, 'لله': 1, 'رب': 1, 'العلمين': 1'},
+{الرحمن': 1, 'الرحيم': 1'},
+{ملك': 1, 'يوم': 1, 'الدين': 1'},
+{إياك': 1, 'نعبد': 1, 'وإياك': 1, 'نستعين': 1'},
+{اهدنا': 1, 'الصرط': 1, 'المستقيم': 1'},
+{عليهم': 2',
+ صرط': 1',
+ الذين': 1',
+ أنعمت': 1',
+ غير': 1',
+ المغضوب': 1',
+ ولا': 1',
+ الضالين': 1'}]
+    ```
     """
     # A list of frequency dictionaries
     frequency_ayat_list = []
@@ -1182,16 +1205,18 @@ def frequency_quran_level():
 
 
     Note:
-        * quranWordsFrequences contains 114 sura_level_words_frequences.
-        * Each sura_level_words_frequences contains frequency dictionary
+        -  quranWordsFrequences contains 114 sura_level_words_frequences.
+        -  Each sura_level_words_frequences contains frequency dictionary
             for every aya.
 
+        ```python
         In [19]: len(quran_words_frequences)
         Out[19]: 114
 
                  # Al Fati-ha
         In [20]: len(quran_words_frequences[0])
         Out[20]: 7
+        ```
     """
 
     # * A list of sura level frequencies.
