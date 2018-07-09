@@ -1,5 +1,5 @@
 site_name: PyQuran
-theme: 'readthedocs'
+theme: readthedocs
 docs_dir: docs
 repo_url: https://github.com/hci-lab/pyquran-private
 
@@ -18,5 +18,7 @@ pages:
     - Package Strucutre: 'Wiki-Home.md'
     - Quran Corpus: 'Filtering-Special-Recitation-Symbols.md'
     - Code Conventios: 'code_conventions.md'
+- Related Projects:
+    - Dictionary of Quran Words Frequency: 'dictFrec.md'
 - Authors: 'authors.md'
 

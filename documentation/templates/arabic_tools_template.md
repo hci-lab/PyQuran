@@ -46,39 +46,56 @@ alef_wasl        = u'\u0671'
 ```
 
 
-## Alphabetical Systems
-We define **alphabetical system** as a dynamic construction of letters in which
-you can treat a group of letters one letter. The default alphabet is a special
-case of the Alphabetical System where each letter is treated as one letter.
+## Alphabetical Systems (Definitions)
+[**Rasm**](https://en.wikipedia.org/wiki/Rasm): is any set of letters which are
+writtern in the same form, namely; they are indistinguishable in wirtting by
+they are distinguished from the context. For example, the letters  ت ث ن ى,
+they can be written with only one rasm ىـ, without dots.
+
+**Alphabetical System**: is a set of rasm; dynamically constructed by 
+specifying the letters that you will treat them as one rasm. By the way,  the
+default Arabic alphabet is a special case of the **Alphabetical System** where
+each letter is as one rasm.
+
 
 **Predefined systems** are stored in `systems` object.
 
-1. default.
-2. without dots system.
-3. hamazat.
+1. **Default**: each letter is treated as a unique rasm.
+2. **Without Dots**: by removing the dots some letters will be
+    indistinguishable; those letters are treated as one rasm.
+    The following example shows the (Without Dots) system as a list of lists;
+    where the sublist contains the letters which share the same rasm.
+3. **Hamazat**: consider each any letter accompanied by hamaz ء as one rasm.
+
+**NOTE**: You may go further and construct your system by speicying what 
+letters you want to treat as one rasm, then you can do some statistical
+analysis like, count, variance, average, ...
 
 Example:
 ```python
 q.systems.withoutDots
 Out: 
-[['ب', 'ت', 'ث', 'ن'],
- ['ح', 'خ', 'ج'],
- ['د', 'ذ'],
- ['ر', 'ز'],
- ['س', 'ش'],
- ['ص', 'ض'],
- ['ط', 'ظ'],
- ['ع', 'غ'],
- ['ف', 'ق']]
+[['ب', 'ت', 'ث', 'ن'], # Rasm 1
+ ['ح', 'خ', 'ج'], # Rasm 2
+ ['د', 'ذ'], # Rasm 3
+ ['ر', 'ز'], # Rasm 4
+ ['س', 'ش'], # Rasm 5
+ ['ص', 'ض'], # Rasm 6
+ ['ط', 'ظ'], # Rasm 7
+ ['ع', 'غ'], # Rasm 8
+ ['ف', 'ق']] # Rasm 9
 ```
 
 
-**Constructing a user-defined system**:
+### Constructing a user-defined system:
 ```python
-system = [[alef_hamza_above, alef],[beh, teh]]
+system = [[alef_hamza_above, alef],
+          [beh, teh]]
 ```
-The previous line of code means "Treat *alef_hamza_above* and *alef*
-as the same one latter, also treat *beh* and *teh* as one letter as well"
+The previous piece of code means "Treat *alef_hamza_above* and *alef*
+as the same one latter, also treat *beh* and *teh* as one letter as well".
+
+The rest of letters can be dynamically constructed using `check_system()`
 
 And then, a system can be applied to some text analysis functions like counting,
 filtering, etc.

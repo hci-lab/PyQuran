@@ -43,7 +43,6 @@ PAGES = [
       'page': 'arabic_tools.md',
       'functions': [
           pyquran.check_system, #
-          pyquran.shape, #
           pyquran.factor_alef_mad, #
           pyquran.grouping_letter_diacritics,#
           arabic.alphabet_excluding,#
@@ -54,10 +53,11 @@ PAGES = [
         {
        'page': 'analysis_tools.md',
        'functions': [
-           pyquran.count_shape,#
+           pyquran.count_rasm,#
            pyquran.search_string_with_tashkeel,#
            pyquran.frequency_of_character,#
-           pyquran.generate_frequency_dictionary,#
+           pyquran.frequency_sura_level,#
+           pyquran.frequency_quran_level,#
            pyquran.sort_dictionary_by_similarity,#
            pyquran.check_sura_with_frequency,
            pyquran.search_sequence,

@@ -23,7 +23,7 @@ as a glottal stop in case of continuing, [Read more about Alef Wasl](https://en.
 
 This filtering is done in run time. We **do not** change the corpus at all.
 
-**[source](https://github.com/hci-lab/PyQuran-Private/blob/master/tools/filtering.py#L67:L82)**
+**[source](https://github.com/hci-lab/PyQuran-Private/blob/master/tools/filtering.py#L107:#L134)**
 
 > Also feel free to report any bugs or lingual errors, you are most welcome, just
 > open  an [issue](https://github.com/hci-lab/PyQuran/issues).
