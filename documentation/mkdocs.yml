@@ -1,5 +1,5 @@
 site_name: PyQuran
-theme_dir : readthedocs
+theme: readthedocs
 docs_dir: docs
 repo_url: https://github.com/hci-lab/pyquran-private
 
