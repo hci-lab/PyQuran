@@ -1,23 +1,24 @@
 # PyQuran: The Python package for Quranic Analysis
 
 
-PyQuran is a package which provides tools for *Quranic Analysis*.
+PyQuran is a package which provides tools for Quranic Analysis and Arabic texts.
 
 
 It is still a small package which needs a lot of your effort. We believe that it
 is a seed of a fundamental general package for
-computations on `Quran` with Python, even at the most basic level which simply retrieving Quran text.
+computations on Quran with Python, even at the most basic level which is simply
+retrieving Quran text.
 
 *Before Islam*, Arabic letters  were without  dots—
 [*rasm*](https://en.wikipedia.org/wiki/Rasm), which resulted in ambiguty, two or three
-letters had the same rasm/form/shape/look. 
+letters had the same rasm or form. 
 
 Muslims have decided to remove this ambiguity by adding
 dots above or below each letter of the ones which share the same rasm. Now each letter has a unique form. By the way,
-originally, `Quran` was written without dots on the letters.
+originally, Quran was written using letters without dots.
 
 
-To enable you to use both modern system or other, we introduce *alphabetical systems*,
+To enable researchers to use modern alphabet, old rasm or other, we introduce *alphabetical systems*,
 It is a dynamic construction of letters—
 [Alphabetical Systems](https://hci-lab.github.io/PyQuran-Private/arabic_tools/#alphabetical-systems).
 
