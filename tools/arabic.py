@@ -325,3 +325,66 @@ def strip_tashkeel(string):
        if char in tashkeel:
             string = string.replace(char, '')
     return string
+
+def factor_shadda_tanwin(string):
+    '''
+    * factors shadda to letter with sukun and letter
+    * factors tanwin to ?????????
+    # Some redundancy is simpler. :"D
+    '''
+    factoredString = ''
+    charsList = separate_token_with_dicrites(string)
+    # print(charsList)
+
+    for char in charsList:
+        if len(char) < 2:
+            factoredString += char
+        if len(char) == 2:
+            if char[1] in arabic.shortharakat:
+                factoredString += char
+            elif char[1] ==  arabic.dammatan:
+                if char[0] == arabic.teh_marbuta:
+                    factoredString += arabic.teh + arabic.damma + \
+                       arabic.noon + arabic.sukun
+                else:
+                    # the letter
+                    factoredString += char[0]  + arabic.damma + \
+                       arabic.noon + arabic.sukun
+            elif char[1] == arabic.kasratan:
+                if char[0] == arabic.teh_marbuta:
+                      factoredString += char[0] + arabic.teh + \
+                      arabic.kasra + arabic.noon + arabic.sukun
+                else:
+                    # the letter
+                    factoredString += char[0] + arabic.kasra \
+                                   + arabic.noon + arabic.sukun
+            elif char[1] == arabic.fathatan:
+                if char[0] == arabic.alef:
+                    factoredString += arabic.noon + arabic.sukun
+                elif char[0] == arabic.teh_marbuta:
+                    factoredString += arabic.teh + arabic.fatha \
+                                   + arabic.noon + arabic.sukun
+            elif char[1] == arabic.shadda:
+                    factoredString += char[0] + arabic.sukun + char[0]
+
+        if len(char) == 3:
+            factoredString += char[0] + arabic.sukun + char[0] + char[2]
+
+    return factoredString
+
+
+'''
+print(factor_shadda_tanwin('بيتٌ'))
+print(factor_shadda_tanwin('ولدٍ'))
+print(factor_shadda_tanwin('ولدَاً'))
+print(factor_shadda_tanwin('مدرسةً'))
+print(factor_shadda_tanwin('مدرسةٍ'))
+print(factor_shadda_tanwin('مدرسةٌ'))
+print(factor_shadda_tanwin('شبّ'))
+print(factor_shadda_tanwin('كبَّ'))
+'''
+'''
+# Testing
+for i in factor_shadda_tanwin('أَشَّدونٌ'):
+    print(i)
+'''
