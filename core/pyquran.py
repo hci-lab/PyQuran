@@ -726,18 +726,17 @@ def search_sequence(sequancesList,verse=None,chapterNum=0,verseNum=0,mode=3):
 
         Example:
         ```python
-        # search in chapter = 1 only using mode 3 (default)
-        q.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
-        #it will return
-        #{'sequance-1' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ],
-        # 'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }
-        # Note : position == 0 if sequance is a sentence and == word position if sequance is a word
-        >>> {'ملك يوم الدين': [('مَلِكِ يَوْمِ الدِّينِ', 0, 4, 1)]}
+# search in chapter = 1 only using mode 3 (default)
+q.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
+#it will return
+#{'sequance-1' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ],
+# 'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }
+# Note : position == 0 if sequance is a sentence and == word position if sequance is a word
+>>> {'ملك يوم الدين': [('مَلِكِ يَوْمِ الدِّينِ', 0, 4, 1)]}
 
-        # search in all Quran using mode 3 (default)
-        q.search_sequence(sequancesList=['ملك يوم'])
-        >>> {'ملك يوم': [('مَلِكِ يَوْمِ', 0, 4, 1),  ('الْمُلْكُ يَوْمَ', 0, 73, 6),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 56, 22),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 26, 25)]}
-
+# search in all Quran using mode 3 (default)
+q.search_sequence(sequancesList=['ملك يوم'])
+>>> {'ملك يوم': [('مَلِكِ يَوْمِ', 0, 4, 1),  ('الْمُلْكُ يَوْمَ', 0, 73, 6),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 56, 22),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 26, 25)]}
         ```
     """
     if type(sequancesList) != list:
@@ -1204,10 +1203,6 @@ def frequency_quran_level():
         [sura_level_frequency_dict]: Revise the output of frequency_sura_level.
 
 
-    Note:
-        -  quranWordsFrequences contains 114 sura_level_words_frequences.
-        -  Each sura_level_words_frequences contains frequency dictionary
-            for every aya.
 
         ```python
 In [19]: len(quran_words_frequences)
