@@ -186,7 +186,7 @@ class Testing_pyquran(unittest.TestCase):
         self.assertEqual(result,real)
 
 
-    def test_count_shape(self):
+    def test_count_rasm(self):
 
        # test case 1: small surah with system
 
@@ -194,7 +194,7 @@ class Testing_pyquran(unittest.TestCase):
                  [jeem, hah, khah]]
 
 
-       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       returnedNParray = pyquran.count_rasm(quran.get_sura(110), system)
        expectedFROW = [1, 0, 0, 0, 0, 1, 0, 4, 1, 0, 2, 0, 1, 1,
                        0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
                        0, 3, 0, 1, 1, 1, 0, 0]
@@ -205,7 +205,7 @@ class Testing_pyquran(unittest.TestCase):
        system = [[theh, beh, teh],
                  [jeem, hah, khah]]
 
-       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       returnedNParray = pyquran.count_rasm(quran.get_sura(110), system)
        self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
@@ -213,13 +213,13 @@ class Testing_pyquran(unittest.TestCase):
        system = [[jeem, hah, khah],
                  [theh, beh, teh]]
 
-       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       returnedNParray = pyquran.count_rasm(quran.get_sura(110), system)
        self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
        system = [[hah, jeem, khah],
                  [theh, teh, beh]]
-       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       returnedNParray = pyquran.count_rasm(quran.get_sura(110), system)
        self.assertEqual(returnedNParray.shape, (3, 33))
        self.assertEqual(list(returnedNParray[0]), expectedFROW)
 
@@ -228,7 +228,7 @@ class Testing_pyquran(unittest.TestCase):
                  [meem, sheen, teh_marbuta, zah],
                  [lam, alef_maksura, dal]]
 
-       returnedNParray = pyquran.count_shape(quran.get_sura(110), system)
+       returnedNParray = pyquran.count_rasm(quran.get_sura(110), system)
        expectedFROW = [1, 0, 0, 2, 0, 1, 0, 4, 0, 0, 1, 0, 1,
                        0, 3, 1, 1, 0, 0, 1, 0, 0, 0, 1,
                        0, 0, 1, 1, 0]
@@ -240,11 +240,11 @@ class Testing_pyquran(unittest.TestCase):
 
        # test case 2: big surah with system
        system = [[beh, teh, theh], [jeem, hah, khah]]
-       returnedNParray = pyquran.count_shape(quran.get_sura(2), system)
+       returnedNParray = pyquran.count_rasm(quran.get_sura(2), system)
        self.assertEqual(returnedNParray.shape, (286, 33))
 
       # test case 3: without system
-       returnedNParray = pyquran.count_shape(quran.get_sura(110))
+       returnedNParray = pyquran.count_rasm(quran.get_sura(110))
        expectedFROW = [1, 0, 0, 0, 0, 1, 0, 4, 0, 0, 1, 0, 1, 1,
                        0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
                        1, 0, 0, 3, 0, 1, 1, 1, 0, 0]
@@ -253,11 +253,11 @@ class Testing_pyquran(unittest.TestCase):
 
        # Test case 4: repeat a char in two subsystems
        system = [[beh, teh, theh], [jeem, hah, khah, beh]]
-       self.assertRaises(ValueError, pyquran.count_shape, quran.get_sura(110), system)
+       self.assertRaises(ValueError, pyquran.count_rasm, quran.get_sura(110), system)
 
        # Test case 5: path a system (as a list not list of lists)
-       self.assertRaises(ValueError, pyquran.count_shape, quran.get_sura(110), [beh, teh, theh])
-       self.assertRaises(ValueError, pyquran.count_shape, quran.get_sura(110), [[beh, teh, theh], hah])
+       self.assertRaises(ValueError, pyquran.count_rasm, quran.get_sura(110), [beh, teh, theh])
+       self.assertRaises(ValueError, pyquran.count_rasm, quran.get_sura(110), [[beh, teh, theh], hah])
 
 
     def test_check_system(self):

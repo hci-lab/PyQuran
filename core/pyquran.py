@@ -412,7 +412,7 @@ def shape(system):
     return alphabetMap
 
 
-def count_shape(text, system=None):
+def count_rasm(text, system=None):
     """counts the occerences of each letter (As `system` defines) in sura.
 
     Args:
@@ -427,7 +427,7 @@ def count_shape(text, system=None):
     Example:
     ```python
     newSystem = [[beh, teh, theh], [jeem, hah, khah]]
-    q.count_shape(get_sura(110), newSystem)
+    q.count_rasm(get_sura(110), newSystem)
 
     >>>[[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
     [1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
