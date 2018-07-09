@@ -68,13 +68,13 @@
     <li class="toctree-l3"><a href="#alphabets">Alphabets</a></li>
     
 
-    <li class="toctree-l3"><a href="#alphabetical-systems">Alphabetical Systems</a></li>
+    <li class="toctree-l3"><a href="#alphabetical-systems-definitions">Alphabetical Systems (Definitions)</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#check_system">check_system</a></li>
+            <li><a class="toctree-l4" href="#constructing-a-user-defined-system">Constructing a user-defined system:</a></li>
         
-            <li><a class="toctree-l4" href="#shape">shape</a></li>
+            <li><a class="toctree-l4" href="#check_system">check_system</a></li>
         
             <li><a class="toctree-l4" href="#factor_alef_mad">factor_alef_mad</a></li>
         
@@ -117,6 +117,17 @@
                 <li class="">
                     
     <a class="" href="../code_conventions/">Code Conventios</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Projects</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../dictFrec/">Dictionary of Quran Words Frequency</a>
                 </li>
     </ul>
 	    </li>
@@ -210,36 +221,49 @@ hamza_below      = u'\u0655'
 alef_wasl        = u'\u0671'
 </code></pre>
 
-<h2 id="alphabetical-systems">Alphabetical Systems</h2>
-<p>We define <strong>alphabetical system</strong> as a dynamic construction of letters in which
-you can treat a group of letters one letter. The default alphabet is a special
-case of the Alphabetical System where each letter is treated as one letter.</p>
+<h2 id="alphabetical-systems-definitions">Alphabetical Systems (Definitions)</h2>
+<p><a href="https://en.wikipedia.org/wiki/Rasm"><strong>Rasm</strong></a>: is any set of letters which are
+writtern in the same form, namely; they are indistinguishable in wirtting by
+they are distinguished from the context. For example, the letters  ت ث ن ى,
+they can be written with only one rasm ىـ, without dots.</p>
+<p><strong>Alphabetical System</strong>: is a set of rasm; dynamically constructed by 
+specifying the letters that you will treat them as one rasm. By the way,  the
+default Arabic alphabet is a special case of the <strong>Alphabetical System</strong> where
+each letter is as one rasm.</p>
 <p><strong>Predefined systems</strong> are stored in <code>systems</code> object.</p>
 <ol>
-<li>default.</li>
-<li>without dots system.</li>
-<li>hamazat.</li>
+<li><strong>Default</strong>: each letter is treated as a unique rasm.</li>
+<li><strong>Without Dots</strong>: by removing the dots some letters will be
+    indistinguishable; those letters are treated as one rasm.
+    The following example shows the (Without Dots) system as a list of lists;
+    where the sublist contains the letters which share the same rasm.</li>
+<li><strong>Hamazat</strong>: consider each any letter accompanied by hamaz ء as one rasm.</li>
 </ol>
+<p><strong>NOTE</strong>: You may go further and construct your system by speicying what 
+letters you want to treat as one rasm, then you can do some statistical
+analysis like, count, variance, average, ...</p>
 <p>Example:</p>
 <pre><code class="python">q.systems.withoutDots
 Out: 
-[['ب', 'ت', 'ث', 'ن'],
- ['ح', 'خ', 'ج'],
- ['د', 'ذ'],
- ['ر', 'ز'],
- ['س', 'ش'],
- ['ص', 'ض'],
- ['ط', 'ظ'],
- ['ع', 'غ'],
- ['ف', 'ق']]
+[['ب', 'ت', 'ث', 'ن'], # Rasm 1
+ ['ح', 'خ', 'ج'], # Rasm 2
+ ['د', 'ذ'], # Rasm 3
+ ['ر', 'ز'], # Rasm 4
+ ['س', 'ش'], # Rasm 5
+ ['ص', 'ض'], # Rasm 6
+ ['ط', 'ظ'], # Rasm 7
+ ['ع', 'غ'], # Rasm 8
+ ['ف', 'ق']] # Rasm 9
 </code></pre>
 
-<p><strong>Constructing a user-defined system</strong>:</p>
-<pre><code class="python">system = [[alef_hamza_above, alef],[beh, teh]]
+<h3 id="constructing-a-user-defined-system">Constructing a user-defined system:</h3>
+<pre><code class="python">system = [[alef_hamza_above, alef],
+          [beh, teh]]
 </code></pre>
 
-<p>The previous line of code means "Treat <em>alef_hamza_above</em> and <em>alef</em>
-as the same one latter, also treat <em>beh</em> and <em>teh</em> as one letter as well"</p>
+<p>The previous piece of code means "Treat <em>alef_hamza_above</em> and <em>alef</em>
+as the same one latter, also treat <em>beh</em> and <em>teh</em> as one letter as well".</p>
+<p>The rest of letters can be dynamically constructed using <code>check_system()</code></p>
 <p>And then, a system can be applied to some text analysis functions like counting,
 filtering, etc.</p>
 <h3 id="check_system">check_system</h3>
@@ -303,22 +327,6 @@ one letter are in one sub-list,  see  <a href="#alphabetical-systems">Alphabetic
 
 <p>The previous example prints each letter as one element in a new alphabet list,
 as you can see the two letters alef and beh are considered one letter.</p>
-<hr />
-<h3 id="shape">shape</h3>
-<pre><code class="python">shape(system)
-</code></pre>
-
-<p>shape declare a new system for alphabets ,user pass the alphabets "in a list of list"
-   that want to count it as on shape "inner list" and returns a dictionary has the same value
-   for each set of alphabets and diffrent values for the rest of alphabets</p>
-<p><strong>Args</strong></p>
-<p>param1 ([[char]]): a list of list of alphabets , each inner list have
-          alphabets that with be count  as one shape .</p>
-<p><strong>Returns</strong></p>
-<ul>
-<li><strong>dictionary</strong>: with all alphabets, where each char "key"  have a value
-value will be equals for alphabets that will be count as oe shape</li>
-</ul>
 <hr />
 <h3 id="factor_alef_mad">factor_alef_mad</h3>
 <pre><code class="python">factor_alef_mad(sentance)

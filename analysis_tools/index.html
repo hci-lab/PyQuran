@@ -69,7 +69,7 @@
     <a class="current" href="./">Analysis tools</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#count_shape">count_shape</a></li>
+    <li class="toctree-l3"><a href="#count_rasm">count_rasm</a></li>
     
 
     <li class="toctree-l3"><a href="#search_string_with_tashkeel">search_string_with_tashkeel</a></li>
@@ -78,7 +78,10 @@
     <li class="toctree-l3"><a href="#frequency_of_character">frequency_of_character</a></li>
     
 
-    <li class="toctree-l3"><a href="#generate_frequency_dictionary">generate_frequency_dictionary</a></li>
+    <li class="toctree-l3"><a href="#frequency_sura_level">frequency_sura_level</a></li>
+    
+
+    <li class="toctree-l3"><a href="#frequency_quran_level">frequency_quran_level</a></li>
     
 
     <li class="toctree-l3"><a href="#sort_dictionary_by_similarity">sort_dictionary_by_similarity</a></li>
@@ -114,6 +117,17 @@
                 <li class="">
                     
     <a class="" href="../code_conventions/">Code Conventios</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Projects</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../dictFrec/">Dictionary of Quran Words Frequency</a>
                 </li>
     </ul>
 	    </li>
@@ -162,8 +176,8 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="count_shape">count_shape</h3>
-<pre><code class="python">count_shape(text, system=None)
+                <h3 id="count_rasm">count_rasm</h3>
+<pre><code class="python">count_rasm(text, system=None)
 </code></pre>
 
 <p>counts the occerences of each letter (As <code>system</code> defines) in sura.</p>
@@ -182,7 +196,7 @@ if <code>system</code> is not passed, the normal alphabet is applied.</p>
 <p><code>A[i][j]</code> is the number of the letter <code>j</code> in the verse <code>i</code>.</p>
 <p><strong>Example</strong></p>
 <pre><code class="python">newSystem = [[beh, teh, theh], [jeem, hah, khah]]
-q.count_shape(get_sura(110), newSystem)
+q.count_rasm(get_sura(110), newSystem)
 
 &gt;&gt;&gt;[[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
 [1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
@@ -249,35 +263,81 @@ q.search_string_with_tashkeel(string, 'َْ')
 <p>{dic} : {str : int} a dictionary and keys is a characters
      and value is count of every chracter.</p>
 <p><strong>Example</strong></p>
-<pre><code class="python">pq.frequency_of_character(['أ',&quot;ب&quot;,&quot;تُ&quot;],verseNum=2,with_tashkeel=False)
+<pre><code class="python">q.frequency_of_character(['أ',&quot;ب&quot;,&quot;تُ&quot;],verseNum=2,with_tashkeel=False)
 #that will count the vers number **2** in all swar
 &gt;&gt;&gt; {'أ': 101, 'ب': 133, 'تُ': 0}
 
-pq.frequency_of_character(['أ',&quot;ب&quot;,&quot;تُ&quot;],chapterNum=1,verseNum=2,with_tashkeel=False)
+q.frequency_of_character(['أ',&quot;ب&quot;,&quot;تُ&quot;],chapterNum=1,verseNum=2,with_tashkeel=False)
 #that will count the vers number **2** in chapter **1**
 &gt;&gt;&gt; {'أ': 0, 'ب': 1, 'تُ': 0}
 
-pq.frequency_of_character(['أ',&quot;ب&quot;,&quot;تُ&quot;],chapterNum=1,verseNum=2,with_tashkeel=False)
+q.frequency_of_character(['أ',&quot;ب&quot;,&quot;تُ&quot;],chapterNum=1,verseNum=2,with_tashkeel=False)
 #that will count in **all Quran**
 &gt;&gt;&gt; {'أ': 8900, 'ب': 11491, 'تُ': 2149}
 
 </code></pre>
 
 <hr />
-<h3 id="generate_frequency_dictionary">generate_frequency_dictionary</h3>
-<pre><code class="python">generate_frequency_dictionary(suraNumber=None)
+<h3 id="frequency_sura_level">frequency_sura_level</h3>
+<pre><code class="python">frequency_sura_level(suraNumber)
 </code></pre>
 
-<p>computes the frequency dictionary; wher key is a unique word and values is the its occurrence.</p>
+<p>Computes the frequency dictionary for a sura</p>
 <p><strong>Args</strong></p>
-<p>suraNumber (int): it's optional</p>
-<p><strong>Returns</strong></p>
 <ul>
-<li><strong>dict</strong>: key is word, str; value is its occurrences, int.</li>
+<li>
+<p><strong>suraNumber</strong>: 1 &lt;= Int &lt;= 114.</p>
+</li>
+<li>
+<p><strong>Return</strong>:</p>
+</li>
+<li>
+<p><strong>[aya_frequency_dictionary]</strong>: the key of  <code>aya_frequency_dictionary</code> is a
+unique word in aya and the corresponding value is its frequency.
+A list of frequency dictionaries for each verse of Sura.</p>
+</li>
+</ul>
+<p><strong>Note</strong></p>
+<ul>
+<li>frequency dictionary is a python dict, which carries word frequencies
+  for an aya.</li>
+<li>Its key is (str) word, its value is (int) word frequency</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">pq.generate_frequency_dictionary(114)
-&gt;&gt;&gt; {'أعوذ': 1, 'إله': 1, 'الجنة': 1, 'الخناس': 1, 'الذى': 1, 'الناس': 4, 'الوسواس': 1, 'برب': 1, 'شر': 1, 'صدور': 1, 'فى': 1, 'قل': 1, 'ملك': 1, 'من': 2, 'والناس': 1, 'يوسوس': 1}
+<pre><code class="python">q.frequency_sura_level(suraNumber=1)
+
+&gt;&gt;&gt; [{بسم': 1, 'الله': 1, 'الرحمن': 1, 'الرحيم': 1'},
+{الحمد': 1, 'لله': 1, 'رب': 1, 'العلمين': 1'},
+{الرحمن': 1, 'الرحيم': 1'},
+{ملك': 1, 'يوم': 1, 'الدين': 1'},
+{إياك': 1, 'نعبد': 1, 'وإياك': 1, 'نستعين': 1'},
+{اهدنا': 1, 'الصرط': 1, 'المستقيم': 1'},
+{عليهم': 2',
+ صرط': 1',
+ الذين': 1',
+ أنعمت': 1',
+ غير': 1',
+ المغضوب': 1',
+ ولا': 1',
+ الضالين': 1'}]
+</code></pre>
+
+<hr />
+<h3 id="frequency_quran_level">frequency_quran_level</h3>
+<pre><code class="python">frequency_quran_level()
+</code></pre>
+
+<p>Compute the words frequences of the Quran.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><strong>[sura_level_frequency_dict]</strong>: Revise the output of frequency_sura_level.</li>
+</ul>
+<pre><code class="python">In [19]: len(quran_words_frequences)
+Out[19]: 114
+
+# Al Fati-ha
+In [20]: len(quran_words_frequences[0])
+Out[20]: 7
 </code></pre>
 
 <hr />
@@ -295,8 +355,8 @@ descending in same time</p>
 <p><strong>Returns</strong></p>
 <p>dict : {str: int} sorted dictionary</p>
 <p><strong>Example</strong></p>
-<pre><code class="python">frequency_dic = pq.generate_frequency_dictionary(114)
-pq.sort_dictionary_by_similarity(frequency_dic)
+<pre><code class="python">frequency_dic = q.generate_frequency_dictionary(114)
+q.sort_dictionary_by_similarity(frequency_dic)
 # this dictionary is sorted using similarity 0.8
 &gt;&gt;&gt; {'أعوذ': 1, 'إذا': 2, 'العقد': 1, 'الفلق': 1, 'النفثت': 1, 'برب': 1, 'حاسد': 1, 'حسد': 1, 'خلق': 1, 'شر': 4, 'غاسق': 1, 'فى': 1, 'قل': 1, 'ما': 1, 'من': 1, 'وقب': 1, 'ومن': 3}
 </code></pre>
@@ -316,8 +376,8 @@ compatible with original sura in shapes count</p>
      Flase :- if not</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">frequency_dic = pq.generate_frequency_dictionary(114)
-pq.check_sura_with_frequency(frequency_dic)
+<pre><code class="python">frequency_dic = q.generate_frequency_dictionary(114)
+q.check_sura_with_frequency(frequency_dic)
 &gt;&gt;&gt; True
 </code></pre>
 
@@ -326,27 +386,45 @@ pq.check_sura_with_frequency(frequency_dic)
 <pre><code class="python">search_sequence(sequancesList, verse=None, chapterNum=0, verseNum=0, mode=3)
 </code></pre>
 
-<p>take list of sequances and return matched sequance,
-   it search in verse ot chapter or All Quran ,
-   it return for every match :
-   1- matched sequance
-   2- chapter number of occurrence
-   3- token number if word and 0 if sentence</p>
+<p>take list of sequances and return matched sequance, it search in verse ot
+chapter or All Quran ,</p>
+<p>it return for every match :
+   1 - matched sequance
+   2 - chapter number of occurrence
+   3 - token number if word and 0 if sentence</p>
 <p>Note :
- *if found verse != None it will use it en search .</p>
-<p>*if no verse and found chapterNum and verseNum it will
-  use this verse and use it to search.</p>
-<p>*if no verse and no verseNum and found chapterNum it will
-  search in chapter.</p>
-<p>*if no verse and no chapterNum and no verseNum it will
+ - if found verse != None it will use it en search .</p>
+<ul>
+<li>if no verse and found chapterNum and verseNum it will</li>
+<li>
+<p>use this verse and use it to search.</p>
+</li>
+<li>
+<p>if no verse and no verseNum and found chapterNum it will</p>
+</li>
+<li>
+<p>search in chapter.</p>
+</li>
+<li>
+<p>if no verse and no chapterNum and no verseNum it will
   search in All Quran.</p>
-<p>it has many modes:
-1- search with decorated sequance (with tashkeel),
+</li>
+</ul>
+<p>it has many modes:</p>
+<ul>
+<li>
+<p>search with decorated sequance (with tashkeel),
+  and return matched sequance with decorates (with tashkil).</p>
+</li>
+<li>
+<p>search without decorated sequance (without tashkeel),
+  and return matched sequance without decorates (without tashkil).</p>
+</li>
+<li>
+<p>search without decorated sequance (without tashkeel),
    and return matched sequance with decorates (with tashkil).</p>
-<p>2- search without decorated sequance (without tashkeel),
-   and return matched sequance without decorates (without tashkil).</p>
-<p>3- search without decorated sequance (without tashkeel),
-   and return matched sequance with decorates (with tashkil).</p>
+</li>
+</ul>
 <p><strong>Args</strong></p>
 <ul>
 <li>
@@ -367,26 +445,17 @@ pq.check_sura_with_frequency(frequency_dic)
 <li><strong>dict</strong>:  key is sequances and value is a list of matched_sequance and their positions.</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">
-   __search in chapter = 1 only using mode 3 (default)__
-
-pq.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
+<pre><code class="python"># search in chapter = 1 only using mode 3 (default)
+q.search_sequence(sequancesList=['ملك يوم الدين'],chapterNum=1)
 #it will return
 #{'sequance-1' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ],
-
-   __'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }__
-
-
-   __Note : position == 0 if sequance is a sentence and == word position if sequance is a word__
-
+# 'sequance-2' : [ (matched_sequance , position , vers_num , chapter_num) , (....) ] }
+# Note : position == 0 if sequance is a sentence and == word position if sequance is a word
 &gt;&gt;&gt; {'ملك يوم الدين': [('مَلِكِ يَوْمِ الدِّينِ', 0, 4, 1)]}
 
-
-   __search in all Quran using mode 3 (default)__
-
-pq.search_sequence(sequancesList=['ملك يوم'])
+# search in all Quran using mode 3 (default)
+q.search_sequence(sequancesList=['ملك يوم'])
 &gt;&gt;&gt; {'ملك يوم': [('مَلِكِ يَوْمِ', 0, 4, 1),  ('الْمُلْكُ يَوْمَ', 0, 73, 6),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 56, 22),  ('الْمُلْكُ يَوْمَئِذٍ', 0, 26, 25)]}
-
 </code></pre>
               
             </div>
