@@ -18,32 +18,28 @@ much details as possible about:
 
 
 ## Feature Request
-Whenever you think *PyQuran* is missing a feature, create a GitHub issue with **Feature Request label**,
+Whenever you think PyQuran is missing a feature, create a GitHub issue with **Feature Request label**,
 define what you want precisely and include sufficient examples to cover all the new feature aspects.
 
 If you would like to implement it by yourself, please read the [Contributing Code](#contributing-code) section.
 
 
 
-## Contributing Code
+## Code Contribution
 
-_not_completed
-
-
-### code conventions
 Your code have to meet [these standartds](code_conventions.md).
 
 
-### contributing flow
+## Contributing Flow
 
-At first, fork the project [on GitHub](https://github.com/TahaMagdy/PyQuran/),
+At first, fork the project on [GitHub](https://github.com/TahaMagdy/PyQuran/),
 then, create a *feature branch* and start writing your changes. 
 We **DO NOT** accept changes to the *master branch*.
 
 Once you are done, push the changes to *your feature branch*, after that create a *pull request*
 with an expressive title and description.
 
-### commit messages
+## Commit Messages
 
 **It is so important to commit properly**, we expect you to commit every one logical change.
 A commit message should describe what have been changed, why, and reference issues fixed (if
@@ -72,7 +68,7 @@ Fixes #101
 ```
 
 
-## Tests
+## Unit Tests
 
 We write a test module for every PyQuran module under `PyQuran/testing`.
 
