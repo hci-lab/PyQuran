@@ -35,14 +35,6 @@ It is a dynamic construction of letters—
 - Words Frequency Table المعجم الترددى للألفاظ .
 
 
-## Install
-- From _PyPI_: `$ pip3 install pyquran`
-- From Source: `$ python3 setup.py install`
-
-
-## Dependencies
-- [numpy](http://www.numpy.org/)
-- [pyarabic](https://github.com/linuxscout/pyarabic)
 
 ## Quran Corpus 
 We use [tanzil](http://tanzil.net/docs/download) Quran Corpus (*Uthmani Text*), it is in `UTF-8` encoding. You
@@ -58,7 +50,15 @@ we **DO NOT** change the corpus, NEVER.
 الضبط.](https://hci-lab.github.io/PyQuran-Private/Filtering-Special-Recitation-Symbols/#recitation-symbols)
 
 ## Contributing
-To contribute and maintain *PyQuran*, Please read  [CONTRIBUTING.md](https://hci-lab.github.io/PyQuran-Private/CONTRIBUTING).
+To contribute and maintain PyQuran, Please read  [CONTRIBUTING.md](https://hci-lab.github.io/PyQuran-Private/CONTRIBUTING).
+
+## Dependencies
+- [numpy](http://www.numpy.org/)
+- [pyarabic](https://github.com/linuxscout/pyarabic)
+
+
+## Install
+- From _PyPI_: `$ pip3 install pyquran`
 
 ## Citing
 ```

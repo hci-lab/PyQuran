@@ -1,4 +1,4 @@
-Code Conventions (DO NOT USE EMACS)
+Code Conventions
 ================
 
 This helps everyone to read and maintain the code even when they maintains

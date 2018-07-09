@@ -1,0 +1,4 @@
+1. Add Letter definitions (It is a one char letter or a more-than-one-letter
+considered as one letter)
+2. Making the import q.arabic and q.analysis for arabic and analysis tools.
+3. struct of tashkell instead of wirting them.
