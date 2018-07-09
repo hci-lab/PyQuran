@@ -18,5 +18,7 @@ pages:
     - Package Strucutre: 'Wiki-Home.md'
     - Quran Corpus: 'Filtering-Special-Recitation-Symbols.md'
     - Code Conventios: 'code_conventions.md'
+- Related Projects:
+    - Dictionary of Quran Words Frequency: 'dictFrec.md'
 - Authors: 'authors.md'
 
