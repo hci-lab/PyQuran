@@ -184,7 +184,7 @@ def check_sura_with_frequency(sura_num,freq_dec):
     Example:
     ```python
     frequency_dic = q.generate_frequency_dictionary(114)
-    q.check_sura_with_frequency(frequency_dic)
+    q.check_sura_with_frequency(114, frequency_dic)
     >>> True
     ```
     """
@@ -525,7 +525,7 @@ def grouping_letter_diacritics(sentance):
 
     Example:
     ```python
-    q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')\n
+    q.grouping_letter_diacritics('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')\n
     >>> ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
     ```
     """
