@@ -426,8 +426,8 @@ def count_rasm(text, system=None):
 
     Example:
     ```python
-    newSystem = [[beh, teh, theh], [jeem, hah, khah]]
-    q.count_rasm(get_sura(110), newSystem)
+    newSystem = [[q.beh, q.teh, q.theh], [q.jeem, q.hah, q.khah]]
+    q.count_rasm(q.quran.get_sura(110), newSystem)
 
     >>>[[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
     [1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
@@ -934,7 +934,7 @@ def factor_alef_mad(sentance):
 
      Example:
     ```python
-    q.unpack_alef_mad('آ')\n
+    q.factor_alef_mad('آ')\n
     >>> 'أْأَ'
     ```
   '''

@@ -202,7 +202,7 @@ __Returns__
 __Example__
 
 ```python
-q.unpack_alef_mad('آ')
+q.factor_alef_mad('آ')
 
 >>> 'أْأَ'
 ```
