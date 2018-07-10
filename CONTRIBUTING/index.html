@@ -88,9 +88,13 @@
         
             <li><a class="toctree-l4" href="#feature-request">Feature Request</a></li>
         
-            <li><a class="toctree-l4" href="#contributing-code">Contributing Code</a></li>
+            <li><a class="toctree-l4" href="#code-contribution">Code Contribution</a></li>
         
-            <li><a class="toctree-l4" href="#tests">Tests</a></li>
+            <li><a class="toctree-l4" href="#contributing-flow">Contributing Flow</a></li>
+        
+            <li><a class="toctree-l4" href="#commit-messages">Commit Messages</a></li>
+        
+            <li><a class="toctree-l4" href="#unit-tests">Unit Tests</a></li>
         
         </ul>
     
@@ -179,20 +183,18 @@ much details as possible about:
 - a self-contained code to reproduce and demonstrate the Bug.</p>
 <p><strong>Issue will be closed if the Bug cannot be reproduced.</strong></p>
 <h2 id="feature-request">Feature Request</h2>
-<p>Whenever you think <em>PyQuran</em> is missing a feature, create a GitHub issue with <strong>Feature Request label</strong>,
+<p>Whenever you think PyQuran is missing a feature, create a GitHub issue with <strong>Feature Request label</strong>,
 define what you want precisely and include sufficient examples to cover all the new feature aspects.</p>
 <p>If you would like to implement it by yourself, please read the <a href="#contributing-code">Contributing Code</a> section.</p>
-<h2 id="contributing-code">Contributing Code</h2>
-<p>_not_completed</p>
-<h3 id="code-conventions">code conventions</h3>
+<h2 id="code-contribution">Code Contribution</h2>
 <p>Your code have to meet <a href="../code_conventions/">these standartds</a>.</p>
-<h3 id="contributing-flow">contributing flow</h3>
-<p>At first, fork the project <a href="https://github.com/TahaMagdy/PyQuran/">on GitHub</a>,
+<h2 id="contributing-flow">Contributing Flow</h2>
+<p>At first, fork the project on <a href="https://github.com/TahaMagdy/PyQuran/">GitHub</a>,
 then, create a <em>feature branch</em> and start writing your changes. 
 We <strong>DO NOT</strong> accept changes to the <em>master branch</em>.</p>
 <p>Once you are done, push the changes to <em>your feature branch</em>, after that create a <em>pull request</em>
 with an expressive title and description.</p>
-<h3 id="commit-messages">commit messages</h3>
+<h2 id="commit-messages">Commit Messages</h2>
 <p><strong>It is so important to commit properly</strong>, we expect you to commit every one logical change.
 A commit message should describe what have been changed, why, and reference issues fixed (if
 any). </p>
@@ -216,7 +218,7 @@ please do proper word-wrap and keep columns shorter than about
 Fixes #101
 </code></pre>
 
-<h2 id="tests">Tests</h2>
+<h2 id="unit-tests">Unit Tests</h2>
 <p>We write a test module for every PyQuran module under <code>PyQuran/testing</code>.</p>
 <p><strong>Naming</strong>
 If the module is called <em>X</em>, then its testing module is called <em>test_X</em>.
