@@ -342,7 +342,7 @@ as you can see the two letters alef and beh are considered one letter.</p>
 <li><strong>str</strong>: sentance having the alef_mad factored</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">q.unpack_alef_mad('آ')
+<pre><code class="python">q.factor_alef_mad('آ')
 
 &gt;&gt;&gt; 'أْأَ'
 </code></pre>
@@ -363,7 +363,7 @@ as you can see the two letters alef and beh are considered one letter.</p>
 diacritics.</li>
 </ul>
 <p><strong>Example</strong></p>
-<pre><code class="python">q.separate_token_with_dicrites('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
+<pre><code class="python">q.grouping_letter_diacritics('إِنَّا أَعْطَيْنَكَ الْكَوْثَرَ')
 
 &gt;&gt;&gt; ['إِ', 'نَّ', 'ا', ' ', 'أَ', 'عْ', 'طَ', 'يْ', 'نَ', 'كَ', ' ', 'ا', 'لْ', 'كَ', 'وْ', 'ثَ', 'رَ']
 </code></pre>

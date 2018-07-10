@@ -195,8 +195,8 @@ if <code>system</code> is not passed, the normal alphabet is applied.</p>
 <p>(N * P) ndarray (Matrix A): N is the number of verses, P is the alphabet (as defined in <code>system</code>).</p>
 <p><code>A[i][j]</code> is the number of the letter <code>j</code> in the verse <code>i</code>.</p>
 <p><strong>Example</strong></p>
-<pre><code class="python">newSystem = [[beh, teh, theh], [jeem, hah, khah]]
-q.count_rasm(get_sura(110), newSystem)
+<pre><code class="python">newSystem = [[q.beh, q.teh, q.theh], [q.jeem, q.hah, q.khah]]
+q.count_rasm(q.quran.get_sura(110), newSystem)
 
 &gt;&gt;&gt;[[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
 [1 2 0 0 2 0 0 0 5 0 2 0 1 0 1 0 0 0 0 0 0 0 2 0 0 4 0 3 1 3 1 3]
@@ -377,7 +377,7 @@ compatible with original sura in shapes count</p>
 </ul>
 <p><strong>Example</strong></p>
 <pre><code class="python">frequency_dic = q.generate_frequency_dictionary(114)
-q.check_sura_with_frequency(frequency_dic)
+q.check_sura_with_frequency(114, frequency_dic)
 &gt;&gt;&gt; True
 </code></pre>
 
