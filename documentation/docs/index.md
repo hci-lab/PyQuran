@@ -58,7 +58,7 @@ To contribute and maintain PyQuran, Please read  [CONTRIBUTING.md](https://hci-l
 
 
 ## Install
-- From _PyPI_: `$ pip3 install pyquran`
+- From _PyPI_: `$ pip3 install PyQuran`
 
 ## Citing
 ```

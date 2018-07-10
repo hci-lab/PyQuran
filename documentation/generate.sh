@@ -5,6 +5,7 @@ cat templates/analysis_tools_template.md > docs/analysis_tools.md
 cat templates/arabic_tools_template.md   > docs/arabic_tools.md
 cat templates/quran_tools_template.md    > docs/quran_tools.md
 cat docs/index.md                        > ../README.md
+cat docs/index.md                        > ../../README.md
 cat docs/CONTRIBUTING.md                 > ../CONTRIBUTING.md
 
 
