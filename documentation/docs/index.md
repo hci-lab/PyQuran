@@ -43,7 +43,7 @@ can find all unique characters of Uthmanic Corpus
 
 There are *special recitation symbols* مصطلحات الضبط in the *Uthmani Text*, they are a guide for the reciter
 to know the right positions to pause and the rules of tajweed.
-We provide an interface to filter those symbols, *only the fly while fetching from the corpus*,
+We provide an interface to filter those symbols, *on the fly while fetching from the corpus*,
 we **DO NOT** change the corpus, NEVER.
 
 [For the full details about filtering *special recitation symbols* مصطلحات
