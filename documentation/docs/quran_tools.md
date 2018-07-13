@@ -1,6 +1,6 @@
 ## Importing PyQuran
 ```python
-import PyQuran as q
+import pyquran as q
 ```
 
 - Quran retrieving tools are in `q.quran`. 
