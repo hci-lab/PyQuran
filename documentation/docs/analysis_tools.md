@@ -95,7 +95,7 @@ counts the number of characters in a specific verse or  sura or even the entrire
 
 __Note__
 
- If you don't pass verse and chapterNum he will get all Quran
+ If verse and chapterNum is not passed, the entire Quran is targeted 
 
 
 __Args__
@@ -210,14 +210,6 @@ __Returns__
 
 
 
-```python
-In [19]: len(quran_words_frequences)
-Out[19]: 114
-
-# Al Fati-ha
-In [20]: len(quran_words_frequences[0])
-Out[20]: 7
-```
 
 ----
 

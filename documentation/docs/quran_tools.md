@@ -116,7 +116,7 @@ So if the order Sura number is x, then it's at (x-1) in the list.
 __Example__
 
 ```python
-pq.quran.get_sura_number('الملك')
+q.quran.get_sura_number('الملك')
 
 >>> 67
 ```
