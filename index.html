@@ -56,9 +56,11 @@
     
         <ul>
         
+            <li><a class="toctree-l3" href="#quran-corpus">Quran Corpus</a></li>
+        
             <li><a class="toctree-l3" href="#current-features">Current Features</a></li>
         
-            <li><a class="toctree-l3" href="#quran-corpus">Quran Corpus</a></li>
+            <li><a class="toctree-l3" href="#pyquran-needs-and-upcoming-features">PyQuran needs and Upcoming Features.</a></li>
         
             <li><a class="toctree-l3" href="#contributing">Contributing</a></li>
         
@@ -177,21 +179,12 @@ computations on Quran with Python, even at the most basic level which is simply
 retrieving Quran text.</p>
 <p><em>Before Islam</em>, Arabic letters  were without  dots—
 <a href="https://en.wikipedia.org/wiki/Rasm"><em>rasm</em></a>, which resulted in ambiguty, two or three
-letters had the same rasm or form. </p>
+letters had the same rasm or form.</p>
 <p>Muslims have decided to remove this ambiguity by adding
 dots above or below each letter of the ones which share the same rasm. Now each letter has a unique form. By the way,
 originally, Quran was written using letters without dots.</p>
 <p>To enable researchers to use modern alphabet, old rasm or other, we introduce <em>alphabetical systems</em>,
-It is a dynamic construction of letters—
-<a href="https://hci-lab.github.io/PyQuran-Private/arabic_tools/#alphabetical-systems">Alphabetical Systems</a>.</p>
-<h2 id="current-features">Current Features</h2>
-<ul>
-<li>Quran Retrieving.</li>
-<li>Advanced Searching, by Text and Diacritics Patterns.</li>
-<li>Buckwalter Transliteration, back and forth.</li>
-<li>Multiple <strong>alphabetical systems</strong>.</li>
-<li>Words Frequency Table المعجم الترددى للألفاظ .</li>
-</ul>
+It is a dynamic construction of letters— Alphabetical Systems.</p>
 <h2 id="quran-corpus">Quran Corpus</h2>
 <p>We use <a href="http://tanzil.net/docs/download">tanzil</a> Quran Corpus (<em>Uthmani Text</em>), it is in <code>UTF-8</code> encoding. You
 can find all unique characters of Uthmanic Corpus
@@ -202,8 +195,29 @@ We provide an interface to filter those symbols, <em>on the fly while fetching f
 we <strong>DO NOT</strong> change the corpus, NEVER.</p>
 <p><a href="https://hci-lab.github.io/PyQuran-Private/Filtering-Special-Recitation-Symbols/#recitation-symbols">For the full details about filtering <em>special recitation symbols</em> مصطلحات
 الضبط.</a></p>
+<h2 id="current-features">Current Features</h2>
+<ul>
+<li><a href="https://hci-lab.github.io/PyQuran-Private/quran_tools/">Quran Retrieving.</a></li>
+<li>Advanced Searching, by
+  <a href="https://hci-lab.github.io/PyQuran-Private/analysis_tools/#search_sequence">Text</a>
+and <a href="https://hci-lab.github.io/PyQuran-Private/analysis_tools/#search_string_with_tashkeel">Diacritics</a> Patterns.</li>
+<li><a href="https://hci-lab.github.io/PyQuran-Private/arabic_tools/#buckwalter_transliteration">Buckwalter Transliteration</a>, back and forth.</li>
+<li>Multiple <a href="https://hci-lab.github.io/PyQuran-Private/arabic_tools/#alphabetical-systems">Alphabetical Systems</a>.</li>
+<li>Words Frequency Table المعجم الترددى للألفاظ .</li>
+</ul>
+<h2 id="pyquran-needs-and-upcoming-features">PyQuran needs and Upcoming Features.</h2>
+<ul>
+<li>Words Frequency Table filtered according to words meaning.</li>
+<li>Morphology analysis of words to their roots.</li>
+<li>Arabic tools for representing Arabic test for AI algorithms and neural
+  networks, for more serious Arabic text processing and understanding. Those
+  tools should take meaning, diacritics, roots and other morphology aspects in
+  account.</li>
+<li>Some PyQuran in-house tools and architecture enhancement will be on GitHub
+  Issues for you contributors to make PyQuran professional and easy to use.</li>
+</ul>
 <h2 id="contributing">Contributing</h2>
-<p>To contribute and maintain PyQuran, Please read  <a href="https://hci-lab.github.io/PyQuran-Private/CONTRIBUTING">CONTRIBUTING.md</a>.</p>
+<p>To contribute and maintain PyQuran, Please read  <a href="https://hci-lab.github.io/PyQuran-Private/CONTRIBUTING">CONTRIBUTING</a> section.</p>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
 <li><a href="http://www.numpy.org/">numpy</a></li>
@@ -211,11 +225,11 @@ we <strong>DO NOT</strong> change the corpus, NEVER.</p>
 </ul>
 <h2 id="install">Install</h2>
 <ul>
-<li>From <em>PyPI</em>: <code>$ pip3 install PyQuran</code></li>
+<li>From PyPI: <code>$ pip3 install pyquran</code></li>
 </ul>
 <h2 id="citing">Citing</h2>
 <pre><code>@MISC {PyQuran2018,
-author = &quot;Waleed A. Yousef and 
+author = &quot;Waleed A. Yousef and
           Taha M. Madbouly and
           Omar M. Ibrahime and
           Ali H. El-Kassas and
@@ -279,5 +293,5 @@ year = &quot;2018&quot;}
 
 <!--
 MkDocs version : 0.17.5
-Build Date UTC : 2018-07-10 15:06:37
+Build Date UTC : 2018-07-13 13:25:40
 -->

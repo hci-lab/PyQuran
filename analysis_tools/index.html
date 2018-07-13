@@ -242,7 +242,7 @@ q.search_string_with_tashkeel(string, 'َْ')
 
 <p>counts the number of characters in a specific verse or  sura or even the entrire Quran ,</p>
 <p><strong>Note</strong></p>
-<p>If you don't pass verse and chapterNum he will get all Quran</p>
+<p>If verse and chapterNum is not passed, the entire Quran is targeted </p>
 <p><strong>Args</strong></p>
 <ul>
 <li>
@@ -332,14 +332,6 @@ A list of frequency dictionaries for each verse of Sura.</p>
 <ul>
 <li><strong>[sura_level_frequency_dict]</strong>: Revise the output of frequency_sura_level.</li>
 </ul>
-<pre><code class="python">In [19]: len(quran_words_frequences)
-Out[19]: 114
-
-# Al Fati-ha
-In [20]: len(quran_words_frequences[0])
-Out[20]: 7
-</code></pre>
-
 <hr />
 <h3 id="sort_dictionary_by_similarity">sort_dictionary_by_similarity</h3>
 <pre><code class="python">sort_dictionary_by_similarity(frequency_dictionary, threshold=0.8)
