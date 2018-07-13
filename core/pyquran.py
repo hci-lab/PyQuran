@@ -549,7 +549,7 @@ def frequency_of_character(characters, verse=None, chapterNum=0, verseNum=0, wit
     """counts the number of characters in a specific verse or  sura or even the entrire Quran ,
 
         Note:
-             If you don't pass verse and chapterNum he will get all Quran
+             If verse and chapterNum is not passed, the entire Quran is targeted 
 
         Args:
              verse: str, this verse that you need to count it and default is None.
@@ -1206,14 +1206,6 @@ def frequency_quran_level():
 
 
 
-        ```python
-In [19]: len(quran_words_frequences)
-Out[19]: 114
-
-# Al Fati-ha
-In [20]: len(quran_words_frequences[0])
-Out[20]: 7
-        ```
     """
 
     # * A list of sura level frequencies.
