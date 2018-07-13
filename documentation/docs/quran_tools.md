@@ -1,4 +1,6 @@
 ## Importing PyQuran
+Note that PyQuran is imported by a **lowercase name**.
+
 ```python
 import pyquran as q
 ```
