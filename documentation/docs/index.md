@@ -54,7 +54,7 @@ and [Diacritics](https://hci-lab.github.io/PyQuran-Private/analysis_tools/#searc
 ## PyQuran needs and Upcoming Features.
 - Words Frequency Table filtered according to words meaning.
 - Morphology analysis of words to their roots.
-- Arabic tools for representing Arabic test for AI algorithms and neural
+- Arabic tools for representing Arabic text for AI algorithms and neural
   networks, for more serious Arabic text processing and understanding. Those
   tools should take meaning, diacritics, roots and other morphology aspects in
   account.
