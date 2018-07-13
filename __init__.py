@@ -1,5 +1,5 @@
 """
 """
-from PyQuran.tools import quran
-from PyQuran.tools import arabic
-from PyQuran.core.pyquran  import *
+from pyquran.tools import quran
+from pyquran.tools import arabic
+from pyquran.core.pyquran  import *
