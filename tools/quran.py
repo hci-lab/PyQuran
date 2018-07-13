@@ -123,7 +123,7 @@ def get_sura_number(sura_name):
 
     Example:
     ```python
-    p.quran.get_sura_number('الملك')\n
+    q.quran.get_sura_number('الملك')\n
     >>> 67
     ```
     """
