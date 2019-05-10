@@ -84,7 +84,8 @@ author = "Waleed A. Yousef and
           Omar M. Ibrahime and
           Ali H. El-Kassas and
           Ali O. Hassan and
-          Abdallah R. Albohy",
+          Abdallah R. Albohy and 
+          Moustafa A. Mahmoud",
 title = "PyQuran: The Python package for Quranic Analysis",
 howpublished = "https://hci-lab.github.io/PyQuran-Private",
 year = "2018"}
