@@ -412,6 +412,20 @@ def shape(system):
     return alphabetMap
 
 
+def count_rasm_system_chars_only(verses_list, system):
+
+    A = numpy.zeros((len(verses_list), len(system)), dtype=numpy.int)
+
+    # n: index for verses
+    # p: index for rasm groups
+    for n, a_verse in enumerate(verses_list):
+        for letter in a_verse:
+            for p, rasm_group in enumerate(system):
+                if letter in rasm_group:
+                    A[n][p] += 1
+    return A
+
+
 def count_rasm(text, system=None):
     """counts the occerences of each letter (As `system` defines) in sura.
 
@@ -549,7 +563,7 @@ def frequency_of_character(characters, verse=None, chapterNum=0, verseNum=0, wit
     """counts the number of characters in a specific verse or  sura or even the entrire Quran ,
 
         Note:
-             If verse and chapterNum is not passed, the entire Quran is targeted 
+             If verse and chapterNum is not passed, the entire Quran is targeted
 
         Args:
              verse: str, this verse that you need to count it and default is None.
@@ -1134,7 +1148,7 @@ def frequency_sura_level(suraNumber):
         * Its key is (str) word, its value is (int) word frequency
 
     Example:
-    
+
     ```python
     q.frequency_sura_level(suraNumber=1)
 
