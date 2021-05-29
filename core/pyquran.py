@@ -414,6 +414,9 @@ def shape(system):
 
 def count_rasm_system_chars_only(verses_list, system):
 
+    if type(verses_list) != type( [[]] ):
+        raise Exception('`verses_list` must be a list of str')
+
     A = numpy.zeros((len(verses_list), len(system)), dtype=numpy.int)
 
     # n: index for verses
