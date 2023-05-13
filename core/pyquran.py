@@ -533,7 +533,7 @@ def grouping_letter_diacritics(sentance):
     print(sentance_without_tatweel)
     hroof_with_tashkeel = []
     for index,i in enumerate(sentance):
-        if((sentance[index] in (alphabet or alefat or hamzat)or sentance[index] is ' ' )):
+        if sentance[index] in (alphabet or alefat or hamzat) or sentance[index] == ' ':
             k = index
             harf_with_taskeel =sentance[index]
             while((k+1) != len(sentance) and (sentance[k+1] in (tashkeel or harakat or shortharakat or tanwin ))):
