@@ -10,7 +10,7 @@ computations on Quran with Python, even at the most basic level which is simply
 retrieving Quran text.
 
 *Before Islam*, Arabic letters  were without  dots—
-[*rasm*](https://en.wikipedia.org/wiki/Rasm), which resulted in ambiguty, two or three
+[*rasm*](https://en.wikipedia.org/wiki/Rasm), which resulted in ambiguity, two or three
 letters had the same rasm or form.
 
 Muslims have decided to remove this ambiguity by adding
