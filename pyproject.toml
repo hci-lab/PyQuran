@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyquran"
+version = "0.0.0.dev0"
+description = "Tools for Quranic analysis and Arabic text processing."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "GPL-2.0-only" }
+authors = [
+  { name = "PyQuran Contributors" }
+]
+dependencies = [
+  "numpy",
+  "pyarabic",
+]
+
+[tool.setuptools]
+include-package-data = true
+packages = ["pyquran", "pyquran.core", "pyquran.tools", "core", "tools", "QuranCorpus"]
+
+[tool.setuptools.package-data]
+QuranCorpus = ["*.xml"]

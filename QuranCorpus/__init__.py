@@ -1,0 +1,1 @@
+"""Quran corpus data package."""

@@ -21,7 +21,7 @@
         * [buckwalter_transliteration](#buckwalter_transliteration)
         * [extract_tashkeel](#extract_tashkeel)
     * [Analysis functions](#analysis-functions)
-        * [count_shape](#count_shape)
+        * [count_rasm](#count_rasm)
         * [count_token](#count_token)
         * [frequency_of_character](#frequency_of_character) 
         * [generate_frequancy_dictionary](#generate_frequancy_dictionary)
@@ -279,13 +279,13 @@ system = [['ت','ب'], systems.hamazatSystem]
 
 ## Analysis functions:
 
-#### count_shape 
-**count_shape(text, system=None)**
+#### count_rasm 
+**count_rasm(text, system=None)**
 - takes **text** (chapter/verse), **system (optional)** it's the shape of character as example [[bah,gem]] and return a **n*p matrix** where **n** number of verses and **p** number of collections in system and if not pass system it will apply the defualt.  
 
 ```python
   newSystem=[[beh, teh, theh], [jeem, hah, khah]]
-  alphabetAsOneShape =pq.count_shape(get_sura(110), newSystem)
+  alphabetAsOneShape =pq.count_rasm(get_sura(110), newSystem)
   print(alphabetAsOneShape)
 
   >>> [[1 2 1 0 0 0 1 0 4 0 0 1 1 0 0 0 1 0 0 0 0 0 1 0 0 3 0 1 1 1 0 0]
@@ -455,4 +455,3 @@ system = [['ت','ب'], systems.hamazatSystem]
   
   >>>['الرَّحِيمِ مَلِكِ', 'نَعْبُدُ وَإِيَّاكَ', 'الْمُسْتَقِيمَ صِرَطَ']
 ```
-

@@ -13,3 +13,7 @@ core/.pyquran.py.swp
 *.txt
 *.ipyb
 *.ipynb
+.venv
+venv
+*.egg
+*.egg-info

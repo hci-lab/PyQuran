@@ -1,8 +1,7 @@
 '''shapeHelper: contains helper functions shape.
 '''
 
-
-from arabic import *
+from pyquran.tools.arabic import *
 from itertools import chain
 
 def searcher(system, ch):

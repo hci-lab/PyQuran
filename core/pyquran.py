@@ -6,40 +6,23 @@ This module contains tools for `Quranic Analysis`
 (More expressive description later)
 
 """
-# Adding another searching path
-from sys import path
-import os
-
-# The current path of the current module.
-path_current_module = os.path.dirname(os.path.abspath(__file__))
-tools_modules = '../tools/'
-tools_path = os.path.join(path_current_module, tools_modules)
-
-path.append(tools_path)
-
-
-
-
-import quran
-import sys
-import error
+from pyquran.tools import buckwalter
+from pyquran.tools import error
+from pyquran.tools import quran
+from pyquran.tools import searchHelper
+from pyquran.tools import shapeHelper
+import pyquran.tools.arabic as arabic
+from pyquran.tools.arabic import *
 import numpy
 import operator
 import re
-import searchHelper
 import functools
 import difflib as dif
-import arabic
-from arabic import *
-from pyarabic.araby import strip_tashkeel, strip_tatweel,separate,strip_tatweel
+from pyarabic.araby import strip_tashkeel, strip_tatweel, separate
 
 from itertools import chain
 from collections import Counter, defaultdict
 
-
-import buckwalter
-import sys
-import shapeHelper
 from collections import OrderedDict
 
 from xml.etree.ElementTree import ElementTree
@@ -85,7 +68,7 @@ def parse_sura(n, alphabets=['ل', 'ب']):
     a = len(sura)
     m = len(alphabets)
     # building ndarray with appropriate dimensions
-    A = numpy.zeros((a,m), dtype=numpy.int)
+    A = numpy.zeros((a,m), dtype=int)
 
 
     # Filling ndarray with alphabets[] occurrences
@@ -455,7 +438,7 @@ def count_rasm(text, system=None):
         p = len(alphabet) - len(list(set(chain(*system)))) + len(system)
         alphabetMap = shape(system)
     n=len(text)
-    A=numpy.zeros((n, p), dtype=numpy.int)
+    A=numpy.zeros((n, p), dtype=int)
     i=0
     j=0
     charCount =[]

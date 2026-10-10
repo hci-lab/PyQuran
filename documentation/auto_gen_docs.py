@@ -1,19 +1,7 @@
 #!/usr/local/bin/python3
-from sys import path
-import os
-# The current path of the current module.
-path_current_module = os.path.dirname(os.path.abspath(__file__))
-tools_modules = '../tools/'
-tools_path = os.path.join(path_current_module, tools_modules)
-core_modules = '../core/'
-core_path = os.path.join(path_current_module,core_modules)
-path.append(tools_path)
-# Adding another searching path
-path.append(core_path)
-
 import pyquran
-import quran
-import arabic
+from pyquran.tools import arabic
+from pyquran.tools import quran
 import re
 import inspect
 import shutil

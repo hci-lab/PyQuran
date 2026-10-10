@@ -1,7 +1,7 @@
 """Contains encoding tools to apply Machine Learning and Deep Learning algorithms
 on Quran and Arabic text generally."""
 
-import arabic
+import pyquran.tools.arabic as arabic
 
 
 def get_alphabet_tashkeel_combination(tashkeel=arabic.shortharakat):

@@ -1,10 +1,10 @@
 """searchHelper: contains helper functions for searching.
 """
 
-from arabic import *
+from pyquran.tools.arabic import *
 import re
 from pyarabic.araby import strip_tashkeel, strip_tatweel
-import quran
+from pyquran.tools import quran
 
 
 def count_spaces_before_index(string, index):

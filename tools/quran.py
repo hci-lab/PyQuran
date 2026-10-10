@@ -1,10 +1,11 @@
 """This modules contains functions to retrieve from quran.
 """
 from xml.etree import ElementTree
-import arabic as ar
-import filtering
-import error
 import os
+
+from pyquran.tools import error
+from pyquran.tools import filtering
+import pyquran.tools.arabic as ar
 
 # Relative path to this modul's location in PyQuran.
 corpus_xml_relative_path= '../QuranCorpus/quran-uthmani.xml'

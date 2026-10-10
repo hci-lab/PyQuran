@@ -75,6 +75,10 @@ To contribute and maintain PyQuran, Please read  [CONTRIBUTING](https://hci-lab.
 
 ## Install
 - From PyPI: `$ pip3 install pyquran`
+- For local development (editable install):
+  1. `python3 -m venv .venv`
+  2. `source .venv/bin/activate`
+  3. `pip install -e .`
 
 ## Citing
 ```
